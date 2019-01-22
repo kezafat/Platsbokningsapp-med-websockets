@@ -50,7 +50,7 @@ module.exports = class Server {
     // create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
 
-    
+
 
     const fs = require('fs');
     const path = require('path');

@@ -1,6 +1,6 @@
 class App extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.navBar = new NavBar();
     this.pageContent = new PageContent();

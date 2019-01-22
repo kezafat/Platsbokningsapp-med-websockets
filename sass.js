@@ -1,5 +1,5 @@
 var nodeSass = require('node-sass'),
-    fs = require('fs');
+  fs = require('fs');
 
 /*  EXAMPLE CONFIG
 "sass": [
@@ -16,7 +16,7 @@ var nodeSass = require('node-sass'),
 */
 
 module.exports = class Sass {
-  constructor(config){
+  constructor(config) {
     this.config = config;
 
     if (this.config.compileAtBootup) {
@@ -28,13 +28,13 @@ module.exports = class Sass {
     }
   }
 
-  get timeTaken(){
+  get timeTaken() {
     return parseInt(process.hrtime(this.timeBegun)[1] / 1000000) + 'ms';
   }
 
   writeOutputFile(css) {
     let dst = this.config.arguments.outFile;
-    fs.writeFile(dst, css, (err)=>{
+    fs.writeFile(dst, css, (err) => {
       err
         ? console.warn(this.getFormattedTime(), 'Error writing compiled SASS to outFile:', err)
         : console.log(this.getFormattedTime(), 'SASS re-compiled in', this.timeTaken);
@@ -43,7 +43,7 @@ module.exports = class Sass {
 
   compile() {
     this.timeBegun = process.hrtime();
-    nodeSass.render(this.config.arguments, (err, result)=>{
+    nodeSass.render(this.config.arguments, (err, result) => {
       err
         ? console.warn(this.getFormattedTime(), 'Error compiling SASS:', err)
         : this.writeOutputFile(result.css.toString());
@@ -63,7 +63,7 @@ module.exports = class Sass {
     });
   }
 
-  getFormattedTime(){
+  getFormattedTime() {
     let d = new Date();
     return d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
   }

@@ -1,6 +1,6 @@
 class MissingPage extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.addRoute('404', 'Missing page');
   }

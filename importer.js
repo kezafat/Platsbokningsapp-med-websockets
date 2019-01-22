@@ -10,8 +10,8 @@ global.db = mongoose.connection;
 db.on('error', () => console.log('Could not connect to DB'));
 db.once('open', () => {
   console.log('Connected to DB');
-   importJsonDataToDb();
- });
+  importJsonDataToDb();
+});
 
 // // Load Mongoose models
 // let Book = require('./Book');

@@ -8,11 +8,11 @@ class REST {
     return this.name.toLowerCase() + 's/';
   }
 
-  constructor(settings){
+  constructor(settings) {
     Object.assign(this, settings);
   }
 
-  async save(){
+  async save() {
     let saved = await $.ajax({
       url: '/json/' + this.constructor.baseRoute + (this._id ? this._id : ''),
       // if _id exists update/put otherwise create/post
@@ -25,9 +25,9 @@ class REST {
     return this;
   }
 
-  async delete(){
-    if(!this._id){
-      throw(new Error('Can not delete because no _id!'));
+  async delete() {
+    if (!this._id) {
+      throw (new Error('Can not delete because no _id!'));
     }
     return await $.ajax({
       url: '/json/' + this.constructor.baseRoute + this._id,
@@ -37,24 +37,24 @@ class REST {
 
   }
 
-  static async find(query = ''){
+  static async find(query = '') {
     let found = await $.ajax({
       url: '/json/' + this.baseRoute + query,
       method: 'GET',
       contentType: 'application/json'
     });
     let wrapped = false;
-    if(!found){
+    if (!found) {
       return found; // probably null
     }
-    if(found.constructor !== Array){
+    if (found.constructor !== Array) {
       // found is not an array so wrap it in array
       found = [found];
       wrapped = true;
     }
     // convert from raw generic object to instance of current class
     let result = found.map(item => new this(item));
-    if(wrapped){
+    if (wrapped) {
       // unwrap things that weren't arrays from the beginning
       result = result[0];
     }

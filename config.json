@@ -4,8 +4,8 @@
       "compileAtBootup": true,
       "watch": true,
       "arguments": {
-        "watchFolder": "./sass",
-        "file": "./sass/style.scss",
+        "watchFolder": "./scss",
+        "file": "./scss/style.scss",
         "outFile": "./www/css/style.css",
         "outputStyle": "compressed"
       }

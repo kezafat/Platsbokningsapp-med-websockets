@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Sass = require('./sass');
 const config = require('./config.json');
+const connectionString = require('./connectionString.js');
 const CreateRestRoutes = require('./CreateRestRoutes');
 
 for (let conf of config.sass) {
@@ -16,14 +17,13 @@ module.exports = class Server {
   }
 
   async start() {
-    await this.connectToDb();
+    console.log(await this.connectToDb());
     await this.startWebServer();
   }
 
   connectToDb() {
     return new Promise((resolve, reject) => {
-      let dbName = 'cinema_booking'
-      mongoose.connect(`mongodb://localhost/${dbName}`);
+      mongoose.connect(connectionString, { useNewUrlParser: true });
       global.db = mongoose.connection;
       db.on('error', () => reject('Could not connect to DB'));
       db.once('open', () => resolve('Connected to DB'));

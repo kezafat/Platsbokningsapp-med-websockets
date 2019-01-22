@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+#DB Benedictus
+connectionString.js
+
+#apple thing
+.DS_store

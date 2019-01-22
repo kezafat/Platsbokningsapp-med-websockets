@@ -65,3 +65,6 @@ connectionString.js
 
 #apple thing
 .DS_store
+
+#
+www/css/

@@ -2,7 +2,6 @@ class Component {
 
   constructor() {
     this.addUniqueId();
-    this.addRenderMethodToArrays();
     // Replace render method
     this._orgRender = this.render;
     this.render = this._render;
@@ -43,19 +42,6 @@ class Component {
     elements.attr('data-instance-id', this._id);
     // return as a string
     return elements[0].outerHTML;
-  }
-
-  addRenderMethodToArrays() {
-    // add a render method to arrays that collect
-    // renders for each item
-    Array.prototype.render = Array.prototype.render || function () {
-      let html = '';
-      for (let item of this) {
-        html += item.render();
-      }
-      return html;
-    }
-    Array.prototype.toString = Array.prototype.render;
   }
 
   addEvents(eventMap) {

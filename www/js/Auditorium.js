@@ -1,0 +1,1 @@
+class Auditorium extends REST{}

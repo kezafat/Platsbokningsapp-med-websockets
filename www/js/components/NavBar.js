@@ -1,3 +1,3 @@
 class NavBar extends Component {
-  
+
 }

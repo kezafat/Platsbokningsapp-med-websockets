@@ -74,7 +74,7 @@ module.exports = class Server {
       ))).map(x => `<script src="/template-to-js/${
         // call the route for the template, with .html instead of .js ending
         x.split('.js').join('.html')}"></script>`).join('');
-        // write the results in the html body        
+      // write the results in the html body        
       res.send(`document.write('${html}')`);
     });
 

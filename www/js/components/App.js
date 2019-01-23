@@ -1,6 +1,6 @@
 class App extends Component {
- 
-  constructor(){
+
+  constructor() {
     super();
     this.addRenderMethodToArrays();
     this.navBar = new NavBar();
@@ -12,17 +12,17 @@ class App extends Component {
 
   }
 
-  addRenderMethodToArrays(){
+  addRenderMethodToArrays() {
     // add a render method to arrays that collect
     // renders for each item
-    Array.prototype.render = Array.prototype.render || function(){
+    Array.prototype.render = Array.prototype.render || function () {
       let html = '';
-      for(let item of this){
+      for (let item of this) {
         html += item.render();
       }
       return html;
     }
     Array.prototype.toString = Array.prototype.render;
   }
- 
+
 }

@@ -1,1 +1,1 @@
-class Show extends REST {};
+class Show extends REST { };

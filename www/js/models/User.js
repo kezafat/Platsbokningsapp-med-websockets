@@ -1,1 +1,1 @@
-class User extends REST{}
+class User extends REST { }

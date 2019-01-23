@@ -1,1 +1,1 @@
-class Booking extends REST{}
+class Booking extends REST { }

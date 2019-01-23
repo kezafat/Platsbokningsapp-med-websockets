@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 let bookingSchema = new Schema({
   "show": { type: Schema.Types.ObjectId, ref: 'Show', required: true },
   "user": { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  "seat": [{type: Number, required: true}],
-  "tickets": [{ "kids": Number, "senior": Number, "adult": Number }]
+  "seats": [{ type: Number, required: true }],
+  "tickets": { "kids": Number, "senior": Number, "adult": Number }
 });
 
 module.exports = db.model('Booking', bookingSchema);

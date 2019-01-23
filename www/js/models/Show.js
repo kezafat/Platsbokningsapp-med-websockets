@@ -1,0 +1,1 @@
+class Show extends REST { };

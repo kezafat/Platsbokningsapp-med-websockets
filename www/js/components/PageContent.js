@@ -1,0 +1,3 @@
+class PageContent extends Component {
+
+}

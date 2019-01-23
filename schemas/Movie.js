@@ -21,6 +21,8 @@ let movieSchema = new Schema({
     "stars": Number,
     "max": Number,
   }],
+  "shows": [{ type: Schema.Types.ObjectId, ref: 'Show', required: true }]
+
 });
 
 module.exports = db.model("Movie", movieSchema);

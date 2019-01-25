@@ -42,9 +42,10 @@ module.exports = class CreateRestRoutes {
         res.json({ error: 'Nice try!' });
         return;
       }
-      let func = new Function('model', 'return model' + query);
       let result;
+      console.log(query);
       try {
+        let func = new Function('model', 'return model' + query);
         result = await func(Model);
       }
       catch (error) {

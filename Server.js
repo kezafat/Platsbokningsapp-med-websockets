@@ -5,6 +5,7 @@ const Sass = require('./sass');
 const config = require('./config.json');
 const connectionString = require('./connectionString.js');
 const CreateRestRoutes = require('./CreateRestRoutes');
+const LoginHandler = require('./LoginHandler');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
@@ -65,7 +66,8 @@ module.exports = class Server {
     // create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
 
-
+    // create special routes for login
+    new LoginHandler(app, models.users);
 
     const fs = require('fs');
     const path = require('path');

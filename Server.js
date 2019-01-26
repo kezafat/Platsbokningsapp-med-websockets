@@ -6,6 +6,7 @@ const config = require('./config.json');
 const connectionString = require('./connectionString.js');
 const CreateRestRoutes = require('./CreateRestRoutes');
 const LoginHandler = require('./LoginHandler');
+const settings = require('./settings.json');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
@@ -28,6 +29,7 @@ module.exports = class Server {
     return new Promise((resolve, reject) => {
       mongoose.connect(connectionString, { useNewUrlParser: true });
       global.db = mongoose.connection;
+      global.passwordSalt = settings.passwordSalt;
       db.on('error', () => reject('Could not connect to DB'));
       db.once('open', () => resolve('Connected to DB'));
     });

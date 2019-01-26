@@ -1,3 +1,41 @@
 <main>
   <h3>Hej</h3>
+
+
+  <div class="container">
+    <p>Meddelanden från backend console.loggas</p>
+    <div class="row">
+      <!-- REGISTRATION FORM -->
+      <div class="col ${this.greeting ? 'd-none' : 'd-block'}">
+        <form>
+          <div class="form-group ">
+            <label for="userEmail">E-post</label>
+            <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Ange e-posten din">
+            <small id="emailHelp" class="form-text text-muted">Se till och stava rätt ;)</small>
+          </div>
+          <div class="form-group ">
+            <label for="userName">Ditt namn</label>
+            <input type="text" class="form-control" id="userName" placeholder="Ange ditt namn">
+          </div>
+          <div class="form-group">
+            <label for="userPassword">Lösenord</label>
+            <input type="password" class="form-control" id="userPassword" placeholder="Lösenord">
+          </div>
+        </form>
+        <!-- Putting button outside formgroup to disable bootstraps built-in form validation -->
+        <button class="btn btn-primary addUser">Skapa konto</button>
+      </div>
+    </div>
+    <!-- GREETING PAGE -->
+    <div class="col ${this.greeting ? 'd-block' : 'd-none'}">
+      <div class="jumbotron">
+        <h1 class="display-4">Välkommen!</h1>
+        <p class="lead">Du kan nu boka dina filmer bla bla bla..</p>
+        <hr class="my-4">
+        <p>Se alla visningar här..</p>
+      </div>
+    </div>
+  </div>
+
+
 </main>

@@ -5,6 +5,8 @@ const Sass = require('./sass');
 const config = require('./config.json');
 const connectionString = require('./connectionString.js');
 const CreateRestRoutes = require('./CreateRestRoutes');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 for (let conf of config.sass) {
   new Sass(conf);
@@ -40,6 +42,16 @@ module.exports = class Server {
 
     // Serve static files from www
     app.use(express.static('www'));
+
+    // Add session (and cookie) handling to Express
+    app.use(session({
+      secret: "secretsAreForPussies(cats)",
+      resave: false,
+      saveUninitialized: true,
+      store: new MongoStore({
+        mongooseConnection: db
+      })
+    }));
 
     // Set keys to names of rest routes
     const models = {

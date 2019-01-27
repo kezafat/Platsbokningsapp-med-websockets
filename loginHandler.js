@@ -56,7 +56,6 @@ module.exports = class LoginHandler {
     this.app.post('/login', async (req, res) => {
       // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
       if (req.session.auth === true) {
-        console.log(req.session)
         res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'user was already logged in'});
         return;
       }
@@ -90,7 +89,6 @@ module.exports = class LoginHandler {
   }
 
   createLogoutRoute() {
-    // Make a get route so you can automatically login user if they have a session
     this.app.post('/logout', async (req, res) => {
       req.session.auth = false;
       req.session.save();

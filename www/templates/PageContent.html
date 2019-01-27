@@ -1,7 +1,4 @@
 <main>
-  <h3>Hej</h3>
-
-
   <div class="container">
     <p>Meddelanden från backend console.loggas</p>
     <div class="row">
@@ -23,19 +20,31 @@
           </div>
         </form>
         <!-- Putting button outside formgroup to disable bootstraps built-in form validation -->
-        <button class="btn btn-primary addUser">Skapa konto</button>
+        <button class="btn btn-danger addUser">Skapa konto</button>
+        <button class="btn btn-primary loginUser">Logga in</button>
       </div>
     </div>
     <!-- GREETING PAGE -->
-    <div class="col ${this.greeting ? 'd-block' : 'd-none'}">
-      <div class="jumbotron">
-        <h1 class="display-4">Välkommen!</h1>
-        <p class="lead">Du kan nu boka dina filmer bla bla bla..</p>
-        <hr class="my-4">
-        <p>Se alla visningar här..</p>
+    <div class="row mt-2">
+      <div class="col ${this.greeting ? 'd-block' : 'd-none'}">
+        <div class="jumbotron">
+          <h1 class="display-4">Välkommen, ${this.user}!</h1>
+          <p class="lead">Du kan nu boka dina filmer bla bla bla..</p>
+          <hr class="my-4">
+          <p>Se alla visningar här..</p>
+          <button class="btn btn-danger logOut">Logga ut</button>
+        </div>
+      </div>
+    </div>
+    <!-- LOGOUT MSG -->
+    <div class="row mt-2">
+      <div class="col ${this.loggedOut ? 'd-block' : 'd-none'}">
+        <div class="jumbotron">
+          <h1 class="display-4">Hejdå!</h1>
+          <p class="lead">Du är nu utloggad ;)</p>
+        </div>
       </div>
     </div>
   </div>
-
-
+  <!-- eof container -->
 </main>

@@ -6,7 +6,6 @@ module.exports = class LoginHandler {
     this.app = app;
     this.User = User;
     this.createLoginRoute();
-    this.createCheckIfLoggedInRoute();
     this.createLogoutRoute();
     this.createRegisterRoute();
   }
@@ -44,25 +43,65 @@ module.exports = class LoginHandler {
       if (resString.search('error') !== -1) {
         res.send("error");
       } else {
-        res.send("ok");
         // Since all went well, also store some data in users session.
         req.session.user = data.email;
         req.session.auth = true;
-        req.session.save();
+        await req.session.save();
+        res.json({"msg": "ok", "user": req.session.user});
       }
     })
   }
 
-  createLoginRoute() {
+  async createLoginRoute() {
+    this.app.post('/login', async (req, res) => {
+      // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
+      if (req.session.auth === true) {
+        console.log(req.session)
+        res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'user was already logged in'});
+        return;
+      }
 
-  }
+      let err, data = req.body;
+      if (!data.password || !data.email) {
+        res.json({ 'msg': 'error' });
+        return;
+      }
 
-  createCheckIfLoggedInRoute() {
+      let user = await this.User.findOne({ email: data.email }).catch(
+        error => err = error
+      );
 
+      if (user === null) {
+        res.json({ 'msg': 'error' });
+        return;
+      }
+
+      let match = await bcrypt.compare(data.password + passwordSalt, user.password);
+      if (match) {
+        req.session.auth = true;
+        req.session.user = data.email;
+        req.session.save();
+        res.json({ 'msg': 'ok' , 'user': req.session.user});
+      } else {
+        res.json({ 'msg': 'error' });
+      }
+
+    });
   }
 
   createLogoutRoute() {
+    // Make a get route so you can automatically login user if they have a session
+    this.app.post('/logout', async (req, res) => {
+      req.session.auth = false;
+      req.session.save();
 
+      if(req.session.auth === false){
+        res.json({'msg':'ok'})
+      } else{
+        res.json({'msg':'error'});
+      }
+      
+    })
   }
 
 }

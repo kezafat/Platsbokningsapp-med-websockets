@@ -43,8 +43,6 @@ module.exports = class Server {
     // Add body-parser to our requests
     app.use(bodyParser.json());
 
-    // Serve static files from www
-    app.use(express.static('www'));
 
     // Add session (and cookie) handling to Express
     app.use(session({
@@ -55,6 +53,12 @@ module.exports = class Server {
         mongooseConnection: db
       })
     }));
+
+    // PUTTING static UNDER session because for some reason Safari creates 7-22 sessions on each load. (when files are cached)
+    // We tried to put static under it but same problem occurs. Leaving this for now
+    app.use(express.static('www'));
+
+
 
     // Set keys to names of rest routes
     const models = {

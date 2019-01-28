@@ -26,12 +26,27 @@ footer {
     text-decoration: none;
     color: #fff;
     padding: 2px;
+    line-height: 15px;
     &:hover{
       color:#bbbcbf;
       }
+  }
+  @include media-breakpoint-down(sm) {
+    h3{
+      font-size: 0.9rem;
+    }
+    p{
+      font-size: 0.7rem;
+      margin-bottom: 10px
+    }
+    a{
+      font-size: 0.7rem;
+      line-height: 11px;
+    }
   }
 }
 .footer-text{
   text-align: left;
   display: inline-block;
 }
+

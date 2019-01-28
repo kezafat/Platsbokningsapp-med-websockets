@@ -1,9 +1,7 @@
-class AboutUs extends Components{
-  constructor(){
+class AboutUs extends Component {
+  constructor() {
     super();
-    this.name = "Om oss";
     this.addRoute('/om-oss', 'Om Oss');
-
-
+    this.name = "Om oss";
   }
 }

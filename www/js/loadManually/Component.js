@@ -53,8 +53,11 @@ class Component {
     for (let event in eventMap) {
       let methodName = eventMap[event];
       let type = event.split(' ').shift();
-      let selector = event.substr(event.indexOf(' ') + 1);
-      $(document).on(type, `[data-instance-id=${this._id}] ${selector}`, (event) => {
+      let selector = '';
+      if (event.indexOf(' ') !== -1) {
+        selector = event.substr(event.indexOf(' '));
+      }
+      $(document).on(type, `[data-instance-id=${this._id}]${selector}`, (event) => {
         return this[methodName](event);
       });
     }

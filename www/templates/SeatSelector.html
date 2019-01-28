@@ -1,3 +1,28 @@
-<section>
-  ${JSON.stringify(this.show, null, 2)}
+<section class="seat-selector">
+  <div>
+    ${JSON.stringify(this.show, null, 2)}
+  </div>
+
+  <div class="ticket-selector">
+    <div>
+      <p>Ordinarie (500 kr/st)</p>
+      <div class="ticket-incrementor normal">
+        <span class="minus">- </span><span class="ticket-count">${this.tickets.normal}</span><span class="plus"> +</span>
+      </div>
+    </div>
+    <div>
+      <p>Pensionär (1300 kr/st)</p>
+      <div class="ticket-incrementor senior">
+        <span class="minus">- </span><span class="ticket-count">${this.tickets.senior}</span><span class="plus"> +</span>
+      </div>
+    </div>
+    <div>
+      <p>Barn (9000 kr/st)</p>
+      <div class="ticket-incrementor child">
+        <span class="minus">- </span><span class="ticket-count">${this.tickets.child}</span><span class="plus"> +</span>
+      </div>
+    </div>
+  </div>
+
+  ${this.seatMap}
 </section>

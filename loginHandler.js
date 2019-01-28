@@ -18,12 +18,12 @@ module.exports = class LoginHandler {
 
       if (user) {
         // Already in DB, redirect user to login screen
-        res.send("login");
+        res.json({"msg":"login"});
         return;
       }
 
       if (!data.password) {
-        res.send("error");
+        res.json({"msg":"error, no password"});
         return;
       }
 
@@ -41,7 +41,7 @@ module.exports = class LoginHandler {
       resString = resString.toLowerCase();
 
       if (resString.search('error') !== -1) {
-        res.send("error");
+        res.json({"msg": "error"});
       } else {
         // Since all went well, also store some data in users session.
         req.session.user = data.email;
@@ -94,7 +94,7 @@ module.exports = class LoginHandler {
       req.session.save();
 
       if(req.session.auth === false){
-        res.json({'msg':'ok'})
+        res.json({'msg':'ok', 'extra':'uz been logged out bizzle'})
       } else{
         res.json({'msg':'error'});
       }

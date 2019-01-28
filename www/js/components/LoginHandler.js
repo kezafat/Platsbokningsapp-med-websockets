@@ -50,7 +50,9 @@ class LoginHandler extends Component {
         if (res.msg == "ok") {
           that.auth = true;
           that.user = res.user;
-          that.render();
+          $('#userModal').modal('hide').on('hidden.bs.modal', function (e) {
+            that.navBar.updateNavStatus("Mitt konto", that);
+          })
         } else if (res.msg === "login") {
           // Check for "ok". Anything else is error!
           console.warn("User already exists, go to login page plz");

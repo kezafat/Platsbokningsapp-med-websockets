@@ -5,6 +5,8 @@ class NavBar extends Component {
       new NavItem('Start', '/'),
       new NavItem('Filmer', '/filmer'),
       new NavItem('Visningar', '/visningar'),
+      new NavItem('Om Oss', '/om-oss'),
+
     ];
   }
 }

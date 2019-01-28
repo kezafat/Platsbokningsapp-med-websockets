@@ -29,18 +29,7 @@ class BookShow extends Component {
 
   async selectShow() {
     const showId = this.baseEl.find('#show-select').val();
-    this.selectedShow = await Show.find(`.findOne({ _id: '${showId}'}).populate({
-      path: 'auditorium',
-      select: 'name seats bookings -_id',
-    })
-    .populate({
-      path: 'movie',
-      select: 'title -_id'
-    })
-    .populate({
-      path: 'bookings',
-      select: 'seats -_id'
-    }).exec()`);
+    this.selectedShow = await Show.find(showId);
     this.seatSelector = new SeatSelector(this.selectedShow);
     this.render();
   }

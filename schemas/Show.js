@@ -11,4 +11,22 @@ let showSchema = new Schema({
   "bookings": [{ type: Schema.Types.ObjectId, ref: 'Booking', required: true }]
 });
 
+// automatically populate so we can stay true to REST
+// (this works for FindById because FindById calls FindOne "under the hood")
+
+showSchema.pre('findOne', function() {
+  this.populate({
+    path: 'auditorium',
+    select: 'name seats -_id'
+  })
+  .populate({
+    path: 'movie',
+    select: 'title -_id'
+  })
+  .populate({
+    path: 'bookings',
+    select: 'seats -_id'
+  });
+});
+
 module.exports = db.model('Show', showSchema);

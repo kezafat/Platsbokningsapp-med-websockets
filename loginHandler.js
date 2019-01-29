@@ -18,12 +18,12 @@ module.exports = class LoginHandler {
 
       if (user) {
         // Already in DB, redirect user to login screen
-        res.json({"msg":"login"});
+        res.json({'msg':'login'});
         return;
       }
 
       if (!data.password) {
-        res.json({"msg":"error, no password"});
+        res.json({'msg':'error, no password'});
         return;
       }
 
@@ -41,13 +41,14 @@ module.exports = class LoginHandler {
       resString = resString.toLowerCase();
 
       if (resString.search('error') !== -1) {
-        res.json({"msg": "error"});
+        res.json({'msg': "error"});
       } else {
         // Since all went well, also store some data in users session.
         req.session.user = data.email;
+        req.session.name = data.name;
         req.session.auth = true;
         await req.session.save();
-        res.json({"msg": "ok", "user": req.session.user});
+        res.json({"msg": "ok", 'user': req.session.user, 'name' : req.session.name});
       }
     })
   }
@@ -56,7 +57,7 @@ module.exports = class LoginHandler {
     this.app.post('/login', async (req, res) => {
       // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
       if (req.session.auth === true) {
-        res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'user was already logged in'});
+        res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'user was already logged in' , 'name' : req.session.name});
         return;
       }
 
@@ -80,7 +81,7 @@ module.exports = class LoginHandler {
         req.session.auth = true;
         req.session.user = data.email;
         req.session.save();
-        res.json({ 'msg': 'ok' , 'user': req.session.user});
+        res.json({ 'msg': 'ok' , 'user': req.session.user, 'name' : req.session.name});
       } else {
         res.json({ 'msg': 'error' });
       }

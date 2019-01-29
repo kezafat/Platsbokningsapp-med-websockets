@@ -5,13 +5,23 @@ class Seat extends Component {
     this.booked = booked;
     this.row = row;
     this.addEvents({
-      'mouseover': 'handleMouseOver'
+      'mouseover': 'handleMouseOver',
+      'mouseleave': 'handleMouseLeave'
     });
   }
+
+  // create new custom events that we listen for in the SeatSelector component
 
   handleMouseOver() {
     const event = new CustomEvent('mouseoverSeat', {
       detail: { seat: this },
+      bubbles: true
+    });
+    this.baseEl[0].dispatchEvent(event);
+  }
+
+  handleMouseLeave() {
+    const event = new CustomEvent('mouseleaveSeat', {
       bubbles: true
     });
     this.baseEl[0].dispatchEvent(event);

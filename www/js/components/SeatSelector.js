@@ -5,7 +5,8 @@ class SeatSelector extends Component {
     this.addEvents({
       'click .minus': 'subtractTicket',
       'click .plus': 'addTicket',
-      'mouseoverSeat': 'hoverSeatSelection'
+      'mouseoverSeat': 'highlightSeatSelection',
+      'mouseleaveSeat': 'removeSeatHighlight'
     });
     this.tickets = {
       normal: 2,
@@ -44,21 +45,43 @@ class SeatSelector extends Component {
     }
   }
 
-  hoverSeatSelection(event) {
-    $('.user-select').each(function(index, element) {$(element).removeClass('user-select')});
+  removeSeatHighlight() {
+    // removes the seat highlighting on mouseover
+    this.baseEl.find('.user-select').each(function (index, element) { $(element).removeClass('user-select') });
+  }
+
+  highlightSeatSelection(event) {
     let seatNumber = event.detail.seat.seatNumber;
-    const row = event.detail.seat.row;
-    // get all seats for the prospective booking
+    // get all seat numbers for the prospective booking
     const allSeatNumbers = [];
     while (allSeatNumbers.length < this.ticketsCount) {
       allSeatNumbers.push(seatNumber--);
     }
+    // megah4xx to make an array of the actual seats, based on the numbers
     const allSeats = [];
     for (let seatNumber of allSeatNumbers) {
-      allSeats.push(this.seatMap.rows.flat().find(seat => seat.seatNumber === seatNumber))
+      allSeats.push(this.seatMap.rows.flat().find(seat => seat.seatNumber === seatNumber));
     }
-    for (let seat of allSeats) {
-      seat.baseEl.addClass('user-select');
+    // hook up our validator function
+    const isValidSelection = this.validateSeatSelection(allSeats);
+    if (isValidSelection) {
+      // highlight the prospective seats
+      for (let seat of allSeats) {
+        seat.baseEl.addClass('user-select');
+      }
+    } else {
+      // do whatever it is we want to do when user hovers over an invalid seat selection
     }
+  }
+
+  validateSeatSelection(seats) {
+    const row = seats[0].row;
+    // for each seat, check if 1) it doesn't exist 2) it's booked already 3) its on another row. if any of these are true, the selection is invalid
+    for (let seat of seats) {
+      if (!seat || seat.booked || seat.row !== row) {
+        return false
+      }
+    }
+    return true
   }
 }

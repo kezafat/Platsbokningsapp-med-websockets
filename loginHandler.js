@@ -57,7 +57,7 @@ module.exports = class LoginHandler {
     this.app.post('/login', async (req, res) => {
       // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
       if (req.session.auth === true) {
-        res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'user was already logged in' , 'name' : req.session.name});
+        res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'Hot damn! User was already logged in :D' , 'name' : req.session.name});
         return;
       }
 
@@ -72,7 +72,7 @@ module.exports = class LoginHandler {
       );
 
       if (user === null) {
-        res.json({ 'msg': 'error' });
+        res.json({ 'msg': 'goRegister' });
         return;
       }
 
@@ -83,7 +83,7 @@ module.exports = class LoginHandler {
         req.session.save();
         res.json({ 'msg': 'ok' , 'user': req.session.user, 'name' : req.session.name});
       } else {
-        res.json({ 'msg': 'error' });
+        res.json({ 'msg': 'badpass' });
       }
 
     });

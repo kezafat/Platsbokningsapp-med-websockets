@@ -41,16 +41,15 @@
 
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#loginOrRegister">
                 <div class="card-body">
-                  <p class="text-danger">${this.notify}</p>
+                  <p class="text-danger">${this.loginNotify}</p>
                   <form>
                     <div class="form-group ">
                       <label for="userEmail">E-post</label>
-                      <input type="email" class="form-control loginUserEmail" aria-describedby="emailHelp" placeholder="Ange e-post"
-                        value="hamid@hairball.se">
+                      <input type="email" class="form-control loginUserEmail" aria-describedby="emailHelp" placeholder="Ange e-post">
                     </div>
                     <div class="form-group">
                       <label for="userPassword">Lösenord</label>
-                      <input type="password" class="form-control loginUserPassword" placeholder="Ange lösenord" value="hamid">
+                      <input type="password" class="form-control loginUserPassword" placeholder="Ange lösenord">
                     </div>
                   </form>
                   <button class="btn btn-success loginUser">Logga in</button>
@@ -69,17 +68,18 @@
               </div>
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#loginOrRegister">
                 <div class="card-body">
+                    <p class="text-danger">${this.registerNotify}</p>
                   <form>
                     <div class="form-group ">
                       <label for="userName">Ditt namn</label>
-                      <input type="text" class="form-control regUserName" placeholder="Ange namn" value="hamid">
+                      <input type="text" class="form-control regUserName" placeholder="Ange namn" >
 
                       <label for="userEmail">E-post</label>
-                      <input type="email" class="form-control regUserEmail" placeholder="Ange e-post" value="hamid@hairball.se">
+                      <input type="email" class="form-control regUserEmail" placeholder="Ange e-post">
                     </div>
                     <div class="form-group">
                       <label for="userPassword">Lösenord</label>
-                      <input type="password" class="form-control regUserPassword" placeholder="Ange lösenord" value="hamid">
+                      <input type="password" class="form-control regUserPassword" placeholder="Ange lösenord">
                     </div>
                   </form>
                   <button class="btn btn-danger addUser">Skapa konto</button>

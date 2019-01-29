@@ -11,7 +11,8 @@ class LoginHandler extends Component {
     this.loggedOut = false;
     this.user = "";
     this.name = "";
-    this.notify = "";
+    this.loginNotify = "";
+    this.registerNotify = "";
 
     // Auto-login user if session auth is true
     this.checkLogin();
@@ -56,8 +57,7 @@ class LoginHandler extends Component {
           })
         } else if (res.msg === "login") {
           // Check for "ok". Anything else is error!
-          console.warn("User already exists, go to login page plz");
-          that.redirectToLogin();
+          that.redirectToLogin("Hur många konton ska du ha egentligen?<br> Logga in istället :P");
         }
       }
     });
@@ -78,6 +78,12 @@ class LoginHandler extends Component {
       processData: false,
       data: JSON.stringify(userData),
       success: function (res) {
+        if (res.msg === 'goRegister') {
+          that.redirectToRegister("Du finns inte än :(<br>Ta och skapa ett konto här!");
+        }
+        if (res.msg === 'badpass') {
+          that.redirectToLogin("Hmm.. säker på ditt lösen?");
+        }
         if (res.msg === "ok") {
           that.user = res.user;
           that.name = res.name;
@@ -107,16 +113,26 @@ class LoginHandler extends Component {
     });
   }
 
-  redirectToLogin() {
+  redirectToLogin(msg) {
     let that = this;
-    $('#userModal').modal('hide');
-    $('#collapseTwo').collapse('toggle').on('hidden.bs.collapse', function () {
-      that.notify = "Användare finns redan, det är bara att logga in serru..";
+    $('#userModal').modal('hide').on('hidden.bs.modal', function () {
+      that.loginNotify = msg;
       that.render();
-      $('#userModal').modal('show');
-      $('#collapseOne').collapse('toggle');
+      $('#userModal').modal('show').on('shown.bs.modal', function () {
+        $('#collapseOne').show('show')
+      })
     })
   }
 
+  redirectToRegister(msg) {
+    let that = this;
+    $('#userModal').modal('hide').on('hidden.bs.modal', function () {
+      that.registerNotify = msg;
+      that.render();
+      $('#userModal').modal('show').on('shown.bs.modal', function () {
+        $('#collapseTwo').show('show')
+      })
+    })
+  }
 
 }

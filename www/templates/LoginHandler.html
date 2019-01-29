@@ -4,74 +4,93 @@
   <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="lillmodalen" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
+
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body text-center">
+
           <!-- ALREADY LOGGED IN -->
           <div class="${this.auth ? 'd-block':'d-none'}">
             <div class="jumbotron">
-              <h4 class="heading">Inloggad som: ${this.user}</h4>
-              <button class="btn btn-danger logOut">Logga ut</button>
-            </div>
-          </div>
-
-          <!-- LOGGA IN  -->
-          <div class="${this.auth ? 'd-none':'d-block'}">
-            <button class="btn btn-success btn-block" type="button" data-toggle="collapse" data-target="#loginCollapser"
-              aria-expanded="false" aria-controls="loginCollapser">
-              Logga in på ditt konto
-            </button>
-
-            <div class="collapse" id="loginCollapser">
-              <div class="card card-body">
-                <form>
-                  <div class="form-group ">
-                    <label for="userEmail">E-post</label>
-                    <input type="email" class="form-control loginUserEmail" aria-describedby="emailHelp" placeholder="Ange e-posten din"
-                      value="hamid">
-                  </div>
-                  <div class="form-group">
-                    <label for="userPassword">Lösenord</label>
-                    <input type="password" class="form-control loginUserPassword" placeholder="Lösenord" value="hamid">
-                  </div>
-                </form>
-                <button class="btn btn-success loginUser">Logga in</button>
+              <h4 class="heading">Hallå: ${this.name}!</h4>
+              <p>Inloggad med: ${this.user}</p>
+              <div class="card p-2">
+                  ${this.name} kan man med fördel få se sina bokningar och annat här? :)
               </div>
             </div>
-            <!-- SKAPA KONTO -->
-            <button class="btn btn-danger btn-block" type="button" data-toggle="collapse" data-target="#registerCollapser"
-              aria-expanded="false" aria-controls="registerCollapser">
-              Registrera ett nytt konto
-            </button>
+            <button class="btn btn-danger logOut">Logga ut</button>
+          </div>
 
-            <div class="collapse" id="registerCollapser">
-              <div class="card card-body">
-                <form>
-                  <div class="form-group ">
-                    <label for="userName">Ditt namn</label>
-                    <input type="text" class="form-control regUserName" placeholder="Ange ditt namn">
 
-                    <label for="userEmail">E-post</label>
-                    <input type="email" class="form-control regUserEmail" placeholder="Ange e-posten din">
-                  </div>
-                  <div class="form-group">
-                    <label for="userPassword">Lösenord</label>
-                    <input type="password" class="form-control regUserPassword" placeholder="Lösenord">
-                  </div>
-                </form>
-                <button class="btn btn-danger addUser">Skapa konto</button>
+          <!-- Login or reg accord -->
+          <div class="accordion text-center ${this.auth ? 'd-none':'d-block'}" id="loginOrRegister">
+
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    Logga in på ditt konto
+                  </button>
+                </h5>
+              </div>
+
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#loginOrRegister">
+                <div class="card-body">
+                  <p class="text-danger">${this.notify}</p>
+                  <form>
+                    <div class="form-group ">
+                      <label for="userEmail">E-post</label>
+                      <input type="email" class="form-control loginUserEmail" aria-describedby="emailHelp" placeholder="Ange e-post"
+                        value="hamid@hairball.se">
+                    </div>
+                    <div class="form-group">
+                      <label for="userPassword">Lösenord</label>
+                      <input type="password" class="form-control loginUserPassword" placeholder="Ange lösenord" value="hamid">
+                    </div>
+                  </form>
+                  <button class="btn btn-success loginUser">Logga in</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="false" aria-controls="collapseTwo">
+                    Registrera ett nytt konto
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#loginOrRegister">
+                <div class="card-body">
+                  <form>
+                    <div class="form-group ">
+                      <label for="userName">Ditt namn</label>
+                      <input type="text" class="form-control regUserName" placeholder="Ange namn" value="hamid">
+
+                      <label for="userEmail">E-post</label>
+                      <input type="email" class="form-control regUserEmail" placeholder="Ange e-post" value="hamid@hairball.se">
+                    </div>
+                    <div class="form-group">
+                      <label for="userPassword">Lösenord</label>
+                      <input type="password" class="form-control regUserPassword" placeholder="Ange lösenord" value="hamid">
+                    </div>
+                  </form>
+                  <button class="btn btn-danger addUser">Skapa konto</button>
+                </div>
               </div>
             </div>
           </div>
+          <!-- eof accord -->
         </div>
-        <div class="modal-footer">
-          <!-- <button class="btn btn-danger logOut ${this.auth ? 'd-block':'d-none'}">Logga ut</button> -->
-        </div>
+        <!-- eof modal body -->
       </div>
     </div>
   </div>
-  <!-- EOF MODALS -->
 </div>

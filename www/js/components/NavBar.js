@@ -12,8 +12,6 @@ class NavBar extends Component {
       'click .navStatus': 'popModal'
     });
     this.navStatus = ""
-    this.showLogin = false;
-    this.showRegister = false;
   }
 
   updateNavStatus(name, callback = this) {

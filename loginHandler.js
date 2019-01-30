@@ -80,6 +80,7 @@ module.exports = class LoginHandler {
       if (match) {
         req.session.auth = true;
         req.session.user = data.email;
+        req.session.name = user.name;
         req.session.save();
         res.json({ 'msg': 'ok' , 'user': req.session.user, 'name' : req.session.name});
       } else {

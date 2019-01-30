@@ -6,7 +6,7 @@ class Seat extends Component {
     this.row = row;
     this.addEvents({
       'mouseover': 'handleMouseOver',
-      'mouseleave': 'handleMouseLeave'
+      'mouseleave': 'handleMouseLeave',
     });
   }
 
@@ -20,6 +20,7 @@ class Seat extends Component {
     this.baseEl[0].dispatchEvent(event);
   }
 
+  // this event does not "need" to be here, but it is here bc the mouseover event is here and they are closely related
   handleMouseLeave() {
     const event = new CustomEvent('mouseleaveSeat', {
       bubbles: true

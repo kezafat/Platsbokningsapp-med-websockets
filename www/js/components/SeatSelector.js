@@ -6,18 +6,22 @@ class SeatSelector extends Component {
       'click .minus': 'subtractTicket',
       'click .plus': 'addTicket',
       'mouseoverSeat': 'highlightSeatSelection',
-      'mouseleaveSeat': 'removeSeatHighlight'
+      'mouseleaveSeat': 'removeSeatHighlight',
+      'click span.seat': 'selectSeats',
+      'click #book-tickets': 'sendBookingRequest'
     });
     this.tickets = {
-      normal: 2,
+      adult: 2,
       senior: 0,
-      child: 0
+      kids: 0
     }
     this.seatMap = new SeatMap(this.show.auditorium.seats, this.bookedSeats);
+    this.highlightedSeats = [];
+    this.selectedSeats = [];
   }
 
   get ticketsCount() {
-    return this.tickets.normal + this.tickets.senior + this.tickets.child
+    return this.tickets.adult + this.tickets.senior + this.tickets.kids
   }
 
   get bookedSeats() {
@@ -47,7 +51,10 @@ class SeatSelector extends Component {
 
   removeSeatHighlight() {
     // removes the seat highlighting on mouseover
-    this.baseEl.find('.user-select').each(function (index, element) { $(element).removeClass('user-select') });
+    for (let seat of this.highlightedSeats) {
+      seat.baseEl.removeClass('highlighted-seat');
+    }
+    this.highlightedSeats = [];
   }
 
   highlightSeatSelection(event) {
@@ -66,8 +73,9 @@ class SeatSelector extends Component {
     const isValidSelection = this.validateSeatSelection(allSeats);
     if (isValidSelection) {
       // highlight the prospective seats
+      this.highlightedSeats = allSeats;
       for (let seat of allSeats) {
-        seat.baseEl.addClass('user-select');
+        seat.baseEl.addClass('highlighted-seat');
       }
     } else {
       // do whatever it is we want to do when user hovers over an invalid seat selection
@@ -83,5 +91,31 @@ class SeatSelector extends Component {
       }
     }
     return true
+  }
+
+  selectSeats() {
+    // remove selected class from old selection
+    for (let seat of this.selectedSeats) {
+      seat.baseEl.removeClass('selected-seat');
+    }
+    //select the highlighted seats and give them the selected class, remove highlight class
+    this.selectedSeats = this.highlightedSeats;
+    for (let seat of this.selectedSeats) {
+      seat.baseEl.addClass('selected-seat').removeClass('highlighted-seat');
+    }
+  }
+
+  async sendBookingRequest() {
+    const booking = new Booking({
+      show: this.show._id,
+      seats: this.selectedSeats.map(seat => seat.seatNumber),
+      tickets: this.tickets,
+      // for now we hardcode the user bc the auth is not in place
+      user: '5c50a52ba2915842ccd015c2'
+    });
+
+    const result = await booking.save();
+    console.log(result);
+
   }
 }

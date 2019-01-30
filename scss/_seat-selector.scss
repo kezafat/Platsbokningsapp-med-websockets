@@ -13,10 +13,15 @@
       &.booked {
         background-color: lightcoral;
       }
+      
+      &.selected-seat {
+        background-color: lightblue;
+      }
 
-      &.user-select {
+      &.highlighted-seat {
         background-color: lightgreen;
       }
+
     }
   }
 

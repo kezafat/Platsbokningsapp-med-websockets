@@ -6,8 +6,8 @@
   <div class="ticket-selector">
     <div>
       <p>Ordinarie (500 kr/st)</p>
-      <div class="ticket-incrementor normal">
-        <span class="minus">- </span><span class="ticket-count">${this.tickets.normal}</span><span class="plus"> +</span>
+      <div class="ticket-incrementor adult">
+        <span class="minus">- </span><span class="ticket-count">${this.tickets.adult}</span><span class="plus"> +</span>
       </div>
     </div>
     <div>
@@ -18,11 +18,13 @@
     </div>
     <div>
       <p>Barn (9000 kr/st)</p>
-      <div class="ticket-incrementor child">
-        <span class="minus">- </span><span class="ticket-count">${this.tickets.child}</span><span class="plus"> +</span>
+      <div class="ticket-incrementor kids">
+        <span class="minus">- </span><span class="ticket-count">${this.tickets.kids}</span><span class="plus"> +</span>
       </div>
     </div>
   </div>
 
   ${this.seatMap}
+
+  <button id="book-tickets">BOOK THAT SHOWY-SHOW</button>
 </section>

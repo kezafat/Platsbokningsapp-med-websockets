@@ -1,4 +1,4 @@
-class Auditorium extends REST {
+class Auditorium extends Component {
   static get baseRoute() {
     return 'auditoria/'
   }

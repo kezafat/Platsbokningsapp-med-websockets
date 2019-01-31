@@ -7,14 +7,14 @@ let userSchema = new Schema({
   "password": { type: String, required: true },
   // "bookings": [{ type: Schema.Types.ObjectId, ref: 'Booking', required: true }]
 },
-{ toJSON: { virtuals: true }});
-userSchema.virtual('bookings',{
+  { toJSON: { virtuals: true } });
+userSchema.virtual('bookings', {
   ref: 'Booking',
   localField: '_id',
   foreignField: 'user',
 });
 
-userSchema.pre('find', function() {
+userSchema.pre('find', function () {
   this.populate({
     path: 'bookings',
     populate: {
@@ -22,17 +22,9 @@ userSchema.pre('find', function() {
       populate: {
         path: 'movie',
         select: 'title images -_id',
-        populate: {
-          path: 'auditorium',
-          select: 'name -_id',
-        }
       }
     }
-  })
-})
-
-userSchema.pre('find', function() {
-  this.populate({
+  }).populate({
     path: 'bookings',
     populate: {
       path: 'show',
@@ -40,9 +32,10 @@ userSchema.pre('find', function() {
         path: 'auditorium',
         select: 'name -_id',
       }
-      
+
     }
   })
 })
+
 
 module.exports = db.model('User', userSchema)

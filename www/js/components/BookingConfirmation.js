@@ -1,12 +1,13 @@
 class BookingConfirmation extends Component {
   constructor() {
     super();
-    this.addRoute('/booking-bekräftelse', 'Boknings Bekräftelse');
-    this.name = "Boknings Bekräftelse"
-    // this.showInfo = [];
-    // this.getBookings();
+    this.addRoute('/booking-confirmation', 'Boknings Bekräftelse');
+    this.user = new User(this.user)
+    this.getUser();
   }
-  // async getBookings() {
-  //   this.showInfo = await User.find(`.find({})`)
-  // }
+  async getUser(){
+    let users = await User.find();
+    console.log(users);
+  }
+  
 }

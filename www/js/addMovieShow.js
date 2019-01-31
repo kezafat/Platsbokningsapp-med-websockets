@@ -56,22 +56,11 @@ async function generatesShows() {
       }
       return movies;
     }
-    //shuffeling the auditoriums and randomising
-    function audiShuffle(auditoriums) {
-      for (let i = auditoriumsArr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = auditoriumsArr[i];
-        auditoriumsArr[i] = auditoriumsArr[j];
-        auditoriumsArr[j] = temp;
-      }
-      return auditoriums;
-    }
 
     tmp.push(show);
     //await show.save()
   }
   shuffle();
-  audiShuffle();
 }
 generatesShows();
 console.log(tmp);

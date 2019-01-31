@@ -21,7 +21,19 @@ userSchema.pre('find', function() {
       path: 'show',
       populate: {
         path: 'movie',
-        select: 'title images -_id' ,
+        select: 'title images -_id',
+      }
+    }
+  })
+})
+userSchema.pre('find', function() {
+  this.populate({
+    path: 'bookings',
+    populate: {
+      path: 'show',
+      populate: {
+        path: 'auditorium',
+        select: 'name -_id',
       }
     }
   })

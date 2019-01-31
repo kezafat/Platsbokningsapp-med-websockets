@@ -22,10 +22,15 @@ userSchema.pre('find', function() {
       populate: {
         path: 'movie',
         select: 'title images -_id',
+        populate: {
+          path: 'auditorium',
+          select: 'name -_id',
+        }
       }
     }
   })
 })
+
 userSchema.pre('find', function() {
   this.populate({
     path: 'bookings',
@@ -35,6 +40,7 @@ userSchema.pre('find', function() {
         path: 'auditorium',
         select: 'name -_id',
       }
+      
     }
   })
 })

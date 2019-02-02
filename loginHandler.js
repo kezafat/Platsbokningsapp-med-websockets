@@ -18,12 +18,12 @@ module.exports = class LoginHandler {
 
       if (user) {
         // Already in DB, redirect user to login screen
-        res.json({'msg':'login'});
+        res.json({ 'msg': 'login' });
         return;
       }
 
       if (!data.password) {
-        res.json({'msg':'error, no password'});
+        res.json({ 'msg': 'error, no password' });
         return;
       }
 
@@ -41,27 +41,30 @@ module.exports = class LoginHandler {
       resString = resString.toLowerCase();
 
       if (resString.search('error') !== -1) {
-        res.json({'msg': "error"});
+        res.json({ 'msg': "error" });
       } else {
         // Since all went well, also store some data in users session.
         req.session.user = data.email;
         req.session.name = data.name;
         req.session.auth = true;
+        req.session._id = newUser._id;
         await req.session.save();
-        res.json({"msg": "ok", 'user': req.session.user, 'name' : req.session.name});
+        res.json({ "msg": "ok", 'user': req.session.user, 'name': req.session.name, '_id': newUser._id });
       }
     })
   }
 
   async createLoginRoute() {
     this.app.post('/login', async (req, res) => {
+      let err;
       // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
       if (req.session.auth === true) {
-        res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'Hot damn! User was already logged in :D' , 'name' : req.session.name});
+        let user = await this.User.findOne({ email: req.session.user }).catch(error => err = error);
+        res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'Hot damn! User was already logged in :D', 'name': req.session.name, '_id': user._id });
         return;
       }
 
-      let err, data = req.body;
+      let data = req.body;
       if (!data.password || !data.email) {
         res.json({ 'msg': 'error' });
         return;
@@ -81,8 +84,9 @@ module.exports = class LoginHandler {
         req.session.auth = true;
         req.session.user = data.email;
         req.session.name = user.name;
+        req.session._id = user._id;
         req.session.save();
-        res.json({ 'msg': 'ok' , 'user': req.session.user, 'name' : req.session.name});
+        res.json({ 'msg': 'ok', 'user': req.session.user, 'name': req.session.name, '_id': user._id });
       } else {
         res.json({ 'msg': 'badpass' });
       }
@@ -95,12 +99,12 @@ module.exports = class LoginHandler {
       req.session.auth = false;
       req.session.save();
 
-      if(req.session.auth === false){
-        res.json({'msg':'ok', 'extra':'uz been logged out bizzle'})
-      } else{
-        res.json({'msg':'error'});
+      if (req.session.auth === false) {
+        res.json({ 'msg': 'ok', 'extra': 'uz been logged out bizzle' })
+      } else {
+        res.json({ 'msg': 'error' });
       }
-      
+
     })
   }
 

@@ -18,7 +18,7 @@ class NavBar extends Component {
       this.navStatus = AccountPageStatus.userData.name;
       this.loggedIn = true;
     } else {
-      this.navStatus = "Logga in / skapa konto";
+      this.navStatus = "Logga in";
       this.loggedIn = false;
     }
     this.render();

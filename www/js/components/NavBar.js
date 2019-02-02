@@ -6,22 +6,22 @@ class NavBar extends Component {
       new NavItem('Start', '/'),
       new NavItem('Filmer', '/filmer'),
       new NavItem('Visningar', '/visningar'),
-      new NavItem('Om Oss', '/om-oss'),
+      new NavItem('Om Oss', '/om-oss')
     ];
-    this.addEvents({
-      'click .navStatus': 'popModal'
-    });
-    this.navStatus = ""
+    this.navStatus = "Laddar..";
+    // Just for fun coloring
+    this.loggedIn = false;
   }
 
-  updateNavStatus(name, callback = this) {
-    this.navStatus = name;
+  updateNavStatus(AccountPageStatus) {
+    if (AccountPageStatus.loggedIn) {
+      this.navStatus = AccountPageStatus.userData.name;
+      this.loggedIn = true;
+    } else {
+      this.navStatus = "Logga in / skapa konto";
+      this.loggedIn = false;
+    }
     this.render();
-    callback.render();
   }
 
-  popModal() {
-    // Popping a modal that actually is in another template (LoginHandler.html)
-    $('#userModal').modal('show')
-  }
 }

@@ -10,7 +10,7 @@
         ${this.navItems}
       </ul>
       <!-- Navbtn for login/logout/loginstatus -->
-      <button class="btn btn-outline-success navStatus mx-auto">${this.navStatus}</button>
+      <a href="/mitt-konto" class="btn btn-outline-${this.loggedIn ? 'danger' : 'success'} mx-auto">${this.navStatus}</a>
     </div>
   </nav>
 </div>

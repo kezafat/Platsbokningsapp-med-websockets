@@ -72,7 +72,7 @@ module.exports = class LoginHandler {
       );
 
       if (user === null) {
-        res.json({ 'msg': 'goRegister' });
+        res.json({ 'msg': 'goregister' });
         return;
       }
 

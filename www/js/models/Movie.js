@@ -1,1 +1,0 @@
-class Movie extends REST { }

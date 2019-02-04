@@ -1,1 +1,0 @@
-class Booking extends REST { }

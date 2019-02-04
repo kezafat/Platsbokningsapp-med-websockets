@@ -5,9 +5,10 @@ class BookingConfirmation extends Component {
     this.user = new User(this.user)
     this.getUser();
   }
+
   async getUser(){
     let users = await User.find();
     console.log(users);
+    this.render();
   }
-  
 }

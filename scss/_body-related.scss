@@ -1,3 +1,10 @@
-body {
+body > div  {
   background-color: rgb(247, 250, 182);
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main{
+  flex: 1;
 }

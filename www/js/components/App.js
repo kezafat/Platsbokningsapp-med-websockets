@@ -4,7 +4,7 @@ class App extends Component {
     super();
     this.addRenderMethodToArrays();
     this.navBar = new NavBar();
-    this.pageContent = new PageContent();
+    this.pageContent = new PageContent(this.navBar);
     this.footer = new Footer();
 
     new Router(this.pageContent);

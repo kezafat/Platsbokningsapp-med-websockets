@@ -1,7 +1,11 @@
 class PageContent extends Component {
-  constructor() {
+  constructor(navBar) {
     super();
-    this.bookShow = new BookShow();
+    this.navBar = navBar;
+    this.startPage = new StartPage();
+    this.moviePage = new MoviePage();
+    this.aboutPage = new AboutUs();
+    this.moviesSchedulePage = new MoviesSchedulePage();
+    this.accountPage = new AccountPage(this.navBar);
   }
-
 }

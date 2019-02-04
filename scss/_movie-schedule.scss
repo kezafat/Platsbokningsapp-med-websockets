@@ -1,9 +1,10 @@
 .movies-schedule-page {
-  // .movie-title {
-  //   margin-top: 80px;
-  // }
+  h3 {
+    display: inline-block;
+    margin-top: 30px;
+  }
   h4 h5 {
-    margin-top: 80px;
+    margin-top: 180px;
   }
   img{
     padding-left: 200px;
@@ -13,7 +14,9 @@
     padding-left: 250px;
     margin-top: 40px;
   }
-  h2 h3 {
-    display: inline-block;
+  
+  .date {
+    margin-top: 80px;
   }
+
   }

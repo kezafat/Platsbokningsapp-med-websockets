@@ -46,6 +46,7 @@ module.exports = class LoginHandler {
         // Since all went well, also store some data in users session.
         req.session.user = data.email;
         req.session.name = data.name;
+        req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
         req.session.auth = true;
         req.session._id = newUser._id;
         await req.session.save();
@@ -57,6 +58,8 @@ module.exports = class LoginHandler {
   async createLoginRoute() {
     this.app.post('/login', async (req, res) => {
       let err;
+      req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
+      req.session.save();
       // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
       if (req.session.auth === true) {
         let user = await this.User.findOne({ email: req.session.user }).catch(error => err = error);
@@ -82,10 +85,11 @@ module.exports = class LoginHandler {
       let match = await bcrypt.compare(data.password + passwordSalt, user.password);
       if (match) {
         req.session.auth = true;
+        req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
         req.session.user = data.email;
         req.session.name = user.name;
         req.session._id = user._id;
-        req.session.save();
+        await req.session.save();
         res.json({ 'msg': 'ok', 'user': req.session.user, 'name': req.session.name, '_id': user._id });
       } else {
         res.json({ 'msg': 'badpass' });
@@ -97,7 +101,7 @@ module.exports = class LoginHandler {
   createLogoutRoute() {
     this.app.post('/logout', async (req, res) => {
       req.session.auth = false;
-      req.session.save();
+      await req.session.save();
 
       if (req.session.auth === false) {
         res.json({ 'msg': 'ok', 'extra': 'uz been logged out bizzle' })

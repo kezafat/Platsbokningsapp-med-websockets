@@ -6,9 +6,7 @@ class MoviesSchedulePage extends Component {
     this.days = [];
     this.fetchMovies();
   }
-
-
-
+  
   //runs when instanciating and loads everything asyncronous
   async fetchMovies() {
     let now = new Date().toISOString().split('T');
@@ -21,8 +19,8 @@ class MoviesSchedulePage extends Component {
     this.days = [new Day({date: firstDate})];
     for(let show of allShows){
       let currentDay = this.days[this.days.length - 1];
-      // if the date of the show doesn't the current day
-      // the create a new day
+      // if the date of the show isn't the current day
+      // create a new day
       if(show.date !== currentDay.date){
         currentDay = new Day({date: show.date});
         this.days.push(currentDay);

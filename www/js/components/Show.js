@@ -6,5 +6,4 @@ class Show extends Component {
     this.movie = new Movie(this.movie);
     this.auditorium = new Auditorium(this.auditorium);
   }
-
 }

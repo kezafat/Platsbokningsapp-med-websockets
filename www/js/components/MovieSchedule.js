@@ -1,1 +1,0 @@
-class MovieSchedule extends Component {}

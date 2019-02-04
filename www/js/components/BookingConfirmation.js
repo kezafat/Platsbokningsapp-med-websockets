@@ -9,7 +9,7 @@ class BookingConfirmation extends Component {
 
   async getUser(){
     let users = await User.find(`.find({name: /jesus/}).populate('bookings show').exec()`);
-    console.log(users);
+    // console.log(users);
   }
 
   async getTickets(){
@@ -17,9 +17,9 @@ class BookingConfirmation extends Component {
     let child = 65;
     let senior = 75;
     let adult = 85;
-    let tickets = users.tickets;
-    for (let userTicket in tickets){
-      console.log(userTicket.tickets)
+    let tickets = users;
+    for (let ticket in tickets){
+      console.log(tickets[ticket])
     }
   }
 }

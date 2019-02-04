@@ -1,15 +1,13 @@
 <section class="account-page">
-
-  ${this.userData._id}
-
-
   
   <!-- Logged in area -->
   <div class="${this.loggedIn ? 'd-block':'d-none'}">
     <div class="jumbotron USERPAGE">
       <h2>Välkommen ${this.userData.name}</h2>
       <p>Du är inloggad med ${this.userData.user}</p>
-      <button class="btn btn-success testrest">TestRest</button>
+      <!-- REMOVE THIS AFTER TEST -->
+      <p>${this.userstring}</p>
+      <button class="btn btn-success testrest">Get my data boiii</button>
     </div>
     <button class="btn btn-danger logOutBtn">Logga ut</button>
   </div>

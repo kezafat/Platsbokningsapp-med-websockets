@@ -14,15 +14,19 @@ class AccountPage extends Component {
     this.loggedIn = false;
     this.loginNotify = "";
     this.registerNotify = "";
+    // Remove this after test
+    this.userstring = "";
     this.userData = {};
     this.checkUserLoginState();
   }
 
   async testrest() {
-    // Lael. Our server forcibly serves index.html for get requests on ALL routes. Meaning this will return the document iself :'(
     let id = this.userData._id;
-    let testrest = await User.find();
-    console.log(testrest);
+    let testrest = await User.find(`.findById("${id}")`);
+    // Remove this after test
+    let stringified = JSON.stringify(testrest);
+    this.userstring = stringified;
+    this.render();
   }
 
   async checkUserLoginState() {

@@ -16,6 +16,10 @@ module.exports = class CreateRestRoutes {
     // create a new instance
     this.app.post(baseRoute, async (req, res) => {
       let err, instance = new Model(req.body);
+      // naughty little if statement to add the users id if creating a booking
+      if (Model.modelName === 'Booking') {
+        instance.user = req.session._id;
+      }
       let result = await instance.save().catch(
         error => err = error
       )

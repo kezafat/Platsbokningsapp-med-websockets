@@ -109,9 +109,7 @@ class SeatSelector extends Component {
     const booking = new Booking({
       show: this.show._id,
       seats: this.selectedSeats.map(seat => seat.seatNumber),
-      tickets: this.tickets,
-      // for now we hardcode the user bc the auth is not in place
-      user: '5c50a52ba2915842ccd015c2'
+      tickets: this.tickets
     });
 
 

@@ -4,11 +4,22 @@ class BookingConfirmation extends Component {
     this.addRoute('/booking-confirmation', 'Boknings Bekräftelse');
     this.user = new User(this.user)
     this.getUser();
+    this.getTickets();
   }
 
   async getUser(){
-    let users = await User.find();
+    let users = await User.find(`.find({name: /jesus/}).populate('bookings show').exec()`);
     console.log(users);
-    this.render();
+  }
+
+  async getTickets(){
+    let users = await User.find(`.find({name: /jesus/}).populate('bookings show').exec()`);
+    let child = 65;
+    let senior = 75;
+    let adult = 85;
+    let tickets = users.tickets;
+    for (let userTicket in tickets){
+      console.log(userTicket.tickets)
+    }
   }
 }

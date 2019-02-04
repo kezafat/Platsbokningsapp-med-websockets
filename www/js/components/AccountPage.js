@@ -8,13 +8,21 @@ class AccountPage extends Component {
     this.addEvents({
       'click .logOutBtn': 'logOut',
       'click .loginBtn': 'logIn',
-      'click .registerBtn': 'register'
+      'click .registerBtn': 'register',
+      'click .testrest': 'testrest'
     });
     this.loggedIn = false;
     this.loginNotify = "";
     this.registerNotify = "";
     this.userData = {};
     this.checkUserLoginState();
+  }
+
+  async testrest() {
+    // Lael. Our server forcibly serves index.html for get requests on ALL routes. Meaning this will return the document iself :'(
+    let id = this.userData._id;
+    let testrest = await User.find();
+    console.log(testrest);
   }
 
   async checkUserLoginState() {

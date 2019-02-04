@@ -1,12 +1,19 @@
 <section class="account-page">
+
+  ${this.userData._id}
+
+
+  
   <!-- Logged in area -->
   <div class="${this.loggedIn ? 'd-block':'d-none'}">
     <div class="jumbotron USERPAGE">
       <h2>Välkommen ${this.userData.name}</h2>
       <p>Du är inloggad med ${this.userData.user}</p>
+      <button class="btn btn-success testrest">TestRest</button>
     </div>
     <button class="btn btn-danger logOutBtn">Logga ut</button>
   </div>
+  <!-- EOF logged in area -->
 
   <!-- Logged out area -->
   <div class="logged-out ${!this.loggedIn ? 'd-block':'d-none'}">

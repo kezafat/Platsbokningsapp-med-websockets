@@ -29,11 +29,11 @@ showSchema.pre('findOne', function() {
   })
   .populate({
     path: 'movie',
-    select: 'title -_id'
+    select: 'title image -_id'
   })
   .populate({
     path: 'bookings',
-    select: 'seats -_id'
+    select: 'seats show -_id'
   });
 });
 

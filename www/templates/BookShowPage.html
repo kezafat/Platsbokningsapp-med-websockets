@@ -1,12 +1,6 @@
 <section class="book-show">
   <div>
     Book the fookin show m8
-    <select name="show-select" id="show-select">
-      ${this.generateShowsList()}
-    </select>
-    <div>
-      <button id="select-show">BOOK THAT MOTHERFUCKER</button>
-    </div>
     <div class="seat-selector">
       ${this.selectedShow._id ? this.seatSelector : ''}
     </div>

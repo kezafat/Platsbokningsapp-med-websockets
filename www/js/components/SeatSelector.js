@@ -114,6 +114,7 @@ class SeatSelector extends Component {
       user: '5c50a52ba2915842ccd015c2'
     });
 
+
     const result = await booking.save();
     console.log(result);
 

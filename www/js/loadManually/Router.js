@@ -31,6 +31,10 @@ class Router {
   }
 
   setPath(path) {
+    // strip query strings
+    if (path.indexOf('?') !== -1) {
+      path = path.slice(0, path.indexOf('?'));
+    }
     Router.path = Router.routes.includes(path) ? path : '404';
     setTimeout(() => this.setActiveLink(), 0);
   }

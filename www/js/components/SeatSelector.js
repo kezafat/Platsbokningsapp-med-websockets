@@ -1,27 +1,20 @@
 class SeatSelector extends Component {
-  constructor(show) {
+  constructor(show, bookShowPage) {
     super();
     this.show = show;
+    this.bookShowPage = bookShowPage
     this.addEvents({
-      'click .minus': 'subtractTicket',
-      'click .plus': 'addTicket',
       'mouseoverSeat': 'highlightSeatSelection',
       'mouseleaveSeat': 'removeSeatHighlight',
-      'click span.seat': 'selectSeats',
-      'click #book-tickets': 'sendBookingRequest'
+      'click span.seat': 'selectSeats'
     });
-    this.tickets = {
-      adult: 2,
-      senior: 0,
-      kids: 0
-    }
     this.seatMap = new SeatMap(this.show.auditorium.seats, this.bookedSeats);
     this.highlightedSeats = [];
     this.selectedSeats = [];
   }
 
-  get ticketsCount() {
-    return this.tickets.adult + this.tickets.senior + this.tickets.kids
+  mount() {
+    this.suggestBestSeats();
   }
 
   get bookedSeats() {
@@ -30,23 +23,6 @@ class SeatSelector extends Component {
       bookedSeats.push(...booking.seats);
     }
     return bookedSeats
-  }
-
-  subtractTicket(event) {
-    // l33t h4xx to get the ticket type as a string based on class name of parent of clicked element
-    const ticketType = $(event.target).parent().attr('class').split(' ')[1];
-    if (this.tickets[ticketType] > 0) {
-      this.tickets[ticketType]--;
-      this.render();
-    }
-  }
-
-  addTicket(event) {
-    if (this.ticketsCount < 8) {
-      const ticketType = $(event.target).parent().attr('class').split(' ')[1];
-      this.tickets[ticketType]++;
-      this.render();
-    }
   }
 
   removeSeatHighlight() {
@@ -61,7 +37,7 @@ class SeatSelector extends Component {
     let seatNumber = event.detail.seat.seatNumber;
     // get all seat numbers for the prospective booking
     const allSeatNumbers = [];
-    while (allSeatNumbers.length < this.ticketsCount) {
+    while (allSeatNumbers.length < this.bookShowPage.ticketsCount) {
       allSeatNumbers.push(seatNumber--);
     }
     // megah4xx to make an array of the actual seats, based on the numbers
@@ -84,7 +60,7 @@ class SeatSelector extends Component {
 
   validateSeatSelection(seats) {
     const row = seats[0].row;
-    // for each seat, check if 1) it doesn't exist 2) it's booked already 3) its on another row. if any of these are true, the selection is invalid
+    // for each seat, check if either 1) it doesn't exist 2) it's booked already 3) its not on the same row as the 1st seat in the selection. if any of these are true, the selection is invalid
     for (let seat of seats) {
       if (!seat || seat.booked || seat.row !== row) {
         return false
@@ -98,23 +74,37 @@ class SeatSelector extends Component {
     for (let seat of this.selectedSeats) {
       seat.baseEl.removeClass('selected-seat');
     }
-    //select the highlighted seats and give them the selected class, remove highlight class
+    // select the highlighted seats and give them the selected class, remove highlight class
     this.selectedSeats = this.highlightedSeats;
+    this.highlightSelectedSeats();
+  }
+
+  highlightSelectedSeats() {
     for (let seat of this.selectedSeats) {
       seat.baseEl.addClass('selected-seat').removeClass('highlighted-seat');
     }
   }
 
-  async sendBookingRequest() {
-    const booking = new Booking({
-      show: this.show._id,
-      seats: this.selectedSeats.map(seat => seat.seatNumber),
-      tickets: this.tickets
-    });
-
-
-    const result = await booking.save();
-    console.log(result);
-
+  suggestBestSeats() {
+    const nOfTickets = this.bookShowPage.ticketsCount;
+    let bestSelection = [];
+    let bestEvaluation = -1000;
+    // find out what the best evaluation for all possible combinations (of seats next to eachother) is
+    for (let row of this.seatMap.rows) {
+      for (let i = 0; i <= row.length - nOfTickets; i++) {
+        // first validate the selected seats
+        const selectedSeats = row.slice(i, i + nOfTickets)
+        if (this.validateSeatSelection(selectedSeats)) {
+          // then check if we have a new highest evaluation, if so, save selection
+          const evaluation = selectedSeats.reduce((acc, seat) => { return acc + seat.evaluation }, 0);
+          if (evaluation > bestEvaluation) {
+            bestEvaluation = evaluation;
+            bestSelection = selectedSeats;
+          }
+        }
+      }
+    }
+    this.selectedSeats = bestSelection;
+    this.highlightSelectedSeats();
   }
 }

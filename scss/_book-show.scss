@@ -1,5 +1,28 @@
 section.book-show {
-  margin: 3rem;
-  display: flex;
-  justify-content: center;
+
+  button {
+    margin: 1rem 0;
+  }
+
+  .ticket-selector {
+    margin-bottom: 2rem;
+    div {
+      p {
+        text-align: center;
+      }
+      .ticket-incrementor {
+        text-align: center;
+        font-size: 2rem;
+  
+        .minus, .plus {
+          cursor: pointer;
+          background-color: coral; // SEXY
+          border-radius: 1rem;
+          text-align: center;
+          padding: 0 0.5rem;
+          margin: 0 0.5rem;
+        }
+      }
+    }
+  }
 }

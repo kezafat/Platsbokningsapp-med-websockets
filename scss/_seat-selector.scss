@@ -1,4 +1,14 @@
 .seat-selector {
+
+  .screen {
+    background-color: darkgrey;
+    width: 200px;
+    margin-bottom: 3rem;
+    border-radius: 0.5rem;
+    padding: 0 0.3rem;
+    text-align: center;
+  }
+
   .seat-map {
     text-align: center;
   
@@ -24,28 +34,4 @@
 
     }
   }
-
-  .ticket-selector {
-    display: flex;
-    justify-content: center;
-
-    div {
-      margin: 1rem;
-
-      .ticket-incrementor {
-        width: 100%;
-        text-align: center;
-        font-size: 2rem;
-  
-        .minus, .plus {
-          cursor: pointer;
-        }
-      }
-
-    }
-  }
-
-
-
-
 }

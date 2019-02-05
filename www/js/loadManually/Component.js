@@ -42,14 +42,14 @@ class Component extends REST {
       inDOM.replaceWith(elements);
     }
     // If I have a route and it is not the current one - render nothing
-    if(this.route && this.route !== Router.path){
+    if(this.route && this.route !== Router.path) {
       inDOM.remove();
       // Call unmount if it exists
       this.unmount && this.unmount();
       return '';
     }
     // Call mount if it exist
-    if(this.route && this.route === Router.path && inDOM.length === 0){
+    if(inDOM.length === 0){
       this.mount && setTimeout(() => this.mount(), 0);
     }
     // Change the title if we match a route with a title

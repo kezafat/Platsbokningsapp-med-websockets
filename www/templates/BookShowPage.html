@@ -1,8 +1,46 @@
 <section class="book-show">
-  <div>
-    Book the fookin show m8
-    <div class="seat-selector">
-      ${this.selectedShow._id ? this.seatSelector : ''}
+  <button class="back-button">NO NO TAKE ME BACK</button>
+  <div class="row movie-info">
+    <div class="col-sm-auto">
+      <figure>
+        <img src="/images/${this.selectedShow.movie.images[0]}" alt="" class="img-fluid">
+      </figure>
+    </div>
+    <!-- /.col-xs-4 -->
+    <div class="col-sm-8">
+      <h3>${this.selectedShow.movie.title}</h3>
+      <h4>${this.selectedShow.auditorium.name}</h4>
+      <h4>${this.selectedShow.date}</h4>
+      <h4>${this.selectedShow.time}</h4>
+    </div>
+    <!-- /.col-xs-8 -->
+  </div>
+  <!-- /.row movie-info -->
+
+  <div class="ticket-selector row">
+    <div class="col-sm-4">
+      <p>Ordinarie (500 kr/st)</p>
+      <div class="ticket-incrementor adult">
+        <span class="minus">-</span><span class="ticket-count">${this.tickets.adult}</span><span class="plus">+</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <p>Pensionär (1300 kr/st)</p>
+      <div class="ticket-incrementor senior">
+        <span class="minus">-</span><span class="ticket-count">${this.tickets.senior}</span><span class="plus">+</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <p>Barn (9000 kr/st)</p>
+      <div class="ticket-incrementor kids">
+        <span class="minus">-</span><span class="ticket-count">${this.tickets.kids}</span><span class="plus">+</span>
+      </div>
     </div>
   </div>
+
+  <div class="seat-selector">
+    ${this.selectedShow._id ? this.seatSelector : ''}
+  </div>
+
+  <button id="book-tickets">BOOK THAT SHOWY-SHOW</button>
 </section>

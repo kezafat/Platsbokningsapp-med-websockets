@@ -28,7 +28,7 @@ showSchema.pre('findOne', function() {
   })
   .populate({
     path: 'movie',
-    select: 'title image -_id'
+    select: 'title images -_id'
   })
   .populate({
     path: 'bookings',

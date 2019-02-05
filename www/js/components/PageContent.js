@@ -8,14 +8,5 @@ class PageContent extends Component {
     this.moviesSchedulePage = new MoviesSchedulePage();
     this.accountPage = new AccountPage(this.navBar);
     this.bookShowPage = new BookShowPage();
-
-    //hijacking pagecontent bc this solution requires movieschedulepage and bookingspages common ancestor
-    this.addEvents({
-      'showSelected': 'updateSelectedShow'
-    })
-  }
-
-  updateSelectedShow(event) {
-    this.bookShowPage.setSelectedShow(event.detail.show);
   }
 }

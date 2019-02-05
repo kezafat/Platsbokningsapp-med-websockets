@@ -24,6 +24,8 @@ class BookShowPage extends Component {
   async setSelectedShow() {
     const urlParams = new URLSearchParams(window.location.search);
     const showId = urlParams.get('show');
+    // if the showid is null we don't have a show to set :()
+    if (showId === null) { return }
     this.selectedShow = await Show.find(showId);
     this.seatSelector = new SeatSelector(this.selectedShow, this);
     this.render();
@@ -48,6 +50,7 @@ class BookShowPage extends Component {
       this.tickets[ticketType]--;
       this.render();
       this.seatSelector.suggestBestSeats();
+      this.seatSelector.limitTicketCount();
     }
   }
 
@@ -61,6 +64,9 @@ class BookShowPage extends Component {
   }
 
   async sendBookingRequest() {
+    if (this.seatSelector.selectSeats.length !== this.ticketsCount) {
+      return alert('invalid amount of tickets, wtf are you doing m8')
+    }
     const booking = new Booking({
       show: this.selectedShow._id,
       seats: this.seatSelector.selectedSeats.map(seat => seat.seatNumber),

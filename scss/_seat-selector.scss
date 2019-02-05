@@ -11,27 +11,37 @@
 
   .seat-map {
     text-align: center;
+
+    div {
+      margin: 0.3rem 0;
+
+      span {
+        display: inline-block;
+        background-color: lightgrey;
+        border-radius: 0.3rem;
+        margin: 0 0.3rem;
+        width: 1.5rem;
+        cursor: pointer;
   
-    span {
-      display: inline-block;
-      background-color: lightgrey;
-      border-radius: 0.3rem;
-      margin: 0 0.3rem;
-      width: 1.5rem;
-      cursor: pointer;
-
-      &.booked {
-        background-color: lightcoral;
-      }
-      
-      &.selected-seat {
-        background-color: lightblue;
-      }
-
-      &.highlighted-seat {
-        background-color: lightgreen;
+        &.booked {
+          background-color: lightcoral;
+        }
+        
+        &.selected-seat {
+          background-color: lightblue;
+        }
+  
+        &.highlighted-seat {
+          background-color: lightgreen;
+        }
+  
+        &.deselect-seat {
+          background-color: red;
+        }
+  
       }
 
     }
+  
   }
 }

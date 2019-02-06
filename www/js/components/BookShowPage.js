@@ -64,7 +64,7 @@ class BookShowPage extends Component {
   }
 
   async sendBookingRequest() {
-    if (this.seatSelector.selectSeats.length !== this.ticketsCount) {
+    if (this.seatSelector.selectedSeats.length !== this.ticketsCount) {
       return alert('invalid amount of tickets, wtf are you doing m8')
     }
     const booking = new Booking({

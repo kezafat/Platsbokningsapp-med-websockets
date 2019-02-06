@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-class Booking extends Component {
-  constructor(){
-    super();
-  }
- }
-=======
 class Booking extends Component { 
   constructor(props){
     super(props);
@@ -12,4 +5,3 @@ class Booking extends Component {
     // this.user = new User(this.user);
   }
 }
->>>>>>> book-shows

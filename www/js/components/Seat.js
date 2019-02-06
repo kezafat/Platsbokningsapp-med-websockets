@@ -1,9 +1,10 @@
 class Seat extends Component {
-  constructor(seatNumber, row, booked = false) {
+  constructor(seatNumber, row, booked = false, evaluation) {
     super();
     this.seatNumber = seatNumber;
     this.booked = booked;
     this.row = row;
+    this.evaluation = evaluation;
     this.addEvents({
       'mouseover': 'handleMouseOver',
       'mouseleave': 'handleMouseLeave',

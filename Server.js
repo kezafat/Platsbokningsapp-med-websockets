@@ -5,6 +5,10 @@ const Sass = require('./sass');
 const config = require('./config.json');
 const connectionString = require('./connectionString.js');
 const CreateRestRoutes = require('./CreateRestRoutes');
+const LoginHandler = require('./LoginHandler');
+const settings = require('./settings.json');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 for (let conf of config.sass) {
   new Sass(conf);
@@ -25,6 +29,7 @@ module.exports = class Server {
     return new Promise((resolve, reject) => {
       mongoose.connect(connectionString, { useNewUrlParser: true });
       global.db = mongoose.connection;
+      global.passwordSalt = settings.passwordSalt;
       db.on('error', () => reject('Could not connect to DB'));
       db.once('open', () => resolve('Connected to DB'));
     });
@@ -38,8 +43,22 @@ module.exports = class Server {
     // Add body-parser to our requests
     app.use(bodyParser.json());
 
-    // Serve static files from www
+
+    // Add session (and cookie) handling to Express
+    app.use(session({
+      secret: "secretsAreForPussies(cats)",
+      resave: false,
+      saveUninitialized: true,
+      store: new MongoStore({
+        mongooseConnection: db
+      })
+    }));
+
+    // PUTTING static UNDER session because for some reason Safari creates 7-22 sessions on each load. (when files are cached)
+    // We tried to put static under it but same problem occurs. Leaving this for now
     app.use(express.static('www'));
+
+
 
     // Set keys to names of rest routes
     const models = {
@@ -47,13 +66,14 @@ module.exports = class Server {
       auditoria: require('./schemas/Auditorium'),
       bookings: require('./schemas/Booking'),
       shows: require('./schemas/Show'),
-      users: require('./schemas/User'),
+      users: require('./schemas/User')
     };
 
     // create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
 
-
+    // create special extra routes for login
+    new LoginHandler(app, require('./schemas/User'));
 
     const fs = require('fs');
     const path = require('path');

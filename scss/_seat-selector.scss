@@ -1,0 +1,51 @@
+.seat-selector {
+  .seat-map {
+    text-align: center;
+  
+    span {
+      display: inline-block;
+      background-color: lightgrey;
+      border-radius: 0.3rem;
+      margin: 0 0.3rem;
+      width: 1.5rem;
+      cursor: pointer;
+
+      &.booked {
+        background-color: lightcoral;
+      }
+      
+      &.selected-seat {
+        background-color: lightblue;
+      }
+
+      &.highlighted-seat {
+        background-color: lightgreen;
+      }
+
+    }
+  }
+
+  .ticket-selector {
+    display: flex;
+    justify-content: center;
+
+    div {
+      margin: 1rem;
+
+      .ticket-incrementor {
+        width: 100%;
+        text-align: center;
+        font-size: 2rem;
+  
+        .minus, .plus {
+          cursor: pointer;
+        }
+      }
+
+    }
+  }
+
+
+
+
+}

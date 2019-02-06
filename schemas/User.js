@@ -32,7 +32,14 @@ userSchema.pre('find', function () {
         path: 'auditorium',
         select: 'name -_id',
       }
-
+    }
+  }).populate({
+    path: 'bookings',
+    populate: {
+      path: 'show',
+      populate: {
+        path: 'tickets',
+      }
     }
   })
 })

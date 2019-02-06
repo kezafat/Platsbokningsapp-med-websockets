@@ -74,5 +74,14 @@ class BookShowPage extends Component {
     });
     const result = await booking.save();
     console.log(result);
+    var stateObj = { booking: booking._id };
+    let bookingConfPath =  "booking-confirmation?id=" + booking._id;
+    history.pushState(stateObj, "Boknings Bekräftelse", bookingConfPath);
+    let fastReload = document.createElement("a");
+    $(fastReload).attr('href','/' + bookingConfPath)
+    this.baseEl.append(fastReload);
+    $(fastReload).click();
+    
+    // location.reload();
   }
 }

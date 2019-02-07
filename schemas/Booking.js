@@ -16,5 +16,13 @@ bookingSchema.pre('find', function() {
     }
   })
 });
+bookingSchema.pre('findOne', function() {
+  this.populate({
+    path: 'show',
+    populate:{
+      path: 'auditorium movie',
+    }
+  })
+});
 
 module.exports = db.model('Booking', bookingSchema);

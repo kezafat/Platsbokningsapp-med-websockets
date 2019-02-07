@@ -8,7 +8,12 @@
       <button class="btn btn-danger logOutBtn">Logga ut</button>
     </div>
     <div>
-      <h3 class="text-center">${this.userBookings.length > 0 ? 'Dina bokningar' : 'Du har ännu inga bokningar :('}</h3>
+      <h3 class="text-center">${this.userBookings.length > 0 ? 'Dina bokningar' : ''}</h3>
+      <div class="jumbotron text-center ${this.userBookings.length > 0 ? 'd-none' : 'd-block'}">
+        <h3>Du har ännu inga bokningar :(</h3>
+        <p>Vad hindrar dig från att skaffa några?</p>
+        <a class="btn btn-success" href="/movies-schedule-page" role="button">Se & boka våra föreställningar här</a>
+      </div>
       ${this.showUserBookings()}
     </div>
   </div>

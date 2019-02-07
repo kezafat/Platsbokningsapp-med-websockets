@@ -28,7 +28,7 @@ class MoviesSchedulePage extends Component {
       // add the show to the current day object
       currentDay.shows.push(show);
     }
-    console.log(this.days[0])
+    // console.log(this.days[0])
     this.render();
   }
 }

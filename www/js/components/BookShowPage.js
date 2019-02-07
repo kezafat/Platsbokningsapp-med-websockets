@@ -74,7 +74,7 @@ class BookShowPage extends Component {
     });
     const result = await booking.save();
     console.log(result);
-    var stateObj = { booking: booking._id };
+    let stateObj = { booking: booking._id };
     let bookingConfPath =  "booking-confirmation?id=" + booking._id;
     history.pushState(stateObj, "Boknings Bekräftelse", bookingConfPath);
     let fastReload = document.createElement("a");

@@ -30,3 +30,6 @@ class BookingConfirmation extends Component {
     return (this.booking.tickets.kids * 65)
   }
 }
+
+
+

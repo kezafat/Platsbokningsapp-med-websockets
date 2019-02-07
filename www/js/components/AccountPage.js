@@ -14,20 +14,99 @@ class AccountPage extends Component {
     this.loggedIn = false;
     this.loginNotify = "";
     this.registerNotify = "";
-    // Remove this after test
-    this.userstring = "";
     this.userData = {};
     this.checkUserLoginState();
+    this.userBookings = [];
   }
 
-  async testrest() {
-    let id = this.userData._id;
-    let testrest = await User.find(`.findById("${id}")`);
-    // Remove this after test
-    let stringified = JSON.stringify(testrest);
-    this.userstring = stringified;
+  mount() {
+    if (!this.loggedIn) {
+      // Not logged in do whatever u like here
+      this.userBookings = [];
+    } else {
+      this.fetchBookings();
+    }
+  }
+
+  async fetchBookings() {
+    let jewser = await User.find(`.find({_id: "${this.userData._id}"})`);
+    let jewserBookings = jewser[0].bookings;
+
+    for (let booking of jewserBookings) {
+      if (booking.show.movie.title) {
+        this.userBookings.push(booking);
+      }
+    }
+
+    this.showUserBookings()
     this.render();
   }
+
+
+  showUserBookings() {
+    let html = "";
+
+    function getTicketHtml(data) {
+      let adult = data.tickets.adult;
+      let senior = data.tickets.senior;
+      let kids = data.tickets.kids;
+      let seats = data.seats.join(', ');
+      return `
+      <ul class="list-group">
+        <p class="font-weight-bold">Bokade biljetter</p>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Vuxna<span class="badge badge-primary badge-pill">${adult}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Barn<span class="badge badge-primary badge-pill">${kids}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Pensionärer<span class="badge badge-primary badge-pill">${senior}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Platser: ${seats}
+        </li>
+      </ul>
+      `
+    }
+
+    for (let booking of this.userBookings) {
+      let tickets = getTicketHtml(booking);
+      let place = booking.show.auditorium.name;
+      let date = booking.show.date;
+      let time = booking.show.time;
+      let movieTitle = booking.show.movie.title;
+      let description = "Ska vi ha filmens beskrivning också eller info overload?";
+      let picpath = `/images/${booking.show.movie.images[0]}`;
+      html += `
+      <div class="card text-center mb-2">
+        <div class="card-header">
+          <span class="font-weight-bold">${date}</span> klockan ${time} i
+          <span class="font-weight-light">${place}</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="text-center mb-2">
+                <h4>${movieTitle}</h4>
+                <img src="${picpath}" class="rounded" alt="Bild på omslaget för ${movieTitle}">
+              </div>
+            </div>
+            <div class="col">
+            ${tickets}
+            <p class=" jumbotron">${description}</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <a href="#" class="btn btn-danger">Avboka biljetterna?</a>
+        </div>
+      </div>
+      `
+    }
+    return html;
+  }
+
 
   async checkUserLoginState() {
     let state = await this.loginHandler.checkLogin()
@@ -37,20 +116,6 @@ class AccountPage extends Component {
     } else {
       this.loginState(false);
     }
-  }
-
-  updateUserData(state) {
-    // Accept userdata from backend
-    Object.assign(this.userData, state);
-  }
-
-  loginState(bool) {
-    if (bool) {
-      this.clearNotifications();
-    }
-    this.loggedIn = bool;
-    this.render();
-    this.navBar.updateNavStatus(this);
   }
 
   async logIn() {
@@ -109,6 +174,21 @@ class AccountPage extends Component {
 
   }
 
+
+  updateUserData(state) {
+    // Accept userdata from backend
+    Object.assign(this.userData, state);
+  }
+
+  loginState(bool) {
+    if (bool) {
+      this.clearNotifications();
+    }
+    this.loggedIn = bool;
+    this.mount();
+    this.render();
+    this.navBar.updateNavStatus(this);
+  }
 
   redirectToLogin(msg) {
     this.loginNotify = msg;

@@ -1,0 +1,87 @@
+<section class="account-page">
+
+  <!-- Logged in area -->
+  <div class="${this.loggedIn ? 'd-block':'d-none'}">
+    <div class="jumbotron USERPAGE">
+      <h2>Välkommen ${this.userData.name}</h2>
+      <p>Du är inloggad med ${this.userData.user}</p>
+      <button class="btn btn-danger logOutBtn">Logga ut</button>
+    </div>
+    <div>
+      <h3 class="text-center">${this.userBookings.length > 0 ? 'Dina bokningar' : ''}</h3>
+      <div class="jumbotron text-center ${this.userBookings.length > 0 ? 'd-none' : 'd-block'}">
+        <h3>Du har ännu inga bokningar :(</h3>
+        <p>Vad hindrar dig från att skaffa några?</p>
+        <a class="btn btn-success" href="/movies-schedule-page" role="button">Se & boka våra föreställningar här</a>
+      </div>
+      ${this.showUserBookings()}
+    </div>
+  </div>
+  <!-- EOF logged in area -->
+
+  <!-- Logged out area -->
+  <div class="logged-out ${!this.loggedIn ? 'd-block':'d-none'}">
+    <!-- Login or reg accord -->
+    <div class="accordion text-center ${this.auth ? 'd-none':'d-block'}" id="loginOrRegister">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseLogin"
+              aria-expanded="false" aria-controls="collapseLogin">
+              Logga in på ditt konto
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseLogin" class="collapse" aria-labelledby="headingOne" data-parent="#loginOrRegister">
+          <div class="card-body">
+            <p class="text-danger">${this.loginNotify}</p>
+            <form>
+              <div class="form-group ">
+                <label for="userEmail">E-post</label>
+                <input type="email" class="form-control loginUserEmail" placeholder="Ange e-post" value="firefox@fox.com">
+              </div>
+              <div class="form-group">
+                <label for="userPassword">Lösenord</label>
+                <input type="password" class="form-control loginUserPassword" placeholder="Ange lösenord" value="firefox">
+              </div>
+            </form>
+            <button class="btn btn-success loginBtn">Logga in</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseRegister"
+              aria-expanded="false" aria-controls="collapseRegister">
+              Registrera ett nytt konto
+            </button>
+          </h5>
+        </div>
+        <div id="collapseRegister" class="collapse" aria-labelledby="headingTwo" data-parent="#loginOrRegister">
+          <div class="card-body">
+            <p class="text-danger">${this.registerNotify}</p>
+            <form>
+              <div class="form-group ">
+                <label for="userName">Ditt namn</label>
+                <input type="text" class="form-control regUserName" placeholder="Ange namn">
+
+                <label for="userEmail">E-post</label>
+                <input type="email" class="form-control regUserEmail" placeholder="Ange e-post">
+              </div>
+              <div class="form-group">
+                <label for="userPassword">Lösenord</label>
+                <input type="password" class="form-control regUserPassword" placeholder="Ange lösenord">
+              </div>
+            </form>
+            <button class="btn btn-danger registerBtn">Skapa konto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- eof accord -->
+  </div>
+
+</section>

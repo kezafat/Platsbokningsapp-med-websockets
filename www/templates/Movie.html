@@ -1,0 +1,19 @@
+<div class="card col-4 mt-3 mx-2">
+  <div class="card-body">
+    <img src="/images/${this.images[0]}">
+
+    <h3>${this.title}</h3>
+    <hr>
+    <p>Genre: ${this.genre}</p>
+    <hr>
+    <p>Direktör: ${this.director}</p>
+    <hr>
+    <p>År: ${this.productionYear}</p>
+    <hr>
+    <p>${this.getActors()}</p>
+    <hr>
+    <p>Beskrivning: ${this.description}</p>
+    <iframe width="320" height="215" src="https://www.youtube.com/embed/${this.youtubeTrailers[0]}" frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>

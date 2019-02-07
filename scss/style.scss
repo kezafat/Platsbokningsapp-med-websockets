@@ -1,0 +1,13 @@
+
+// The whole Bootstrap library
+@import 'bootstrap/bootstrap';
+
+// My own partials
+@import 'body-related';
+
+// Components
+@import 'book-show';
+@import 'seat-selector';
+@import 'footer';
+@import 'movie-schedule';
+@import 'movie-page';

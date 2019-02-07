@@ -8,4 +8,14 @@ let bookingSchema = new Schema({
   "tickets": { "kids": Number, "senior": Number, "adult": Number }
 });
 
+boookingSchema.pre('find', function() {
+  this.populate({
+    path: 'show',
+    populate:{
+      path: 'movie',
+      select: 'title images -_id',
+    }
+  })
+});
+
 module.exports = db.model('Booking', bookingSchema);

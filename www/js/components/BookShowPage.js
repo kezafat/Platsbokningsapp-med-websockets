@@ -73,7 +73,6 @@ class BookShowPage extends Component {
       tickets: this.tickets
     });
     const result = await booking.save();
-    console.log(result);
     let stateObj = { booking: booking._id };
     let bookingConfPath =  "booking-confirmation?id=" + booking._id;
     history.pushState(stateObj, "Boknings Bekräftelse", bookingConfPath);

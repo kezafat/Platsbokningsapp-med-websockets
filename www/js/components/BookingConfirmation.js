@@ -16,7 +16,7 @@ class BookingConfirmation extends Component {
     let id = location.search.split("id=");
     id.shift();
     id = id.join();
-    this.booking = await Booking.find(id);
+    this.booking = await Booking.find(`.find({_id: "${id}"})`);
     this.render();
   }
   mount(){

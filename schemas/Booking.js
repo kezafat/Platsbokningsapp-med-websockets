@@ -8,12 +8,11 @@ let bookingSchema = new Schema({
   "tickets": { "kids": Number, "senior": Number, "adult": Number }
 });
 
-boookingSchema.pre('find', function() {
+bookingSchema.pre('find', function() {
   this.populate({
     path: 'show',
     populate:{
-      path: 'movie',
-      select: 'title images -_id',
+      path: 'auditorium movie',
     }
   })
 });

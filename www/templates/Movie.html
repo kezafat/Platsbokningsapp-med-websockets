@@ -1,19 +1,27 @@
-<div class="card col-4 mt-3 mx-2">
-  <div class="card-body">
-    <img src="/images/${this.images[0]}">
-
-    <h3>${this.title}</h3>
-    <hr>
-    <p>Genre: ${this.genre}</p>
-    <hr>
-    <p>Direktör: ${this.director}</p>
-    <hr>
-    <p>År: ${this.productionYear}</p>
-    <hr>
-    <p>${this.getActors()}</p>
-    <hr>
-    <p>Beskrivning: ${this.description}</p>
-    <iframe width="320" height="215" src="https://www.youtube.com/embed/${this.youtubeTrailers[0]}" frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="card col-12 mt-3 mx-2 p-0">
+    <div class="card-body">
+      <div class="row">
+        <div class="movie-poster col-3 inline-block">
+          <img src="/images/${this.images[0]}">
+        </div>
+        <div class="info-text col-4 d-inline-block">
+          <h3>${this.title}</h3>
+          <p>${this.genre}, ${this.productionYear}</p>
+          <p>Direktör: ${this.director}</p>
+  
+          <p class="actors-toggle">Skådespelare:
+            ${this.showActors ? 'Visa mindre' : 'Visa mer'}</p>
+          ${!this.showActors ? '' :`<p>${this.getActors()}</p>`}
+  
+          <p class="description-toggle">Beskrivning:
+            ${this.showDescription ? 'Visa mindre' : 'Visa mer'}</p>
+          ${!this.showDescription ? '' :`<p>${this.description}</p>`}
+        </div>
+  
+        <div class="video col-5 d-inline-block">
+          <iframe width="320" height="215" src="https://www.youtube.com/embed/${this.youtubeTrailers[0]}" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
   </div>
-</div>

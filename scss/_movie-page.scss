@@ -1,16 +1,41 @@
 .movie-page {
   .card {
-  background-color: lightblue;
+  background-color: rgb(239, 233, 233);
+  line-height: 1.5;
+  display: inline-block;
   }
 
   ul {
   list-style-type: none;
   }
+
   h3 {
     font-size: 1.25rem;
-    margin-top: 1rem
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
   }
-  ifram {
-    position: sticky;
+
+  p.actors-toggle,
+  p.description-toggle:hover {
+    cursor: pointer;
   }
-}
+  // .video {
+  //   padding-right: 4rem;
+  //   padding-top: 2rem;
+  // }
+  @include media-breakpoint-down(sm) {
+    h3{
+      font-size: 0.9rem;
+    }
+    p{
+      font-size: 0.7rem;
+      margin-bottom: 10px
+    }
+    .card {
+      font-size: 0.7rem;
+      line-height: 11px;
+
+       }
+      
+    }
+  }

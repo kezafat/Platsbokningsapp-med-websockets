@@ -10,7 +10,6 @@ class BookingConfirmation extends Component {
   async getSelectedBooking() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    const ticketID = urlParams.get('ticket');
     this.booking = await Booking.find(id);
     this.render();
   }

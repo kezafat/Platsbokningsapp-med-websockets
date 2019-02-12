@@ -1,3 +1,13 @@
+div.book-show-container {
+  display: flex;
+  justify-content: center;
+
+  .spin-container {
+    position: absolute;
+    top: 40%;
+  }
+}
+
 section.book-show {
 
   button {
@@ -24,5 +34,10 @@ section.book-show {
         }
       }
     }
+  }
+
+  div.button-wrap {
+    display: flex;
+    justify-content: center;
   }
 }

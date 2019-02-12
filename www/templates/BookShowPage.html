@@ -1,5 +1,5 @@
-<section class="book-show">
-  <button class="back-button">NO NO TAKE ME BACK</button>
+<section class="book-show container">
+  <button class="back-button btn btn-secondary">NO NO TAKE ME BACK</button>
   <div class="row movie-info">
     <div class="col-sm-auto">
       <figure>
@@ -44,5 +44,7 @@
     ${this.selectedShow._id ? this.seatSelector : ''}
   </div>
 
-  <button id="book-tickets">BOOK THAT SHOWY-SHOW</button>
+  <div class="button-wrap">
+    <button id="book-tickets" class="btn btn-success">BOOK THAT SHOWY-SHOW</button>
+  </div>
 </section>

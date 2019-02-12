@@ -1,42 +1,23 @@
 class BookShowPage extends Component {
-  constructor() {
+  constructor(show) {
     super();
-    this.addRoute('/book-show', 'Boka Visning');
     this.addEvents({
       'click .minus': 'subtractTicket',
       'click .plus': 'addTicket',
       'click .back-button': 'goBack',
       'click #book-tickets': 'sendBookingRequest'
     });
-    this.selectedShow = {};
-    this.setSelectedShow();
+    this.selectedShow = show;
     this.tickets = {
       adult: 2,
       senior: 0,
       kids: 0
     }
+    this.seatSelector = new SeatSelector(show, this);
   }
 
   get ticketsCount() {
     return this.tickets.adult + this.tickets.senior + this.tickets.kids
-  }
-
-  async setSelectedShow() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const showId = urlParams.get('show');
-    // if the showid is null we don't have a show to set :()
-    if (showId === null) { return }
-    this.selectedShow = await Show.find(showId);
-    this.seatSelector = new SeatSelector(this.selectedShow, this);
-    this.render();
-  }
-
-  mount() {
-    this.setSelectedShow();
-  }
-
-  unmount() {
-    this.selectedShow = {};
   }
 
   goBack() {

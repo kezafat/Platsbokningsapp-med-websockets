@@ -30,7 +30,7 @@ class SeatSelector extends Component {
   removeSeatHighlight() {
     // removes the seat highlighting on mouseover
     for (let seat of this.highlightedSeats) {
-      seat.baseEl.removeClass('highlighted-seat').removeClass('deselect-seat');
+      seat.baseEl.removeClass('highlighted-seat').removeClass('deselect-seat').removeClass('invalid-selection')
     }
     this.highlightedSeats = [];
   }
@@ -49,14 +49,16 @@ class SeatSelector extends Component {
     }
     // hook up our validator function
     const isValidSelection = this.validateSeatSelection(allSeats);
+    this.highlightedSeats = allSeats.filter(seat => seat);
     if (isValidSelection) {
       // highlight the prospective seats
-      this.highlightedSeats = allSeats;
       for (let seat of allSeats) {
         seat.baseEl.addClass('highlighted-seat');
       }
     } else {
-      // do whatever it is we want to do when user hovers over an invalid seat selection
+      for (let seat of this.highlightedSeats) {
+        seat.baseEl.addClass('invalid-selection');
+      }
     }
     // if seat is already selected and we are in separate seats mode, indicate deselection
     if (this.separateSeats && this.selectedSeats.includes(allSeats[0])) {
@@ -82,27 +84,38 @@ class SeatSelector extends Component {
     if (this.separateSeats) {
       return this.handleAddOrRemoveSeparateSeat();      
     }
-    // remove selected class from old selection
-    for (let seat of this.selectedSeats) {
-      seat.baseEl.removeClass('selected-seat');
+    // if the selection is valid, allow selection of seats
+    if (this.validateSeatSelection(this.highlightedSeats)) {
+      // remove selected class from old selection
+      for (let seat of this.selectedSeats) {
+        seat.baseEl.removeClass('selected-seat');
+      }
+      // select the highlighted seats and give them the selected class, remove highlight class
+      this.selectedSeats = this.highlightedSeats;
+      this.highlightSelectedSeats();
+
     }
-    // select the highlighted seats and give them the selected class, remove highlight class
-    this.selectedSeats = this.highlightedSeats;
-    this.highlightSelectedSeats();
   }
 
   handleAddOrRemoveSeparateSeat() {
     // basically if the seat we are hovering on is in our array of selected seats, remove it, otherwise add it
     const indexOfHighlightedSeat = this.selectedSeats.indexOf(this.highlightedSeats[0]);
       if (indexOfHighlightedSeat !== -1) {
-        return this.selectedSeats.splice(indexOfHighlightedSeat, 1)[0].baseEl.removeClass('selected-seat');
+        const seat = this.selectedSeats.splice(indexOfHighlightedSeat, 1)[0];
+        seat.baseEl.removeClass('selected-seat');
+        this.removeSeatHighlight();
+        seat.handleMouseOver();
+        return
       }
-      // if we already have max number of tickets, remove one before adding clicked one
-      if (this.selectedSeats.length === this.bookShowPage.ticketsCount) {
-        this.selectedSeats.pop().baseEl.removeClass('selected-seat');
+      // if the selection is valid, allow selection of seat
+      if (this.validateSeatSelection(this.highlightedSeats)) {
+        // if we already have max number of tickets, remove one before adding clicked one
+        if (this.selectedSeats.length === this.bookShowPage.ticketsCount) {
+          this.selectedSeats.pop().baseEl.removeClass('selected-seat');
+        }
+        this.selectedSeats.push(this.highlightedSeats[0]);
+        this.highlightSelectedSeats();
       }
-      this.selectedSeats.push(this.highlightedSeats[0]);
-      this.highlightSelectedSeats();
   }
 
   highlightSelectedSeats() {

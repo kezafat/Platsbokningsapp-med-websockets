@@ -12,7 +12,7 @@
   .seat-map {
 
     div {
-      margin: 0.3rem 0;
+      margin: 0.4rem 0;
       display: flex;
       justify-content: center;
 
@@ -20,25 +20,31 @@
         display: inline-block;
         background-color: lightgrey;
         border-radius: 0.3rem;
-        margin: 0 0.3rem;
+        margin: 0 0.15rem;
+        height: 1.5rem;
         width: 6vw;
         max-width: 1.5rem;
         cursor: pointer;
         text-align: center;
+        box-shadow: 1px 1px 3px black;
   
         &.booked {
           background-color: lightcoral;
         }
         
         &.selected-seat {
-          background-color: skyblue;
+          background-color: #218838;
         }
   
         &.highlighted-seat {
-          background-color: lightgreen;
+          background-color: #44d463;
         }
   
         &.deselect-seat {
+          background-color: red;
+        }
+
+        &.invalid-selection {
           background-color: red;
         }
   

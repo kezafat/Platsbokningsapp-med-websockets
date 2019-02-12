@@ -9,7 +9,6 @@ const LoginHandler = require('./LoginHandler');
 const settings = require('./settings.json');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const shorthash = require("shorthash");
 
 for (let conf of config.sass) {
   new Sass(conf);

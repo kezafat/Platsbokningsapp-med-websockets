@@ -183,6 +183,9 @@ class AccountPage extends Component {
   loginState(bool) {
     if (bool) {
       this.clearNotifications();
+      AccountPage.auth = true;
+    } else {
+      AccountPage.auth = false;
     }
     this.loggedIn = bool;
     this.mount();
@@ -209,3 +212,5 @@ class AccountPage extends Component {
   }
 
 }
+
+AccountPage.auth = false;

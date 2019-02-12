@@ -10,8 +10,8 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-   
   }
+
   h3 {
     display: inline-block;
     margin-top: 30px;
@@ -19,18 +19,20 @@
     background: #FFFFFF;
     text-shadow: 2px 2px 0 #bcbcbc, 2px 2px 0 #E69900;
   }
+
   h4, 
   h5 {
     margin-top: 6%;
   }
+
   .poster {
     padding-left: 10%;
     padding-top: 5%;
     }
+
   .movie-view-info {
     padding-left: 15%;
     padding-top: 5%;
-
   }
 
   .book-show,
@@ -48,6 +50,7 @@
       line-height: 1.4;
       }
     }
+  }
     @media (max-width: 735px) {
       .book-show,
       .info {
@@ -59,8 +62,8 @@
     h3 {
       font-size: 1rem;
       }
-    }
-  }
+    
+  
   @media (max-width: 735px){
     .movie-view-info {      
     h4,
@@ -70,9 +73,10 @@
       line-height: 1.4;
       }
     }
-}
+  }
 
     h3 {
       font-size: 1rem;
       }
-  }
+  
+}

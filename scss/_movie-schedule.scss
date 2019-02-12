@@ -1,34 +1,78 @@
 .movies-schedule-page {
+  .movie-viewings-headline {
+    color: #1A000D;
+    background: #E69900;
+    text-shadow: 2px 2px 5px #FFFFFF;  
+    font-size: 40px;
+    display: inline-block;
+    padding:10px;
+    text-align: center;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+   
+  }
   h3 {
     display: inline-block;
     margin-top: 30px;
+    color: black;
+    background: #FFFFFF;
+    text-shadow: 2px 2px 0 #bcbcbc, 2px 2px 0 #E69900;
   }
-  h4 h5 {
-    margin-top: 180px;
+  h4, 
+  h5 {
+    margin-top: 6%;
   }
-  img{
-    padding-left: 20%;
-    padding-top: 20px;
+  .poster {
+    padding-left: 10%;
+    padding-top: 5%;
     }
-  .movie-text {
-    padding-left: 22%;
-    margin-top: 40px;
+  .movie-view-info {
+    padding-left: 15%;
+    padding-top: 5%;
+
   }
-  
-  .date {
-    margin-top: 80px;
+
+  .book-show,
+  .info {
+    border-radius: 15px;
+    background-color: #E69900;
   }
-  @include media-breakpoint-down(md) {
-    .movie-text {
+
+  @media (min-width: 320px) {
+    .movie-view-info {
     h4,
     h5 {
       font-size: 0.7rem;
-    }
-    p{
-      font-size: 0.5rem;
       margin-bottom: 10px;
-      line-height: 11px;
+      line-height: 1.4;
+      }
+    }
+    @media (max-width: 735px) {
+      .book-show,
+      .info {
+        size: 50%;
+
+      }
+    }
+
+    h3 {
+      font-size: 1rem;
       }
     }
   }
+  @media (max-width: 735px){
+    .movie-view-info {      
+    h4,
+    h5 {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      line-height: 1.4;
+      }
+    }
 }
+
+    h3 {
+      font-size: 1rem;
+      }
+  }

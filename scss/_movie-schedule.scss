@@ -7,16 +7,28 @@
     margin-top: 180px;
   }
   img{
-    padding-left: 200px;
+    padding-left: 20%;
     padding-top: 20px;
     }
   .movie-text {
-    padding-left: 250px;
+    padding-left: 22%;
     margin-top: 40px;
   }
   
   .date {
     margin-top: 80px;
   }
-
+  @include media-breakpoint-down(md) {
+    .movie-text {
+    h4,
+    h5 {
+      font-size: 0.7rem;
+    }
+    p{
+      font-size: 0.5rem;
+      margin-bottom: 10px;
+      line-height: 11px;
+      }
+    }
   }
+}

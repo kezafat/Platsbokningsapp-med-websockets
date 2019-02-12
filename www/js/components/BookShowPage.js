@@ -81,6 +81,5 @@ class BookShowPage extends Component {
     this.baseEl.append(fastReload);
     $(fastReload).click();
     
-    // location.reload();
   }
 }

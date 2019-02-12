@@ -8,9 +8,9 @@ class BookingConfirmation extends Component {
   }
 
   async getSelectedBooking() {
-    let id = location.search.split("id=");
-    id.shift();
-    id = id.join();
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const ticketID = urlParams.get('ticket');
     this.booking = await Booking.find(id);
     this.render();
   }
@@ -20,13 +20,13 @@ class BookingConfirmation extends Component {
   get ticketPrice() {
     return (this.booking.tickets.adult * 85) + (this.booking.tickets.senior * 75) + (this.booking.tickets.kids * 65);
   }
-  get adultPrice(){
+  get adultPrice() {
     return (this.booking.tickets.adult * 85)
   }
-  get seniorPrice(){
+  get seniorPrice() {
     return (this.booking.tickets.senior * 75)
   }
-  get kidsPrice(){
+  get kidsPrice() {
     return (this.booking.tickets.kids * 65)
   }
 }

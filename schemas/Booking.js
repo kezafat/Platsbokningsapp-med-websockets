@@ -5,7 +5,8 @@ let bookingSchema = new Schema({
   "show": { type: Schema.Types.ObjectId, ref: 'Show', required: true },
   "user": { type: Schema.Types.ObjectId, ref: 'User', required: true },
   "seats": [{ type: Number, required: true }],
-  "tickets": { "kids": Number, "senior": Number, "adult": Number }
+  "tickets": { "kids": Number, "senior": Number, "adult": Number },
+  "ticketID": {type: String, required: true}
 });
 
 bookingSchema.pre('find', function() {

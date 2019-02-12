@@ -10,18 +10,21 @@
   }
 
   .seat-map {
-    text-align: center;
 
     div {
       margin: 0.3rem 0;
+      display: flex;
+      justify-content: center;
 
       span {
         display: inline-block;
         background-color: lightgrey;
         border-radius: 0.3rem;
         margin: 0 0.3rem;
-        width: 1.5rem;
+        width: 6vw;
+        max-width: 1.5rem;
         cursor: pointer;
+        text-align: center;
   
         &.booked {
           background-color: lightcoral;

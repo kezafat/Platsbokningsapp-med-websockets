@@ -1,13 +1,13 @@
 <section class="book-show container">
   <button class="back-button btn btn-secondary">NO NO TAKE ME BACK</button>
   <div class="row movie-info">
-    <div class="col-sm-auto">
+    <div class="col-auto">
       <figure>
         <img src="/images/${this.selectedShow.movie.images[0]}" alt="" class="img-fluid">
       </figure>
     </div>
     <!-- /.col-xs-4 -->
-    <div class="col-sm-8">
+    <div class="col-auto">
       <h3>${this.selectedShow.movie.title}</h3>
       <h4>${this.selectedShow.auditorium.name}</h4>
       <h4>${this.selectedShow.date}</h4>
@@ -19,19 +19,19 @@
 
   <div class="ticket-selector row">
     <div class="col"></div>
-    <div class="col-sm-auto">
+    <div class="col-auto">
       <p>Ordinarie (85 kr/st)</p>
       <div class="ticket-incrementor adult">
         <span class="minus">-</span><span class="ticket-count">${this.tickets.adult}</span><span class="plus">+</span>
       </div>
     </div>
-    <div class="col-sm-auto">
+    <div class="col-auto">
       <p>Pensionär (75 kr/st)</p>
       <div class="ticket-incrementor senior">
         <span class="minus">-</span><span class="ticket-count">${this.tickets.senior}</span><span class="plus">+</span>
       </div>
     </div>
-    <div class="col-sm-auto">
+    <div class="col-auto">
       <p>Barn (65 kr/st)</p>
       <div class="ticket-incrementor kids">
         <span class="minus">-</span><span class="ticket-count">${this.tickets.kids}</span><span class="plus">+</span>
@@ -40,9 +40,7 @@
     <div class="col"></div>
   </div>
 
-  <div class="seat-selector">
-    ${this.selectedShow._id ? this.seatSelector : ''}
-  </div>
+  ${this.seatSelector}
 
   <div class="button-wrap">
     <button id="book-tickets" class="btn btn-success">BOOK THAT SHOWY-SHOW</button>

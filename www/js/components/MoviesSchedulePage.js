@@ -6,7 +6,7 @@ class MoviesSchedulePage extends Component {
     this.days = [];
     this.fetchMovies();
   }
-  
+
   //runs when instanciating and loads everything asyncronous
   async fetchMovies() {
     //get date of the day and cut it off at the 'T'

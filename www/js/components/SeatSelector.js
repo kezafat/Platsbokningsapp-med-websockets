@@ -87,6 +87,8 @@ class SeatSelector extends Component {
   }
 
   selectSeats() {
+    // if the highlighted seats are fewer than the tickets count, don't select them
+    if (this.highlightedSeats.length < this.bookShowPage.ticketsCount) { return }
     // incase of separate seat selection, handle separately
     if (this.separateSeats) {
       return this.handleAddOrRemoveSeparateSeat();

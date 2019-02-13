@@ -6,12 +6,12 @@
     margin-bottom: 0;
   }
   .text-center-md{
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(xs) {
       text-align: center;
     }
   }
   .col-auto{
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(xs) {
       margin: 0 auto
     }
   }

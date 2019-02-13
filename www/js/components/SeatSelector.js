@@ -68,7 +68,7 @@ class SeatSelector extends Component {
 
 
   validateSeatSelection(seats) {
-    if (!seats[0]) { return false }
+    if (!seats[0] || seats.length > this.bookShowPage.ticketsCount) { return false }
     const row = seats[0].row;
     // for each seat, check if either 1) it doesn't exist 2) it's booked already 3) its not on the same row as the 1st seat in the selection. if any of these are true, the selection is invalid
     for (let seat of seats) {
@@ -82,7 +82,7 @@ class SeatSelector extends Component {
   selectSeats() {
     // incase of separate seat selection, handle separately
     if (this.separateSeats) {
-      return this.handleAddOrRemoveSeparateSeat();      
+      return this.handleAddOrRemoveSeparateSeat();
     }
     // if the selection is valid, allow selection of seats
     if (this.validateSeatSelection(this.highlightedSeats)) {
@@ -100,22 +100,22 @@ class SeatSelector extends Component {
   handleAddOrRemoveSeparateSeat() {
     // basically if the seat we are hovering on is in our array of selected seats, remove it, otherwise add it
     const indexOfHighlightedSeat = this.selectedSeats.indexOf(this.highlightedSeats[0]);
-      if (indexOfHighlightedSeat !== -1) {
-        const seat = this.selectedSeats.splice(indexOfHighlightedSeat, 1)[0];
-        seat.baseEl.removeClass('selected-seat');
-        this.removeSeatHighlight();
-        seat.handleMouseOver();
-        return
+    if (indexOfHighlightedSeat !== -1) {
+      const seat = this.selectedSeats.splice(indexOfHighlightedSeat, 1)[0];
+      seat.baseEl.removeClass('selected-seat');
+      this.removeSeatHighlight();
+      seat.handleMouseOver();
+      return
+    }
+    // if the selection is valid, allow selection of seat
+    if (this.validateSeatSelection(this.highlightedSeats)) {
+      // if we already have max number of tickets, remove one before adding clicked one
+      if (this.selectedSeats.length === this.bookShowPage.ticketsCount) {
+        this.selectedSeats.pop().baseEl.removeClass('selected-seat');
       }
-      // if the selection is valid, allow selection of seat
-      if (this.validateSeatSelection(this.highlightedSeats)) {
-        // if we already have max number of tickets, remove one before adding clicked one
-        if (this.selectedSeats.length === this.bookShowPage.ticketsCount) {
-          this.selectedSeats.pop().baseEl.removeClass('selected-seat');
-        }
-        this.selectedSeats.push(this.highlightedSeats[0]);
-        this.highlightSelectedSeats();
-      }
+      this.selectedSeats.push(this.highlightedSeats[0]);
+      this.highlightSelectedSeats();
+    }
   }
 
   highlightSelectedSeats() {
@@ -124,7 +124,14 @@ class SeatSelector extends Component {
     }
   }
 
+  deselectSeats() {
+    while (this.selectedSeats.length) {
+      this.selectedSeats.pop().baseEl.removeClass('selected-seat');
+    }
+  }
+
   suggestBestSeats() {
+    this.deselectSeats();
     if (this.separateSeats) { return this.highlightSelectedSeats() }
     const nOfTickets = this.bookShowPage.ticketsCount;
     let bestSelection = [];
@@ -136,7 +143,7 @@ class SeatSelector extends Component {
         const selectedSeats = row.slice(i, i + nOfTickets)
         if (this.validateSeatSelection(selectedSeats)) {
           // then check if we have a new highest evaluation, if so, save selection
-          const evaluation = selectedSeats.reduce((acc, seat) => { return acc + seat.evaluation }, 0);
+          const evaluation = this.evaluateSelection(selectedSeats);
           if (evaluation >= bestEvaluation) {
             bestEvaluation = evaluation;
             bestSelection = selectedSeats;
@@ -151,6 +158,10 @@ class SeatSelector extends Component {
       // if the evaluation is still -1000, there were no valid selections of adjacent seats
       this.suggestSeparateSeats();
     }
+  }
+
+  evaluateSelection(selection) {
+    return selection.reduce((acc, seat) => { return acc + seat.evaluation }, 0);
   }
 
   suggestSeparateSeats() {
@@ -185,5 +196,44 @@ class SeatSelector extends Component {
     if (this.selectedSeats.length > this.bookShowPage.ticketsCount) {
       this.selectedSeats.pop().baseEl.removeClass('selected-seat');
     }
+  }
+
+  addOneSeatToSelection() {
+    // if there are no seats, suggest the best one
+    if (!this.selectedSeats.length) {
+      this.suggestBestSeats();
+    }
+    // this long ass function selects the adjacent seat with the highest evaluation, or a new suggestion of best seats if the current selection cannot be expanded
+    const highSeatNumber = this.selectedSeats[0].seatNumber + 1;
+    const highSeat = this.seatMap.rows.flat().find(seat => seat.seatNumber === highSeatNumber);
+    const lowSeatNumber = this.selectedSeats[this.selectedSeats.length - 1].seatNumber - 1;
+    const lowSeat = this.seatMap.rows.flat().find(seat => seat.seatNumber === lowSeatNumber);
+    let lowEvaluation, highEvaluation;
+    // we use concat as not to modify the original array
+    if (this.validateSeatSelection(this.selectedSeats.concat([lowSeat]))) {
+      lowEvaluation = this.evaluateSelection(this.selectedSeats.concat([lowSeat]));
+    }
+    if (this.validateSeatSelection(this.selectedSeats.concat([highSeat]))) {
+      highEvaluation = this.evaluateSelection(this.selectedSeats.concat([highSeat]));
+    }
+    if (lowEvaluation && highEvaluation) {
+      if (lowEvaluation >= highEvaluation) {
+        this.selectedSeats.push(lowSeat);
+        return this.highlightSelectedSeats();
+      } else {
+        this.selectedSeats.unshift(highSeat);
+        return this.highlightSelectedSeats();
+      }
+    } else if (lowEvaluation) {
+      this.selectedSeats.push(lowSeat);
+      return this.highlightSelectedSeats();
+    } else if (highEvaluation) {
+      this.selectedSeats.unshift(highSeat);
+      return this.highlightSelectedSeats();
+    } else {
+      // otherwise, select best suggestion regardless of previously selected seats
+      this.suggestBestSeats();
+    }
+
   }
 }

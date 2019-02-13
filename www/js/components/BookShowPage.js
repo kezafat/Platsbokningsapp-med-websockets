@@ -34,19 +34,21 @@ class BookShowPage extends Component {
     // l33t h4xx to get the ticket type as a string based on class name of parent of clicked element
     const ticketType = $(event.target).parent().attr('class').split(' ')[1];
     if (this.tickets[ticketType] > 0) {
-      this.tickets[ticketType]--;
-      this.render();
-      this.seatSelector.suggestBestSeats();
+      // increment the ticket type count and output the new value in the DOM
+      $(event.target).siblings('.ticket-count').html(--this.tickets[ticketType]);
       this.seatSelector.limitTicketCount();
+      // this.seatSelector.suggestBestSeats();
     }
   }
 
   addTicket(event) {
     if (this.ticketsCount < 8 && this.ticketsCount < this.freeSeatsCount) {
+      // get the ticket type as a string
       const ticketType = $(event.target).parent().attr('class').split(' ')[1];
-      this.tickets[ticketType]++;
-      this.render();
-      this.seatSelector.suggestBestSeats();
+      // increment the ticket type count and output the new value in the DOM
+      $(event.target).siblings('.ticket-count').html(++this.tickets[ticketType]);
+      // this.seatSelector.suggestBestSeats();
+      this.seatSelector.addOneSeatToSelection();
     }
   }
 

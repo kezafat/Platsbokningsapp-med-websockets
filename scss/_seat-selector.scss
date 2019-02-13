@@ -33,6 +33,7 @@
         cursor: pointer;
         text-align: center;
         box-shadow: 1px 1px 3px black;
+        transition: background-color 0.25s ease;
   
         &.booked {
           background-color: lightcoral;

@@ -5,7 +5,8 @@ class BookShowPage extends Component {
       'click .minus': 'subtractTicket',
       'click .plus': 'addTicket',
       'click .back-button': 'goBack',
-      'click #book-tickets': 'sendBookingRequest'
+      'click #book-tickets': 'sendBookingRequest',
+      'seatSelectionChange': 'toggleInvalidSelectionAlert'
     });
     this.selectedShow = show;
     this.seatSelector = new SeatSelector(show, this);
@@ -26,6 +27,18 @@ class BookShowPage extends Component {
     return totalSeats - bookedSeats
   }
 
+  get isValidSelection() {
+    return this.ticketsCount === this.seatSelector.selectedSeats.length
+  }
+
+  toggleInvalidSelectionAlert() {
+    if (this.isValidSelection) {
+      this.baseEl.find('.invalid-selection-alert').hide();
+    } else {
+      this.baseEl.find('.invalid-selection-alert').show();
+    }
+  }
+
   goBack() {
     history.back();
   }
@@ -37,7 +50,7 @@ class BookShowPage extends Component {
       // increment the ticket type count and output the new value in the DOM
       $(event.target).siblings('.ticket-count').html(--this.tickets[ticketType]);
       this.seatSelector.limitTicketCount();
-      // this.seatSelector.suggestBestSeats();
+      this.toggleInvalidSelectionAlert();
     }
   }
 
@@ -48,13 +61,15 @@ class BookShowPage extends Component {
       // increment the ticket type count and output the new value in the DOM
       $(event.target).siblings('.ticket-count').html(++this.tickets[ticketType]);
       // this.seatSelector.suggestBestSeats();
-      this.seatSelector.addOneSeatToSelection();
+      while (this.seatSelector.selectedSeats.length < this.ticketsCount) {
+        this.seatSelector.addOneSeatToSelection();
+      }
     }
   }
 
   async sendBookingRequest() {
     if (this.seatSelector.selectedSeats.length !== this.ticketsCount) {
-      return alert('invalid amount of tickets, wtf are you doing m8')
+      return this.baseEl.find('.invalid-selection-alert').show();
     }
     const booking = new Booking({
       show: this.selectedShow._id,

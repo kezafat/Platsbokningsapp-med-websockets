@@ -27,6 +27,13 @@ class SeatSelector extends Component {
     return bookedSeats
   }
 
+  fireSeatSelectionChangeEvent() {
+    const event = new CustomEvent('seatSelectionChange', {
+      bubbles: true
+    });
+    this.baseEl[0].dispatchEvent(event);
+  }
+
   removeSeatHighlight() {
     // removes the seat highlighting on mouseover
     for (let seat of this.highlightedSeats) {
@@ -104,7 +111,9 @@ class SeatSelector extends Component {
       const seat = this.selectedSeats.splice(indexOfHighlightedSeat, 1)[0];
       seat.baseEl.removeClass('selected-seat');
       this.removeSeatHighlight();
-      seat.handleMouseOver();
+      this.fireSeatSelectionChangeEvent();
+      // this is a dirty fix for mobile. it does not fuck anything up because this.highlightedSeats is always assigned to in all other "seat adding" operations
+      this.highlightedSeats.push(seat);
       return
     }
     // if the selection is valid, allow selection of seat
@@ -122,6 +131,7 @@ class SeatSelector extends Component {
     for (let seat of this.selectedSeats) {
       seat.baseEl.addClass('selected-seat').removeClass('highlighted-seat');
     }
+    this.fireSeatSelectionChangeEvent();
   }
 
   deselectSeats() {
@@ -202,6 +212,18 @@ class SeatSelector extends Component {
     // if there are no seats, suggest the best one
     if (!this.selectedSeats.length) {
       this.suggestBestSeats();
+    }
+    if (this.separateSeats) {
+      // if separate seats is enabled, just add the best remaining seat to the selection
+      let bestSeat = {};
+      for (let seat of this.seatMap.rows.flat()) {
+        // if the evaluation is higher than the current highest, and the seat is not already selected, save it as bestSeat
+        if (seat.evaluation >= (bestSeat.evaluation || -1000) && !this.selectedSeats.includes(seat) && !seat.booked) {
+          bestSeat = seat;
+        }
+      }
+      this.selectedSeats.push(bestSeat);
+      return this.highlightSelectedSeats();
     }
     // this long ass function selects the adjacent seat with the highest evaluation, or a new suggestion of best seats if the current selection cannot be expanded
     const highSeatNumber = this.selectedSeats[0].seatNumber + 1;

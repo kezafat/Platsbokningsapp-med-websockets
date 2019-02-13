@@ -6,13 +6,15 @@
   }
 
   .screen {
-    background-color: darkgrey;
+    background-color: rgb(136, 16, 40);
+    color: white;
     width: 200px;
     max-width: 40vw;
     margin-bottom: 3rem;
     border-radius: 0.5rem;
     padding: 0 0.3rem;
     text-align: center;
+    box-shadow: 1px 1px 3px black;
   }
 
   .seat-map {

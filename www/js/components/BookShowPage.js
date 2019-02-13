@@ -8,16 +8,22 @@ class BookShowPage extends Component {
       'click #book-tickets': 'sendBookingRequest'
     });
     this.selectedShow = show;
+    this.seatSelector = new SeatSelector(show, this);
     this.tickets = {
-      adult: 2,
+      adult: this.freeSeatsCount < 2 ? this.freeSeatsCount : 2,
       senior: 0,
       kids: 0
     }
-    this.seatSelector = new SeatSelector(show, this);
   }
 
   get ticketsCount() {
     return this.tickets.adult + this.tickets.senior + this.tickets.kids
+  }
+
+  get freeSeatsCount() {
+    const totalSeats = this.selectedShow.auditorium.seats.reduce((acc, current) => { return acc + current }, 0);
+    const bookedSeats = this.seatSelector.bookedSeats.length;
+    return totalSeats - bookedSeats
   }
 
   goBack() {
@@ -36,7 +42,7 @@ class BookShowPage extends Component {
   }
 
   addTicket(event) {
-    if (this.ticketsCount < 8) {
+    if (this.ticketsCount < 8 && this.ticketsCount < this.freeSeatsCount) {
       const ticketType = $(event.target).parent().attr('class').split(' ')[1];
       this.tickets[ticketType]++;
       this.render();

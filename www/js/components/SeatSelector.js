@@ -144,7 +144,30 @@ class SeatSelector extends Component {
         }
       }
     }
-    this.selectedSeats = bestSelection;
+    if (bestEvaluation !== -1000) {
+      this.selectedSeats = bestSelection;
+      this.highlightSelectedSeats();
+    } else {
+      // if the evaluation is still -1000, there were no valid selections of adjacent seats
+      this.suggestSeparateSeats();
+    }
+  }
+
+  suggestSeparateSeats() {
+    const nOfTickets = this.bookShowPage.ticketsCount;
+    const selectedSeats = [];
+    while (selectedSeats.length < nOfTickets && selectedSeats.length < this.bookShowPage.freeSeatsCount) {
+      let bestSeat = {};
+      for (let seat of this.seatMap.rows.flat()) {
+        // if the evaluation is higher than the current highest, and the seat is not already selected, save it as bestSeat
+        if (seat.evaluation > (bestSeat.evaluation || -1000) && !selectedSeats.includes(seat) && !seat.booked) {
+          bestSeat = seat;
+        }
+      }
+      // "select" the best seat
+      selectedSeats.push(bestSeat);
+    }
+    this.selectedSeats = selectedSeats;
     this.highlightSelectedSeats();
   }
 

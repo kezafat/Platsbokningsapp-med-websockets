@@ -1,8 +1,14 @@
 .seat-selector {
 
+  .screen-container {
+    display: flex;
+    justify-content: center;
+  }
+
   .screen {
     background-color: darkgrey;
     width: 200px;
+    max-width: 40vw;
     margin-bottom: 3rem;
     border-radius: 0.5rem;
     padding: 0 0.3rem;

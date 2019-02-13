@@ -1,0 +1,14 @@
+.booking-confirmation{
+  h2{
+    text-align: center;
+  }
+  .card-text{
+    margin-bottom: 0;
+  }
+  .img-resize{
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+
+  }
+}

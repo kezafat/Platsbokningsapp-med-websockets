@@ -10,7 +10,6 @@ class MoviePage extends Component {
     this.movies = await Movie.find();
     
 
-    console.log(this.movies)
     this.render();
   }
 }

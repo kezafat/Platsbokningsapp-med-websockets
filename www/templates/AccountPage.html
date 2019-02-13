@@ -1,5 +1,4 @@
 <section class="account-page">
-
   <!-- Logged in area -->
   <div class="${this.loggedIn ? 'd-block':'d-none'}">
     <div class="jumbotron USERPAGE">
@@ -14,7 +13,7 @@
         <p>Vad hindrar dig från att skaffa några?</p>
         <a class="btn btn-success" href="/movies-schedule-page" role="button">Se & boka våra föreställningar här</a>
       </div>
-      ${this.showUserBookings()}
+      ${this.userBookingHTML}
     </div>
   </div>
   <!-- EOF logged in area -->

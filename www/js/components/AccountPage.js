@@ -8,12 +8,12 @@ class AccountPage extends Component {
     this.addEvents({
       'click .logOutBtn': 'logOut',
       'click .loginBtn': 'logIn',
-      'click .registerBtn': 'register',
-      'click .testrest': 'testrest'
+      'click .registerBtn': 'register'
     });
     this.loggedIn = false;
     this.loginNotify = "";
     this.registerNotify = "";
+    this.userBookingHTML = "";
     this.userData = {};
     this.checkUserLoginState();
     this.userBookings = [];
@@ -28,29 +28,36 @@ class AccountPage extends Component {
     }
   }
 
+
+
   async fetchBookings() {
+    this.userBookings = [];
     let jewser = await User.find(`.find({_id: "${this.userData._id}"})`);
     let jewserBookings = jewser[0].bookings;
 
     for (let booking of jewserBookings) {
-      if (booking.show.movie.title) {
+      if (booking.show && booking.show.movie.title) {
         this.userBookings.push(booking);
       }
     }
-
-    this.showUserBookings()
-    this.render();
+    this.showUserBookings();
   }
 
 
   showUserBookings() {
+    if (!AccountPage.auth) { return; }
     let html = "";
+    let oldBookings = [];
+    let actualBookings = [];
+    let futureBookings = [];
+    let allBookings = [oldBookings, actualBookings, futureBookings];
 
     function getTicketHtml(data) {
       let adult = data.tickets.adult;
       let senior = data.tickets.senior;
       let kids = data.tickets.kids;
       let seats = data.seats.join(', ');
+      let ticketID = data.ticketID || "N/A";
       return `
       <ul class="list-group">
         <p class="font-weight-bold">Bokade biljetter</p>
@@ -64,7 +71,10 @@ class AccountPage extends Component {
           Pensionärer<span class="badge badge-primary badge-pill">${senior}</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          Platser: ${seats}
+          Platser: <span class="font-weight-italic">${seats}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Bokningsnummer: <span class="font-weight-bold">${ticketID}</span>
         </li>
       </ul>
       `
@@ -73,11 +83,23 @@ class AccountPage extends Component {
     for (let booking of this.userBookings) {
       let tickets = getTicketHtml(booking);
       let place = booking.show.auditorium.name;
+      let todaysDate = new Date().toISOString().split('T')[0];
       let date = booking.show.date;
       let time = booking.show.time;
       let movieTitle = booking.show.movie.title;
-      let description = "Ska vi ha filmens beskrivning också eller info overload?";
       let picpath = `/images/${booking.show.movie.images[0]}`;
+
+      if (date == todaysDate) {
+        // TODAYS BOOKING
+        actualBookings.push(booking);
+      } else if (date < todaysDate) {
+        // OLD BOOKINGS
+        oldBookings.push(booking);
+      } else {
+        // FUTURE BOOKINGS
+        futureBookings.push(booking);
+      }
+
       html += `
       <div class="card text-center mb-2">
         <div class="card-header">
@@ -93,18 +115,21 @@ class AccountPage extends Component {
               </div>
             </div>
             <div class="col">
-            ${tickets}
-            <p class=" jumbotron">${description}</p>
+              ${tickets}
             </div>
           </div>
         </div>
+        <!--
         <div class="card-footer text-muted">
           <a href="#" class="btn btn-danger">Avboka biljetterna?</a>
         </div>
+        -->
       </div>
       `
     }
-    return html;
+    // console.log(allBookings);
+    this.userBookingHTML = html;
+    this.render();
   }
 
 
@@ -184,11 +209,12 @@ class AccountPage extends Component {
     if (bool) {
       this.clearNotifications();
       AccountPage.auth = true;
+      this.fetchBookings();
     } else {
       AccountPage.auth = false;
+      this.userBookingHTML = "";
     }
     this.loggedIn = bool;
-    this.mount();
     this.render();
     this.navBar.updateNavStatus(this);
   }
@@ -208,7 +234,6 @@ class AccountPage extends Component {
   clearNotifications() {
     this.loginNotify = "";
     this.registerNotify = "";
-    this.render();
   }
 
 }

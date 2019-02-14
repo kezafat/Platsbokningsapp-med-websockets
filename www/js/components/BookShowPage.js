@@ -1,17 +1,17 @@
 class BookShowPage extends Component {
-  constructor() {
+  constructor(show) {
     super();
-    this.addRoute('/book-show', 'Boka Visning');
     this.addEvents({
       'click .minus': 'subtractTicket',
       'click .plus': 'addTicket',
       'click .back-button': 'goBack',
-      'click #book-tickets': 'sendBookingRequest'
+      'click #book-tickets': 'sendBookingRequest',
+      'seatSelectionChange': 'toggleInvalidSelectionAlert'
     });
-    this.selectedShow = {};
-    this.setSelectedShow();
+    this.selectedShow = show;
+    this.seatSelector = new SeatSelector(show, this);
     this.tickets = {
-      adult: 2,
+      adult: this.freeSeatsCount < 2 ? this.freeSeatsCount : 2,
       senior: 0,
       kids: 0
     }
@@ -21,22 +21,22 @@ class BookShowPage extends Component {
     return this.tickets.adult + this.tickets.senior + this.tickets.kids
   }
 
-  async setSelectedShow() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const showId = urlParams.get('show');
-    // if the showid is null we don't have a show to set :()
-    if (showId === null) { return }
-    this.selectedShow = await Show.find(showId);
-    this.seatSelector = new SeatSelector(this.selectedShow, this);
-    this.render();
+  get freeSeatsCount() {
+    const totalSeats = this.selectedShow.auditorium.seats.reduce((acc, current) => { return acc + current }, 0);
+    const bookedSeats = this.seatSelector.bookedSeats.length;
+    return totalSeats - bookedSeats
   }
 
-  mount() {
-    this.setSelectedShow();
+  get isValidSelection() {
+    return this.ticketsCount === this.seatSelector.selectedSeats.length
   }
 
-  unmount() {
-    this.selectedShow = {};
+  toggleInvalidSelectionAlert() {
+    if (this.isValidSelection) {
+      this.baseEl.find('.invalid-selection-alert').hide();
+    } else {
+      this.baseEl.find('.invalid-selection-alert').show();
+    }
   }
 
   goBack() {
@@ -47,25 +47,29 @@ class BookShowPage extends Component {
     // l33t h4xx to get the ticket type as a string based on class name of parent of clicked element
     const ticketType = $(event.target).parent().attr('class').split(' ')[1];
     if (this.tickets[ticketType] > 0) {
-      this.tickets[ticketType]--;
-      this.render();
-      this.seatSelector.suggestBestSeats();
+      // increment the ticket type count and output the new value in the DOM
+      $(event.target).siblings('.ticket-count').html(--this.tickets[ticketType]);
       this.seatSelector.limitTicketCount();
+      this.toggleInvalidSelectionAlert();
     }
   }
 
   addTicket(event) {
-    if (this.ticketsCount < 8) {
+    if (this.ticketsCount < 8 && this.ticketsCount < this.freeSeatsCount) {
+      // get the ticket type as a string
       const ticketType = $(event.target).parent().attr('class').split(' ')[1];
-      this.tickets[ticketType]++;
-      this.render();
-      this.seatSelector.suggestBestSeats();
+      // increment the ticket type count and output the new value in the DOM
+      $(event.target).siblings('.ticket-count').html(++this.tickets[ticketType]);
+      // this.seatSelector.suggestBestSeats();
+      while (this.seatSelector.selectedSeats.length < this.ticketsCount) {
+        this.seatSelector.addOneSeatToSelection();
+      }
     }
   }
 
   async sendBookingRequest() {
     if (this.seatSelector.selectedSeats.length !== this.ticketsCount) {
-      return alert('invalid amount of tickets, wtf are you doing m8')
+      return this.baseEl.find('.invalid-selection-alert').show();
     }
     const booking = new Booking({
       show: this.selectedShow._id,

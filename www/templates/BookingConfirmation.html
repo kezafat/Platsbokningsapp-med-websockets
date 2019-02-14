@@ -1,21 +1,47 @@
-<div class="booking-confirmation">
+<section class="booking-confirmation">
   <h2>Samanställning</h2>
-  <div class="row">
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">${this.booking.show.movie.title}</h5>
-          <img src="/images/${this.booking.show.movie.images[0]}">
-          <h6 class="card-subtitle mb-2 text-muted">${this.booking.show.auditorium.name}</h6>
-          <p class="card-text">${this.booking.show.time} ${this.booking.show.date}</p>
-          <p class="card-text">Platser: ${this.booking.seats.join(', ')}</p>
+  <div class="row mt-5">
+    <div class="col col-xl-7 col-lg-7 mx-auto">
+      <h4 class="pb-3 ">Biljettkod: ${this.selectedBooking.ticketID}</h4>
+      <div class="card">
+        <div class="card-body rounded-lg">
+          <div class="row">
+            <div class="col-auto">
+              <img src="/images/${this.selectedBooking.show.movie.images[0]}">
+            </div>
+            <div class="col-auto">
+              <h5 class="card-title text-center-md">${this.selectedBooking.show.movie.title}</h5>
+              <h6 class="card-subtitle mb-1 text-muted text-center-md">${this.selectedBooking.show.auditorium.name}</h6>
+              <p class="card-text text-center-md">${this.selectedBooking.show.time} - ${this.selectedBooking.show.date}</p>
+              <p class="card-text text-center-md">Platser: ${this.selectedBooking.seats.join(', ')}</p>
+            </div>
+          </div>
         </div>
       </div>
-      <p class="card-text font-weight-bold">Vuxen Biljett:${this.adultPrice}kr</p>
-      <p class="card-text font-weight-bold">Pensionär Biljett:${this.seniorPrice}kr</p>
-      <p class="card-text font-weight-bold">Barn Biljett:${this.kidsPrice}kr</p>
-      <p class="card-text font-weight-bold">Total Pris:${this.ticketPrice}kr</p>
-      <a href="/movies-schedule-page" class="btn btn-info" role="button">Tillbaka</a>
+      <div class="row">
+        <div class="col-12">
+          <h5 class="card-text pb-3 pt-4">Vuxen: <div class="float-right">${this.adultPrice}kr</div>
+          </h5>
+        </div>
+        <div class="col-12">
+          <h5 class="card-text pb-3">Pensionär: <div class="float-right">${this.seniorPrice}kr</div>
+          </h5>
+        </div>
+        <div class="col-12">
+          <h5 class="card-text pb-4">Barn: <div class="float-right">${this.kidsPrice}kr</div>
+          </h5>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <h5 class="card-text pb-5 pt-3">Totalt: <div class="float-right">${this.ticketPrice}kr</div>
+          </h5>
+        </div>
+      </div>
+      <a href="/movies-schedule-page" class="btn btn-info d-block mb-1" role="button">Tillbaka</a>
+      <a href="/mitt-konto" class="btn btn-info d-block" role="button">Mitt Konto</a>
+
     </div>
   </div>
-</div>
+</section>

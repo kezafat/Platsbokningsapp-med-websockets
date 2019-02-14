@@ -1,3 +1,4 @@
+const shorthash = require("shorthash");
 module.exports = class CreateRestRoutes {
 
   constructor(app, db, models) {
@@ -19,6 +20,8 @@ module.exports = class CreateRestRoutes {
       // naughty little if statement to add the users id if creating a booking
       if (Model.modelName === 'Booking') {
         instance.user = req.session._id;
+        let dateString = Date.now() + " ";
+        instance.ticketID = await shorthash.unique(dateString);
       }
       let result = await instance.save().catch(
         error => err = error

@@ -15,6 +15,7 @@ class AccountPage extends Component {
     this.registerNotify = "";
     this.userBookingHTML = "";
     this.userData = {};
+    this.loadingDone = false;
     this.checkUserLoginState();
     this.userBookings = [];
   }
@@ -152,6 +153,7 @@ class AccountPage extends Component {
       this.userBookingHTML = "";
     }
     this.loggedIn = bool;
+    this.loadingDone = true;
     this.render();
     this.navBar.updateNavStatus(this);
   }

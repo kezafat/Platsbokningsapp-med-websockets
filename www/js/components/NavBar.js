@@ -1,16 +1,13 @@
 class NavBar extends Component {
-  constructor(pageContent) {
+  constructor() {
     super();
-    this.pageContent = pageContent;
     this.navItems = [
       new NavItem('Start', '/'),
       new NavItem('Filmer', '/filmer'),
       new NavItem('Visningar', '/movies-schedule-page'),
       new NavItem('Om Oss', '/om-oss'),
-
     ];
-    this.navStatus = "Laddar..";
-    // Just for fun coloring
+    this.navStatus = 'Laddar..';
     this.loggedIn = false;
   }
 
@@ -19,7 +16,7 @@ class NavBar extends Component {
       this.navStatus = AccountPageStatus.userData.name;
       this.loggedIn = true;
     } else {
-      this.navStatus = "Logga in";
+      this.navStatus = "Konto";
       this.loggedIn = false;
     }
     this.render();

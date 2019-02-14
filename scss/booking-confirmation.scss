@@ -1,4 +1,11 @@
-.booking-confirmation{
+div.booking-confirmation-container{
+  .center-spinner {
+    height: 100vh;
+    align-items: center;
+  }
+}
+
+section.booking-confirmation{
   h2{
     text-align: center;
   }

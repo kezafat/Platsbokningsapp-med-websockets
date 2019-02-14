@@ -78,13 +78,13 @@ class BookShowPage extends Component {
     });
     const result = await booking.save();
     let stateObj = { booking: booking._id };
-    // let bookingConfPath =  "booking-confirmation?id=" + booking._id;
     let bookingConfPath =  `booking-confirmation?id=${booking._id}&ticket=${booking.ticketID}`;
     history.pushState(stateObj, "Boknings Bekräftelse", bookingConfPath);
     let fastReload = document.createElement("a");
     $(fastReload).attr('href','/' + bookingConfPath)
     this.baseEl.append(fastReload);
     $(fastReload).click();
+    window.scrollTo(0,0);
     
   }
 }

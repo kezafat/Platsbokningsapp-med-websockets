@@ -1,48 +1,51 @@
-<section class="book-show">
-  <button class="back-button">NO NO TAKE ME BACK</button>
+<section class="book-show container">
+  <button class="back-button btn btn-secondary">NO NO TAKE ME BACK</button>
   <div class="row movie-info">
-    <div class="col-sm-auto">
+    <div class="col-md-auto col-4">
       <figure>
         <img src="/images/${this.selectedShow.movie.images[0]}" alt="" class="img-fluid">
       </figure>
     </div>
     <!-- /.col-xs-4 -->
-    <div class="col-sm-8">
+    <div class="col-md-auto col-8">
       <h3>${this.selectedShow.movie.title}</h3>
       <h4>${this.selectedShow.auditorium.name}</h4>
-      <h4>${this.selectedShow.date}</h4>
-      <h4>${this.selectedShow.time}</h4>
+      <h5>${this.selectedShow.date}</h5>
+      <h5>${this.selectedShow.time}</h5>
     </div>
     <!-- /.col-xs-8 -->
   </div>
   <!-- /.row movie-info -->
 
   <div class="ticket-selector row">
-    <div class="col"></div>
-    <div class="col-sm-auto">
-      <p>Ordinarie (85 kr/st)</p>
+    <div class="col-md"></div>
+    <div class="col-sm-auto col-12">
+      <h6>Ordinarie (85 kr/st)</h6>
       <div class="ticket-incrementor adult">
         <span class="minus">-</span><span class="ticket-count">${this.tickets.adult}</span><span class="plus">+</span>
       </div>
     </div>
-    <div class="col-sm-auto">
-      <p>Pensionär (75 kr/st)</p>
+    <div class="col-sm-auto col-12">
+      <h6>Pensionär (75 kr/st)</h6>
       <div class="ticket-incrementor senior">
         <span class="minus">-</span><span class="ticket-count">${this.tickets.senior}</span><span class="plus">+</span>
       </div>
     </div>
-    <div class="col-sm-auto">
-      <p>Barn (65 kr/st)</p>
+    <div class="col-sm-auto col-12">
+      <h6>Barn (65 kr/st)</h6>
       <div class="ticket-incrementor kids">
         <span class="minus">-</span><span class="ticket-count">${this.tickets.kids}</span><span class="plus">+</span>
       </div>
     </div>
-    <div class="col"></div>
+    <div class="col-md"></div>
   </div>
 
-  <div class="seat-selector">
-    ${this.selectedShow._id ? this.seatSelector : ''}
-  </div>
+  ${this.seatSelector}
 
-  <button id="book-tickets">BOOK THAT SHOWY-SHOW</button>
+  <div class="alert alert-danger invalid-selection-alert">
+    De platser du valt stämmer inte överens med antalet biljetter
+  </div>
+  <div class="button-wrap">
+    <button id="book-tickets" class="btn btn-success">BOOK THAT SHOWY-SHOW</button>
+  </div>
 </section>

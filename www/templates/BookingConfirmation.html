@@ -1,19 +1,19 @@
-<div class="booking-confirmation">
+<section class="booking-confirmation">
   <h2>Samanställning</h2>
   <div class="row mt-5">
     <div class="col col-xl-7 col-lg-7 mx-auto">
-      <h4 class="pb-3 ">Biljettkod: ${this.booking.ticketID}</h4>
+      <h4 class="pb-3 ">Biljettkod: ${this.selectedBooking.ticketID}</h4>
       <div class="card">
         <div class="card-body rounded-lg">
           <div class="row">
             <div class="col-auto">
-              <img src="/images/${this.booking.show.movie.images[0]}">
+              <img src="/images/${this.selectedBooking.show.movie.images[0]}">
             </div>
             <div class="col-auto">
-              <h5 class="card-title text-center-md">${this.booking.show.movie.title}</h5>
-              <h6 class="card-subtitle mb-1 text-muted text-center-md">${this.booking.show.auditorium.name}</h6>
-              <p class="card-text text-center-md">${this.booking.show.time} - ${this.booking.show.date}</p>
-              <p class="card-text text-center-md">Platser: ${this.booking.seats.join(', ')}</p>
+              <h5 class="card-title text-center-md">${this.selectedBooking.show.movie.title}</h5>
+              <h6 class="card-subtitle mb-1 text-muted text-center-md">${this.selectedBooking.show.auditorium.name}</h6>
+              <p class="card-text text-center-md">${this.selectedBooking.show.time} - ${this.selectedBooking.show.date}</p>
+              <p class="card-text text-center-md">Platser: ${this.selectedBooking.seats.join(', ')}</p>
             </div>
           </div>
         </div>
@@ -42,4 +42,4 @@
       <a href="/movies-schedule-page" class="btn btn-info" role="button">Tillbaka</a>
     </div>
   </div>
-</div>
+</section>

@@ -68,6 +68,10 @@ class BookShowPage extends Component {
   }
 
   async sendBookingRequest() {
+    if(!AccountPage.auth){
+      alert("Can some mofo fix some UI stuff for this. (Not logged in, plz login first before bookibookbook");
+      return;
+    }
     if (this.seatSelector.selectedSeats.length !== this.ticketsCount) {
       return this.baseEl.find('.invalid-selection-alert').show();
     }

@@ -51,25 +51,23 @@ class AccountPage extends Component {
 
     for (let booking of this.userBookings) {
       let todaysDate = new Date().toISOString().split('T')[0];
-      let date = booking.show.date;
-      if (date == todaysDate) {
+      let bookingDate = booking.show.date;
+      if (bookingDate == todaysDate) {
         // TODAYS BOOKINGS
         currentBookings.push(booking);
-      } else if (date < todaysDate) {
+      } else if (bookingDate < todaysDate) {
         // OLD BOOKINGS
         previousBookings.push(booking);
       } else {
         // FUTURE BOOKINGS
         futureBookings.push(booking);
       }
-
-      // html += this.getBookingCard(booking);
     }
+
+    // Send in OPTIONAL second param to false if no sorting is needed (defaults to true)
     this.currentBookingsHTML = this.getBookingCard(currentBookings);
     this.futureBookingsHTML = this.getBookingCard(futureBookings);
     this.previousBookingsHTML = this.getBookingCard(previousBookings);
-    // console.log(allBookings);
-    // this.userBookingHTML = html;
     this.render();
   }
 
@@ -209,13 +207,20 @@ class AccountPage extends Component {
     `
   }
 
-  getBookingCard(bookings) {
-    console.log(bookings);
+  getBookingCard(bookings, sort = true) {
+    // Sort them bitches and show closest date first.
+    if (sort) {
+      bookings.sort(function (a, b) {
+        let dateA = new Date(a.show.date), dateB = new Date(b.show.date);
+        return dateA - dateB;
+      });
+    }
+
     let tmp = "";
     if (bookings.length < 1) {
       tmp = `
       <div class="alert alert-warning" role="alert">
-        Ingenting att visa här inte :(
+        Inga visningar här inte :(
       </div>
       `
       return tmp;
@@ -247,9 +252,7 @@ class AccountPage extends Component {
             </div>
           </div>
         </div>
-
       </div>
-
       `
     }
     return tmp;

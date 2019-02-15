@@ -2,6 +2,7 @@ class Component extends REST {
  
   constructor(props){
     super(props); // send props to REST constructor
+    this._props = props; //also store as property
     this.addUniqueId();
     this.addRenderMethodToArrays();
     // Replace render method
@@ -96,9 +97,13 @@ class Component extends REST {
     this.title = title;
     Router.registerRoute(route);
   }
+  
+  get routeParts(){
+    return Router.parts;
+  }
  
   get baseEl(){
     return $(`[data-instance-id=${this._componentId}]`);
   }
- 
+
 }

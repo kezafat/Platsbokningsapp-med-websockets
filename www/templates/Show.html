@@ -1,16 +1,18 @@
-<div class="card movie-view-info m-2 p-0 ">
-  <div class="card-body pb-0">
-    <div class="row">
-      <div class="poster col-md-5">
-        <img src="/images/${this.movie.images[0]}" alt="${this.movie.images[0]}">
+<section>
+  <div class="card my-2 pt-3 px-3 movie-view-info"style="max-width: 640px;">
+    <div class="row no-gutters">
+      <div class="poster col-md-4">
+        <img src="/images/${this.movie.images[0]}" class="card-img" alt="${this.movie.images[0]}">
       </div>
-      <div class="text-halv col-md-6 pl-3">
-        <h4>${this.movie.title}</h4>
-        <h5>${this.time}</h5>
-        <h5>${this.auditorium.name}</h5>
-        <a class="btn btn-light" href="/book-show?show=${this._id}" role="button" id="book-show">BOKA</a>
-        <a class="btn btn-light" href="/filmer" role="button" id="info">INFO</a>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">${this.movie.title}</h5>
+          <p class="card-text">${this.time}</p>
+          <p class="card-text">${this.auditorium.name}</p>
+          <a class="btn btn-light" href="/book-show?show=${this._id}" role="button" id="book-show">BOKA</a>
+          <a class="btn btn-light" href="/filmer" role="button" id="info">INFO</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

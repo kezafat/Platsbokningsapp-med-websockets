@@ -1,16 +1,15 @@
 .movies-schedule-page {
 
-  .movie-viewings-headline {
+  #movie-viewings-headline {
     color: #1A000D;
     background: #E69900;
     text-shadow: 2px 2px 5px #FFFFFF;  
-    font-size: 7rem;
-    display: block;
+    font-size: 3rem;
     padding:10px;
     text-align: center;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
-    border-radius: 10px;
+     border-radius: 10px;
   }
 
   .date {
@@ -24,31 +23,26 @@
   }
 
   .movie-view-info {
-    background-color: silver;
-
-   .poster{
-    align-content: center;
-    padding-bottom: 3%;
+    background-color: silver; 
   }
-
-  h4, 
-  h5 {
-    font-size: 27px;
-    margin-top: 3%;
-    padding-left: 15%;
    
+  h5 {
+    font-size: 24px;
+    align-content: center;
+  }
+  .card-text {
+    font-size: 20px;
+    align-content: center; 
   }
 
-    a#book-show{
-      margin-left: 15%;
-    }
+  
     a#info {
-      margin-left: 5%;
+      margin-left: 2%;
     }
 
     a#book-show,
     a#info {
-      width:24%;
+      width:40%;
       height:12%;
       font-size: 19px;
       border-radius: 11px;
@@ -57,158 +51,6 @@
         transition: all 0.5s ease-in-out;
         background:yellow;
       }
-    }
-  }
-  @media only screen and (max-width: 1000px){
-    .movie-viewings-headline {
-      font-size: 8rem;
-      line-height: 1;
-    }
-
-    .date {
-      font-size: 5rem;
-    }
-
-    .card.movie-view-info {  
-      .poster{
-        padding-left: 17%;
-      }
-    
-      h4,
-      h5 {
-        font-size: 21px;
-        margin-top: 4%;
-        line-height: 1;
-        }
-
-      #book-show {
-        margin-left:  14%;
-        } 
-
-      #info {
-        margin-left: 2%;
-        }
-
-      a#book-show,
-      a#info {
-        width:26%;
-        height:13%;
-        font-size: 12px;
-        }    
-    } 
-  }
-
-  @media only screen and (max-width: 867px){
-    .movie-viewings-headline {
-      font-size: 3rem;
-      line-height: 1;
-    }
-
-    .date {
-      font-size: 5rem;
-    }
-
-    .card.movie-view-info {  
-      .poster{
-        padding-left: 13%;
-      }
-    
-      h4,
-      h5 {
-        font-size: 21px;
-        margin-top: 5%;
-        line-height: 1;
-        }
-
-      #book-show {
-        margin-left:  14%;
-        } 
-
-      #info {
-        margin-left: 2%;
-        }
-
-      a#book-show,
-      a#info {
-        width:26%;
-        height:13%;
-        font-size: 12px;
-        }    
-    } 
-  }
+   }
   
-  @media only screen and (max-width: 680px) {
-    .card.movie-view-info {
-      .poster{
-        padding-left: 22%;
-      }
-    
-    h4,
-    h5 {
-      font-size: 19px;
-      margin-top: 5%;
-      margin-left: 0;
-      padding-left: 19%;
-      }
-
-    #book-show {
-      margin-left:  17%;
-    } 
-    #info {
-      margin-left: 2%;
-    }
-
-    a#book-show,
-    a#info {
-      width:22%;
-      height:11%;
-      font-size: 10px;
-      border-radius: 15px;
-      background-color: #E69900;  
-      }
-      }
   }
-    
-  @media only screen and (max-width: 400px) {
-    .movie-viewings-headline {
-      font-size: 3rem;
-      }
-      .date {
-        font-size: 4rem;
-      }
-
-    .card.movie-view-info {
-
-    .poster{
-      padding-left: 15%;
-    }
-
-      h4,
-      h5 {
-      font-size: 21px;
-      margin-top: 10px;
-      line-height: 1;
-      padding-left: 17%;
-      }
-    
-      #book-show{
-        margin-left: 13%;
-      }
-
-      #info{
-        margin-left: 3%;
-      }
-      a#book-show,
-      a#info {
-        width:26%;
-        height:13%;
-        line-height: 1;
-        font-size: 10px;
-        border-radius: 15px;
-        background-color: #E69900;  
-      
-        }
-      }
-  }
-  
-}

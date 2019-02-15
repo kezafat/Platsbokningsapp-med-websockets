@@ -1,11 +1,11 @@
 
 class StartPage extends Component {
 
-  constructor(show, movieSchedulePage) {
+  constructor(movieSchedulePage) {
     super();
     this.addRoute('/', 'Startsida');
     this.movies = [];
-    this.show = [];
+    this.shows = [];
     this.movieSchedulePage = movieSchedulePage;
     this.moviesHtml = 'loading';
     this.getMovies();
@@ -22,26 +22,24 @@ class StartPage extends Component {
     for (let movie of this.movies) {
       html += `
       <div class="card">
-       <img class= "card-img-top img-thumbnail" src="images/${movie.images[0]}" alt="Card image cap">
+       <img class= "card-img-top img-thumbnail" src="images/${movie.images[0]}" alt="movie-posters">
       <div class="card-body">
         <h5 class="card-title">${movie.title}</h5><br>
         <p class="card-text">${movie.genre} ${movie.productionYear}<br>${movie.director}</p>
         <a href="/mitt-konto" class="btn btn-warning startbtn" role="button">Konto</a>
         <a href="/movie-schedule-page" class="btn btn-warning startbtn" role="button">Visningar</a>
       </div>
-      </div>
-        `
+      </div>`
     }
     this.moviesHtml = html;
     this.render();
     //return 'html';
   }
 
-  async getShows() {
-    let id = this.id
+  async getShows(show) {
+    let id = this.id;
     let movie = this.movie;
-    let auditorium = this.auditorium;
-    this.shows = await Show.find(id, movie, auditorium);
+    this.shows = await Show.find(id, show, movie);
     //console.log(this.shows);
     this.displayCurrentShows();
   }
@@ -49,12 +47,10 @@ class StartPage extends Component {
   displayCurrentShows() {
     let html = '';
     for (let show of this.shows) {
-      console.log(show.time)
-      html += `
-      <ul>Datum
-       <li> ${show.date} kl. ${show.time}<br>${show.movie.title}</li>
-      </ul>
-      `
+      console.log(show.movie)
+      html += `<ul>Datum
+       <li> ${show.date} kl. ${show.time}<br>${show.movie.title}<br>${show.auditorium.name}</li>
+      </ul>`
     }
     this.showsHtml = html;
     this.render();

@@ -1,7 +1,11 @@
+*{
+    box-sizing: border-box;
+
+}
+
 .startPage{
     width: 100%;
-    container .carousel{
-    display: flex;
+    container-fluid .carousel{
     margin: 0 auto;
 }
 }
@@ -11,15 +15,21 @@ img-thumbnail{
 }
 // card deck
 .moviescard{
-    font-family: sans-serif;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     font-size: 15px;
     font-weight: 200;
-    width: 960px;
-    h5{
+      h5{
         font-size: 20px;
     }
-}
 
+}
+.card-deck{
+    flex: 1 1 33%;
+}
+  
 
   .startbtn{
     display: inline-flex;
@@ -53,9 +63,10 @@ img-thumbnail{
     padding: 10px;
 }
 
-
- .col{
-    @include media-breakpoint-down(xs) {
-      margin: 0 auto
+.aside{
+    border: 1px solid #f7aa00;
+    li{
+list-style-type: none;
     }
 }
+

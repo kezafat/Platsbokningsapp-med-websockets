@@ -8,7 +8,7 @@ let showSchema = new Schema({
   "movie": { type: Schema.Types.ObjectId, ref: 'Movie', required: true, autopopulate: { maxDepth: 3 } },
   "date": { type: String, required: true },
   "time": { type: String, required: true }
-}, { toJSON: { virtuals: true } });
+}, { toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
 // virtually reference bookings
 

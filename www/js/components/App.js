@@ -26,3 +26,7 @@ class App extends Component {
   }
 
 }
+
+// Create a new web socket connection to the server
+// (available globally via App.socket)
+App.socket = io();

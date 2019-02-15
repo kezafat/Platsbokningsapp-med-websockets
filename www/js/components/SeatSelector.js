@@ -7,7 +7,8 @@ class SeatSelector extends Component {
       'mouseoverSeat': 'highlightProspectiveSelection',
       'mouseleaveSeat': 'removeSeatHighlight',
       'click span.seat': 'selectSeats',
-      'change #separate-seats': 'setSeparateSeats'
+      'change #separate-seats': 'setSeparateSeats',
+      'click .close': 'hideAlert'
     });
     this.seatMap = new SeatMap(this.show.auditorium.seats, this.bookedSeats);
     this.highlightedSeats = [];
@@ -25,6 +26,10 @@ class SeatSelector extends Component {
       bookedSeats.push(...booking.seats);
     }
     return bookedSeats
+  }
+
+  hideAlert(event) {
+    $(event.currentTarget).parent().hide();
   }
 
   fireSeatSelectionChangeEvent() {
@@ -45,10 +50,11 @@ class SeatSelector extends Component {
   highlightProspectiveSelection(event) {
     let seatNumber = event.detail.seat.seatNumber;
     // get all seat numbers for the prospective booking
-    const allSeatNumbers = [seatNumber--];
-    while (!this.separateSeats && allSeatNumbers.length < this.bookShowPage.ticketsCount) {
+    const allSeatNumbers = [];
+    // do...while loop to make sure we execute at least once, but only once if separate seats is selected
+    do  {
       allSeatNumbers.push(seatNumber--);
-    }
+    } while (!this.separateSeats && allSeatNumbers.length < this.bookShowPage.ticketsCount);
     // megah4xx to make an array of the actual seats, based on the numbers
     const allSeats = [];
     for (let seatNumber of allSeatNumbers) {
@@ -144,7 +150,9 @@ class SeatSelector extends Component {
 
   suggestBestSeats() {
     this.deselectSeats();
-    if (this.separateSeats) { return this.highlightSelectedSeats() }
+    if (this.separateSeats) {
+      return this.highlightSelectedSeats()
+    }
     const nOfTickets = this.bookShowPage.ticketsCount;
     let bestSelection = [];
     let bestEvaluation = -1000;

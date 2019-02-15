@@ -22,5 +22,7 @@ class BookShowContainer extends Component {
 
   unmount() {
     this.showFetched = false;
+    // we have to trigger bookshowpage unmount manually bc the framework only triggers it for components with routes
+    this.bookShowPage && this.bookShowPage.unmount();
   }
 }

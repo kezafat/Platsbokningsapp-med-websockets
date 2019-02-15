@@ -54,14 +54,4 @@ class Movie extends Component {
     return html;
   }
 
-
-  getActors() {
-    let html = '<ul>';
-    for (let actor of this.actors) {
-      html += `<li>${actor}</li>`;
-    }
-    html += '</ul>';
-    return html;
-  }
-
 }

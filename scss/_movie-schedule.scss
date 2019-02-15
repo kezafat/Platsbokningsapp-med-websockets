@@ -7,6 +7,7 @@
     font-size: 3rem;
     padding:10px;
     text-align: center;
+    align-content: center;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
      border-radius: 10px;
@@ -27,11 +28,13 @@
   }
    
   h5 {
-    font-size: 24px;  
+    font-size: 34px;  
+    margin-top: 20px;
   }
   
   .card-text {
-    font-size: 20px; 
+    font-size: 34px; 
+    margin-top: 15px;
   }
     a#info {
       margin-left: 2%;
@@ -42,6 +45,7 @@
       width:40%;
       height:12%;
       font-size: 19px;
+      margin-top: 60px;
       border-radius: 11px;
       background-color: #E69900;
         &:hover{

@@ -1,15 +1,21 @@
-.movie-page {
+
+  .movie-page { 
+    align-content: center;
+  
+
   .card {
   background-color: rgb(239, 233, 233);
   line-height: 1.15;
   }
 
   .card-title-movie {
-    font-size: 14px;
+    font-size: 33px;
+    padding-top: 5px;
   }
 
   .card-text-movie {
-    font-size: 14px;
+    font-size: 26px;
+    padding-top: 5px;
   }
 
   a#details {

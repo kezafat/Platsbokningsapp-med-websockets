@@ -1,5 +1,5 @@
 <section class="startpage">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-sm col-md mb-2">
         <div id="movieCarousel" class="carousel slide" data-ride="carousel">
@@ -11,41 +11,26 @@
                 <p class="lead">Men's special! Safe space... for men by men :-) 'just kiddin'</p>
               </div>
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="images/diehardwallpaper1.png" alt="Second slide">
-              <div class="carousel-caption d-none d-md-block">
-                <h2>Die Hard or Die Harder</h2>
-                <p class="lead">fullblown testostorne</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="images/diehardwallpaper3.png" alt="Third slide">
-              <div class="carousel-caption d-none d-md-block">
-                <h2>Or Die Even Harder Six point O</h2>
-                <p class="lead">The movie that never was or...</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="demaracater p-5">
-    <img class="d-block w-100" src="images/DieHard6.0.png" alt="Fourth slide">
-  </div>
-  <div class="moviescard m-2">
-    <div class="row">
-      <div class="col-sm-8 col-md-8">
-        <div class="card-deck">
-          ${this.moviesHtml}
+    <div class="demaracater p-5">
+      <img class="d-block w-100" src="images/DieHard6.0.png" alt="Fourth slide">
+    </div>
+    <div class="moviescard m-2">
+      <div class="row">
+        <div class="col-sm-9 col-md-9">
+          <div class="card-deck">
+            ${this.moviesHtml}
+          </div>
         </div>
-      </div>
-      <div class="col-sm-4 col-md-4">
-        <div class="aside">
-          <h2>Visningar</h2>
-          ${this.showsHtml}
+        <div class="col-sm-3 col-md-3">
+          <div class="aside m-2">
+            <h2>Visningar</h2>
+            ${this.showsHtml}
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </section>

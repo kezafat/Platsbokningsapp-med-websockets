@@ -5,7 +5,7 @@ class StartPage extends Component {
     super();
     this.addRoute('/', 'Startsida');
     this.movies = [];
-    this.show = show;
+    this.show = [];
     this.movieSchedulePage = movieSchedulePage;
     this.moviesHtml = 'loading';
     this.getMovies();
@@ -26,8 +26,8 @@ class StartPage extends Component {
       <div class="card-body">
         <h5 class="card-title">${movie.title}</h5><br>
         <p class="card-text">${movie.genre} ${movie.productionYear}<br>${movie.director}</p>
-        <button href="/mitt-konto" class="btn btn-warning startbtn">Konto</button>
-        <button href="/movie-schedule-page" class="btn btn-warning startbtn">Visningar</button>
+        <a href="/mitt-konto" class="btn btn-warning startbtn" role="button">Konto</a>
+        <a href="/movie-schedule-page" class="btn btn-warning startbtn" role="button">Visningar</a>
       </div>
       </div>
         `
@@ -43,18 +43,16 @@ class StartPage extends Component {
     let auditorium = this.auditorium;
     this.shows = await Show.find(id, movie, auditorium);
     //console.log(this.shows);
-    this.showCurrentShows();
+    this.displayCurrentShows();
   }
 
-  showCurrentShows() {
+  displayCurrentShows() {
     let html = '';
-    // let currentDate = new Date().toISOString().split('T')[0];
-    // let showDate = show[0].currentDate
     for (let show of this.shows) {
-      console.log(show.movie)
+      console.log(show.time)
       html += `
       <ul>Datum
-       <li> ${show.id}</li>
+       <li> ${show.date} kl. ${show.time}<br>${show.movie.title}</li>
       </ul>
       `
     }

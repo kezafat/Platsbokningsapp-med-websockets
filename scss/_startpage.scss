@@ -1,24 +1,25 @@
 .startPage{
+    width: 100%;
     container .carousel{
     display: flex;
     margin: 0 auto;
 }
 }
-
+img-thumbnail{
+    width: 100%;
+    height: auto;
+}
 // card deck
 .moviescard{
     font-family: sans-serif;
     font-size: 15px;
     font-weight: 200;
-    width: 100%
+    width: 960px;
     h5{
         font-size: 20px;
     }
 }
-img{
-    max-width: 100%;
-    height: auto;
-}
+
 
   .startbtn{
     display: inline-flex;
@@ -52,3 +53,9 @@ img{
     padding: 10px;
 }
 
+
+ .col{
+    @include media-breakpoint-down(xs) {
+      margin: 0 auto
+    }
+}

@@ -51,10 +51,10 @@ class StartPage extends Component {
     // let currentDate = new Date().toISOString().split('T')[0];
     // let showDate = show[0].currentDate
     for (let show of this.shows) {
-      console.log(show.movie)
       html += `
       <ul>Datum
-       <li> ${show.id}</li>
+       <li> ${show.date} kl. ${show.time}<br>${show.movie.title}</li>
+
       </ul>
       `
     }

@@ -147,7 +147,7 @@ class BookShowPage extends Component {
       for (let ticketType in this.tickets) {
         if (this.tickets[ticketType] > 0) {
           this.baseEl.find('.' + ticketType + ' .ticket-count').html(--this.tickets[ticketType]);
-          continue;
+          break;
         }
       }
     }

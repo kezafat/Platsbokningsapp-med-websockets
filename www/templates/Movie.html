@@ -11,7 +11,26 @@
           <p class="card-text-movie">Från: ${this.productionYear}</p>
           <p class="card-text-movie">Direktör: ${this.director}</p>
           <a class="btn btn-light" href="/book-show?show=${this._id}" role="button" id="book-show-link">BOKA</a>
-          <a class="btn btn-light" href="/film${this._id}" role="button" id="details">MERA</a>
+          <a class="btn btn-light" href="/film?film=${this._id}" role="button" id="details">MERA</a>
+          
+          <!-- <div id="link">se på trailern!</div>
+
+          <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+
+                <div class="modal-body">
+                  <iframe width="400" height="300" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
         </div>
       </div>
     </div>

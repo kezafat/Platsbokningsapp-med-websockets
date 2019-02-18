@@ -9,6 +9,6 @@ class PageContent extends Component {
     this.bookingConfirmationContainer = new BookingConfirmationContainer();
     this.accountPage = new AccountPage(this.navBar);
     this.bookShowContainer = new BookShowContainer();
-    this.movieDetail = new MovieDetail();
+    this.movieDetailContainer = new MovieDetailContainer();
   }
 }

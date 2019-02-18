@@ -1,34 +1,31 @@
-// class MovieDetailContainer extends Component  {
-//   constructor(){
-//     super();
-//     this.addRoute('/film', 'film-info');
-//     his.movieDetailFetched = false;
-//     console.log('movieDetail');
+ class MovieDetailContainer extends Component  {
 
-//   }
-//   async setSelectedMovie() {
-//     console.log(movie);
-//     let urlParams = new URLSearchParams(window.location.search);
-//     let id = urlParams.get('movie');
-//     // if the showid is null we don't have a show to set :()
-//     if (id === null) { return }
-//     //let show = await Show.find(showId);
-//     let movie = await Movie.find(id);
-//    // document.title = 'Film: ' + show.title;
-//     document.title = 'Film: ' + movie.title;
-//     Object.assign(this, movie._props);
-    
-//     this.movieDetailFetched = true;
-//     this.render();
+  constructor() {
+    super();
+    this.addRoute('/film', 'film'); //film/(.*)/);
+    this.fetchMovieDetail();
+    this.movieDetailFetched = false;
+  }
 
-//     console.log(show);
-//   }
 
-//   mount() {
-//     this.setSelectedMovie();
-//   }
+  async fetchMovieDetail() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let movieId = urlParams.get('film');
+    // if the showid is null we don't have a show to set :()
+    if (movieId === null) { return }
+    let movie = await Movie.find(movieId);
+    console.log(movie);
+    //document.title = 'Film: ' + movie.title;
+    this.movieDetail = new MovieDetail(movie._props);
+    this.movieDetailFetched = true;
+    this.render();
 
-//   unmount() {
-//     this.movieDetailFetched = false;
-//   }
-// }
+  }
+  mount() {
+    this.fetchMovieDetail();
+  }
+
+  unmount(){
+    this.movieDetailFetched = false;
+  }
+ }

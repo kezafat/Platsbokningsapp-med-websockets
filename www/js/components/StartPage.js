@@ -41,8 +41,8 @@ class StartPage extends Component {
     //return 'html';
   }
 
-  async getShows() {
-    let id = this.id
+  async getShows(show) {
+    let id = this.id;
     let movie = this.movie;
     let auditorium = this.auditorium;
     this.shows = await Show.find(id, movie, auditorium);

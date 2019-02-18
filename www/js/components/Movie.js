@@ -1,16 +1,18 @@
 class Movie extends Component {
+
   constructor(props) {
     super(props);
-    
+
   }
 
-  getActors() {
-    let html = '<ul>'
-    for (let actor of this.actors) {
-      html += `<li>${actor}</li>`;
-    }
-    html += '</ul>';
-    return html;
-  }
+  // $('#link').click(function() {
+  //   var src = 'https://www.youtube.com/embed/${this.youtubeTrailers[0];autoplay=1';
+  //   $('#myModal').modal('show');
+  //   $('#myModal iframe').attr('src', src);
+  // });
+
+  // $('#myModal button').click(function() {
+  //   $('#myModal iframe').removeAttr('src');
+  // });
 
 }

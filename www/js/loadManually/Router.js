@@ -7,6 +7,7 @@ class Router {
     this.listenToATagClicks();
     this.listenToBackForward();
     this.setPath(location.pathname);
+    Router.instance = this;
   }
 
   listenToATagClicks() {
@@ -43,6 +44,12 @@ class Router {
     $('a').removeClass('active');
     $(`a[href="${Router.path}"]`).addClass('active');
   }
+
+  goto(path){
+    history.pushState(null, null, path);
+    this.setPath(path);
+    this.mainInstance.render();
+}
 
   static registerRoute(route) {
     Router.routes.push(route);

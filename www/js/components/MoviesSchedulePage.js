@@ -2,11 +2,11 @@ class MoviesSchedulePage extends Component {
 
   constructor( ) {
     super();
-    this.addRoute('/movies-schedule-page', 'Film Visningar');
+    this.addRoute('/visningar', 'movie-schedule-page');
     this.days = [];
     this.fetchMovies();
   }
-  
+
   //runs when instanciating and loads everything asyncronous
   async fetchMovies() {
     //get date of the day and cut it off at the 'T'

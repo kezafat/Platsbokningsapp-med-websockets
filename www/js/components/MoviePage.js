@@ -6,7 +6,8 @@ class MoviePage extends Component {
     this.movies = [];
     this.getMovies();
   }
-  async getMovies() {
+  
+  async getMovies(){
     this.movies = await Movie.find();
     this.render();
   }

@@ -1,11 +1,18 @@
-<div class="row my-0">
-  <div class="col-3">
-    <img src="/images/${this.movie.images[0]}">
+<section>
+  <div class="card mb-2 pt-3 px-3 movie-view-info">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="/images/${this.movie.images[0]}" class="card-img" alt="${this.movie.images[0]}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body py-0">
+          <h5 class="card-title">${this.movie.title}</h5>
+          <p class="card-text">${this.time}</p>
+          <p class="card-text">${this.auditorium.name}</p>
+          <a class="btn btn-light" href="/book-show?show=${this._id}" role="button" id="book-show">BOKA</a>
+          <a class="btn btn-light" href="/filmer" role="button" id="info">INFO</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="movie-text col-9">
-    <h4>${this.movie.title}</h4>
-    <h5>${this.time}</h5>
-    <h5>${this.auditorium.name}</h5>
-    <a href="/book-show?show=${this._id}"><button class="book-show btn btn-primary">BOOK MY FAT ASS</button></a>
-  </div>
-</div>
+</section>

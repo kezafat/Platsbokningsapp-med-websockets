@@ -49,7 +49,10 @@ section.book-show {
     justify-content: center;
   }
 
-  div.invalid-selection-alert {
+  div.invalid-selection-alert, div.invalid-booking-alert, div.not-logged-in-alert, div.seats-stolen-alert {
     display: none;
+    .close {
+      top: -15px;
+    }
   }
 }

@@ -1,0 +1,98 @@
+*{
+    box-sizing: border-box;
+}
+
+.startPage, body{
+    width: 100%;
+    font-weight: 200;
+}
+#movieCarousel{
+    margin: 0 auto;
+    border: 2px solid #f7aa00;
+}
+
+img-thumbnail{
+    width: 100%;
+    height: auto;
+}
+// card deck
+.moviescard{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 15px;
+}
+.card{
+   margin-left: 5px !important;
+   margin-right: 5px !important;
+}
+
+/*.background-image{
+    background-image: url(images/background-images.jpeg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+*/
+
+.card-title{
+    font-size: 15px;
+    font-weight: 200;
+    margin: 0;
+    padding: 0;
+}
+.card-deck{
+    flex: 1 1 33%;
+}
+  
+
+  .startbtn{
+    display: inline-flex;
+    font-size: 15px;
+    border-radius: 40px;
+    background: transparent;
+    padding: 5px;
+  }
+ .startbtn:hover{
+     color: #fff;
+     background: #f7aa00;
+ } 
+
+
+.carousel-caption{  
+    background-color: rgba(14, 13, 13, 0.927);
+    opacity: 0.6;
+    
+
+ h2, p.lead{
+    font-weight: 200;
+    font-size: 40px;
+}
+ p.lead{
+     font-size: 30px;
+
+ }
+}
+.demaracater{
+    background-color:lightgray;
+    padding: 10px;
+}
+
+.aside{
+    border: 1px solid #f7aa00;
+    li{
+list-style-type: none;
+    }
+    h2{
+        font-weight: 200;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+ .moviescard{
+     width:100%;
+     font: 14px;
+ }
+}

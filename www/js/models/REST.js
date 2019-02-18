@@ -38,6 +38,7 @@ class REST {
   }
 
   static async find(query = '') {
+    console.log('finding', this)
     let found = await $.ajax({
       url: '/json/' + this.baseRoute + query,
       method: 'GET',

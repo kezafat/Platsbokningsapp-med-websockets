@@ -2,12 +2,14 @@
 //   box-sizing: border-box;
 // }
 
+
 body > div  {
   background-color: rgb(252, 252, 252);
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   background-image: url("/images/wheat.png");
+  font-family: 'Lato', sans-serif;
 }
 
 main{

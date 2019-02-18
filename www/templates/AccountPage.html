@@ -15,7 +15,7 @@
       <button class="btn btn-danger logOutBtn">Logga ut</button>
     </div>
     <div>
-      <h3 class="text-center">${this.userBookings.length > 0 ? 'Dina bokningar' : ''}</h3>
+      <h3 class="text-center text-light">${this.userBookings.length > 0 ? 'Dina bokningar' : ''}</h3>
       <div class="jumbotron text-center ${this.userBookings.length > 0 ? 'd-none' : 'd-block'}">
         <h3>Du har ännu inga bokningar :(</h3>
         <p>Vad hindrar dig från att skaffa några?</p>
@@ -35,7 +35,7 @@
 
           <div id="currentBookingsCollapse" class="collapse show" aria-labelledby="headingOne"
             data-parent="#userBookingsCollapser">
-            <div class="card-body bg-dark">
+            <div class="card-body">
               ${this.currentBookingsHTML}
             </div>
           </div>
@@ -52,7 +52,7 @@
           </div>
           <div id="futureBookingsCollapse" class="collapse" aria-labelledby="headingTwo"
             data-parent="#userBookingsCollapser">
-            <div class="card-body bg-dark">
+            <div class="card-body">
               ${this.futureBookingsHTML}
             </div>
           </div>
@@ -69,7 +69,7 @@
           </div>
           <div id="previousBookingsCollapse" class="collapse" aria-labelledby="headingThree"
             data-parent="#userBookingsCollapser">
-            <div class="card-body bg-dark">
+            <div class="card-body">
               ${this.previousBookingsHTML}
             </div>
           </div>
@@ -84,7 +84,7 @@
   <div class="logged-out ${!this.loggedIn && this.loadingDone ? 'd-block':'d-none'}">
     <!-- Login or reg accord -->
     <div class="accordion text-center ${this.auth ? 'd-none':'d-block'}" id="loginOrRegister">
-      <div class="card">
+      <div class="card ">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseLogin"
@@ -139,7 +139,7 @@
                 <input type="password" class="form-control regUserPassword" placeholder="Ange lösenord">
               </div>
             </form>
-            <button class="btn btn-danger registerBtn">Skapa konto</button>
+            <button class="btn btn-success registerBtn">Skapa konto</button>
           </div>
         </div>
       </div>

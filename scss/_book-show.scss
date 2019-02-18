@@ -1,3 +1,13 @@
+div.book-show-container {
+  display: flex;
+  justify-content: center;
+
+  .spin-container {
+    position: absolute;
+    top: 40%;
+  }
+}
+
 section.book-show {
 
   button {
@@ -6,6 +16,8 @@ section.book-show {
 
   .ticket-selector {
     margin-bottom: 2rem;
+    margin-top: 2rem;
+    text-align: center;
     div {
       p {
         text-align: center;
@@ -16,13 +28,28 @@ section.book-show {
   
         .minus, .plus {
           cursor: pointer;
-          background-color: coral; // SEXY
+          display: inline-block;
+          background-color: $success;
           border-radius: 1rem;
           text-align: center;
           padding: 0 0.5rem;
           margin: 0 0.5rem;
+          min-width: 38px;
+          transition: background-color 0.3s ease;
+          &:hover {
+            background-color: #218838;
+          }
         }
       }
     }
+  }
+
+  div.button-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  div.invalid-selection-alert {
+    display: none;
   }
 }

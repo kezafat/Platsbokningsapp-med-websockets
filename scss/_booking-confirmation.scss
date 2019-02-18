@@ -9,24 +9,11 @@ section.booking-confirmation{
   h2{
     text-align: center;
   }
-  h1,h2,h3,h4,h5,h6{
-    color:#fff;
+  .backgroundscheiße{
+    background: whitesmoke;
   }
-  h3{
-    @include media-breakpoint-down(sm) {
-      font-size: 1.15rem;
-    }
-  }
-
-  .card{
-    border-color: black;
-    color: black;
-    h3,h6{
-      color: black;
-    }
-    .card-text{
-      margin-bottom: 0;
-    }
+  .card-text{
+    margin-bottom: 0;
   }
   .text-center-md{
     @include media-breakpoint-down(xs) {
@@ -50,8 +37,5 @@ section.booking-confirmation{
       background:#f6b93b; 
       transition: all 0.2s ease 0s;
     }
-  }
-  hr{
-    border-color: #fff;
   }
 }

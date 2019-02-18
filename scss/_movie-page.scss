@@ -39,11 +39,16 @@
     cursor: pointer;
     }
 
-    @media only screen and (min-width: 1000px) {
+    @media only screen and (min-width: 990px) {
       a#book-show-link,
       a#details {
         margin-top: 25%;
+        margin-left: 5%;
       }  
+      .card-title-movie,
+      .card-text-movie {
+        padding-left: 5%;
+      }
     }
 
 }

@@ -29,15 +29,20 @@ class Auditorium extends Component {
     }
   }
 
+  get totalSeats() {
+    return this.seats.reduce((acc, cur) => acc + cur, 0)
+  }
+
   generateShowsHtml() {
     const shows = this.shows.slice(0, 3);
     let html = '';
     for (let show of shows) {
+      const freeSeats = this.totalSeats - show.bookings.map(booking => booking.seats).flat().length;
       html += `
               <div class="row my-3">
                 <div class="col-12 col-sm-auto">${show.date} ${show.time}</div>
                 <div class="col-12 col-sm-auto">${show.movie.title}</div>
-                <div class="col-12 col-sm d-flex justify-content-end justify-content-sm-end"><a class="btn btn-primary btn-sm float-md-right" href="/book-show?show=${show._id}">Boka</a></div>
+                <div class="col-12 col-sm d-flex justify-content-end justify-content-sm-end"><a class="btn btn-primary btn-sm float-md-right" href="/book-show?show=${show._id}">${freeSeats} kvar av ${this.totalSeats} -></a></div>
               </div>
       
       `

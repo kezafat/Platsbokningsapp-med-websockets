@@ -37,12 +37,9 @@ class AuditoriaContainer extends Component {
   }
 
   componentDidUpdate() {
-    console.log('update hook fired')
     const urlParams = new URLSearchParams(window.location.search);
     const auditoriumId = urlParams.get('id');
-    console.log('audi id', auditoriumId, 'old', this.auditoriumId);
     if (this.auditoriumId !== auditoriumId) {
-      console.log('CHANGE IF ID DETECTED')
       this.fetched = false;
       this.auditoria = false;
       this.selectedAuditorium = false;

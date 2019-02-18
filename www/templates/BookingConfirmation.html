@@ -4,14 +4,14 @@
     <div class="col col-xl-7 col-lg-7 mx-auto">
       <h4 class="pb-3 ">Biljettkod: ${this.selectedBooking.ticketID}</h4>
       <div class="card">
-        <div class="card-body rounded-lg">
+        <div class="no-gutters rounded-lg">
           <div class="row">
             <div class="col-auto">
               <img src="/images/${this.selectedBooking.show.movie.images[0]}">
             </div>
             <div class="col-auto">
-              <h5 class="card-title text-center-md">${this.selectedBooking.show.movie.title}</h5>
-              <h6 class="card-subtitle mb-1 text-muted text-center-md">${this.selectedBooking.show.auditorium.name}</h6>
+              <h3 class="text-center-md">${this.selectedBooking.show.movie.title}</h3>
+              <h6 class="card-subtitle mb-1 text-center-md">${this.selectedBooking.show.auditorium.name}</h6>
               <p class="card-text text-center-md">${this.selectedBooking.show.time} - ${this.selectedBooking.show.date}</p>
               <p class="card-text text-center-md">Platser: ${this.selectedBooking.seats.join(', ')}</p>
             </div>

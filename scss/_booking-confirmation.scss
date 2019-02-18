@@ -9,8 +9,28 @@ section.booking-confirmation{
   h2{
     text-align: center;
   }
-  .card-text{
-    margin-bottom: 0;
+  h1,h2,h3,h4,h5,h6{
+    color:#fff;
+  }
+  h3{
+    @include media-breakpoint-down(sm) {
+      font-size: 1.15rem;
+    }
+  }
+
+  .card{
+    border-radius: 11px;
+    border: none;
+    color: black;
+    h3,h6{
+      color: black;
+    }
+    .card-text{
+      margin-bottom: 0;
+    }
+    img{
+      border-radius: 10px 0px 0px 10px
+    }
   }
   .text-center-md{
     @include media-breakpoint-down(xs) {
@@ -34,5 +54,8 @@ section.booking-confirmation{
       background:#f6b93b; 
       transition: all 0.2s ease 0s;
     }
+  }
+  hr{
+    border-color: #fff;
   }
 }

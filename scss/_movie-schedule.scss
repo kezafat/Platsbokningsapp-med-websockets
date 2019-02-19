@@ -12,7 +12,6 @@
     -moz-border-radius: 10px;
      border-radius: 10px;
   }
-
   .date {
     font-size: 6rem;
     display: block;
@@ -22,34 +21,22 @@
     background: #FFFFFF;
     text-shadow:  1px 1px 0 rgb(214, 213, 210);
   }
-
   .movie-view-info {
     background-color: silver; 
   }
-   
   h5 {
     font-size: 26px;  
     margin-top: 8px;
   }
-  
   .card-text {
     font-size: 26px; 
   }
-    a#info {
-      margin-left: 2%;
-    }
-
-    a#book-show,
+  a#info {
+    margin-left: 2%;
+  }
+  a#book-show,
     a#info {
       width:40%;
       height:12%;
-      font-size: 19px;
-      border-radius: 11px;
-      background-color: #E69900;
-        &:hover{
-        transition: all 0.5s ease-in-out;
-        background:yellow;
-      }
-   }
-  
+    }
   }

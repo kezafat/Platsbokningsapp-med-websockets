@@ -1,7 +1,7 @@
 
 class StartPage extends Component {
 
-  constructor(auditorium, movie) {
+  constructor() {
     super();
     this.addRoute('/', 'Startsida');
     this.movies = [];
@@ -27,8 +27,8 @@ class StartPage extends Component {
         <h5 class="card-title">${movie.title}</h5><br>
         <p class="card-text">${movie.genre}</p>
         <p> ${movie.productionYear}<br> ${movie.director}</p>
-        <a href="/mitt-konto" class="btn btn-warning startbtn" role="button">Konto</a>
-        <a href="/movies-schedule-page" class="btn btn-warning startbtn" role="button">Visningar</a>
+        <span><a href="/mitt-konto" class="btn btn-outline-warning text-dark d-inline" role="button">Konto</a></span>
+        <a href="/movies-schedule-page" class="btn btn-outline-warning text-dark d-inline" role="button">Visningar</a>
       </div> 
       </div>
       `
@@ -39,9 +39,6 @@ class StartPage extends Component {
   }
 
   async upcomingShows() {
-    let id = this.id;
-    let movie = this.movie;
-    let auditorium = this.auditorium;
     // What is this supposed to do? This is not a valid query, check backend.
     // this.shows = await Show.find(id, movie, auditorium);
     this.shows = await Show.find();
@@ -52,8 +49,8 @@ class StartPage extends Component {
     const shows = this.shows.slice(0, 7);
     let html = '';
     for (let show of shows) {
-      html += `<ul> Datum
-      <li> ${show.date} kl.${show.time}<br>${show.movie.title} ${show.auditorium.name}</li >
+      html += `<ul class="text-light"> Datum
+      <li> ${show.date} kl.${show.time}<br> ${show.movie.title} ${show.auditorium.name}</li >
      </ul>`
     }
     this.upcomingShowsHTML = html;

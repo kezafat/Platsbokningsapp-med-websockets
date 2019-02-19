@@ -1,15 +1,15 @@
 
 class StartPage extends Component {
 
-  constructor(show) {
+  constructor(auditorium, movie) {
     super();
     this.addRoute('/', 'Startsida');
     this.movies = [];
     this.shows = [];
     this.moviesHtml = 'loading';
     this.getMovies();
-    this.upcomingShows = show;
-    this.getShows();
+    //this.upcomingShows = show;
+    this.upcomingShows();
     this.upcomingShowsHTML = '';
   }
 
@@ -41,20 +41,21 @@ class StartPage extends Component {
     //return 'html';
   }
 
-  async getShows(show) {
+  async upcomingShows() {
     let id = this.id;
     let movie = this.movie;
     let auditorium = this.auditorium;
     this.shows = await Show.find(id, movie, auditorium);
-    //console.log(this.shows); 
+    //console.log(this.shows);
     console.log(this.shows)
     this.showUpcomingShowsHTML();
   }
 
   showUpcomingShowsHTML() {
+    const shows = this.shows.slice(0, 7);
     let html = '';
-    for (let show of this.shows) {
-      console.log(show.movie);
+    for (let show of shows) {
+      console.log(show.movie.title)
       html += `<ul> Datum
       <li> ${show.date} kl.${show.time}<br>${show.movie.title} ${show.auditorium.name}</li >
      </ul>`
@@ -68,4 +69,5 @@ class StartPage extends Component {
 $('.carousel').carousel({
   interval: 1500
 })
+
 

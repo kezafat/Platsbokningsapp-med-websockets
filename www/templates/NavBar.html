@@ -1,5 +1,5 @@
-<div class="container d-flex justify-content-center text-center">
-  <nav class="navbar navbar-expand-lg navbar-light d-flex">
+<div class="container text-center">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div>
       <a href="/mitt-konto" class="btn btn-outline-${this.loggedIn ? 'danger' : 'success'} d-inline d-lg-none">${this.navStatus}</a>
       &nbsp;
@@ -14,7 +14,7 @@
         ${this.navItems}
       </ul>
       <!-- Navbtn for login/logout/loginstatus -->
-      <a href="/mitt-konto" class="btn btn-outline-${this.loggedIn ? 'danger' : 'success'} mx-auto d-none d-lg-inline">${this.navStatus}</a>
+      <a href="/mitt-konto" class="btn btn-outline-${this.loggedIn ? 'danger' : 'success'} ml-auto d-none d-lg-inline">${this.navStatus}</a>
     </div>
   </nav>
 </div>

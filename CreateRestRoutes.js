@@ -34,35 +34,8 @@ module.exports = class CreateRestRoutes {
       res.json(await Model.find());
     });
 
-    // advanced search/find route
-    this.app.get(baseRoute + '.*', async (req, res) => {
-      let query = decodeURIComponent(
-        req.url.substr(req.url.indexOf('/.') + 1)
-      );
-      if (query.indexOf('.find') !== 0) {
-        // To prevent update and remove questions
-        res.json({ error: 'The query must start with .find' });
-        return;
-      }
-      // prevent Elias injection
-      if (query.indexOf('.catch') >= 0) {
-        res.json({ error: 'Nice try!' });
-        return;
-      }
-
-      // just going to leave this here
-      // http://localhost:3000/json/auditoria/.find()&&function()%7Bconst%20d%20=%20global.db.base.connections[0];return%20JSON.stringify(d.hosts)+JSON.stringify(d.user)+JSON.stringify(d.pass)%7D()
-      let result;
-      console.log(query);
-      try {
-        let func = new Function('model', 'return model' + query);
-        result = await func(Model);
-      }
-      catch (error) {
-        result = { error: error + '' };
-      }
-      res.json(result);
-    });
+    // just going to leave this here (this is one way to hack the old "custom route")
+    // http://localhost:3000/json/auditoria/.find()&&function()%7Bconst%20d%20=%20global.db.base.connections[0];return%20JSON.stringify(d.hosts)+JSON.stringify(d.user)+JSON.stringify(d.pass)%7D()
 
     // read instance by id
     this.app.get(baseRoute + ':id', async (req, res) => {

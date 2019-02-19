@@ -14,7 +14,25 @@ class MoviesSchedulePage extends Component {
     //set time format and add current date to first movie viewing
     let currentDate = now[0];
     let currentTime = now[1].split(':').slice(0,2).join(':');
-    let allShows = await Show.find(`.find({ date: { $gte: '${currentDate}' } }).populate('auditorium movie bookings').sort({date: 1, time: 1}).limit(21).exec()`);
+    // `.find({ date: { $gte: '${currentDate}' } }).populate('auditorium movie bookings').sort({date: 1, time: 1}).limit(21).exec()`
+    let allShows = await Show.find();
+    allShows = allShows.filter(show => {
+      if (show.date > currentDate) {
+        return true
+      } else if (show.date === currentDate && show.time > currentTime) {
+        return true
+      } else {
+        return false
+      }
+    });
+    allShows.sort((a, b) => {
+      if (a.date < b.date) { return -1 }
+      else if (a.date > b.date) { return 1 }
+      else if (a.time < b.time) { return -1 }
+      else if (a.time > b.time) { return 1 }
+      else { return 0 }
+    });
+    allShows.length = 21;
     if(allShows.length === 0){ return; }
     let firstDate = allShows[0].date;
     // create a day with the same date as the first show

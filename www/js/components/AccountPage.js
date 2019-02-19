@@ -31,8 +31,8 @@ class AccountPage extends Component {
 
   async fetchBookings() {
     this.userBookings = [];
-    let jewser = await User.find(`.find({_id: "${this.userData._id}"})`);
-    let jewserBookings = jewser[0].bookings;
+    let jewser = await User.find(this.userData._id);
+    let jewserBookings = jewser.bookings;
 
     for (let booking of jewserBookings) {
       if (booking.show && booking.show.movie.title) {

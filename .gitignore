@@ -68,3 +68,6 @@ connectionString.js
 
 #
 www/css/
+
+#package-lock
+.package-lock

@@ -5,6 +5,7 @@ class NavBar extends Component {
       new NavItem('Start', '/'),
       new NavItem('Filmer', '/filmer'),
       new NavItem('Visningar', '/movies-schedule-page'),
+      new NavItem('Biografer', '/biografer'),
       new NavItem('Om Oss', '/om-oss'),
     ];
     this.navStatus = 'Laddar..';

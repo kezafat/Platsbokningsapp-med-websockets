@@ -9,6 +9,8 @@ const LoginHandler = require('./LoginHandler');
 const settings = require('./settings.json');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const http = require('http');
+const SocketIoController = require('./SocketIoController');
 
 for (let conf of config.sass) {
   new Sass(conf);
@@ -69,6 +71,8 @@ module.exports = class Server {
       users: require('./schemas/User')
     };
 
+    global.models = models;
+
     // create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
 
@@ -116,7 +120,10 @@ module.exports = class Server {
     });
 
     // Start the web server
-    app.listen(3000, () => console.log('Listening on port 3000'));
+    const server = http.Server(app);
+    server.listen(3000, () => console.log('Listening on port 3000'));
+
+    new SocketIoController(server);
   }
 
 }

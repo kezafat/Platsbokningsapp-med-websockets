@@ -24,12 +24,11 @@ class StartPage extends Component {
       html += `
       <div class="card">
        <img class= "card-img-top img-thumbnail" src="images/${movie.images[0]}" alt="movie-posters">
-      <div class="card-body">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">${movie.title}</h5><br>
         <p class="card-text">${movie.genre}</p>
         <p> ${movie.productionYear}<br> ${movie.director}</p>
-        <a href="/mitt-konto" class="btn btn-warning startbtn" role="button">Konto</a>
-        <a href="/movies-schedule-page" class="btn btn-warning startbtn" role="button">Visningar</a>
+        <a href="/movies-schedule-page" class="btn btn-outline-danger mt-auto" role="button">Visningar</a>
       </div> 
       </div>
       `

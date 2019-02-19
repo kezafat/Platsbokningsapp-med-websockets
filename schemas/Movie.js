@@ -20,9 +20,16 @@ let movieSchema = new Schema({
     "quote": String,
     "stars": Number,
     "max": Number,
-  }],
-  "shows": [{ type: Schema.Types.ObjectId, ref: 'Show', required: true }]
+  }]
+}, { toJSON: { virtuals: true }});
 
+movieSchema.virtual('shows', {
+  ref: 'Show',
+  localField: '_id',
+  foreignField: 'movie',
+  autopopulate: { maxDepth: 2 }
 });
+
+movieSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = db.model("Movie", movieSchema);

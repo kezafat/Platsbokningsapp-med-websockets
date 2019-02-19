@@ -42,8 +42,14 @@
 
   ${this.seatSelector}
 
-  <div class="alert alert-danger invalid-selection-alert">
+  <div class="alert alert-danger invalid-selection-alert" role="alert">
     De platser du valt stämmer inte överens med antalet biljetter
+  </div>
+  <div class="alert alert-danger invalid-booking-alert" role="alert">
+    Något gick fel med din bokning. Försök igen!
+  </div>
+  <div class="alert alert-danger not-logged-in-alert" role="alert">
+    Du måste vara inloggad för att kunna boka.
   </div>
   <div class="button-wrap">
     <button id="book-tickets" class="btn btn-success">BOOK THAT SHOWY-SHOW</button>

@@ -3,6 +3,7 @@ class BookShowContainer extends Component {
     super();
     this.addRoute('/book-show', 'Boka Visning');
     this.showFetched = false;
+    this.spinner = new Spinner();
   }
 
   async setSelectedShow() {

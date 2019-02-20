@@ -30,3 +30,25 @@ class App extends Component {
 // Create a new web socket connection to the server
 // (available globally via App.socket)
 App.socket = io();
+
+// SCROLLEND FUNC
+// Adding a scrollback func to ease the pain of long scrolling customers
+$.fn.scrollEnd = function (callback, timeout) {
+  $(this).scroll(function () {
+    var $this = $(this);
+    if ($this.data('scrollTimeout')) {
+      clearTimeout($this.data('scrollTimeout'));
+    }
+    $this.data('scrollTimeout', setTimeout(callback, timeout));
+  });
+};
+
+// Kalla scrollEnd med timer som rensas om man rör den mer
+$(window).scrollEnd(function () {
+  if ($(window).scrollTop() > 900) {
+    $('.ttb').fadeIn();
+  } else {
+    $('.ttb').hide();
+  }
+}, 400);
+// EOF SCROLLEND FUNC

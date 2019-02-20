@@ -39,6 +39,9 @@ class Component extends REST {
     let inDOM = $(`[data-instance-id=${this._componentId}]`);
     if(inDOM.length > 0){
       inDOM.replaceWith(elements);
+      // call update hook
+      this.componentDidUpdate && setTimeout(() => this.componentDidUpdate(), 0);
+
     }
     // If I have a route and it is not the current one - render nothing
     if(this.route && this.route !== Router.path) {

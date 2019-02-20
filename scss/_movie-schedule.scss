@@ -1,42 +1,33 @@
 .movies-schedule-page {
 
-  #movie-viewings-headline {
-    color: #1A000D;
-    background: #E69900;
-    text-shadow: 2px 2px 5px #FFFFFF;  
-    font-size: 3rem;
-    padding:10px;
-    text-align: center;
-    align-content: center;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-     border-radius: 10px;
+  img{
+    width: 70%;
   }
-  .date {
-    font-size: 6rem;
-    display: block;
-    margin-top:4%;
-    margin-bottom: 4%;
-    color: black;
-    background: #FFFFFF;
-    text-shadow:  1px 1px 0 rgb(214, 213, 210);
+  .red{
+    background-color:#dc3545;
+    font-size: 18px;
   }
-  .movie-view-info {
-    background-color: silver; 
-  }
-  h5 {
-    font-size: 26px;  
-    margin-top: 8px;
-  }
-  .card-text {
-    font-size: 26px; 
-  }
-  a#info {
-    margin-left: 2%;
-  }
-  a#book-show,
-    a#info {
-      width:40%;
-      height:12%;
+  @include media-breakpoint-only(xs) {
+    p{
+      font-size: 50%;
+    }
+    .red{
+      font-size: 50%;
+      padding:2px;
+    }
+    h5{
+      font-size: 60%;
+    }
+    .btn{
+      font-size: 70%;
+      padding: 1px;
     }
   }
+  @include media-breakpoint-only(sm) {
+      h5{
+        font-size: 1rem;
+      }
+  }
+}
+
+  

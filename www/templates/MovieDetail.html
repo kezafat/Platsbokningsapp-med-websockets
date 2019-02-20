@@ -1,5 +1,50 @@
-<div class="movie-detail">
-  <h2>hello world</h2>
-  <div>${this.movie.title}</div>
-  <div>${this.movie.shows[0].date}</div>
-</div>
+<section class="movie-detail">
+
+  <div class="row">
+    <h3 class="movie-title">${this.movie.title}</h3>
+  </div>
+  <div class="row">
+    <p class="category">Genre: ${this.movie.genre}</p>
+  </div>
+
+  <div class="media row mb-5">
+    <div class="col-md-4">
+      <img src="/images/${this.movie.images[0]}" class="img float-left" alt="${this.movie.images[0]}">
+    </div>
+    <div class="col-md-7">
+      <p class="description-text ml-5 float-right">${this.movie.description}</p>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="card col-md-6 mt-3">
+      <div class="card-body">
+        <div class="category"><span>Skådespelare: </span></div>
+        <ul class="category">
+          <li class="actors">${this.actorsList}</li>
+        </ul>
+        <div class="category"><span>Produktionsår: </span></div>
+        <div class="d-inline"><span>${this.movie.productionYear}</span></div><br>
+        <div class="category"><span>Land:</span></div>
+        <div class="d-inline"><span>${this.movie.productionCountries[0]}</span></div><br>
+        <div class="category"><span>Längd: </span></div>
+        <div class="d-inline"><span>${this.movie.length} minuter</span></div><br>
+        <div class="category"><span>Text: </span></div>
+        <div class="d-inline"><span>${this.movie.subtitles}</span></div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <span class="border border-success rounded-sm mt-5">
+        <aside class="aside p-3">
+          <h4 class="mb-1">Visningar:</h4>
+          <p class="mb-1">${this.movieTimes}</p>
+        </aside>
+      </span>
+    </div>
+  </div>
+  <div class="video d-inline-block ml-5 mt-5">
+    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${this.movie.youtubeTrailers[0]}"
+      frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+.movie-detail {
+  line-height: 2.5;
+  
+  h5.intro-text {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .movie-title {
+    font-size: 30px;
+    padding: 2%;
+  }
+  
+  .category {
+    padding-left: 2%;
+    line-height: 1;
+  }
+  
+  
+  .description-text {
+    margin-bottom: 5%;
+    margin-left: 19%;
+    font-size: 17px;
+    padding-left:10%;
+  }
+
+  .category {
+    display: inline-block;
+    font-size: 18px;
+    list-style-type: none; 
+    line-height: 2.5; 
+  }
+  
+  .img {
+    width: auto;
+    height: 430px;
+  }
+
+  .aside {
+    width: 288px;
+    line-height: 1;
+  }
+}

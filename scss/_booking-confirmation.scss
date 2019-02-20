@@ -10,10 +10,13 @@ section.booking-confirmation{
     text-align: center;
   }
   .backgroundscheiße{
-    background: whitesmoke;
+    background-color: black;
   }
   .card-text{
     margin-bottom: 0;
+  }
+  .card{
+    background-color: #de1226;
   }
   .text-center-md{
     @include media-breakpoint-down(xs) {

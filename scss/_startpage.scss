@@ -20,56 +20,53 @@
 .carousel-caption{  
     //background-color: rgba(58, 55, 55, 0.927);
    // opacity: 0.8;
-  
+  h3, p.lead{
+    font-size: 45px;
+    color: #fff;
+    font-weight: 400;  
+    text-shadow: 1px 2px #fcbe05
+
+}
+p.lead{
+    font-size: 25px;
+}
+}
+
+
 // Carousel-btn
 .btn-lg{
     font-size: 20px;
     font-weight: 200;
     margin: 5px;
     border: 2px solid;
-    text-shadow: 2px 2px #c0beb8
+}
 
-}
-h3, p.lead{
-    font-size: 50px;
-    color: #fff;
-    font-weight: 400;
-    
-}
-p.lead{
-    font-size: 25px;
-}
-}
-// card deck = moviescard
+
+/* Movies card row/column starts */ 
 .moviescard{
     width: 100%;
     display: flex;
-    //flex-direction: row;
-    flex-wrap: wrap;
-    
+    flex-direction: row;
+    flex-wrap: wrap;  
 }
+
 .card{
-   width: 30%;
-   margin-left: 5px !important;
-   margin-right: 5px !important;
-   margin-top: 5px;
+    margin: 5px !important;
    .card-body{
-        //padding: 0;
+        padding-bottom: 0.5rem;
         .card-text{
             font-weight: 200;
             padding: 5px;
-            //text-align: center;
+        }
+            .card-title{
+            font-size: 15px;
+            font-weight: 200;
+
         }
    }
 }
-
-.card-title{
-    font-size: 16px;
-    font-weight: 200;
-} 
-
  
-//card buttons
+//card buttons that links to mitt-konto och visningar
 a.btn{
     font-size: 15px;
     margin: 0 auto;
@@ -79,27 +76,55 @@ a.btn{
      transition: all 0.2s ease 0s;
  } 
 }
-
-.col-3{
+//col-4 --> aside
+.col-4{
     border: 1px solid #fff;
-    width: calc(30% - 5px);
     padding-left: 0;
     padding-right: 0;
+
+  li{
+        list-style-type: none;
+        color: #fff;   
+        font-size: 16px;
+        //min-width: 25%;
+        }
+}
+
+
+@media only screen and (min-width: 600px) {
+
+ .col-4, .col-md-4{
+    border: 1px solid #fff;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 25%;
+    
+}
     li{
-         list-style-type: none;
-         color: #fff;     
+        list-style-type: none;
+        color: #fff;   
+        font-size: 15px;
+       }
+}
+
+
+@media only screen and (max-width: 320px){
+    .card{
+    justify-content: space-around;
+    }
+    .col-4 {
+        display: block;
+        width: 25%;
+          h5{
+        font-size: 15px;
+    }
+    }
+
+    li{
+        font-size: 14px;
     }
 }
-
-
-@media only screen and (sm) {
- .card{
-     display: block;   
- }  
-.aside li{
-     font-size: 14px;
-     display: flex;
-     
-
-}
+//customized bootstraps 'ul' setting 
+ul{
+    padding-inline-start: 10px;
 }

@@ -237,7 +237,7 @@ class AccountPage extends Component {
       tmp += `
 
       <div class="card text-center">
-        <div class="card-header">
+        <div class="card-header card-header-inner">
           <span class="font-weight-bold">${date}</span> klockan ${time} i
           <span class="font-weight-light">${place}</span>
         </div>

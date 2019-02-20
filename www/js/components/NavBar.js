@@ -4,6 +4,7 @@ class NavBar extends Component {
     this.navItems = [
       new NavItem('Start', '/'),
       new NavItem('Filmer', '/filmer'),
+      new NavItem('Biografer', '/biografer'),
       new NavItem('Visningar', '/visningar'),
       new NavItem('Om Oss', '/om-oss'),
     ];

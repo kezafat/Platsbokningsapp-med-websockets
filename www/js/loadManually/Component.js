@@ -4,8 +4,6 @@ class Component extends REST {
     super(props); // send props to REST constructor
     this._props = props; //also store as property
     this.addUniqueId();
-    this.addRenderMethodToArrays();
-    // Replace render method
     this._orgRender = this.render;
     this.render = this._render;
     this.toString = this.render;
@@ -41,6 +39,9 @@ class Component extends REST {
     let inDOM = $(`[data-instance-id=${this._componentId}]`);
     if(inDOM.length > 0){
       inDOM.replaceWith(elements);
+      // call update hook
+      this.componentDidUpdate && setTimeout(() => this.componentDidUpdate(), 0);
+
     }
     // If I have a route and it is not the current one - render nothing
     if(this.route && this.route !== Router.path) {
@@ -61,19 +62,6 @@ class Component extends REST {
     elements.attr('data-instance-id', this._componentId);
     // return as a string
     return elements[0].outerHTML;
-  }
- 
-  addRenderMethodToArrays(){
-    // add a render method to arrays that collect
-    // renders for each item
-    Array.prototype.render = Array.prototype.render || function(){
-      let html = '';
-      for(let item of this){
-        html += item.render ? item.render() : item;
-      }
-      return html;
-    }
-    Array.prototype.toString = Array.prototype.render;
   }
  
   addEvents(eventMap){

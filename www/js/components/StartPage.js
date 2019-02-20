@@ -19,14 +19,14 @@ class StartPage extends Component {
   createMoviesHtml() {
     let html = '';
     for (let movie of this.movies) {
-      html += `<div class="row no-gutters">
+      html += `<div class="row mx-0">
       <div class="card">
        <img class="img-thumbnail img-fluid" src="images/${movie.images[0]}" alt="movie-posters">
-       <div class="card-body">
+       <div class="card-body pb-2">
         <h5 class="card-title">${movie.title}</h5><br>
-        <p class="card-text">${movie.genre}</p>
-        <p class="card-text">${movie.productionYear} <br> ${movie.director}</p>
-        <a href="/mitt-konto" class="btn btn-outline-warning text-dark d-inline" role="button">Konto</a>
+        <p class="card-text">${movie.genre}  ${movie.productionYear}</p><br>
+        <p class="card-text">${movie.director}</p>
+        <a href="/mitt-konto" class="btn btn-outline-warning text-dark d-inline mb-2" role="button">Konto</a>
         <a href="/movies-schedule-page" class="btn btn-outline-warning text-dark d-inline" role="button">Visningar</a>
       </div> 
       </div>
@@ -48,8 +48,8 @@ class StartPage extends Component {
     let html = '';
     for (let show of shows) {
       html += `<ul class="text-light">Datum
-      <li>${show.date} kl. ${show.time}<br> ${show.movie.title} ${show.auditorium.name}</li>
-     </ul>`
+      <li>${show.date} kl. ${show.time} <br> ${show.movie.title} & ${show.auditorium.name}</li>
+      </ul>`
     }
     this.upcomingShowsHTML = html;
     this.render();

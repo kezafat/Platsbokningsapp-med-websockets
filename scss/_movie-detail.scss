@@ -35,13 +35,12 @@
 
   .category-genre {
     color: aliceblue;
-    
     padding: 5%;
   }
   .category {
     display: inline-block;
     font-size: 18px;
-    line-height: 2.5; 
+    line-height: 1.5; 
     font-weight: 900;
   }
   .d-inline {
@@ -54,10 +53,13 @@
   padding-left:0;
   }
 
-  .aside {
+  .alert {
     line-height: 1;
     color: white;
-    float: right;
-    width: 40%;
+    
+  }
+
+  hr {
+    margin-top: 0;
   }
 }

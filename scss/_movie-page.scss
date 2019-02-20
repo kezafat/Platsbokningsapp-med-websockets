@@ -1,21 +1,30 @@
 
   .movie-page { 
     align-content: center;
-  
+
+  h5.intro-text {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
 
   .card {
   background-color: rgb(239, 233, 233);
   line-height: 1.15;
   }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+  }
 
   .card-title-movie {
-    font-size: 33px;
-    padding-top: 5px;
+    font-size: 28px;
   }
 
   .card-text-movie {
-    font-size: 26px;
-    padding-top: 5px;
+    font-size: 21px;
   }
 
   a#details {
@@ -24,8 +33,6 @@
 
   a#book-show-link,
   a#details {
-    width:37%;
-    height:12%;
     font-size: 17px;
     border-radius: 11px;
     background-color: #E69900;
@@ -42,7 +49,6 @@
     @media only screen and (min-width: 990px) {
       a#book-show-link,
       a#details {
-        margin-top: 25%;
         margin-left: 5%;
       }  
       .card-title-movie,

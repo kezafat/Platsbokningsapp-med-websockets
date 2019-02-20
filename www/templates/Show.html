@@ -1,18 +1,24 @@
-<section>
-  <div class="card mb-2 pt-3 px-3 movie-view-info">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="/images/${this.movie.images[0]}" class="card-img" alt="${this.movie.images[0]}">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body py-0">
-          <h5 class="card-title">${this.movie.title}</h5>
-          <p class="card-text">${this.time}</p>
-          <p class="card-text">${this.auditorium.name}</p>
-          <a class="btn btn-outline-danger" href="/book-show?show=${this._id}" role="button" id="book-show">BOKA</a>
-          <a class="btn btn-outline-danger" href="/filmer" role="button" id="info">INFO</a>
+  <div class="row">
+    <div class="col">
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-sm-auto col-1 mr-4 mt-3 ml-3">
+            <p class="red">${this.time}</p>
+          </div>
+          <div class="col-sm-auto col-3">
+            <img src="/images/${this.movie.images[0]}" alt="${this.movie.images[0]}">
+          </div>
+          <div class="col-sm-auto col-6 d-flex flex-column">
+            <div class="card-body">
+              <h5 class="m-0">${this.movie.title}</h5>
+              <p>${this.auditorium.name}</p>
+            </div>
+            <div class="pl-3">
+            <a class="btn btn-outline-danger mt-auto" href="/book-show?show=${this._id}" role="button" id="book-show">BOKA</a>
+            <a class="btn btn-outline-danger mt-auto" href="/filmer" role="button" id="info">INFO</a>
+          </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>

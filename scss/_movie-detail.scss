@@ -9,6 +9,13 @@
     position: absolute;
       right: 17%;
       top: 10%;
+      @include media-breakpoint-down(sm) { 
+        top: 32%;
+      }
+      @include media-breakpoint-only(xs) {
+        top:18%;
+      }
+
   }
   .img {
     width: 100%;

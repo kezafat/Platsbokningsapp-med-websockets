@@ -13,3 +13,14 @@ p{
 h1,h2,h3,h4,h5,h6{
   color: #ffffff ;
 }
+
+.navbar-brand{
+  @include media-breakpoint-down(md) {
+    font-size: 80%;
+  }
+}
+.btn-outline-danger{
+  &:hover{
+    color:black;
+  }
+}

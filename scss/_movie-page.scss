@@ -45,4 +45,9 @@
     .checked {
       color: orange;
     }
+    @include media-breakpoint-down(sm) {
+      .padding-fix{
+        padding: 15px !important;
+      }
+  }
 }

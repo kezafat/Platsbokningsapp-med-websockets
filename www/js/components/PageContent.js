@@ -7,7 +7,6 @@ class PageContent extends Component {
     this.navBar = navBar;
     this.startPage = new StartPage();
     this.moviePage = new MoviePage();
-    this.aboutPage = new AboutUs();
     this.moviesSchedulePage = new MoviesSchedulePage();
     this.bookingConfirmationContainer = new BookingConfirmationContainer();
     this.accountPage = new AccountPage(this.navBar);

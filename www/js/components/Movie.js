@@ -3,8 +3,8 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.sortMovieShows();
-    
-    
+
+
   }
   sortMovieShows() {
     function compare(a, b) {
@@ -26,7 +26,7 @@ class Movie extends Component {
         }
       }
     }
-  
+
 
     //get date of the day and cut it off at the 'T'
     let now = new Date().toISOString().split('T');
@@ -35,6 +35,7 @@ class Movie extends Component {
     let currentTime = now[1].split(':').slice(0, 2).join(':');
     let result = this.shows.sort(compare).filter(show => {
       if (show.date > currentDate) {
+
         return true
       } else if (show.date === currentDate && show.time > currentTime) {
         return true

@@ -14,7 +14,7 @@
     // if the showId is null we don't have a show to set :()
     if (movieId === null) { return }
     let movie = await Movie.find(movieId);
-    this.movieDetail = new MovieDetail(movie._props);
+    this.movieDetail = new MovieDetail(movie);
     this.movieDetailFetched = true;
     this.render();
 

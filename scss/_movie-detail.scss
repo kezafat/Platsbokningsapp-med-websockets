@@ -6,9 +6,6 @@
   }
   
   a#book-show-link {
-    font-size: 17px;
-    border-radius: 11px;
-    background-color: #E69900;
     position: absolute;
       right: 7%;
       top: 13%;
@@ -30,6 +27,9 @@
     line-height: 2.3;
   }
 
+  .card {
+    color: white;
+  }
   .category-genre {
     color: aliceblue;
     padding: 5%;
@@ -40,7 +40,8 @@
     line-height: 1.5; 
     font-weight: 900;
   }
-  .d-inline {
+  .d-inline,
+  .actors {
     font-weight: 400;
 
   }

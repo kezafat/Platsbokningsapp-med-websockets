@@ -19,19 +19,19 @@ class StartPage extends Component {
   createMoviesHtml() {
     let html = '';
     for (let movie of this.movies) {
-      html += `<div class="row mx-0">
-      <div class="card">
+      html += `
+      <div class="col-12 col-sm-6 col-md-4 p-0">
+      <div class="card h-100 mb-2 mx-1">
        <img class="img-thumbnail img-fluid" src="images/${movie.images[0]}" alt="movie-posters">
-       <div class="card-body pb-2">
-        <h5 class="card-title">${movie.title}</h5><br>
-        <p class="card-text">${movie.genre}  ${movie.productionYear}</p><br>
-        <p class="card-text">${movie.director}</p>
-        <a href="/mitt-konto" class="btn btn-outline-warning text-dark" role="button">Konto</a>
-        <a href="/movies-schedule-page" class="btn btn-outline-warning text-dark" role="button">Visningar</a>
+       <div class="card-body p-2">
+        <h5 class="card-title mb-1 font-weight-light text-light">${movie.title}</h5><br>
+        <p class="card-text font-weight-light text-light">${movie.genre} ${movie.productionYear}<br>${movie.director}
+       </p>
+        <a href="/mitt-konto" class="btn btn-outline-danger font-weight-light mt-2" role="button">Konto</a>
+        <a href="/movies-schedule-page" class="btn btn-outline-danger font-weight-light mt-2" role="button">Visningar</a>
       </div> 
       </div>
-      </div>
-      `
+      </div>`
     }
     this.moviesHtml = html;
     this.render();
@@ -48,17 +48,24 @@ class StartPage extends Component {
     let html = '';
     for (let show of shows) {
       html += `<ul class="text-light">Datum
-      <li>${show.date} kl. ${show.time} <br> ${show.movie.title} & ${show.auditorium.name}</li>
+      <li class="aside-text font-weight-light">${show.date} kl. ${show.time} <br> ${show.movie.title} ${show.auditorium.name}</li>
       </ul>`
     }
     this.upcomingShowsHTML = html;
     this.render();
   }
-
 }
 
 $('.carousel').carousel({
   interval: 1500
-})
+});
 
+// TILL CARD 6 FAKE MOVIE
+/* <div class="card h-100">/
+  <img class="img-thumbnail img-fluid" src="/" alt="fake movie">
+    <h3 class="title">Die Hard Die Now: The Musical</h3>
+    <p class="card-text font-weight-light text-light">Action Romance <br> 2020 <br> Bruce Willis
+        </p>
+      </div>
+      */
 

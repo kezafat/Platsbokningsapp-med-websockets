@@ -28,7 +28,7 @@ class StartPage extends Component {
         <h5 class="card-title">${movie.title}</h5><br>
         <p class="card-text">${movie.genre}</p>
         <p> ${movie.productionYear}<br> ${movie.director}</p>
-        <a href="/movies-schedule-page" class="btn btn-outline-danger mt-auto" role="button">Visningar</a>
+        <a href="/visningar" class="btn btn-outline-danger mt-auto" role="button">Visningar</a>
       </div> 
       </div>
       `

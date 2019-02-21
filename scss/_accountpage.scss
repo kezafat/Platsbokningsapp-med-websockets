@@ -1,21 +1,50 @@
 .account-page {
+  .btn-outline-danger:hover {
+    color: #000;
+  }
+
   h3 {
     font-weight: 800;
   }
-  .jumbotron,
-  .accordion {
-    background: whitesmoke;
+  .jumbotron, .accordion {
+    background: black;
+    color: #ddd;
     border-radius: 5px;
-    box-shadow: 0 0 4px #fff;
+    h2 {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
   .logged-out button {
     text-transform: uppercase;
   }
+
+  .card-header {
+    background: #000;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    margin-bottom: 0px !important;
+  }
   .card-header button {
     font-weight: 600;
-    color: black;
   }
   .card-header-inner {
     background: #fff9c4;
+    color: #000;
+    margin-top: 1rem;
+  }
+
+  .list-group {
+    background-color: black;
+
+    .list-group-item {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background-color: #000;
+    }
+  }
+  .card{
+    background-color: #000;
+  }
+  h2,p{
+    color: #eee;
   }
 }

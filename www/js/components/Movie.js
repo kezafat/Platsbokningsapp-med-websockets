@@ -3,8 +3,6 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.sortMovieShows();
-
-
   }
   sortMovieShows() {
     function compare(a, b) {
@@ -49,5 +47,15 @@ class Movie extends Component {
   //movie has an array of shows
   get nextShow() {
     return this.shows[0];
+  }
+  setStars() {
+    let starsCount = this.reviews[0].stars;
+    let htmlStars = this.baseEl.find('.fa.fa-star');
+    for (let i = 0; i < starsCount; i++) {
+      $(htmlStars[i]).addClass('checked');
+    }
+  }
+  mount() {
+    this.setStars();
   }
 }

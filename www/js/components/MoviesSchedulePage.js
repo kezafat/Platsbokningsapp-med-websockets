@@ -2,7 +2,7 @@ class MoviesSchedulePage extends Component {
 
   constructor() {
     super();
-    this.addRoute('/visningar', 'movie-schedule-page');
+    this.addRoute('/visningar', 'Visningar');
     this.days = [];
     this.fetchMovies();
   }

@@ -4,7 +4,7 @@
   }
   .jumbotron,
   .accordion {
-    background: whitesmoke;
+    background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 4px #fff;
   }
@@ -17,5 +17,11 @@
   }
   .card-header-inner {
     background: #fff9c4;
+  }
+  .card{
+    background-color: #fff;
+  }
+  h2,p{
+    color: black;
   }
 }

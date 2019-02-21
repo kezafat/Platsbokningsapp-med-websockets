@@ -6,11 +6,14 @@
   h3 {
     font-weight: 800;
   }
-  .jumbotron,
-  .accordion {
+  .jumbotron, .accordion {
     background: black;
     color: #ddd;
     border-radius: 5px;
+    h2 {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
   .logged-out button {
     text-transform: uppercase;

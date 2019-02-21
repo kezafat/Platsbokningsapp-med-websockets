@@ -13,7 +13,7 @@ class NavBar extends Component {
 
   updateNavStatus(AccountPageStatus) {
     if (AccountPageStatus.loggedIn) {
-      this.navStatus = AccountPageStatus.userData.name;
+      this.navStatus = "Konto"
       this.loggedIn = true;
     } else {
       this.navStatus = "Logga in";

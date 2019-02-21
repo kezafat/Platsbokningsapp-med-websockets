@@ -24,10 +24,10 @@ class StartPage extends Component {
       <div class="card h-100 mb-2 mx-1">
        <img class="img-thumbnail img-fluid" src="images/${movie.images[0]}" alt="movie-posters">
        <div class="card-body d-flex flex-column p-2">
-        <h5 class="card-title mb-1 font-weight-light text-light">${movie.title}</h5><br>
+        <h5 class="card-title font-weight-light text-light">${movie.title}</h5><br>
         <p class="card-text font-weight-light text-light">${movie.genre} ${movie.productionYear}<br>${movie.director}
        </p>
-        <a href="/movies-schedule-page" class="btn btn-outline-danger mt-auto font-weight-light d-block mt-2 mb-2" role="button">Visningar</a>
+        <a href="/movies-schedule-page" class="btn btn-outline-danger mt-auto font-weight-light d-block" role="button">Visningar</a>
       </div> 
       </div>
       </div>`

@@ -1,7 +1,5 @@
-*{
-    box-sizing: border-box;
-}
-.startpage body{
+.startpage {
+  body{
     width: 100%;
     height: auto;
     margin: auto 0;
@@ -28,14 +26,14 @@
 }
 }
 /* Movies card row/column starts */ 
-.startpage .moviescard{
+.moviescard{
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;  
 }
 
-.startpage .card{
+.card{
     //margin: 5px 5px !important;
     background-color:black;
     .card-text{ 
@@ -49,20 +47,20 @@
             font-size: 16px;
         }
    }
-.startpage .img-thumbnail{
+ .img-thumbnail{
     background-color: none !important;
     padding: 0;
 }  
 
 //card buttons that links to mitt-konto och visningar
-.startpage a.btn{
+a.btn{
    font-size: 12px;
     &:hover{
      transition: all 0.2s ease 0s;
  } 
 }
 //col-4 --> aside
-.aside-bar, .startpage .col-4{
+.aside-bar, .col-4{
     border: 1px solid #dee2e6;
     padding-left: 0;
     padding-right: 0;
@@ -97,3 +95,6 @@
     height: 265px;
 }
   }
+
+
+}

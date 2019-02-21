@@ -12,17 +12,19 @@
     margin: 0 auto;
     .carousel-img{
         max-height: 400px !important;
-
+    }
 .carousel-caption {  
   h3 {
-    font-size: 40px;
+    font-size: 50px;
     text-transform: uppercase;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: #000;
-    font-weight: 600;  
-    text-shadow: 2px 1px 1px #fff; 
+    color: rgb(220, 33, 33);
+    font-weight: 500;  
+    text-shadow: 1px 2px rgb(141, 133, 133); 
     }
-}
+  .btn-outline-danger{
+        font-size: 20px;
+    }
 }
 }
 /* Movies card row/column starts */ 

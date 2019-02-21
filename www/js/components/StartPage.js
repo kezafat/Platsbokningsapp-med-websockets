@@ -27,8 +27,7 @@ class StartPage extends Component {
         <h5 class="card-title mb-1 font-weight-light text-light">${movie.title}</h5><br>
         <p class="card-text font-weight-light text-light">${movie.genre} ${movie.productionYear}<br>${movie.director}
        </p>
-        <a href="/mitt-konto" class="btn btn-outline-danger font-weight-light mt-2" role="button">Konto</a>
-        <a href="/movies-schedule-page" class="btn btn-outline-danger font-weight-light mt-2" role="button">Visningar</a>
+        <a href="/movies-schedule-page" class="btn btn-outline-danger font-weight-light d-block mt-2 mb-2" role="button">Visningar</a>
       </div> 
       </div>
       </div>`
@@ -60,12 +59,5 @@ $('.carousel').carousel({
   interval: 1500
 });
 
-// TILL CARD 6 FAKE MOVIE
-/* <div class="card h-100">/
-  <img class="img-thumbnail img-fluid" src="/" alt="fake movie">
-    <h3 class="title">Die Hard Die Now: The Musical</h3>
-    <p class="card-text font-weight-light text-light">Action Romance <br> 2020 <br> Bruce Willis
-        </p>
-      </div>
-      */
+
 

@@ -2,7 +2,6 @@
 
   .movie-title {
     font-size: 30px;
-    padding: 2%;
     color: aliceblue;
   }
   
@@ -13,7 +12,6 @@
     position: absolute;
       right: 7%;
       top: 13%;
-      padding: 1%;
       &:hover{
       transition: all 0.5s ease-in-out;
       background:yellow;
@@ -29,7 +27,6 @@
     color: white;
     margin-bottom: 5%;
     font-size: 17px;
-    padding-left:10%;
     line-height: 2.3;
   }
 

@@ -1,16 +1,16 @@
 <section class="movie-detail">
   <div class="row">
-    <h3 class="movie-title">${this.movie.title}</h3>
-    <a class="btn-warning" href="/book-show?show=${this.movie.shows[0].id}" role="button" id="book-show-link">BOKA</a>
+    <h3 class="movie-title pl-2 p-3">${this.movie.title}</h3>
+    <a class="btn-warning p-2" href="/book-show?show=${this.movie.shows[0].id}" role="button" id="book-show-link">BOKA</a>
   </div>
 
-  <div class="media row mb-5">
+  <div class="media row mb-5 justify-content-between">
     <div class="col-md-5">
       <img src="/images/${this.movie.images[0]}" class="img" alt="${this.movie.images[0]}">
     </div>
-    <div class="col-md-7">
-      <div class="category-genre pl-5"><span>Genre: ${this.movie.genre}</span></div>
-      <p class="description-text pl-5">${this.movie.description}</p>
+    <div class="col-md-7 mt-3">
+      <div class="category-genre pl-1"><span>Genre: ${this.movie.genre}</span></div>
+      <p class="description-text pl-1">${this.movie.description}</p>
     </div>
   </div>
 
@@ -18,32 +18,32 @@
     <div class="card col-md-5 p-0 mt-3">
       <div class="row">
         <div class="card-body pl-5">
-          <div class="col-4 p-0">
+          <div class="col-sm-8 p-0">
             <div class="category"><span>Skådespelare: </span></div>
             <ul class="actors">
               <li>${this.actorsList}</li>
             </ul>
           </div>
-          <div class="col-4 p-0">
+          <div class="col-sm-8 p-0">
             <div class="category"><span>Produktionsår: </span></div>
-            <div class="d-inline"><span>${this.movie.productionYear}</span></div><br>
+            <div class="d-inline"><span>${this.movie.productionYear}</span></div><hr>
             <div class="category"><span>Land:</span></div>
-            <div class="d-inline"><span>${this.movie.productionCountries[0]}</span></div><br>
+            <div class="d-inline"><span>${this.movie.productionCountries[0]}</span></div><hr>
             <div class="category"><span>Längd: </span></div>
-            <div class="d-inline"><span>${this.movie.length} minuter</span></div><br>
+            <div class="d-inline"><span>${this.movie.length} minuter</span></div><hr>
             <div class="category"><span>Text: </span></div>
-            <div class="d-inline"><span>${this.movie.subtitles}</span></div>
-            <!-- <div class="category"><span>Omdömen: </span></div> -->
-            <!-- <div class="d-inline"><span>${this.review}</span></div> -->
-            <!-- <div class="category"><span>destributers: </span></div>
-          <div class="d-inline"><span>${this.movie.distributor}</span></div> -->
+            <div class="d-inline"><span>${this.movie.subtitles}</span></div><hr>
+            <div class="category"><span>Omdömen: </span></div>
+            <div class="d-inline"><span>${this.movie.reviews[0].quote}</span></div><hr>
+            <div class="category"><span>Distributör: </span></div>
+          <div class="d-inline"><span>${this.movie.distributor}</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="alert alert-info col-md-4 mt-3 pl-3 d-inline-block" role="alert">
-      <h4 class="mb-3">Visningar:</h4>
+    <div class="alert alert-info col-md-4 mt-3 pl-5 d-inline-block" role="alert">
+      <h4 class="my-3">Visningar:</h4>
       ${this.movieTimes}
     </div>
   </div>

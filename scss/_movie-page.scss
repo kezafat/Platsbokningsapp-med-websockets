@@ -2,10 +2,22 @@
   .movie-page { 
     align-content: center;
 
+  h5.intro-text {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
   .card {
     background-color: #000000;
     border-color: black;
     line-height: 0.7;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
   }
 
   .card-title-movie {

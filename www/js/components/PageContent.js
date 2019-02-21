@@ -13,6 +13,7 @@ class PageContent extends Component {
     this.bookShowContainer = new BookShowContainer();
     this.movieDetailContainer = new MovieDetailContainer();
     this.auditoriaContainer = new AuditoriaContainer();
+    this.movieDetailContainer = new MovieDetailContainer();
   }
 
   scrollUp() {

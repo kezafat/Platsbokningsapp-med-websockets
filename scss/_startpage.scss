@@ -2,90 +2,99 @@
 *{
   box-sizing: border-box;
 }
-
-.startPage, body{
-  width: 100%;
-  font-weight: 200;
+.startpage body{
+    width: 100%;
+    height: auto;
+    margin: auto 0;
+    font-weight: 200;
+    font-size: 16px;
 }
 #movieCarousel{
-  margin: 0 auto;
-  border: 2px solid #f7aa00;
+    margin: 0 auto;
+    .carousel-img{
+        max-height: 400px !important;
+    }
+.carousel-caption {  
+  h3 {
+    font-size: 50px;
+    text-transform: uppercase;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(220, 33, 33);
+    font-weight: 500;  
+    text-shadow: 1px 2px rgb(141, 133, 133); 
+    }
+  .btn-outline-danger{
+        font-size: 20px;
+    }
+}
+}
+/* Movies card row/column starts */ 
+.startpage .moviescard{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;  
 }
 
-img-thumbnail{
-  width: 100%;
-  height: auto;
+.startpage .card{
+    //margin: 5px 5px !important;
+    background-color:black;
+    .card-text{ 
+            font-size: 15px;
+            padding: 0;
+            margin: 0;
+           
 }
-// card deck
-.moviescard{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  font-size: 15px;
-}
-.card{
-  margin-left: 5px !important;
-  margin-right: 5px !important;
-}
+    .card-title{
+            word-wrap: inherit;
+            font-size: 16px;
+        }
+   }
+.startpage .img-thumbnail{
+    background-color: none !important;
+    padding: 0;
+}  
 
-.card-title{
-  font-size: 15px;
-  font-weight: 200;
-  margin: 0;
-  padding: 0;
+//card buttons that links to mitt-konto och visningar
+.startpage a.btn{
+   font-size: 12px;
+    &:hover{
+     transition: all 0.2s ease 0s;
+ } 
 }
-.card-deck{
-  flex: 1 1 33%;
-}
+//col-4 --> aside
+.aside-bar, .startpage .col-4{
+    border: 1px solid #dee2e6;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: black;
+   
+    ul{
+        padding-inline-start: 10px;
 
+    }
+    h5{
+        font-size: 15px;
+    }
 
-.startbtn{
-  display: inline-flex;
-  font-size: 15px;
-  border-radius: 40px;
-  background: transparent;
-  padding: 5px;
-}
-.startbtn:hover{
-    color: #fff;
-    background: #f7aa00;
-} 
-
-
-.carousel-caption{  
-  background-color: rgba(14, 13, 13, 0.927);
-  opacity: 0.6;
-  
-
-h2, p.lead{
-  font-weight: 200;
-  font-size: 40px;
-}
-p.lead{
-    font-size: 30px;
-
+ ul, .aside-text {   
+         list-style-type: none;
+         color: #fff;   
+         justify-content: center;
+         font-size: 14px; 
+         line-height: 1.5;   
 }
 }
-.demaracater{
-  background-color:lightgray;
-  padding: 10px;
-}
-
-.aside{
-  border: 1px solid #f7aa00;
-  li{
-list-style-type: none;
+@include media-breakpoint-up(xs) {
+  h5, ul {
+    font-size: 12px;
   }
-  h2{
-      font-weight: 200;
-  }
 }
 
-@media only screen and (min-width: 600px) {
-.moviescard{
-    width:100%;
-    font: 14px;
+
+@include media-breakpoint-up(md){
+     .img-musical{
+    width: 229px;
+    height: 265px;
 }
-}
-}
+  }

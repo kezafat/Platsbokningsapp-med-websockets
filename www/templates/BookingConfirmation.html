@@ -1,47 +1,41 @@
 <section class="booking-confirmation">
-  <h2>Samanställning</h2>
-  <div class="row mt-5">
-    <div class="col col-xl-7 col-lg-7 mx-auto">
-      <h4 class="pb-3 ">Biljettkod: ${this.selectedBooking.ticketID}</h4>
-      <div class="card">
-        <div class="card-body rounded-lg">
-          <div class="row">
-            <div class="col-auto">
-              <img src="/images/${this.selectedBooking.show.movie.images[0]}">
+  <div class="row">
+    <div class="col">
+        <div class="row my-3">
+          <div class="col col-xl-7 col-lg-7 mx-auto backgroundscheiße p-5">
+            <h2>Samanställning</h2>
+            <h4 class="pb-3 ">Biljettkod: ${this.selectedBooking.ticketID}</h4>
+            <div class="card">
+              <div class="card-body rounded-lg">
+                <div class="row">
+                  <div class="col-auto">
+                    <img src="/images/${this.selectedBooking.show.movie.images[0]}">
+                  </div>
+                  <div class="col-auto">
+                    <h5 class="card-title text-center-md">${this.selectedBooking.show.movie.title}</h5>
+                    <h6 class="card-subtitle mb-1 mt-1 text-center-md">
+                      ${this.selectedBooking.show.auditorium.name}
+                    </h6>
+                    <p class="card-text text-center-md">${this.selectedBooking.show.time} -
+                      ${this.selectedBooking.show.date}</p>
+                    <p class="card-text text-center-md">Platser: ${this.selectedBooking.seats.join(', ')}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-auto">
-              <h5 class="card-title text-center-md">${this.selectedBooking.show.movie.title}</h5>
-              <h6 class="card-subtitle mb-1 text-muted text-center-md">${this.selectedBooking.show.auditorium.name}</h6>
-              <p class="card-text text-center-md">${this.selectedBooking.show.time} - ${this.selectedBooking.show.date}</p>
-              <p class="card-text text-center-md">Platser: ${this.selectedBooking.seats.join(', ')}</p>
-            </div>
+            <h5 class="card-text pb-3 pt-4">Vuxen: <div class="float-right">${this.adultPrice}kr</div>
+            </h5>
+            <h5 class="card-text pb-3">Pensionär: <div class="float-right">${this.seniorPrice}kr</div>
+            </h5>
+            <h5 class="card-text pb-4">Barn: <div class="float-right">${this.kidsPrice}kr</div>
+            </h5>
+            <hr>
+            <h5 class="card-text pb-5 pt-3">Totalt: <div class="float-right">${this.ticketPrice}kr</div>
+            </h5>
+            <a href="/visningar" class="btn btn-outline-danger d-block mb-1" role="button">Tillbaka</a>
+            <a href="/mitt-konto" class="btn btn-outline-danger d-block" role="button">Mitt Konto</a>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <h5 class="card-text pb-3 pt-4">Vuxen: <div class="float-right">${this.adultPrice}kr</div>
-          </h5>
-        </div>
-        <div class="col-12">
-          <h5 class="card-text pb-3">Pensionär: <div class="float-right">${this.seniorPrice}kr</div>
-          </h5>
-        </div>
-        <div class="col-12">
-          <h5 class="card-text pb-4">Barn: <div class="float-right">${this.kidsPrice}kr</div>
-          </h5>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-12">
-          <h5 class="card-text pb-5 pt-3">Totalt: <div class="float-right">${this.ticketPrice}kr</div>
-          </h5>
-        </div>
-      </div>
-      <a href="/movies-schedule-page" class="btn btn-info d-block mb-1" role="button">Tillbaka</a>
-      <a href="/mitt-konto" class="btn btn-info d-block" role="button">Mitt Konto</a>
-
     </div>
   </div>
 </section>

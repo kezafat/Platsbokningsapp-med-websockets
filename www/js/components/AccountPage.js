@@ -184,7 +184,7 @@ class AccountPage extends Component {
     let ticketID = data.ticketID || "N/A";
 
     function badgeColor(count) {
-      return count > 0 ? 'badge-success' : 'badge-dark';
+      return count > 0 ? 'badge-success' : 'badge-danger';
     }
 
     return `

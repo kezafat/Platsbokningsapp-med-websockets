@@ -27,7 +27,7 @@ class StartPage extends Component {
         <h5 class="card-title font-weight-light text-light">${movie.title}</h5><br>
         <p class="card-text font-weight-light text-light">${movie.genre} ${movie.productionYear}<br>${movie.director}
        </p>
-        <a href="/movies-schedule-page" class="btn btn-outline-danger mt-auto font-weight-light d-block" role="button">Visningar</a>
+        <a href="/visningar" class="btn btn-outline-danger mt-auto font-weight-light d-block" role="button">Visningar</a>
       </div> 
       </div>
       </div>`

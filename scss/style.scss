@@ -1,3 +1,5 @@
+//fonts
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 // The whole Bootstrap library
 @import 'bootstrap/bootstrap';
@@ -6,6 +8,8 @@
 @import 'body-related';
 
 // Components
+@import 'bootstrap-overrides';
+@import 'startpage';
 @import 'book-show';
 @import 'seat-selector';
 @import 'footer';
@@ -13,3 +17,5 @@
 @import 'movie-page';
 @import 'booking-confirmation';
 @import 'accountpage';
+@import 'auditoria';
+@import 'movie-detail';

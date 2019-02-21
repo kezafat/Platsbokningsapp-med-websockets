@@ -1,18 +1,28 @@
-<div class="card col-4 mt-3 mx-2">
-  <div class="card-body">
-    <img src="/images/${this.images[0]}">
-
-    <h3>${this.title}</h3>
-    <hr>
-    <p>Genre: ${this.genre}</p>
-    <hr>
-    <p>Direktör: ${this.director}</p>
-    <hr>
-    <p>År: ${this.productionYear}</p>
-    <hr>
-    <p>${this.getActors()}</p>
-    <hr>
-    <p>Beskrivning: ${this.description}</p>
-
+<section class="movie-page">
+  <div class="card no-gutters my-4 ">
+    <div class="row no-gutters">
+      <div class="col-md-3">
+        <img src="/images/${this.images[0]}" class="card-img" alt="${this.images[0]}">
+      </div>
+      <div class="col-md-8 d-flex flex-column">
+        <div class="card-body pl-5 padding-fix">
+          <h5 class="card-title-movie mt-3">${this.title}</h5>
+          <p class="card-text-movie">${this.genre}</p>
+          <p class="card-text-movie">Från: ${this.productionYear}</p>
+          <p class="card-text-movie">Direktör: ${this.director}</p>
+          <p class="mt-5 font-italic morelinehight">"${this.reviews[0].quote}"</p>
+          <p>${this.reviews[0].source}</p>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+        </div>
+        <div class="pl-5 pb-1 padding-fix">
+          <a class="btn btn-outline-danger" href="/book-show?show=${this.nextShow._id}" role="button">BOKA</a>
+          <a class="btn btn-outline-danger" href="/film?film=${this._id}" role="button">MERA</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>

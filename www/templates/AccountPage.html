@@ -12,7 +12,7 @@
     <div class="jumbotron USERPAGE text-center">
       <h2>Välkommen ${this.userData.name}</h2>
       <p>Du är inloggad med ${this.userData.user}</p>
-      <button class="btn btn-danger logOutBtn">Logga ut</button>
+      <button class="btn btn-outline-danger logOutBtn">Logga ut</button>
     </div>
     <div>
       <h3 class="text-center text-light">${this.userBookings.length > 0 ? 'Dina bokningar' : ''}</h3>
@@ -24,9 +24,9 @@
       <div class="accordion text-center ${this.userBookings.length > 0 ? 'd-block' : 'd-none'}"
         id="userBookingsCollapser">
         <div class="card">
-          <div class="card-header" id="headingOne">
+          <div class="card-header border-0" id="headingOne">
             <h2 class="mb-0">
-              <button class="btn btn-link text-uppercase" type="button" data-toggle="collapse"
+              <button class="btn btn-outline-danger text-uppercase" type="button" data-toggle="collapse"
                 data-target="#currentBookingsCollapse" aria-expanded="true" aria-controls="currentBookingsCollapse">
                 Bokningar idag
               </button>
@@ -44,7 +44,7 @@
         <div class="card">
           <div class="card-header" id="headingTwo">
             <h2 class="mb-0">
-              <button class="btn btn-link text-uppercase collapsed" type="button" data-toggle="collapse"
+              <button class="btn btn-outline-danger text-uppercase collapsed" type="button" data-toggle="collapse"
                 data-target="#futureBookingsCollapse" aria-expanded="false" aria-controls="futureBookingsCollapse">
                 Framtida bokningar
               </button>
@@ -61,7 +61,7 @@
         <div class="card">
           <div class="card-header" id="headingThree">
             <h2 class="mb-0">
-              <button class="btn btn-link text-uppercase collapsed" type="button" data-toggle="collapse"
+              <button class="btn btn-outline-danger text-uppercase collapsed" type="button" data-toggle="collapse"
                 data-target="#previousBookingsCollapse" aria-expanded="false" aria-controls="previousBookingsCollapse">
                 Bokningshistorik
               </button>
@@ -87,7 +87,7 @@
       <div class="card ">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseLogin"
+            <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#collapseLogin"
               aria-expanded="false" aria-controls="collapseLogin">
               Logga in på ditt konto
             </button>
@@ -109,7 +109,7 @@
                   value="firefox">
               </div>
             </form>
-            <button class="btn btn-success loginBtn">Logga in</button>
+            <button class="btn btn-outline-danger loginBtn">Logga in</button>
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@
       <div class="card">
         <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseRegister"
+            <button class="btn btn-outline-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseRegister"
               aria-expanded="false" aria-controls="collapseRegister">
               Registrera ett nytt konto
             </button>
@@ -139,7 +139,7 @@
                 <input type="password" class="form-control regUserPassword" placeholder="Ange lösenord">
               </div>
             </form>
-            <button class="btn btn-success registerBtn">Skapa konto</button>
+            <button class="btn btn-outline-danger registerBtn">Skapa konto</button>
           </div>
         </div>
       </div>

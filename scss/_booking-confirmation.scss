@@ -1,0 +1,35 @@
+div.booking-confirmation-container{
+  .center-spinner {
+    height: 100vh;
+    align-items: center;
+  }
+}
+
+section.booking-confirmation{
+  h2{
+    text-align: center;
+  }
+  .backgroundscheiße{
+    background-color: black;
+  }
+  .card-text{
+    margin-bottom: 0;
+  }
+  .card{
+    background-color: #de1226;
+  }
+  .text-center-md{
+    @include media-breakpoint-down(xs) {
+      text-align: center;
+    }
+  }
+  .col-auto{
+    @include media-breakpoint-down(xs) {
+      margin: 0 auto
+    }
+  }
+  .btn{
+    padding: 12px;
+    display: inline-block;
+  }
+}

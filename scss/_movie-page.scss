@@ -1,16 +1,57 @@
-.movie-page {
-  .card {
-  background-color: lightblue;
+
+  .movie-page { 
+    align-content: center;
+
+  h5.intro-text {
+    margin-top: 5%;
+    margin-bottom: 5%;
   }
 
-  ul {
-  list-style-type: none;
+  .card {
+    background-color: #000000;
+    border-color: black;
+    line-height: 0.7;
   }
-  h3 {
-    font-size: 1.25rem;
-    margin-top: 1rem
+  .card-title-movie {
+    font-size: 33px;
+    padding-top: 5px;
+    color: #dc3545
   }
-  ifram {
-    position: sticky;
+
+  .card-text-movie {
+    font-size: 20px;
+    padding-top: 2px;
+  }
+
+  a#details {
+    margin-left: 2%;
+  }
+  .btn{
+    padding: 12px;
+    width: 46%;
+    margin-right: 5px;
+    display: inline-block;
+  }
+
+  .picture-toggle:hover {
+    cursor: pointer;
+    }
+    p{
+      color:#fff;
+    }
+    h5{
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .morelinehight{
+      line-height: 1;
+    }
+    .checked {
+      color: orange;
+    }
+    @include media-breakpoint-down(sm) {
+      .padding-fix{
+        padding: 15px !important;
+      }
   }
 }

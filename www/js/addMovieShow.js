@@ -1,6 +1,3 @@
-//this one is temporary so to see the result in the console
-let tmp = [];
-
 //create a function to generate at least 84 movie viewings
 async function generatesShows() {
 
@@ -57,10 +54,9 @@ async function generatesShows() {
       return movies;
     }
 
-    tmp.push(show);
+ 
     //await show.save()
   }
   shuffle();
 }
 generatesShows();
-console.log(tmp);

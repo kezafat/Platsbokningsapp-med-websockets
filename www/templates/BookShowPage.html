@@ -1,48 +1,72 @@
 <section class="book-show">
-  <button class="back-button">NO NO TAKE ME BACK</button>
-  <div class="row movie-info">
-    <div class="col-sm-auto">
-      <figure>
-        <img src="/images/${this.selectedShow.movie.images[0]}" alt="" class="img-fluid">
-      </figure>
+  <button class="back-button btn btn-secondary">NO NO TAKE ME BACK</button>
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="row movie-info">
+        <div class="col-md-auto col-4">
+          <figure>
+            <img src="/images/${this.selectedShow.movie.images[0]}" alt="" class="img-fluid">
+          </figure>
+        </div>
+        <!-- /.col-xs-4 -->
+        <div class="col-md-auto col-8">
+          <h3>${this.selectedShow.movie.title}</h3>
+          <h4>${this.selectedShow.auditorium.name}</h4>
+          <h5>${this.selectedShow.date}</h5>
+          <h5>${this.selectedShow.time}</h5>
+        </div>
+        <!-- /.col-xs-8 -->
+      </div>
+      <!-- /.row movie-info -->
     </div>
-    <!-- /.col-xs-4 -->
-    <div class="col-sm-8">
-      <h3>${this.selectedShow.movie.title}</h3>
-      <h4>${this.selectedShow.auditorium.name}</h4>
-      <h4>${this.selectedShow.date}</h4>
-      <h4>${this.selectedShow.time}</h4>
-    </div>
-    <!-- /.col-xs-8 -->
+    <!-- /.card-body -->
   </div>
-  <!-- /.row movie-info -->
+  <!-- /.card -->
 
-  <div class="ticket-selector row">
-    <div class="col"></div>
-    <div class="col-sm-auto">
-      <p>Ordinarie (85 kr/st)</p>
-      <div class="ticket-incrementor adult">
-        <span class="minus">-</span><span class="ticket-count">${this.tickets.adult}</span><span class="plus">+</span>
+  <div class="card my-3">
+    <div class="card-body">
+      <div class="ticket-selector row">
+        <div class="col-md"></div>
+        <div class="col-sm-auto col-12">
+          <h6>Ordinarie (85 kr/st)</h6>
+          <div class="ticket-incrementor adult">
+            <span class="minus">-</span><span class="ticket-count">${this.tickets.adult}</span><span
+              class="plus">+</span>
+          </div>
+        </div>
+        <div class="col-sm-auto col-12">
+          <h6>Pensionär (75 kr/st)</h6>
+          <div class="ticket-incrementor senior">
+            <span class="minus">-</span><span class="ticket-count">${this.tickets.senior}</span><span
+              class="plus">+</span>
+          </div>
+        </div>
+        <div class="col-sm-auto col-12">
+          <h6>Barn (65 kr/st)</h6>
+          <div class="ticket-incrementor kids">
+            <span class="minus">-</span><span class="ticket-count">${this.tickets.kids}</span><span
+              class="plus">+</span>
+          </div>
+        </div>
+        <div class="col-md"></div>
+      </div>
+
+      ${this.seatSelector}
+
+      <div class="alert alert-danger invalid-selection-alert" role="alert">
+        De platser du valt stämmer inte överens med antalet biljetter
+      </div>
+      <div class="alert alert-danger invalid-booking-alert" role="alert">
+        Något gick fel med din bokning. Försök igen!
+      </div>
+      <div class="alert alert-danger not-logged-in-alert" role="alert">
+        Du måste vara inloggad för att kunna boka.
+      </div>
+      <div class="button-wrap">
+        <button id="book-tickets" class="btn btn-outline-danger">BOOK THAT SHOWY-SHOW</button>
       </div>
     </div>
-    <div class="col-sm-auto">
-      <p>Pensionär (75 kr/st)</p>
-      <div class="ticket-incrementor senior">
-        <span class="minus">-</span><span class="ticket-count">${this.tickets.senior}</span><span class="plus">+</span>
-      </div>
-    </div>
-    <div class="col-sm-auto">
-      <p>Barn (65 kr/st)</p>
-      <div class="ticket-incrementor kids">
-        <span class="minus">-</span><span class="ticket-count">${this.tickets.kids}</span><span class="plus">+</span>
-      </div>
-    </div>
-    <div class="col"></div>
+    <!-- /.card-body -->
   </div>
-
-  <div class="seat-selector">
-    ${this.selectedShow._id ? this.seatSelector : ''}
-  </div>
-
-  <button id="book-tickets">BOOK THAT SHOWY-SHOW</button>
+  <!-- /.card -->
 </section>

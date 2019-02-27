@@ -31,7 +31,7 @@ class SeatMap extends Component {
     // evaluate the seat based on how close it is to the center of the cinema
     let evaluation = 100;
     // the "best row" is currently the one in the middle (or an imaginary row between two rows)
-    const bestRow = (totalRows + 1)/2
+    const bestRow = (totalRows + 1) / 2
     // adjust the evaluation based on how many rows from the best row you are seated
     evaluation -= Math.abs(row - bestRow);
     // multiply by two to make seats distance from center of row 'weigh' more

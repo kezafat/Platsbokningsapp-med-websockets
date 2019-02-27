@@ -1,0 +1,1 @@
+class Spinner extends Component {}

@@ -4,37 +4,22 @@ const Schema = mongoose.Schema;
 
 // Create a schema for an a show
 let showSchema = new Schema({
-  "auditorium": { type: Schema.Types.ObjectId, ref: 'Auditorium', required: true },
-  "movie": { type: Schema.Types.ObjectId, ref: 'Movie', required: true },
+  "auditorium": { type: Schema.Types.ObjectId, ref: 'Auditorium', required: true, autopopulate: { maxDepth: 1 } },
+  "movie": { type: Schema.Types.ObjectId, ref: 'Movie', required: true, autopopulate: { maxDepth: 3 } },
   "date": { type: String, required: true },
   "time": { type: String, required: true }
-}, { toJSON: { virtuals: true } });
+}, { toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
 // virtually reference bookings
 
 showSchema.virtual('bookings', {
   ref: 'Booking',
   localField: '_id',
-  foreignField: 'show'
+  foreignField: 'show',
+  autopopulate: { maxDepth: 1 }
 });
 
-// automatically populate so we can stay true to REST
-// (this works for FindById because FindById calls FindOne "under the hood")
-
-showSchema.pre('findOne', function() {
-  this.populate({
-    path: 'auditorium',
-    select: 'name seats -_id'
-  })
-  .populate({
-    path: 'movie',
-    select: 'title images -_id'
-  })
-  .populate({
-    path: 'bookings',
-    select: 'seats show -_id'
-  });
-});
+showSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = db.model('Show', showSchema);
 

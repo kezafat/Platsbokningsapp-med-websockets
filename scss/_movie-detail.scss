@@ -1,0 +1,58 @@
+.movie-detail {
+
+  .movie-title {
+    color: aliceblue;
+  }
+
+  .img {
+    width: 100%;
+    margin-top: 9%;
+  }
+
+  .description-text {
+    color: white;
+    margin-bottom: 5%;
+    line-height: 2.3;
+  }
+
+  .card {
+    span{
+      color:white;
+    }
+    li{
+      color:white;
+    }
+  }
+  .category-genre {
+    color: aliceblue;
+    padding: 5%;
+  }
+  .category {
+    display: inline-block;
+    line-height: 1.5; 
+    font-weight: 900;
+  }
+  .d-inline,
+  .actors {
+    font-weight: 400;
+
+  }
+
+  ul.actors {
+  list-style-type: none; 
+  padding-left:0;
+  }
+
+  .alert {
+    line-height: 1;
+    color: white;
+    
+  }
+  hr {
+    margin-top: 0;
+  }
+  .img-popcorn{
+    display: flex;
+
+  }
+}

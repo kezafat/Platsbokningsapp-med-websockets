@@ -100,15 +100,9 @@ module.exports = class LoginHandler {
 
   createLogoutRoute() {
     this.app.post('/logout', async (req, res) => {
-      req.session.auth = false;
-      await req.session.save();
-
-      if (req.session.auth === false) {
-        res.json({ 'msg': 'ok', 'extra': 'uz been logged out bizzle' })
-      } else {
-        res.json({ 'msg': 'error' });
-      }
-
+      req.session.destroy(function () {
+        res.json({ 'msg': 'ok', 'xtrazz': 'This mofo is goooone baby!'});
+      })
     })
   }
 

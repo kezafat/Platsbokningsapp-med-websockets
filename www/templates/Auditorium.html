@@ -1,3 +1,39 @@
-<div>
-  <h3>${this.auditorium}</h3>
+<div class="container">
+  <img src="/images/${this.imageBig}" alt="Big drive-in cinema" class="img-fluid">
+  <div class="row no-gutters">
+    <div class="col-12 col-md-6 d-flex">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">${this.name}</h3>
+          <p>${this.descriptionLong}</p>
+        </div>
+      </div>
+    </div>
+    <!-- /.col-12 col-md-6 -->
+    <div class="col-12 col-md-6 d-flex">
+      <div class="card" style="flex-grow: 1">
+        <div class="card-body">
+          <h5 class="card-title">Info</h5>
+          <p>Högtalarsystem: ${this.soundSystem}</p>
+          <p>Projektor: ${this.projector}</p>
+          <p>Godisbutik: ${this.candyStore}</p>
+          <p>Serveringstillstånd: ${this.alcohol}</p>
+          <p>Platser: ${this.seats.reduce((acc, cur) => acc + cur, 0)}</p>
+        </div>
+      </div>
+    </div>
+    <!-- /.col-12 col-md-6 -->
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Kommande visningar</h3>
+          ${this.generateShowsHtml()}
+        </div>
+      </div>
+    </div>
+    <!-- /.col-12 -->
+
+  </div>
+  <!-- /.row -->
 </div>

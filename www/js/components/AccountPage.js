@@ -8,13 +8,14 @@ class AccountPage extends Component {
     this.addEvents({
       'click .logOutBtn': 'logOut',
       'click .loginBtn': 'logIn',
-      'click .registerBtn': 'register',
-      'click .testrest': 'testrest'
+      'click .registerBtn': 'register'
     });
     this.loggedIn = false;
     this.loginNotify = "";
     this.registerNotify = "";
+    this.userBookingHTML = "";
     this.userData = {};
+    this.loadingDone = false;
     this.checkUserLoginState();
     this.userBookings = [];
   }
@@ -29,84 +30,47 @@ class AccountPage extends Component {
   }
 
   async fetchBookings() {
-    let jewser = await User.find(`.find({_id: "${this.userData._id}"})`);
-    let jewserBookings = jewser[0].bookings;
+    this.userBookings = [];
+    let jewser = await User.find(this.userData._id);
+    let jewserBookings = jewser.bookings;
 
     for (let booking of jewserBookings) {
-      if (booking.show.movie.title) {
+      if (booking.show && booking.show.movie.title) {
         this.userBookings.push(booking);
       }
     }
-
-    this.showUserBookings()
-    this.render();
+    this.showUserBookings();
   }
 
 
   showUserBookings() {
+    if (!AccountPage.auth) { return; }
     let html = "";
-
-    function getTicketHtml(data) {
-      let adult = data.tickets.adult;
-      let senior = data.tickets.senior;
-      let kids = data.tickets.kids;
-      let seats = data.seats.join(', ');
-      return `
-      <ul class="list-group">
-        <p class="font-weight-bold">Bokade biljetter</p>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Vuxna<span class="badge badge-primary badge-pill">${adult}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Barn<span class="badge badge-primary badge-pill">${kids}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Pensionärer<span class="badge badge-primary badge-pill">${senior}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Platser: ${seats}
-        </li>
-      </ul>
-      `
-    }
+    let previousBookings = [];
+    let currentBookings = [];
+    let futureBookings = [];
 
     for (let booking of this.userBookings) {
-      let tickets = getTicketHtml(booking);
-      let place = booking.show.auditorium.name;
-      let date = booking.show.date;
-      let time = booking.show.time;
-      let movieTitle = booking.show.movie.title;
-      let description = "Ska vi ha filmens beskrivning också eller info overload?";
-      let picpath = `/images/${booking.show.movie.images[0]}`;
-      html += `
-      <div class="card text-center mb-2">
-        <div class="card-header">
-          <span class="font-weight-bold">${date}</span> klockan ${time} i
-          <span class="font-weight-light">${place}</span>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <div class="text-center mb-2">
-                <h4>${movieTitle}</h4>
-                <img src="${picpath}" class="rounded" alt="Bild på omslaget för ${movieTitle}">
-              </div>
-            </div>
-            <div class="col">
-            ${tickets}
-            <p class=" jumbotron">${description}</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer text-muted">
-          <a href="#" class="btn btn-danger">Avboka biljetterna?</a>
-        </div>
-      </div>
-      `
+      let todaysDate = new Date().toISOString().split('T')[0];
+      let bookingDate = booking.show.date;
+      if (bookingDate == todaysDate) {
+        // TODAYS BOOKINGS
+        currentBookings.push(booking);
+      } else if (bookingDate < todaysDate) {
+        // OLD BOOKINGS
+        previousBookings.push(booking);
+      } else {
+        // FUTURE BOOKINGS
+        futureBookings.push(booking);
+      }
     }
-    return html;
-  }
 
+    // Send in OPTIONAL second param to false if no sorting is needed (defaults to true)
+    this.currentBookingsHTML = this.getBookingCard(currentBookings);
+    this.futureBookingsHTML = this.getBookingCard(futureBookings);
+    this.previousBookingsHTML = this.getBookingCard(previousBookings);
+    this.render();
+  }
 
   async checkUserLoginState() {
     let state = await this.loginHandler.checkLogin()
@@ -174,7 +138,6 @@ class AccountPage extends Component {
 
   }
 
-
   updateUserData(state) {
     // Accept userdata from backend
     Object.assign(this.userData, state);
@@ -183,9 +146,14 @@ class AccountPage extends Component {
   loginState(bool) {
     if (bool) {
       this.clearNotifications();
+      AccountPage.auth = true;
+      this.fetchBookings();
+    } else {
+      AccountPage.auth = false;
+      this.userBookingHTML = "";
     }
     this.loggedIn = bool;
-    this.mount();
+    this.loadingDone = true;
     this.render();
     this.navBar.updateNavStatus(this);
   }
@@ -205,7 +173,93 @@ class AccountPage extends Component {
   clearNotifications() {
     this.loginNotify = "";
     this.registerNotify = "";
-    this.render();
+  }
+
+  // Random funcs that just hang around for the fun of it
+  getTicketList(data) {
+    let adult = data.tickets.adult;
+    let senior = data.tickets.senior;
+    let kids = data.tickets.kids;
+    let seats = data.seats.join(', ');
+    let ticketID = data.ticketID || "N/A";
+
+    function badgeColor(count) {
+      return count > 0 ? 'badge-success' : 'badge-danger';
+    }
+
+    return `
+    <ul class="list-group">
+      <p class="font-weight-bold">Bokade biljetter</p>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Vuxna<span class="badge ${badgeColor(adult)} badge-pill">${adult}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Barn<span class="badge ${badgeColor(kids)} badge-pill">${kids}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Pensionärer<span class="badge ${badgeColor(senior)} badge-pill">${senior}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Platser: <span class="font-weight-italic">${seats}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Bokningsnummer: <span class="font-weight-bold">${ticketID}</span>
+      </li>
+    </ul>
+    `
+  }
+
+  getBookingCard(bookings, sort = true) {
+    // Sort them bitches and show closest date first.
+    if (sort) {
+      bookings.sort(function (a, b) {
+        let dateA = new Date(a.show.date), dateB = new Date(b.show.date);
+        return dateA - dateB;
+      });
+    }
+
+    let tmp = "";
+    if (bookings.length < 1) {
+      tmp = `
+      <div class="alert alert-warning" role="alert">
+        Inga visningar här inte :(
+      </div>
+      `
+      return tmp;
+    }
+    for (const booking of bookings) {
+      let tickets = this.getTicketList(booking);
+      let place = booking.show.auditorium.name;
+      let date = booking.show.date;
+      let time = booking.show.time;
+      let movieTitle = booking.show.movie.title;
+      let picpath = `/images/${booking.show.movie.images[0]}`;
+      tmp += `
+
+      <div class="card text-center">
+        <div class="card-header card-header-inner">
+          <span class="font-weight-bold">${date}</span> klockan ${time} i
+          <span class="font-weight-light">${place}</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="text-center mb-2">
+                <h4>${movieTitle}</h4>
+                <img src="${picpath}" class="rounded" alt="Bild på omslaget för ${movieTitle}">
+              </div>
+            </div>
+            <div class="col">
+              ${tickets}
+            </div>
+          </div>
+        </div>
+      </div>
+      `
+    }
+    return tmp;
   }
 
 }
+
+AccountPage.auth = false;

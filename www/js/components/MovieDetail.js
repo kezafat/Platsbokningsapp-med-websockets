@@ -9,7 +9,7 @@ class MovieDetail extends Component {
     this.getActorList();
   }
 
- 
+
 
   getActorList() {
     let actorsList = "";

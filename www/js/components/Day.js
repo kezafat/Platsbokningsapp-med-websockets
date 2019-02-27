@@ -1,8 +1,8 @@
 class Day extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.shows = [];
   }
-  
+
 }

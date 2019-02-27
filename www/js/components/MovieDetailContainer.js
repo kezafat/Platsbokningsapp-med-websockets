@@ -1,4 +1,4 @@
- class MovieDetailContainer extends Component  {
+class MovieDetailContainer extends Component {
 
   constructor() {
     super();
@@ -23,7 +23,7 @@
     this.fetchMovieDetail();
   }
 
-  unmount(){
+  unmount() {
     this.movieDetailFetched = false;
   }
- }
+}

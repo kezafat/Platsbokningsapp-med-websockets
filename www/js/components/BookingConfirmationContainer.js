@@ -17,8 +17,8 @@ class BookingConfirmationContainer extends Component {
   mount() {
     this.getSelectedBooking();
   }
-  
-  unmount(){
+
+  unmount() {
     this.fetchedBooking = false;
   }
 }

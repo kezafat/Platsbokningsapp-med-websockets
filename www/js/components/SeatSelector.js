@@ -52,7 +52,7 @@ class SeatSelector extends Component {
     // get all seat numbers for the prospective booking
     const allSeatNumbers = [];
     // do...while loop to make sure we execute at least once, but only once if separate seats is selected
-    do  {
+    do {
       allSeatNumbers.push(seatNumber--);
     } while (!this.separateSeats && allSeatNumbers.length < this.bookShowPage.ticketsCount);
     // megah4xx to make an array of the actual seats, based on the numbers

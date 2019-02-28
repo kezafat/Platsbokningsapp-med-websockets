@@ -1,22 +1,9 @@
 .movie-detail {
 
   .movie-title {
-    font-size: 30px;
     color: aliceblue;
   }
-  
-  a#book-show-link {
-    position: absolute;
-      right: 17%;
-      top: 10%;
-      @include media-breakpoint-down(sm) { 
-        top: 32%;
-      }
-      @include media-breakpoint-only(xs) {
-        top:18%;
-      }
 
-  }
   .img {
     width: 100%;
     margin-top: 9%;
@@ -25,7 +12,6 @@
   .description-text {
     color: white;
     margin-bottom: 5%;
-    font-size: 17px;
     line-height: 2.3;
   }
 
@@ -43,7 +29,6 @@
   }
   .category {
     display: inline-block;
-    font-size: 18px;
     line-height: 1.5; 
     font-weight: 900;
   }

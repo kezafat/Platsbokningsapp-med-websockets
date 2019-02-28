@@ -9,7 +9,7 @@ class Auditorium extends Component {
       const now = new Date().toISOString().split('T');
       //set time format and add current date to first movie viewing
       const currentDate = now[0];
-      const currentTime = now[1].split(':').slice(0,2).join(':');
+      const currentTime = now[1].split(':').slice(0, 2).join(':');
       this.shows = this.shows.filter(show => {
         if (show.date > currentDate) {
           return true
@@ -42,7 +42,8 @@ class Auditorium extends Component {
               <div class="row my-3">
                 <div class="col-12 col-sm-auto">${show.date} ${show.time}</div>
                 <div class="col-12 col-sm-auto">${show.movie.title}</div>
-                <div class="col-12 col-md d-flex justify-content-end justify-content-sm-end"><a class="btn btn-outline-danger btn-sm float-md-right" href="/book-show?show=${show._id}">${freeSeats} kvar av ${this.totalSeats} -></a></div>
+                <div class="col-12 col-md d-flex justify-content-end justify-content-sm-end">
+                <a class="btn btn-outline-danger btn-sm float-md-right" href="/book-show?show=${show._id}">${freeSeats} kvar av ${this.totalSeats} -></a></div>
               </div>
       
       `

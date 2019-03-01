@@ -39,7 +39,7 @@ closeNavbar = () => {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink to='/' onClick={this.closeNavbar} className="nav-link">Start</NavLink>
+                <NavLink exact to='/' onClick={this.closeNavbar} className="nav-link">Start</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to='/filmer' onClick={this.closeNavbar} className="nav-link">Filmer</NavLink>

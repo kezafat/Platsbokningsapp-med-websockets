@@ -2,47 +2,53 @@ import React, { Component } from 'react';
 import {
   Container,
   Navbar,
-  NavbarBrand,
   NavbarToggler,
   Collapse,
   Nav,
   NavItem,
 } from 'reactstrap'
-import { Link } from 'react-router-dom'
+import { NavLink, Link} from 'react-router-dom'
 
 
 class NavBar extends Component {
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
     this.state = {
-      isOpen: false
+    collapsed: true
     };
-  }
-  toggle = () => {
+}
+
+toggleNavbar = () => {
     this.setState({
-      isOpen: !this.state.isOpen
+    collapsed: !this.state.collapsed
     });
-  }
+}
+
+closeNavbar = () => {
+    if (!this.state.collapsed === true) {
+    this.toggleNavbar();
+    }
+}
+
   render() {
     return (
       <Container>
         <Navbar expand="lg" dark>
-          <NavbarBrand href="/">Dö Hårt Biografen</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Link to='/' className="navbar-brand">Dö Hårt Biografen</Link>
+          <NavbarToggler onClick={this.toggleNavbar} />
+          <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to='/' className="nav-link">Start</Link>
+                <NavLink exact to='/' onClick={this.closeNavbar} className="nav-link">Start</NavLink>
               </NavItem>
               <NavItem>
-                <Link to='/filmer' className="nav-link">Filmer</Link>
+                <NavLink to='/filmer' onClick={this.closeNavbar} className="nav-link">Filmer</NavLink>
               </NavItem>
               <NavItem>
-                <Link to='/biografer' className="nav-link">Biografer</Link>
+                <NavLink to='/biografer' onClick={this.closeNavbar} className="nav-link">Biografer</NavLink>
               </NavItem>
               <NavItem>
-                <Link to='/visningar' className="nav-link">Visningar</Link>
+                <NavLink to='/visningar' onClick={this.closeNavbar} className="nav-link">Visningar</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

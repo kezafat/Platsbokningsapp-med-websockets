@@ -56,6 +56,22 @@ class Auditorium extends Component {
   }
 
   render() {
+    if (!this.auditorium) {
+      return (
+        <Container>
+          <Row>
+            <Col xs="12">
+              <Card>
+                <CardBody>
+                  <h3 className="card-title">Fel!</h3>
+                  <p>Något gick fel och vi hittade inte den biograf ni sökte!</p>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      )
+    } 
     return (
       <Container>
         <img src={require('../images/' + this.auditorium.imageBig)} alt="Auditorium" className="img-fluid" />

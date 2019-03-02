@@ -20,7 +20,7 @@ class App extends Component {
         <Route path="/filmer" component={MoviesContainer} />
         <Route path="/visningar" component={ShowContainer} />
         <Route exact path="/biografer" component={Auditoria} /> 
-        <Route path ="/biografer/:id" component={Auditorium} />
+        <Route path ="/biografer/:name" component={Auditorium} />
       </main>
       <footer>
 

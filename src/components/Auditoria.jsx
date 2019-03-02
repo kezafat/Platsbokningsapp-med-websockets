@@ -30,7 +30,7 @@ class Auditoria extends Component {
                     <CardText>{auditorium.descriptionShort}</CardText>
                   </CardBody>
                   <div className="p-3">
-                    <Link to={'/biografer/' + auditorium._id} className="btn btn-outline-danger">MER INFO</Link>
+                    <Link to={'/biografer/' + auditorium.name.replace(' ', '-').toLowerCase()} className="btn btn-outline-danger">MER INFO</Link>
                   </div>
                 </Card>
               </Col>

@@ -14,8 +14,11 @@ class Auditorium extends Component {
   constructor(props) {
     super(props)
     this.state = { fetched: false }
-    this.auditorium = require('../json/auditoria.json').find(auditorium => auditorium._id === this.props.match.params.id)
-    this.fetchShows()
+    // find the auditorium based on the route parameter (the first regex replaces whitespace and hyphen with nothing in the auditorium names, the second replaces hyphens with nothing in the url param)
+    this.auditorium = require('../json/auditoria.json').find(auditorium => auditorium.name.toLowerCase().replace(/[\s-]/g, '') === this.props.match.params.name.replace(/-/g, '').toLowerCase())
+    if (this.auditorium) {
+      this.fetchShows()
+    }
   }
 
   get totalSeats() {
@@ -23,7 +26,8 @@ class Auditorium extends Component {
   }
 
   fetchShows = async () => {
-    const result = await fetch('http://localhost:3000/json/auditoria/' + this.props.match.params.id)
+    // get the shows (i get the whole auditorium because its the most convenient way, and the extra data downloaded is minimal) and save them in this.shows
+    const result = await fetch('http://localhost:3000/json/auditoria/' + this.auditorium._id)
     const auditorium = await result.json()
     this.shows = auditorium.shows
     if (this.shows) {
@@ -33,6 +37,7 @@ class Auditorium extends Component {
   }
 
   sortAndFilterShows = () => {
+    // get rid of the shows that have already occured, and sort them by date&time
     const now = new Date().toISOString().split('T');
     //set time format and add current date to first movie viewing
     const currentDate = now[0];
@@ -57,6 +62,7 @@ class Auditorium extends Component {
 
   render() {
     if (!this.auditorium) {
+      // incase the url is not a valid auditorium name
       return (
         <Container>
           <Row>
@@ -101,6 +107,7 @@ class Auditorium extends Component {
               <CardBody>
                 <h3 className="card-title">Kommande Visningar</h3>
                 {
+                  // shows a spinner while waiting on the shows to fetch from backend
                   (!this.state.fetched)
                     ?
                     <div className="d-flex justify-content-center">

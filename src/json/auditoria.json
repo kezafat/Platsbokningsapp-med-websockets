@@ -1,0 +1,67 @@
+[
+  {
+    "_id": "5c484609fd4f4f3a649802dc",
+    "name": "Drive-in cinema",
+    "__v": 0,
+    "imageSmall": "drive-in-small.jpg",
+    "imageBig": "drive-in-big.jpg",
+    "descriptionShort": "En saftig drive-in biograf med anor från det vilda 70-talet.",
+    "descriptionLong": "Våran drive-in biograf är belägen i centrala Malmö och vi har dagliga Die Hard-visningar. Det finns inget bättre än att sätta sig ner i sin egen bil och njuta av högkvalitativ film med de bästa skådespelare Hollywood har att erbjuda. Knäck en kall Pripps och luta dig tillbaka i förarsätet och förbered dig på en upplevelse du sent kommer att glömma!",
+    "soundSystem": " Bose MX-5000 800 MegaWatt",
+    "projector": "ICA Basic Projektor 500",
+    "candyStore": "Leffes Pripps&Godis",
+    "alcohol": "Ja",
+    "seats": [
+      6,
+      8,
+      10,
+      12,
+      12,
+      12
+    ]
+  },
+  {
+    "_id": "5c484846a675d90b486a1413",
+    "name": "Stora Salongen",
+    "__v": 1,
+    "imageSmall": "stora-salongen-small.jpg",
+    "imageBig": "stora-salongen-big.jpg",
+    "descriptionShort": "Våran största salong. En grandios filmupplevelse!",
+    "descriptionLong": "Att storleken inte har någon betydelse är en ren lögn när det kommer till biografer. Detta är Norra Europas största biograf, och den bjuder på en sanslös bioupplevelse som kommer att överväldiga dig med sin massiva storlek. Size is the prize! Välkommen till våran flaggskeppsbiograf. P.S Biografen är riktigt stor.",
+    "soundSystem": "Sony BigSound XTReMe-9000 UltraBlast",
+    "projector": "BenQ Cinematronix-80",
+    "candyStore": "Big Apple Candy",
+    "alcohol": "Nej",
+    "seats": [
+      8,
+      9,
+      10,
+      10,
+      10,
+      10,
+      12,
+      12
+    ]
+  },
+  {
+    "_id": "5c484e15048b852cf4b8f051",
+    "name": "Lilla Salongen",
+    "__v": 0,
+    "imageSmall": "lilla-salongen-small.jpg",
+    "imageBig": "lilla-salongen-big.jpg",
+    "descriptionShort": "Detta är våran minsta biograf. Den är så liten att du riskerar att missa den när du går förbi!",
+    "descriptionLong": "Denna biograf är så liten att den knappt existerar. Ska du se en film här behöver du ha med dig mikroskop. Vi rekommenderar dig istället att besöka Stora Salongen för en riktigt stor och massiv biografupplevelse!",
+    "soundSystem": "Sennheiser Picolo MKII",
+    "projector": "RUSTA Projektor mini",
+    "candyStore": "Smått & Gott",
+    "alcohol": "Nej",
+    "seats": [
+      6,
+      8,
+      9,
+      10,
+      10,
+      12
+    ]
+  }
+]

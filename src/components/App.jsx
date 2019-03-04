@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../avoidFOUC';
 import NavBar from  './NavBar'
+import Footer from './Footer'
 import MoviesContainer from './MoviesContainer'
 import ShowContainer from './ShowContainer'
 import StartPage from './StartPage'
@@ -22,9 +23,7 @@ class App extends Component {
         <Route exact path="/biografer" component={Auditoria} /> 
         <Route path ="/biografer/:name" component={Auditorium} />
       </main>
-      <footer>
-
-      </footer>
+      <Footer />
       </div>
     );
   }

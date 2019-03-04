@@ -7,6 +7,7 @@ import ShowContainer from './ShowContainer'
 import StartPage from './StartPage'
 import Auditoria from './Auditoria'
 import Auditorium from './Auditorium'
+import BookShow from './BookShow'
 import { Route } from 'react-router-dom'
 
 class App extends Component {
@@ -16,10 +17,11 @@ class App extends Component {
       <header>
         <NavBar />
       </header>
-      <main className="container">
+      <main className="main-content container mt-4 mb-3">
         <Route exact path="/" component={StartPage} />
         <Route path="/filmer" component={MoviesContainer} />
-        <Route path="/visningar" component={ShowContainer} />
+        <Route exact path="/visningar" component={ShowContainer} />
+        <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
         <Route exact path="/biografer" component={Auditoria} /> 
         <Route path ="/biografer/:name" component={Auditorium} />
       </main>

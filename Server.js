@@ -63,6 +63,18 @@ module.exports = class Server {
 
     global.models = models;
 
+    // Route for human friendly show urls
+
+    app.get('/json/shows/:auditorium/:date/:time', async (req, res) => {
+      const shows = await models.shows.find({
+        time: req.params.time,
+        date: req.params.date
+      })
+      // incase there are two shows at the same time, we get only the one at our specified auditorium
+      const show = shows.filter(show => show.auditorium.name.toLowerCase().replace(/ /, '-') === req.params.auditorium)
+      res.json(show)
+    })
+
     // create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
 

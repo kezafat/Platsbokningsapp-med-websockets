@@ -1,17 +1,25 @@
 import React, { Component } from 'react'
+import Seat from './Seat'
 
 class SeatMap extends Component {
 
   render() {
+    const { handleMouseOver, handleMouseLeave, handleClick, seats } = this.props
     return (
       <div className="seat-map">
           {
-            this.props.seats.map((row, index) => {
-            return (
+            seats.map((row, index) => {
+            return row[0] ? (
               <div key={index}>
-                {row}
+                {
+                  row.map(seatProps => (
+                    <Seat {...seatProps} key={seatProps.seatNumber} handleMouseOver={handleMouseOver} handleMouseLeave={handleMouseLeave} handleClick={handleClick} />
+                  )).reverse()
+                }
               </div>
             )
+            :
+            ''
         })}      
       </div>
     )

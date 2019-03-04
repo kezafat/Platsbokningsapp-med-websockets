@@ -22,7 +22,7 @@ class TicketSelector extends Component {
                 <h6>{ticket.DOMtext}</h6>
                 <div className={`ticket-incrementor ${ticket.class}`}>
                   <span className="minus" onClick={this.props.subtractTicket}>-</span>
-                  <span className="ticket-count">2</span>
+                  <span className="ticket-count">{this.props.tickets[ticket.class]}</span>
                   <span className="plus" onClick={this.props.addTicket}>+</span>
                 </div>
               </Col>

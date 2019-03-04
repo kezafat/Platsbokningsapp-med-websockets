@@ -1,62 +1,41 @@
-.startpage{
-
+.StartPage{
+html{
+  max-width: 960px;
+}
 body{
   width: 100%;
   height: auto;
-  margin: auto 0;
-  //background-color: gray;
-
-}
-#movieCarousel{
-  margin: 0 auto;
-  .carousel-img{
-      max-height: 400px !important;
-  }
-.carousel-caption {
-h3 {
-  font-size: 50px;
-  text-transform: uppercase;
-  color: rgb(220, 33, 33);
-  font-weight: 500;
-  text-shadow: 1px 2px rgb(0, 0, 0);
-  }
-.btn-outline-danger{
-      font-size: 20px;
-  }
-}
+  font-weight: 200;
 }
 /* Movies card row/column starts */
-.moviescard{
-  width: 100%;
+.moviescard-wrapper{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
 }
-
 .card{
   background-color:black;
+  position: relative;
+  flex: 1;
+  min-width: 280px;
   .card-text{
-          font-size: 15px;
-          padding: 0;
-          margin: 0;
-
-}
-  .card-title{
+          font-size: 16px;
+     }
+  .CardTitle{
           word-wrap: inherit;
           font-size: 16px;
       }
  }
-
 .img-thumbnail{
   padding: 0;
   border: 1px solid black;
   background-color: transparent;
-  
+
 }
 
-//card buttons that links to mitt-konto och visningar
+//card buttons that links to visningar
 a.btn{
- font-size: 12px;
+ font-size: 15px;
+ display: block;
   &:hover{
    transition: all 0.2s ease 0s;
 }
@@ -88,7 +67,6 @@ h5, ul {
   font-size: 12px;
 }
 }
-
 
 @include media-breakpoint-up(md){
    .img-musical{

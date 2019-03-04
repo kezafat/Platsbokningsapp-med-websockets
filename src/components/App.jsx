@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../avoidFOUC';
 import NavBar from  './NavBar'
+import Footer from './Footer'
 import MoviesContainer from './MoviesContainer'
 import ShowContainer from './ShowContainer'
 import StartPage from './StartPage'
@@ -20,9 +21,7 @@ class App extends Component {
         <Route path="/visningar" component={ShowContainer} />
         <Route path="/biografer" component={AuditoriaContainer} /> 
       </main>
-      <footer>
-
-      </footer>
+      <Footer />
       </div>
     );
   }

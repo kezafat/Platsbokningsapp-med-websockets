@@ -8,6 +8,11 @@ import StartPage from './StartPage'
 import Auditoria from './Auditoria'
 import Auditorium from './Auditorium'
 import { Route } from 'react-router-dom'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+library.add(faStar);
+
+
 
 class App extends Component {
   render() {

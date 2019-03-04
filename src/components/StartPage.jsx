@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import CarouselStartPage from './CarouselStartPage';
 import {
-  Container, Row, Col, Card, Button, CardImg, CardTitle, CardText, CardGroup,
+  Container, Row, Col, Card, CardImg, CardTitle, CardText, CardGroup,
   CardSubtitle, CardBody
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 class StartPage extends Component {
   constructor(props) {
@@ -11,10 +14,11 @@ class StartPage extends Component {
   }
   render() {
     return (<Container className="StartPage">
+      <CarouselStartPage />
       <Row>
-        <Col xs="12" md="12" className="d-flex">
+        <Col xs="12" className="d-flex">
           {this.movies.map((movie) => {
-            return <div className="Movies">
+            return <div className="MoviesCard m-1">
               <CardGroup>
                 <Card>
                   <CardBody>
@@ -23,7 +27,7 @@ class StartPage extends Component {
                     <CardSubtitle><p>{movie.productionCountries} || {movie.director}<br />
                       {movie.genre}, {movie.productionYear} </p></CardSubtitle>
                     <CardText><p>{movie.description.substr(0, 100) + '...'}</p></CardText>
-                    <Button to={'/visningar/'} className="btn btn-outline-danger">Visningar</Button>
+                    <Link to={'/visningar/'} className="btn btn-outline-danger">Visningar</Link>
                   </CardBody>
                 </Card>
               </CardGroup>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../avoidFOUC';
 import NavBar from  './NavBar'
 import Footer from './Footer'
-import MoviesContainer from './MoviesContainer'
+import MoviePage from './MoviePage'
 import ShowContainer from './ShowContainer'
 import StartPage from './StartPage'
 import Auditoria from './Auditoria'
@@ -18,7 +18,7 @@ class App extends Component {
       </header>
       <main className="container">
         <Route exact path="/" component={StartPage} />
-        <Route path="/filmer" component={MoviesContainer} />
+        <Route path="/filmer" component={MoviePage} />
         <Route path="/visningar" component={ShowContainer} />
         <Route exact path="/biografer" component={Auditoria} /> 
         <Route path ="/biografer/:name" component={Auditorium} />

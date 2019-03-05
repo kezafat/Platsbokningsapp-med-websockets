@@ -15,7 +15,7 @@ class MovieInfoCard extends Component {
           <Row className="movie-info">
             <Col xs="4" md="auto">
               <figure>
-                <img src={require('../images/' + this.props.show.movie.images[0])} alt="Movie Poster" />
+                <img src={require('../images/' + this.props.show.movie.images[0])} alt="Movie Poster" className="img-fluid" />
               </figure>
             </Col>
             <Col xs="8" md="auto">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../avoidFOUC';
-import NavBar from  './NavBar'
+import NavBar from './NavBar'
 import Footer from './Footer'
 import MoviesContainer from './MoviesContainer'
 import ShowContainer from './ShowContainer'
@@ -14,18 +14,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <header>
-        <NavBar />
-      </header>
-      <main className="main-content container mt-4 mb-3">
-        <Route exact path="/" component={StartPage} />
-        <Route path="/filmer" component={MoviesContainer} />
-        <Route exact path="/visningar" component={ShowContainer} />
-        <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
-        <Route exact path="/biografer" component={Auditoria} /> 
-        <Route path ="/biografer/:name" component={Auditorium} />
-      </main>
-      <Footer />
+        <header>
+          <NavBar />
+        </header>
+        <main className="main-content container mt-4 mb-3">
+          <Route exact path="/" component={StartPage} />
+          <Route path="/filmer" component={MoviesContainer} />
+          <Route exact path="/visningar" component={ShowContainer} />
+          <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
+          <Route exact path="/biografer" component={Auditoria} />
+          <Route path="/biografer/:name" component={Auditorium} />
+        </main>
+        <Footer />
       </div>
     );
   }

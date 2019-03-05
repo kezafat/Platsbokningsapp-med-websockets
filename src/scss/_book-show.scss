@@ -8,9 +8,9 @@ div.book-show-container {
   }
 }
 
-section.book-show {
+div.book-show {
 
-  button {
+  button.btn {
     margin: 1rem 0;
   }
 
@@ -49,10 +49,10 @@ section.book-show {
     justify-content: center;
   }
 
-  div.invalid-selection-alert, div.invalid-booking-alert, div.not-logged-in-alert, div.seats-stolen-alert {
-    display: none;
-    .close {
-      top: -15px;
-    }
-  }
+  // div.invalid-selection-alert, div.invalid-booking-alert, div.not-logged-in-alert, div.seats-stolen-alert {
+  //   display: none;
+  //   .close {
+  //     top: -15px;
+  //   }
+  // }
 }

@@ -4,12 +4,20 @@ const Schema = mongoose.Schema;
 let bookingSchema = new Schema({
   "show": { type: Schema.Types.ObjectId, ref: 'Show', required: true, autopopulate: { maxDepth: 3 } },
   "user": { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  "seats": [{ type: Number, required: true }],
+  "seats": { 
+    type: [{ type: Number, required: true }],
+    validate: validateSeats,
+    required: true
+  },
   "tickets": { "kids": Number, "senior": Number, "adult": Number },
   "ticketID": { type: String, required: true }
 });
 
 bookingSchema.plugin(require('mongoose-autopopulate'));
+
+function validateSeats(val) {
+  return val.length > 0 && val.length < 9
+}
 
 // pre hook to make sure no double bookings are possible
 bookingSchema.pre('save', async function (next) {

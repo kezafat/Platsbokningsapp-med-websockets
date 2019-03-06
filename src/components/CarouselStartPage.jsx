@@ -18,7 +18,7 @@ class CarouselStartPage extends Component {
             slidesToScroll: 1
         };
 
-        return (<Container fluid className="carousel mb-2">
+        return (<Container fluid className="carousel">
             <Slider {...settings}>
                 <img src={require('../images/diehard-wallpaper6.jpg')} alt="" />
                 <img src={require('../images/diehard-wallpaper4.jpg')} alt="" />

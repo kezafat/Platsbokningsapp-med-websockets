@@ -12,7 +12,7 @@ class CardStartPage extends Component {
         let { title, images, productionCountries, productionYear, genre, director, description } = this.props.movie;
         return (
             <div>
-                <CardGroup className="mt-2 mb-2">
+                <CardGroup className="mt-4 mb-2">
                     <Card>
                         <CardBody>
                             <CardTitle><h5>{title}</h5></CardTitle>

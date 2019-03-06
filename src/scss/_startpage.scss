@@ -1,4 +1,4 @@
-.StartPage{
+.StartPage, .CardStartPage, .CarouselStartPage{
 html{
   max-width: 960px;
 }
@@ -6,14 +6,13 @@ body{
   width: 100%;
   height: auto;
   font-weight: 200;
+  background-color: azure;
+  //background-image: url('../images/diehard-artposter.jpg'); 
 }
+
 /* Movies card row/column starts */
-.moviescard-wrapper{
-  display: flex;
-  flex-direction: row;
-}
 .card{
-  background-color:black;
+  //background-color:black;
   position: relative;
   flex: 1;
   min-width: 280px;
@@ -22,9 +21,10 @@ body{
      }
   .CardTitle{
           word-wrap: inherit;
-          font-size: 16px;
+          font-size: 15px;
       }
  }
+
 .img-thumbnail{
   padding: 0;
   border: 1px solid black;
@@ -41,37 +41,10 @@ a.btn{
 }
 }
 //col-4 --> aside
-.aside-bar, .col-4{
+.aside{
   border: 1px solid #dee2e6;
   padding-left: 0;
   padding-right: 0;
   background-color: black;
-
-  ul{
-      padding-inline-start: 10px;
-
-  }
-  h5{
-      font-size: 15px;
-  }
-
-ul, .aside-text {
-       list-style-type: none;
-       color: #fff;
-       justify-content: center;
-       line-height: 1.5;
 }
-}
-@include media-breakpoint-up(xs) {
-h5, ul {
-  font-size: 12px;
-}
-}
-
-@include media-breakpoint-up(md){
-   .img-musical{
-      width: 229px;
-      height: 265px;
-    }
-  }
 }

@@ -25,6 +25,7 @@
     "react-slick": "^0.23.2",
     "reactstrap": "^7.1.0",
     "shorthash": "0.0.2",
+    "slick-carousel": "^1.8.1",
     "socket.io": "^2.2.0"
   },
   "scripts": {

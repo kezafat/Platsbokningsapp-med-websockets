@@ -3,7 +3,7 @@ import '../avoidFOUC';
 import NavBar from  './NavBar'
 import Footer from './Footer'
 import MoviesContainer from './MoviesContainer'
-import ShowContainer from './ShowContainer'
+import Shows from './Shows'
 import StartPage from './StartPage'
 import Auditoria from './Auditoria'
 import Auditorium from './Auditorium'
@@ -19,7 +19,7 @@ class App extends Component {
       <main className="container">
         <Route exact path="/" component={StartPage} />
         <Route path="/filmer" component={MoviesContainer} />
-        <Route path="/visningar" component={ShowContainer} />
+        <Route path="/visningar" component={Shows} />
         <Route exact path="/biografer" component={Auditoria} /> 
         <Route path ="/biografer/:name" component={Auditorium} />
       </main>

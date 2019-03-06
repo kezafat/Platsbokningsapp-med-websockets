@@ -12,13 +12,15 @@ class CarouselStartPage extends Component {
         const settings = {
             dots: true,
             infinite: true,
+            autoPlay: true,
+            focusOnSelect: true,
             fade: true,
-            speed: 500,
+            speed: 300,
             slidesToShow: 1,
             slidesToScroll: 1
         };
 
-        return (<Container fluid className="carousel">
+        return (<Container fluid className="carousel mb-4">
             <Slider {...settings}>
                 <img src={require('../images/diehard-wallpaper6.jpg')} alt="" />
                 <img src={require('../images/diehard-wallpaper4.jpg')} alt="" />

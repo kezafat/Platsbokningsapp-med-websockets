@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import CarouselStartPage from './CarouselStartPage';
 import CardStartPage from './CardStartPage';
+import Show from './Show'
 
 
 class StartPage extends Component {
@@ -23,6 +24,7 @@ class StartPage extends Component {
         })}
         <Col xs="12" md="4" className="aside d-flex">
           <h4>Aktuella Visningar</h4>
+          <Show />
         </Col>
       </Row>
     </Container>

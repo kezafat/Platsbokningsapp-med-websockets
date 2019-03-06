@@ -47,12 +47,9 @@ div.book-show {
   div.button-wrap {
     display: flex;
     justify-content: center;
-  }
 
-  // div.invalid-selection-alert, div.invalid-booking-alert, div.not-logged-in-alert, div.seats-stolen-alert {
-  //   display: none;
-  //   .close {
-  //     top: -15px;
-  //   }
-  // }
+    button.disabled:hover {
+      color: rgb(153, 3, 3)
+    }
+  }
 }

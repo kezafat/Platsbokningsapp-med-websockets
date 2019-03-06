@@ -26,6 +26,10 @@ class BookShow extends Component {
   }
 
   render() {
+    const now = new Date().toISOString().split('T');
+    const currentDate = now[0];
+    const currentTime = now[1].split(':').slice(0, 2).join(':');
+
     if (!this.state.fetched) {
       return <Spinner color="secondary" />
     }
@@ -35,14 +39,25 @@ class BookShow extends Component {
                   <h3>Fel!</h3>
                   <p>Något gick fel och vi hittade ingen visning på det aktuella datumet</p>
                 </CardBody>
-             </Card>
+              </Card>
     }
     return (
       <Row className="book-show-container">
         <Col xs="12" md="10" lg="8" className="book-show">
           <MovieInfoCard show={this.state.show} />
           <ErrorBoundary>
-            <SeatSelector show={this.state.show} />
+            {
+              (this.state.show.date > currentDate || (this.state.show.date === currentDate && this.state.show.time > currentTime))
+              ?
+              <SeatSelector show={this.state.show} />
+              :
+              <Card>
+                <CardBody>
+                  <h3>Historisk Föreställning</h3>
+                  <p>Denna föreställning har redan ägt rum och det går inte att boka några biljetter till den</p>
+                </CardBody>
+              </Card>
+            }
           </ErrorBoundary>
         </Col>
       </Row>

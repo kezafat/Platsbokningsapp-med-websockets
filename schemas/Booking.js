@@ -22,6 +22,12 @@ function validateSeats(val) {
 // pre hook to make sure no double bookings are possible
 bookingSchema.pre('save', async function (next) {
   const show = await global.models.shows.findById(this.show);
+  const now = new Date().toISOString().split('T');
+  const currentDate = now[0];
+  const currentTime = now[1].split(':').slice(0, 2).join(':');
+  if (show.date < currentDate || (show.date === currentDate && show.time < currentTime) ) {
+    next(new Error('Booking the past wtf'))
+  }
   const bookedSeats = show.bookings.map(booking => booking.seats);
   // array.flat is not supported in node v.10.x.x.x which is what we are using, so we have to use a custom .flat()
   let flatSeats = [];

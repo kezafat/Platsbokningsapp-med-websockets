@@ -148,9 +148,9 @@ class SeatSelector extends Component {
     const row = this.selectedSeats[0].row
     const lowerSeat = this.indexedSeats[this.selectedSeats[0].seatNumber - 1]
     const higherSeat = this.indexedSeats[this.selectedSeats[this.selectedSeats.length - 1].seatNumber + 1]
-    if (lowerSeat.row === row && lowerSeat.evaluation >= higherSeat.evaluation) {
+    if (!lowerSeat.booked && lowerSeat.row === row && lowerSeat.evaluation >= higherSeat.evaluation) {
       await this.mutateSeats([lowerSeat], { selected: true })
-    } else if (higherSeat.row === row) {
+    } else if (!higherSeat.booked && higherSeat.row === row) {
       await this.mutateSeats([higherSeat], { selected: true })
     } else {
       this.suggestBestSeats()
@@ -410,7 +410,13 @@ class SeatSelector extends Component {
               Du måste vara inloggad för att kunna boka
             </Alert>
             <div className="button-wrap">
+            {
+              (this.freeSeatsCount > 0)
+              ?
               <button className="btn btn-outline-danger" onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
+              :
+              <button className="btn btn-outline-danger disabled">Denna visning är fullbokad</button>
+            }
             </div>
           </section>
         </CardBody>

@@ -16,47 +16,58 @@ class Show extends Component {
         <Row>
           <Col>
             <Card className="card mb-3">
-              <CardBody>
-                <Row>
-                  <Col>
-                    <p className="red">{this.props.data.time}</p>
-                  </Col>
-                  <Col>
-                    <CardImg
-                      src={require("../images/" +
-                        this.props.data.movie.images[0])}
-                    />
-                  </Col>
-                  <Col>
-                    <h5 className="">{this.props.data.movie.title}</h5>
-                    <p className="m-0">{this.props.data.auditorium.name}</p>
+              <Row className="row no-gutters">
+                <Col className="col-sm-auto col-1 mr-4 mt-3 ml-3">
+                  <p className="red">{this.props.show.time}</p>
+                </Col>
+                <Col className="col-sm-auto col-3">
+                  <CardImg
+                    className="col-sm-auto col-3"
+                    src={require("../images/" +
+                      this.props.show.movie.images[0])}
+                  />
+                </Col>
+                <Col className="col-sm-auto col-6 d-flex flex-column">
+                  <CardBody>
+                    <h5 className="m-0">{this.props.show.movie.title}</h5>
+                    <p>{this.props.show.auditorium.name}</p>
+                  </CardBody>
+                  <div className="pl-3">
                     <Link
                       to={
-                        "/visningar/" + '/'+
-                        this.props.data.auditorium.name +'/' +
-                        this.props.data.date + '/' +
-                        this.props.data.time
+                        "/bokning/" +
+                        this.props.show.auditorium.name
+                          .replace(" ", "-")
+                          .toLowerCase() +
+                        "/" +
+                        this.props.show.date +
+                        "/" +
+                        this.props.show.time +
+                        "/" +
+                        this.props.show.movie.title
                       }
                       className="btn btn-outline-danger mt-auto"
-                      id="book-show"
                     >
-                      Boka{" "}
+                      Boka
                     </Link>
                     <Link
                       to={
-                        "/filmer/" + '/'+
-                        this.props.data.auditorium.name +'/'+
-                        this.props.data.date + '/'+
-                        this.props.data.time
+                        "/filmer/" +
+                        this.props.show.auditorium.name
+                          .replace(" ", "-")
+                          .toLowerCase() +
+                        "/" +
+                        this.props.show.date +
+                        "/" +
+                        this.props.show.time
                       }
                       className="btn btn-outline-danger mt-auto"
-                      id="info"
                     >
-                      INFO{" "}
+                      INFO
                     </Link>
-                  </Col>
-                </Row>
-              </CardBody>
+                  </div>
+                </Col>
+              </Row>
             </Card>
           </Col>
         </Row>

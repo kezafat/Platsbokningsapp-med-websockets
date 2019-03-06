@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 import CarouselStartPage from './CarouselStartPage';
 import CardStartPage from './CardStartPage';
-import Show from './Show'
+import Show from './Show';
 
 
 class StartPage extends Component {

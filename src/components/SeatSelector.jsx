@@ -14,30 +14,24 @@ import { withRouter } from 'react-router-dom'
 class SeatSelector extends Component {
   constructor(props) {
     super(props)
-    const seats = this.generateSeats()
     this.state = {
-      seats: seats,
-      tickets: {
-        adult: this.freeSeatsCount < 2 ? this.freeSeatsCount : 2,
-        senior: 0,
-        kids: 0
-      }
+      rows: this.generateRows(),
+      tickets: this.generateTickets()
     }
     this.separateSeats = false;
     this.listenToSocketIo()
   }
 
   get bookedSeats() {
-    const bookedSeats = [];
-    for (let booking of this.props.show.bookings) {
-      bookedSeats.push(...booking.seats);
-    }
-    return bookedSeats
+    return this.allSeats.filter(seat => seat.booked)
   }
 
   get freeSeatsCount() {
-    const totalSeats = this.props.show.auditorium.seats.reduce((accumulator, current) => accumulator + current, 0)
-    return totalSeats - (this.state ? this.flatSeats.filter(seat => seat.booked).length : this.bookedSeats.length)
+    return this.totalSeats - this.bookedSeats.length
+  }
+
+  get totalSeats() {
+    return this.props.show.auditorium.seats.reduce((accumulator, current) => accumulator + current, 0)
   }
 
   get ticketsCount() {
@@ -48,18 +42,22 @@ class SeatSelector extends Component {
     return count
   }
 
-  get flatSeats() {
+  get allSeats() {
+    return this.state.rows.flat()
+  }
+
+  get indexedSeats() {
     // getter for all seats in one array, padded with an apache kitten at index 0
     // so all seats have the same index as the seat number
-    return ['kitten'].concat(this.state.seats.flat())
+    return ['kitten'].concat(this.state.rows.flat())
   }
 
   get selectedSeats() {
-    return this.flatSeats.filter(seat => seat.selected)
+    return this.allSeats.filter(seat => seat.selected)
   }
 
   get highlightedSeats() {
-    return this.flatSeats.filter(seat => seat.highlighted || seat.invalid)
+    return this.allSeats.filter(seat => seat.highlighted || seat.invalid)
   }
 
   componentDidMount() {
@@ -70,9 +68,9 @@ class SeatSelector extends Component {
     this.unListenToSocketIo()
   }
 
-  generateSeats = () => {
-    // clone so we dont invoke the getter every time
-    const bookedSeats = [...this.bookedSeats]
+  generateRows = () => {
+    // we don't have access to state yet so get bookings from props
+    const bookedSeats = this.props.show.bookings.map(booking => booking.seats).flat()
     let seatCounter = 0;
     const seats = this.props.show.auditorium.seats.map((numberOfSeatsInRow, index, originalSeats) => {
       const seats = []
@@ -89,6 +87,16 @@ class SeatSelector extends Component {
       return seats
     })
     return seats
+  }
+
+  generateTickets() {
+    const bookedSeats = this.props.show.bookings.map(booking => booking.seats).flat()
+    const tickets = {
+      adult: Math.min(2, this.totalSeats - bookedSeats.length),
+      senior: 0,
+      kids: 0
+    }
+    return tickets
   }
 
   evaluateSeat(seatPositionInRow, seatsInRow, row, totalRows) {
@@ -123,12 +131,35 @@ class SeatSelector extends Component {
   }
 
   adjustSelection = () => {
-    const deficit = this.selectedSeats.length - this.ticketsCount
-    if (deficit > 0) {
-      this.mutateSeats(this.selectedSeats.slice(0, deficit), { selected: false })
-    } else if (deficit < 0) {
+    if (this.selectedSeats.length === 0) { return this.suggestBestSeats() }
+    const surplus = this.selectedSeats.length - this.ticketsCount
+    if (surplus > 0) {
+      this.mutateSeats(this.selectedSeats.slice(0, surplus), { selected: false })
+    } else if (surplus === -1 && !this.separateSeats) {
+      this.addOneAdjacentSeatToSelection()
+    } else if (surplus === -1 && this.separateSeats) {
+      this.addBestSeatToSelection()
+    } else if (surplus < -1) {
       this.suggestBestSeats()
     }
+  }
+
+  addOneAdjacentSeatToSelection = async () => {
+    const row = this.selectedSeats[0].row
+    const lowerSeat = this.indexedSeats[this.selectedSeats[0].seatNumber - 1]
+    const higherSeat = this.indexedSeats[this.selectedSeats[this.selectedSeats.length - 1].seatNumber + 1]
+    if (lowerSeat.row === row && lowerSeat.evaluation >= higherSeat.evaluation) {
+      await this.mutateSeats([lowerSeat], { selected: true })
+    } else if (higherSeat.row === row) {
+      await this.mutateSeats([higherSeat], { selected: true })
+    } else {
+      this.suggestBestSeats()
+    }
+  }
+
+  addBestSeatToSelection = () => {
+    const bestFreeSeat = this.allSeats.filter(seat => !seat.booked && !seat.selected).sort((a, b) => b.evaluation - a.evaluation)[0]
+    this.mutateSeats([bestFreeSeat], { selected: true })
   }
 
   toggleSeparateSeats = (event) => {
@@ -139,20 +170,20 @@ class SeatSelector extends Component {
   }
 
   handleMouseOver = (event) => {
-    let seatNumber = event.target.classList[2]
+    const seatNumber = event.target.classList[2]
     this.indicateSelection(seatNumber)    
   }
 
   indicateSelection = (seatNumber) => {
-    const row = this.flatSeats[seatNumber].row
+    const row = this.indexedSeats[seatNumber].row
     let lowSeatNumber = seatNumber, highSeatNumber = seatNumber
     const selection = []
     // do while loop so we always get one seat if separateseats, and one or more if not
     do {
-      if (this.flatSeats[lowSeatNumber].row && this.flatSeats[lowSeatNumber].row === row) {
-        selection.push(this.flatSeats[lowSeatNumber--]) 
+      if (lowSeatNumber && this.indexedSeats[lowSeatNumber].row === row) {
+        selection.push(this.indexedSeats[lowSeatNumber--]) 
       } else {
-        selection.push(this.flatSeats[++highSeatNumber])
+        selection.push(this.indexedSeats[++highSeatNumber])
       }
     } while (!this.separateSeats && selection.length < this.ticketsCount)
     if (this.validateSelection(selection)) {
@@ -163,19 +194,19 @@ class SeatSelector extends Component {
   }
 
   mutateSeats = (selection, options) => {
-    // this is how we mutate the seats array
+    // this is how we mutate the rows array
     // i made it return a promise and put the promise resolver in the callback so we can await this
     // to make sure the new state has been applied before we move on
     return new Promise(resolve => {
       this.setState(prevState => {
         // prevState should not be mutated so clone
-        const seats = JSON.parse(JSON.stringify(prevState.seats))
+        const rows = JSON.parse(JSON.stringify(prevState.rows))
         // filter out seats that don't exist before looping
         for (let seat of selection.filter(seat => seat.row)) {
           // find the correct seat and apply new options
-          seats[seat.row - 1][seat.index] = { ...seat, ...options }
+          rows[seat.row - 1][seat.index] = { ...seat, ...options }
         }
-        return { seats: seats }
+        return { rows: rows }
       }, resolve)
     })
   }
@@ -203,7 +234,7 @@ class SeatSelector extends Component {
   addOrRemoveSeparateSeat = (event) => {
     // this one is based on the click event rather than the highlighted seats so it can support repeated selection and deselection of the same seat
     const seatNumber = event.target.classList[2]
-    const newSeat = this.flatSeats[seatNumber]
+    const newSeat = this.indexedSeats[seatNumber]
     if (this.validateSelection([newSeat])) {
       if (this.selectedSeats.length < this.ticketsCount) {
         this.mutateSeats([newSeat], { highlighted: false, selected: true })
@@ -212,13 +243,13 @@ class SeatSelector extends Component {
         this.mutateSeats([newSeat], { highlighted: false, selected: true })
       }
     } else if (this.selectedSeats.some(seat => seat.seatNumber === newSeat.seatNumber)){
-      // if the set was selected, deslect it
+      // if the set was selected, deselect that motherfucker
       this.mutateSeats([newSeat], { selected: false, invalid: false })
     }
   }
 
   validateSelection(seats) {
-    if (!seats[0] || (!this.separateSeats && seats.length !== this.ticketsCount)) { return false}
+    if (!seats[0] || (!this.separateSeats && seats.length !== this.ticketsCount) || this.ticketsCount === 0) { return false}
     const row = seats[0].row
     for (let seat of seats) {
       if (!seat || seat.row !== row || seat.booked || (this.separateSeats && seat.selected)) {
@@ -237,7 +268,7 @@ class SeatSelector extends Component {
   findBestAdjacentSeats = () => {
     let bestSelection = []
     let bestEvaluation = 0
-    for (let row of this.state.seats) {
+    for (let row of this.state.rows) {
       for (let i = 0; i <= row.length - this.ticketsCount; i++) {
         const selection = row.slice(i, i + this.ticketsCount)
         if (this.validateSelection(selection)) {
@@ -253,7 +284,7 @@ class SeatSelector extends Component {
   }
 
   findBestOverallSeats() {
-    const sortedSeats = this.flatSeats.filter(seat => seat.evaluation && !seat.booked).sort((a, b) => b.evaluation - a.evaluation)
+    const sortedSeats = this.allSeats.filter(seat => !seat.booked).sort((a, b) => b.evaluation - a.evaluation)
     return sortedSeats.slice(0, this.ticketsCount)    
   }
 
@@ -277,6 +308,7 @@ class SeatSelector extends Component {
     const result = await response.json()
     if (result.ticketID) {
       // sucessful bonking (make this link go the right place when we know what that is)
+      // we have access to history as a prop because we wrap this component in the withRouter function
       this.props.history.push('/bokningsbekräftelse/' + result.ticketID)
     } else {
       // not successful, listen to socket once again and let the user know
@@ -302,8 +334,8 @@ class SeatSelector extends Component {
   }
 
   addBooking = async (booking) => {
-    const bookedSeats = this.flatSeats.filter(seat => booking.seats.includes(seat.seatNumber))
-    await this.mutateSeats(bookedSeats, { booked: true })
+    const freshlyBookedSeats = this.allSeats.filter(seat => booking.seats.includes(seat.seatNumber))
+    await this.mutateSeats(freshlyBookedSeats, { booked: true })
     if (this.selectedSeats.some(seat => booking.seats.includes(seat.seatNumber))) {
       this.handleConflictGracefully()
     }
@@ -361,7 +393,7 @@ class SeatSelector extends Component {
             <Alert color="danger" className="d-none seats-stolen-alert" toggle={this.hideAlert}>
               Minst en av de platser du hade valt har precis blivit bokade av en annan användare
             </Alert>
-            <SeatMap seats={this.state.seats} handleMouseOver={this.handleMouseOver} handleMouseLeave={this.handleMouseLeave} handleClick={this.handleClick} />
+            <SeatMap rows={this.state.rows} handleMouseOver={this.handleMouseOver} handleMouseLeave={this.handleMouseLeave} handleClick={this.handleClick} />
             {
               this.selectedSeats.length !== this.ticketsCount 
               ?

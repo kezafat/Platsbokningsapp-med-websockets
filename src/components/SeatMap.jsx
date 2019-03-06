@@ -4,11 +4,11 @@ import Seat from './Seat'
 class SeatMap extends Component {
 
   render() {
-    const { handleMouseOver, handleMouseLeave, handleClick, seats } = this.props
+    const { handleMouseOver, handleMouseLeave, handleClick, rows } = this.props
     return (
       <div className="seat-map">
           {
-            seats.map((row, index) => {
+            rows.map((row, index) => {
             return row[0] ? (
               <div key={index}>
                 {

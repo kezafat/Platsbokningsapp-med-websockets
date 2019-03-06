@@ -21,7 +21,7 @@ class App extends Component {
       <header>
         <NavBar />
       </header>
-      <main className="container">
+      <main className="container mt-4 mb-3">
         <Route exact path="/" component={StartPage} />
         <Route path="/filmer" component={MoviePage} />
         <Route path="/visningar" component={ShowContainer} />

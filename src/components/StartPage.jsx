@@ -25,7 +25,7 @@ class StartPage extends Component {
         <Col xs="12" md="4" className="aside d-flex">
           <h4>Aktuella Visningar</h4>
           {/* <Shows/> */}
-        </Col>)
+        </Col>
       </Row>
     </Container>
     )

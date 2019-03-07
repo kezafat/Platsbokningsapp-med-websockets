@@ -32,8 +32,8 @@ class Show extends Component {
                     <p className="m-0">{this.props.data.auditorium.name}</p>
                     <Link
                       to={
-                        "/visningar/" + '/'+
-                        this.props.data.auditorium.name +'/' +
+                        "/visningar/" + '/' +
+                        this.props.data.auditorium.name + '/' +
                         this.props.data.date + '/' +
                         this.props.data.time
                       }
@@ -44,9 +44,9 @@ class Show extends Component {
                     </Link>
                     <Link
                       to={
-                        "/filmer/" + '/'+
-                        this.props.data.auditorium.name +'/'+
-                        this.props.data.date + '/'+
+                        "/filmer/" + '/' +
+                        this.props.data.auditorium.name + '/' +
+                        this.props.data.date + '/' +
                         this.props.data.time
                       }
                       className="btn btn-outline-danger mt-auto"

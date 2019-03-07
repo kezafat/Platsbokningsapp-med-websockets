@@ -13,7 +13,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class MoviePage extends Component {
   constructor(props) {
     super(props)
-    this.movie = require('../json/movie.json')
+    this.state = { fetched: false }
+    this.movies = require('../json/movie.json')
+    this.fetchShows()
+  }
+
+  fetchShows = async () => {
+    const result = await fetch('http://localhost:3000/json/movies/')
+    const movies = await result.json()
+    for(let movie in movies){
+      this.shows = movies[movie].shows
+      console.log(this.shows)
+      
+    }
+    this.state = { fetched: true }
+  }
+
+  componentDidMount() {
+    this.setStars()
+  }
+
+  setStars() {
+    let movies = this.movies;
+    for(let i = 0; i < movies.length; i++ ){
+      let starsCount = movies[i].reviews[0].stars;
+      let htmlStars = document.getElementsByClassName("fa-star");
+      for (let j = 5 * i; j < starsCount + 5* i; j++) {
+        (htmlStars[j]).classList.add('checked');
+      }
+    }
   }
 
   render() {
@@ -22,9 +50,9 @@ class MoviePage extends Component {
         <Row>
           <Col>
             {
-              this.movie.map(movies => (
-                <section className="movie-page">
-                  <Card className="my-4">¨
+              this.movies.map((movies, index) => (
+                <section className="movie-page" key={index}>
+                  <Card className="my-4 no-gutters">
                     <Row className="no-gutters">
                       <Col md="3">
                         <CardImg src={require('../images/' + movies.images)} />
@@ -35,7 +63,7 @@ class MoviePage extends Component {
                           <p className="card-text-movie">{movies.genre}</p>
                           <p className="card-text-movie">Från: {movies.productionYear}</p>
                           <p className="card-text-movie">Regissör: {movies.director}</p>
-                          <p className="mt-5 font-italic morelinehight">{movies.reviews[0].quote}</p>
+                          <p className="mt-5 font-italic morelinehight">"{movies.reviews[0].quote}"</p>
                           <p>{movies.reviews[0].source}</p>
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
@@ -44,8 +72,8 @@ class MoviePage extends Component {
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
                         </CardBody>
                         <div className="pl-5 pb-1 padding-fix">
-                          <Link to="/visningar" className="btn btn-outline-danger">Boka</Link>
-                          <Link to="/"className="btn btn-outline-danger">Mera</Link>
+                          <Link to={"/book-show/"} className="btn btn-outline-danger">Boka</Link>
+                          <Link to="/" className="btn btn-outline-danger">Mera</Link>
                         </div>
                       </Col>
                     </Row>

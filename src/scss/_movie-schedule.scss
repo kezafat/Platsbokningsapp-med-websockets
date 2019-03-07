@@ -2,37 +2,31 @@
 
   img{
     width: 70%;
+    display: block;
+    margin-left: 5%;
+    border: 3px, solid, #dc3545;
+  }
+  @media only screen and(max-width: 375px){
+    img {
+      display: none;
+    }
   }
   .red{
     background-color:#dc3545;
     font-size: 18px;
   }
   @include media-breakpoint-only(xs) {
-    p{
-      font-size: 60%;
-    }
     .red{
-      font-size: 45%;
       padding: 2px;
-    }
-    h5{
-      font-size: 60%;
     }
     .card-body{
       padding: 10px;
     }
     .btn{
-      font-size: 70%;
       padding: 1px;
     }
   }
   @include media-breakpoint-only(sm) {
-      h5{
-        font-size: 0.74rem;
-      }
-      p{
-        font-size: 0.70rem
-      }
       .card-body{
         padding: 10px;
       }

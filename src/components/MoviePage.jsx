@@ -14,29 +14,44 @@ class MoviePage extends Component {
   constructor(props) {
     super(props)
     this.state = { fetched: false }
-    this.movies = require('../json/movie.json')
-    this.fetchShows()
+    this.movies= []
   }
 
-  fetchShows = async () => {
+  async fetchShows() {
     const result = await fetch('http://localhost:3000/json/movies/')
-    const movies = await result.json()
-    for(let movie in movies){
-      this.shows = movies[movie].shows
-      console.log(this.shows)
-      
+    this.movies = await result.json()
+    for(let movie of this.movies){
+      movie.nextShow = this.getNextShow(movie.shows)
     }
     this.state = { fetched: true }
-  }
-
-  componentDidMount() {
+    this.setState(state => this)
     this.setStars()
   }
 
+  getNextShow(shows){
+    shows.sort(function(a,b) {
+      return new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time);
+    });
+    for(let show of shows){
+      let date =  new Date(show.date + ' ' + show.time)
+      if(date >= new Date()){
+        return show
+      }
+    }
+    return {}
+  }
+  
+  async componentDidMount() {
+    await this.fetchShows()
+  }
+
+  /**
+   * @blame should be part of the react element, not working on the DOM like now..
+   * 
+   */
   setStars() {
-    let movies = this.movies;
-    for(let i = 0; i < movies.length; i++ ){
-      let starsCount = movies[i].reviews[0].stars;
+    for(let i = 0; i < this.movies.length; i++ ){
+      let starsCount = this.movies[i].reviews[0].stars;
       let htmlStars = document.getElementsByClassName("fa-star");
       for (let j = 5 * i; j < starsCount + 5* i; j++) {
         (htmlStars[j]).classList.add('checked');
@@ -50,21 +65,21 @@ class MoviePage extends Component {
         <Row>
           <Col>
             {
-              this.movies.map((movies, index) => (
-                <section className="movie-page" key={index}>
+              this.movies.map((movie) => (
+                <section className="movie-page" key={movie._id}>
                   <Card className="my-4 no-gutters">
                     <Row className="no-gutters">
                       <Col md="3">
-                        <CardImg src={require('../images/' + movies.images)} />
+                        <CardImg src={require('../images/' + movie.images)} />
                       </Col>
                       <Col md="8" className="d-flex flex-column">
                         <CardBody className="pl-5 padding-fix">
-                          <h5 className="card-title-movie mt-3">{movies.title}</h5>
-                          <p className="card-text-movie">{movies.genre}</p>
-                          <p className="card-text-movie">Från: {movies.productionYear}</p>
-                          <p className="card-text-movie">Regissör: {movies.director}</p>
-                          <p className="mt-5 font-italic morelinehight">"{movies.reviews[0].quote}"</p>
-                          <p>{movies.reviews[0].source}</p>
+                          <h5 className="card-title-movie mt-3">{movie.title}</h5>
+                          <p className="card-text-movie">{movie.genre}</p>
+                          <p className="card-text-movie">Från: {movie.productionYear}</p>
+                          <p className="card-text-movie">Regissör: {movie.director}</p>
+                          <p className="mt-5 font-italic morelinehight">"{movie.reviews[0].quote}"</p>
+                          <p>{movie.reviews[0].source}</p>
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
@@ -72,8 +87,17 @@ class MoviePage extends Component {
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
                         </CardBody>
                         <div className="pl-5 pb-1 padding-fix">
-                          <Link to={"/book-show/"} className="btn btn-outline-danger">Boka</Link>
-                          <Link to="/" className="btn btn-outline-danger">Mera</Link>
+                            {/* added ternery so application dosen't crash if we dont have any shows*/}
+                          <Link to={!movie.nextShow._id ? "/visningar/" : "/visningar/" +
+                          movie.nextShow.auditorium.name.replace(" ", "-").toLowerCase() +
+                          "/" +
+                          movie.nextShow.date +
+                          "/" +
+                          movie.nextShow.time +
+                          "/"
+                        } 
+                          className="btn btn-outline-danger">Boka</Link>
+                          <Link to={"/"+ movie.title.replace(" ", "-").toLowerCase() +"/"} className="btn btn-outline-danger">Mera</Link>
                         </div>
                       </Col>
                     </Row>

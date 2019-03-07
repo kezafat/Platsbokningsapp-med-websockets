@@ -1,0 +1,206 @@
+[
+  {
+    "_id": "5c486a4c75c5d020985147ee",
+    "title": "Die Hard",
+    "productionYear": 1988,
+    "length": 132,
+    "genre": "Action, Thriller",
+    "distributor": "20th Century Fox",
+    "language": "Engelska, Tyska, Italienska, Japanska",
+    "subtitles": "Svenska och Engelska",
+    "director": "John McTiernan",
+    "description": "John McClane (Bruce Willis) arbetar som polis i New York. När han under julhelgen åker till sin fru Holly (Bonnie Bedelia) i Los Angeles och besöker hennes arbetsplats Nakatomi Corporation, belägen i en skyskrapa, hamnar han mitt i ett rån maskerat som en terroristattack. Med sin fru som en av gisslan bestämmer sig McClane att försöka sätta stopp för det som händer.",
+    "__v": 1,
+    "reviews": [
+      {
+        "source": "Svenska Dagbladet",
+        "quote": "En av 1980-talets bästa actionfilmer",
+        "stars": 4,
+        "max": 5,
+        "_id": "5c486a4c75c5d020985147ef"
+      }
+    ],
+    "youtubeTrailers": [
+      "2TQ-pOvI6Xo"
+    ],
+    "images": [
+      "dieHard1.jpg"
+    ],
+    "actors": [
+      "Bruce Willis",
+      "Alan Rickman",
+      "Alexander Godunov",
+      "Bonnie Bedelia"
+    ],
+    "productionCountries": [
+      "USA"
+    ],
+    "shows": [],
+    "id": "5c486a4c75c5d020985147ee"
+  },
+  {
+    "_id": "5c486dfdadb3743d8cd1c685",
+    "title": "Die Hard 2: Die Harder",
+    "productionYear": 1990,
+    "length": 124,
+    "genre": "Action, Thriller",
+    "distributor": "20th Century Fox",
+    "language": "Engelska, Spanska",
+    "subtitles": "Svenska",
+    "director": "Renny Harlin",
+    "description": "På julaftonskvällen sitter polisen John McClane (Bruce Willis) på en internationell flygplats och väntar på sin frus flygplan när plötsligt en grupp terrorister intar flygplatsen. Terroristerna är ett gäng avhoppade kommandosoldater som kommit för att rädda en knarkkung undan rättvisan. De har tänkt på allt, utom en sak: John McClane! John McClanes julafton ser återigen ut att bli förstörd i uppföljaren på Die Hard.",
+    "__v": 1,
+    "reviews": [
+      {
+        "source": "Sydsvenskan",
+        "quote": "Uppföljaren till die hard är också det ett mästerverk",
+        "stars": 5,
+        "max": 5,
+        "_id": "5c486dfdadb3743d8cd1c686"
+      }
+    ],
+    "youtubeTrailers": [
+      "gUg4gWjOgXs"
+    ],
+    "images": [
+      "dieHard2.jpg"
+    ],
+    "actors": [
+      "Bruce Willis",
+      "Bonnie Bedelia",
+      "William Sadler",
+      "Art Evans",
+      "Dennis Franz",
+      "Reginald VelJohnson"
+    ],
+    "productionCountries": [
+      "USA"
+    ],
+    "shows": [],
+    "id": "5c486dfdadb3743d8cd1c685"
+  },
+  {
+    "_id": "5c4873316edf1f1e3c2cb45e",
+    "title": "Die Hard with a Vengeance",
+    "productionYear": 1995,
+    "length": 128,
+    "genre": "Action, Thriller",
+    "distributor": "20th Century Fox",
+    "language": "Engelska",
+    "subtitles": "Svenska",
+    "director": "John McTiernan",
+    "description": "Polisen John McClane vaknar på morgonen med en hemsk baksmälla. Dagen blir inte bättre av att han snart dras in i en dödlig lek med tidsinställda bomber. En för John McClane okänd röst talar om vad John måste göra och om han inte gör det tillräckligt fort sprängs bomberna. Han får dock oväntad hjälp av en butiksägare, Zeus Carver, och de försöker tillsammans förhindra katastrofen.",
+    "__v": 1,
+    "reviews": [
+      {
+        "source": "Sydsvenskan",
+        "quote": "Bruce Willis och Samuel L. Jackson gör Die Hard with a Vengence till en av sommarens bästa filmer!",
+        "stars": 4,
+        "max": 5,
+        "_id": "5c4873316edf1f1e3c2cb45f"
+      }
+    ],
+    "youtubeTrailers": [
+      "gQ0uSh2Hgcs"
+    ],
+    "images": [
+      "dieHard3.jpg"
+    ],
+    "actors": [
+      "Bruce Willis",
+      "Jeremy Irons",
+      "Samuel L. Jackson",
+      "Graham Greene",
+      "Colleen Camp",
+      "Larry Bryggman",
+      "Sam Phillips"
+    ],
+    "productionCountries": [
+      "USA"
+    ],
+    "shows": [],
+    "id": "5c4873316edf1f1e3c2cb45e"
+  },
+  {
+    "_id": "5c487d91a5ee194420510f50",
+    "title": "Die Hard 4.0: Live Free or Die Hard",
+    "productionYear": 1995,
+    "length": 128,
+    "genre": "Action, Thriller",
+    "distributor": "20th Century Fox",
+    "language": "Engelska, Italienska, Franska",
+    "subtitles": "Svenska",
+    "director": "Len Wiseman",
+    "description": "John McClane är en missförstådd polis, vars familj har övergett honom. Hans dotter har tagit moderns efternamn. Hon vill inte prata med honom och han bråkar med hennes pojkvän. Samtidigt slår terroristen Thomas Gabriel ut USA:s hela datanätverk och alla elkraftverk med hjälp av några hackers och några franska legosoldater. Deras mål är att de skall föra över alla pengar från banker, statliga myndigheter och företag till sig själva. Nu är det upp till John McClane att tillsammans med hackern Matthew Farrell stoppa skurkarna och förhindra att hela USA blir bankrutt. ",
+    "__v": 1,
+    "reviews": [
+      {
+        "source": "Sydsvenskan",
+        "quote": "Die Hard 4.0 är fortfarande en legendarisk film",
+        "stars": 5,
+        "max": 5,
+        "_id": "5c487d91a5ee194420510f51"
+      }
+    ],
+    "youtubeTrailers": [
+      "xqjICXgcsZM"
+    ],
+    "images": [
+      "dieHard4.jpg"
+    ],
+    "actors": [
+      "Bruce Willis",
+      "Timothy Olyphant",
+      "Justin Long",
+      "Maggie Q",
+      "Mary Elizabeth Winstead",
+      " Cliff Curtis"
+    ],
+    "productionCountries": [
+      "USA, UK"
+    ],
+    "shows": [],
+    "id": "5c487d91a5ee194420510f50"
+  },
+  {
+    "_id": "5c487ef5bfe6711ed017006e",
+    "title": "A Good Day to Die Hard",
+    "productionYear": 2013,
+    "length": 98,
+    "genre": "Action, Thriller",
+    "distributor": "20th Century Fox",
+    "language": "Engelska, Ryska, Hindi, Punjabi",
+    "subtitles": "Svenska",
+    "director": "John Moore",
+    "description": "John McClanes (Bruce Willis) son hamnar i trubbel i Moskva och John reser dit för att hjälpa honom. Väl där uppdagas en terroristplan och återigen måste McClane motvilligt ge sig in i leken",
+    "__v": 1,
+    "reviews": [
+      {
+        "source": "Metro",
+        "quote": "A Good Day to Die Hard fick mig att vilja gråta",
+        "stars": 1,
+        "max": 5,
+        "_id": "5c487ef5bfe6711ed017006f"
+      }
+    ],
+    "youtubeTrailers": [
+      "nEboCvmfL24"
+    ],
+    "images": [
+      "dieHard5.jpg"
+    ],
+    "actors": [
+      "Bruce Willis",
+      "Jai Courtney",
+      "Cole Hauser",
+      "Sebastian Koch",
+      "Mary Elizabeth Winstead",
+      "Yuliya Snigir"
+    ],
+    "productionCountries": [
+      "USA, UK"
+    ],
+    "shows": [],
+    "id": "5c487ef5bfe6711ed017006e"
+  }
+]

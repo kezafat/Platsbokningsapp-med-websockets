@@ -2,8 +2,9 @@ const bcrypt = require('bcryptjs');
 
 module.exports = class LoginHandler {
 
-  constructor(app, User) {
+  constructor(app, db, User) {
     this.app = app;
+    this.db = db;
     this.User = User;
     this.createLoginRoute();
     this.createLogoutRoute();
@@ -12,7 +13,7 @@ module.exports = class LoginHandler {
 
   //MANUALLY add these routes (do not allow hackable queries)
   async createRegisterRoute() {
-    this.app.post('/register', async (req, res) => {
+    this.app.post('/user/register', async (req, res) => {
       let err, data = req.body;
       let user = await this.User.findOne({ email: data.email });
 
@@ -56,7 +57,7 @@ module.exports = class LoginHandler {
   }
 
   async createLoginRoute() {
-    this.app.post('/login', async (req, res) => {
+    this.app.post('/user/login', async (req, res) => {
       let err;
       req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
       req.session.save();
@@ -69,7 +70,7 @@ module.exports = class LoginHandler {
 
       let data = req.body;
       if (!data.password || !data.email) {
-        res.json({ 'msg': 'error' });
+        res.json({ 'msg': 'error', 'xtras' : 'missing email or pwd' });
         return;
       }
 
@@ -99,9 +100,9 @@ module.exports = class LoginHandler {
   }
 
   createLogoutRoute() {
-    this.app.post('/logout', async (req, res) => {
+    this.app.post('/user/logout', async (req, res) => {
       req.session.destroy(function () {
-        res.json({ 'msg': 'ok', 'xtrazz': 'This mofo is goooone baby!'});
+        res.json({ 'msg': 'ok', 'xtrazz': 'This mofo is goooone baby!' });
       })
     })
   }

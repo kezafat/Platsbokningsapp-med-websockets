@@ -31,7 +31,12 @@ class BookShow extends Component {
     const currentTime = now[1].split(':').slice(0, 2).join(':');
 
     if (!this.state.fetched) {
-      return <Spinner color="secondary" />
+      return (
+        <div className="d-flex justify-content-center">
+          <Spinner color="secondary" />
+        </div>
+      )
+      
     }
     if (!this.state.show) {
       return <Card>

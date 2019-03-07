@@ -1,3 +1,10 @@
+@keyframes invalid-selection-animation {
+  0% {background-color: default;}
+  20% {background-color: red}
+  60% {background-color: red}
+  100% {background-color: default;}
+}
+
 .seat-selector {
 
   .screen-container {
@@ -50,14 +57,20 @@
           background-color: #44d463;
         }
   
+        
+        &.invalid-selection {
+          @media screen and (max-width: 1024px) {
+            animation: invalid-selection-animation 2.5s;          
+          }
+          @media screen and (min-width: 1024px) {
+            background-color: red;
+          }
+
+        }
+        
         &.deselect-seat {
           background-color: red;
         }
-
-        &.invalid-selection {
-          background-color: red;
-        }
-  
       }
 
     }

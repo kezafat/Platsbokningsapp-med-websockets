@@ -16,22 +16,61 @@ class SeatSelector extends Component {
     super(props)
     this.state = {
       rows: this.generateRows(),
-      tickets: this.generateTickets()
+      tickets: this.generateTickets(),
+      separateSeats: false
     }
-    this.separateSeats = false;
+    this.separateSeatsForced = false
     this.listenToSocketIo()
+  }
+
+  get allSeats() {
+    // these seats getters will be heavily utilized throughout this component
+    // this is the basic one, with all seats in one array
+    return this.state.rows.flat()
+  }
+
+  get indexedSeats() {
+    // getter for all seats in one array, padded with a kitten at index 0
+    // so all seats have the same index as the seat number
+    return ['kitten'].concat(this.allSeats)
+  }
+
+  get selectedSeats() {
+    return this.allSeats.filter(seat => seat.selected)
+  }
+
+  get highlightedSeats() {
+    // invalid is a highlight to indicate invalid selection
+    return this.allSeats.filter(seat => seat.highlighted || seat.invalid || seat.deselect)
   }
 
   get bookedSeats() {
     return this.allSeats.filter(seat => seat.booked)
   }
 
-  get freeSeatsCount() {
-    return this.totalSeats - this.bookedSeats.length
+  get freeSeats() {
+    return this.allSeats.filter(seat => !seat.booked)
   }
 
   get totalSeats() {
     return this.props.show.auditorium.seats.reduce((accumulator, current) => accumulator + current, 0)
+  }
+
+  get freeAdjacentSeatsMax() {
+    // counts the highest number of free adjacent seats
+    let count = 0, maxCount = 0, row = 1
+    for (let seat of this.allSeats) {
+      if (seat.row === row && !seat.booked) {
+        // if the seat is on our current row and not booked, count up and adjust max if reached
+        maxCount = Math.max(++count, maxCount)
+      } else {
+        // if the seat isnt booked it means we entered a new row, so start counting at one
+        // if it is booked it doesnt matter if its a new row or not, start count at 0
+        count = seat.booked ? 0 : 1
+        row = Math.max(row, seat.row)
+      } 
+    }
+    return maxCount
   }
 
   get ticketsCount() {
@@ -40,24 +79,6 @@ class SeatSelector extends Component {
       count += this.state.tickets[type]
     }
     return count
-  }
-
-  get allSeats() {
-    return this.state.rows.flat()
-  }
-
-  get indexedSeats() {
-    // getter for all seats in one array, padded with an apache kitten at index 0
-    // so all seats have the same index as the seat number
-    return ['kitten'].concat(this.state.rows.flat())
-  }
-
-  get selectedSeats() {
-    return this.allSeats.filter(seat => seat.selected)
-  }
-
-  get highlightedSeats() {
-    return this.allSeats.filter(seat => seat.highlighted || seat.invalid)
   }
 
   componentDidMount() {
@@ -72,21 +93,24 @@ class SeatSelector extends Component {
     // we don't have access to state yet so get bookings from props
     const bookedSeats = this.props.show.bookings.map(booking => booking.seats).flat()
     let seatCounter = 0;
-    const seats = this.props.show.auditorium.seats.map((numberOfSeatsInRow, index, originalSeats) => {
+    const seatsInBiggestRow = Math.max(...this.props.show.auditorium.seats)
+    // create an array with the rows, containing arrays with information about each seat
+    const rows = this.props.show.auditorium.seats.map((numberOfSeatsInRow, rowIndex, originalSeats) => {
       const seats = []
       for (let i = 0; i < numberOfSeatsInRow; i++) {
-        const evaluation = this.evaluateSeat(i + 1, numberOfSeatsInRow, index + 1, originalSeats.length)
+        const evaluation = this.evaluateSeat(i + 1, numberOfSeatsInRow, rowIndex + 1, originalSeats.length)
         seats.push({
           seatNumber: ++seatCounter,
-          row: index + 1,
+          row: rowIndex + 1,
           evaluation: evaluation,
           index: i,
+          offsetIndex: i + ((seatsInBiggestRow - numberOfSeatsInRow )/ 2),
           booked: bookedSeats.includes(seatCounter)
         })
       }
       return seats
     })
-    return seats
+    return rows
   }
 
   generateTickets() {
@@ -108,8 +132,10 @@ class SeatSelector extends Component {
   }
 
   addTicket = (event) => {
-    if (this.ticketsCount < Math.min(this.freeSeatsCount, 8)) {
+    // do not allow more than 8 tickets, or more tickets than the amount of free seats
+    if (this.ticketsCount < Math.min(this.freeSeats.length, 8)) {
       const ticketType = event.target.parentNode.classList[1]
+      // update state and supply this.adjustSelection as callback once state update is complete
       this.setState(prevState => {
         // prevState should not be mutated
         const tickets = {...prevState.tickets}
@@ -134,39 +160,61 @@ class SeatSelector extends Component {
     if (this.selectedSeats.length === 0) { return this.suggestBestSeats() }
     const surplus = this.selectedSeats.length - this.ticketsCount
     if (surplus > 0) {
-      this.mutateSeats(this.selectedSeats.slice(0, surplus), { selected: false })
-    } else if (surplus === -1 && !this.separateSeats) {
+      this.unselectedRecentSeats(surplus)
+    } else if (surplus === -1 && !this.state.separateSeats) {
       this.addOneAdjacentSeatToSelection()
-    } else if (surplus === -1 && this.separateSeats) {
-      this.addBestSeatToSelection()
+    } else if (surplus < 0 && this.state.separateSeats) {
+      this.addClosestSeatsToSelection(Math.abs(surplus))
     } else if (surplus < -1) {
       this.suggestBestSeats()
     }
   }
 
+  unselectedRecentSeats = async (numberOfSeats) => {
+    const selection = this.selectedSeats.sort((a, b) => b.order - a.order).slice(0, numberOfSeats)
+    await this.mutateSeats(selection, { selected: false })
+    if (this.separateSeatsForced && this.selectedSeats.every(seat => seat.row === this.selectedSeats[0].row)) {
+      this.setState({ separateSeats: false })
+      this.separateSeatsForced = false
+    }
+  }
+
   addOneAdjacentSeatToSelection = async () => {
+    // first try to expand the selection to a higher or lower seat based on evaluation
     const row = this.selectedSeats[0].row
     const lowerSeat = this.indexedSeats[this.selectedSeats[0].seatNumber - 1]
     const higherSeat = this.indexedSeats[this.selectedSeats[this.selectedSeats.length - 1].seatNumber + 1]
-    if (!lowerSeat.booked && lowerSeat.row === row && lowerSeat.evaluation >= higherSeat.evaluation) {
+    if (!lowerSeat.booked && lowerSeat.row === row && (lowerSeat.evaluation >= higherSeat.evaluation || higherSeat.booked)) {
       await this.mutateSeats([lowerSeat], { selected: true })
     } else if (!higherSeat.booked && higherSeat.row === row) {
       await this.mutateSeats([higherSeat], { selected: true })
-    } else {
+    } else if (this.freeAdjacentSeatsMax >= this.ticketsCount) {
+      // if that doesnt work, but there are enough free adjacent seats, suggest them
       this.suggestBestSeats()
+    } else {
+      // otherwise, force separate seats
+      this.addClosestSeatsToSelection(1)
+      this.setState({ separateSeats: true })
+      this.separateSeatsForced = true
     }
   }
 
-  addBestSeatToSelection = () => {
-    const bestFreeSeat = this.allSeats.filter(seat => !seat.booked && !seat.selected).sort((a, b) => b.evaluation - a.evaluation)[0]
-    this.mutateSeats([bestFreeSeat], { selected: true })
+  addClosestSeatsToSelection = (numberOfSeats) => {
+    const row = this.selectedSeats.sort((a, b) => b.order - a.order)[0].row
+    const selectedSeatsOnRow = this.selectedSeats.filter(seat => seat.row === row)
+    // take the index from one of the middle seats
+    const index = selectedSeatsOnRow[Math.floor(selectedSeatsOnRow.length / 2)].offsetIndex
+    // compare index and row with available free seats and select the closest one (prioritizing same row)
+    const closestSeats = this.freeSeats.filter(seat => !seat.selected).sort((a, b) => (Math.abs(a.offsetIndex - index) / 3 + Math.abs(a.row - row)) - (Math.abs(b.offsetIndex - index) / 3 + Math.abs(b.row - row))).slice(0, numberOfSeats)
+    this.mutateSeats(closestSeats, { selected: true })
   }
 
   toggleSeparateSeats = (event) => {
-    this.separateSeats = event.target.checked
-    if (!this.separateSeats) {
-      this.suggestBestSeats()
-    }
+    this.setState({ separateSeats: event.target.checked }, () => {
+      if (!this.state.separateSeats && !this.validateSelection(this.selectedSeats)) {
+        this.suggestBestSeats()
+      }
+    })
   }
 
   handleMouseOver = (event) => {
@@ -180,18 +228,24 @@ class SeatSelector extends Component {
     const selection = []
     // do while loop so we always get one seat if separateseats, and one or more if not
     do {
+      // expand to lower seat numbers if on same row, otherwise expand to highter
       if (lowSeatNumber && this.indexedSeats[lowSeatNumber].row === row) {
         selection.push(this.indexedSeats[lowSeatNumber--]) 
       } else {
         selection.push(this.indexedSeats[++highSeatNumber])
       }
-    } while (!this.separateSeats && selection.length < this.ticketsCount)
+    } while (!this.state.separateSeats && selection.length < this.ticketsCount)
     if (this.validateSelection(selection)) {
       this.mutateSeats(selection, { highlighted: true })
+    } else if (this.state.separateSeats && this.selectedSeats.includes(selection[0])) {
+      this.mutateSeats(selection, { deselect: true })
     } else {
       this.mutateSeats(selection, { invalid: true })
     }
   }
+
+  //counter for selected seats
+  selectedSeatsCounter = 0
 
   mutateSeats = (selection, options) => {
     // this is how we mutate the rows array
@@ -203,6 +257,8 @@ class SeatSelector extends Component {
         const rows = JSON.parse(JSON.stringify(prevState.rows))
         // filter out seats that don't exist before looping
         for (let seat of selection.filter(seat => seat.row)) {
+          // first we increment the counter and add the count to the seat, if it is to be selected 
+          if (options.selected) { options.order = ++this.selectedSeatsCounter }
           // find the correct seat and apply new options
           rows[seat.row - 1][seat.index] = { ...seat, ...options }
         }
@@ -216,7 +272,7 @@ class SeatSelector extends Component {
   }
 
   removeSeatHighlight = () => {
-    this.mutateSeats(this.highlightedSeats, { highlighted: false, invalid: false })
+    this.mutateSeats(this.highlightedSeats, { highlighted: false, invalid: false, deselect: false })
   }
 
   removeSeatSelection = () => {
@@ -224,7 +280,7 @@ class SeatSelector extends Component {
   }
 
   handleClick = (event) => {
-    if (this.separateSeats) { return this.addOrRemoveSeparateSeat(event)}
+    if (this.state.separateSeats) { return this.addOrRemoveSeparateSeat(event)}
     else if (this.validateSelection(this.highlightedSeats)) {
       this.removeSeatSelection()
       this.mutateSeats(this.highlightedSeats, { highlighted: false, selected: true })
@@ -235,11 +291,13 @@ class SeatSelector extends Component {
     // this one is based on the click event rather than the highlighted seats so it can support repeated selection and deselection of the same seat
     const seatNumber = event.target.classList[2]
     const newSeat = this.indexedSeats[seatNumber]
+    // if the user starts adding/removing seats, we assume that they want to stay in separate seats mode
+    this.separateSeatsForced = false
     if (this.validateSelection([newSeat])) {
       if (this.selectedSeats.length < this.ticketsCount) {
         this.mutateSeats([newSeat], { highlighted: false, selected: true })
       } else {
-        this.mutateSeats([this.selectedSeats[0]], { selected: false })
+        this.unselectedRecentSeats(1)
         this.mutateSeats([newSeat], { highlighted: false, selected: true })
       }
     } else if (this.selectedSeats.some(seat => seat.seatNumber === newSeat.seatNumber)){
@@ -249,10 +307,10 @@ class SeatSelector extends Component {
   }
 
   validateSelection(seats) {
-    if (!seats[0] || (!this.separateSeats && seats.length !== this.ticketsCount) || this.ticketsCount === 0) { return false}
+    if (!seats[0] || (!this.state.separateSeats && seats.length !== this.ticketsCount) || this.ticketsCount === 0) { return false }
     const row = seats[0].row
     for (let seat of seats) {
-      if (!seat || seat.row !== row || seat.booked || (this.separateSeats && seat.selected)) {
+      if (!seat || seat.row !== row || seat.booked || (this.state.separateSeats && seat.selected)) {
         return false
       }
     }
@@ -261,17 +319,21 @@ class SeatSelector extends Component {
 
   suggestBestSeats = () => {
     this.removeSeatSelection()
-    const selection = (!this.separateSeats && this.findBestAdjacentSeats()) || this.findBestOverallSeats()
+    const selection = this.findBestAdjacentSeats() || this.findBestOverallSeats()
     this.mutateSeats(selection, { selected: true })
   }
 
   findBestAdjacentSeats = () => {
+    // if we are in separate seats mode, return false and immediately jump to finding best overall seats
+    if (this.state.separateSeats) { return false }
     let bestSelection = []
     let bestEvaluation = 0
+    // loop through all possible selections of n amount of tickets
     for (let row of this.state.rows) {
       for (let i = 0; i <= row.length - this.ticketsCount; i++) {
         const selection = row.slice(i, i + this.ticketsCount)
         if (this.validateSelection(selection)) {
+          // if the selection passes the validation, check if it has the highest evaluation and update best selection if so
           const evaluation = this.evaluateSelection(selection)
           if (evaluation > bestEvaluation) {
             bestEvaluation = evaluation
@@ -280,10 +342,17 @@ class SeatSelector extends Component {
         }
       }
     }
+    // if we didn't find a valid selection, the best evaluation is still 0, so return false so it jumps to finding best overall seats
     return bestEvaluation > 0 ? bestSelection : false
   }
 
   findBestOverallSeats() {
+    if (!this.state.separateSeats) {
+      // if we end up here despite separate seats being off, we must force separate seats
+      this.setState({ separateSeats: true })
+      this.separateSeatsForced = true
+    }
+    // sort the seats by evaluation, the select as many as we want
     const sortedSeats = this.allSeats.filter(seat => !seat.booked).sort((a, b) => b.evaluation - a.evaluation)
     return sortedSeats.slice(0, this.ticketsCount)    
   }
@@ -334,8 +403,11 @@ class SeatSelector extends Component {
   }
 
   addBooking = async (booking) => {
+    // find the freshly booked seats based on their numbers and set them to booked
     const freshlyBookedSeats = this.allSeats.filter(seat => booking.seats.includes(seat.seatNumber))
     await this.mutateSeats(freshlyBookedSeats, { booked: true })
+    // if the user had selected one of the freshly booked seats, handle the conflict gracefully
+    // (he who treads softly goes far)
     if (this.selectedSeats.some(seat => booking.seats.includes(seat.seatNumber))) {
       this.handleConflictGracefully()
     }
@@ -348,7 +420,7 @@ class SeatSelector extends Component {
   }
 
   limitTicketsCount = () => {
-    const surplus = this.ticketsCount - this.freeSeatsCount
+    const surplus = this.ticketsCount - this.freeSeats.length
     const tickets = {...this.state.tickets}
     let removed = 0
     while (removed < surplus) {
@@ -362,12 +434,7 @@ class SeatSelector extends Component {
     this.setState({ tickets: tickets })
   }
 
-
-
-
-
-
-
+  // Congratulations, you made it to the end!
 
   // ---------------------------------------------
 
@@ -383,7 +450,8 @@ class SeatSelector extends Component {
           <section className="seat-selector">
             <Row>
               <Col xs="12" className="d-flex justify-content-center">
-                <input type="checkbox" name="Separate" id="separate-seats" className="m-2"onChange={this.toggleSeparateSeats}/>
+                <input type="checkbox" name="Separate" id="separate-seats" className="m-2" onChange={this.toggleSeparateSeats}
+                checked={this.state.separateSeats} disabled={this.ticketsCount > this.freeAdjacentSeatsMax ? true : false}/>
                 <label htmlFor="separate-seats">Separata platser</label>
               </Col>
               <Col xs="12" className="screen-container">
@@ -411,7 +479,7 @@ class SeatSelector extends Component {
             </Alert>
             <div className="button-wrap">
             {
-              (this.freeSeatsCount > 0)
+              (this.freeSeats.length > 0)
               ?
               <button className="btn btn-outline-danger" onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
               :

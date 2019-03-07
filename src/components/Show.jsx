@@ -12,15 +12,14 @@ class Show extends Component {
 
   render() {
     return (
-      <React.Fragment>
         <Row>
           <Col>
             <Card className="card mb-3">
-              <Row className="row no-gutters">
+              <Row className="no-gutters">
                 <Col className="col-sm-auto col-1 mr-4 mt-3 ml-3">
                   <p className="red">{this.props.show.time}</p>
                 </Col>
-                <Col className="col-sm-auto col-3">
+                <Col  className="col-sm-auto col-3">
                   <CardImg
                     className="col-sm-auto col-3"
                     src={require("../images/" +
@@ -71,7 +70,6 @@ class Show extends Component {
             </Card>
           </Col>
         </Row>
-      </React.Fragment>
     );
   }
 }

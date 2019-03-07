@@ -75,12 +75,12 @@ class Shows extends Component {
           <Col>
             <h2 className="mb-3 ml-3">Filmvisningar</h2>
           </Col>
-          <div className="date">
-            {this.days.map((day, index) => (
-              <Day key={index} show={day} />
-            ))}
-          </div>
         </Row>
+        <div className="date">
+          {this.days.map((day, index) => (
+            <Day key={index} show={day} />
+          ))}
+        </div>
       </section>
     );
   }

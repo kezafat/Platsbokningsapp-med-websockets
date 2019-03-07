@@ -3,6 +3,7 @@ import {
     Card, CardImg, CardTitle, CardText, CardGroup, CardSubtitle, CardBody
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Show from './Show';
 
 class CardStartPage extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class CardStartPage extends Component {
                             <CardImg top width="100%" src={require('../images/' + images)} alt="Posters" />
                             <CardSubtitle className="my-2"><p>[{productionCountries}] {director}<br />
                                 {genre} {productionYear}</p></CardSubtitle>
-                            <CardText><p>{description.substr(0, 200) + ' ... '}</p></CardText>
+                            <CardText><p>{description.substr(0, 200) + ' ... '} {Show}</p></CardText>
                             <Link to={'/visningar/'} className="btn btn-outline-danger">Visningar</Link>
                         </CardBody>
                     </Card>

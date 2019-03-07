@@ -47,7 +47,8 @@ module.exports = class Server {
       resave: false,
       saveUninitialized: true,
       store: new MongoStore({
-        mongooseConnection: db
+        mongooseConnection: db,
+        collection: "tmpsess"
       })
     }));
 
@@ -58,7 +59,6 @@ module.exports = class Server {
       auditoria: require('./schemas/Auditorium'),
       bookings: require('./schemas/Booking'),
       shows: require('./schemas/Show'),
-      users: require('./schemas/User')
     };
 
     global.models = models;
@@ -67,7 +67,7 @@ module.exports = class Server {
     new CreateRestRoutes(app, db, models);
 
     // create special extra routes for login
-    new LoginHandler(app, require('./schemas/User'));
+    new LoginHandler(app, db, require('./schemas/User'));
 
     // Start the web server
     const server = http.Server(app);

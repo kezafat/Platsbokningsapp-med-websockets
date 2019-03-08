@@ -21,13 +21,16 @@ function validateSeats(val) {
 
 // pre hook to make sure no double bookings are possible
 bookingSchema.pre('save', async function (next) {
+  // get the appropriate show
   const show = await global.models.shows.findById(this.show);
+  // check if its in the past or not
   const now = new Date().toISOString().split('T');
   const currentDate = now[0];
   const currentTime = now[1].split(':').slice(0, 2).join(':');
   if (show.date < currentDate || (show.date === currentDate && show.time < currentTime) ) {
     next(new Error('Booking the past wtf'))
   }
+  // check for double bookings
   const bookedSeats = show.bookings.map(booking => booking.seats);
   // array.flat is not supported in node v.10.x.x.x which is what we are using, so we have to use a custom .flat()
   let flatSeats = [];
@@ -41,6 +44,12 @@ bookingSchema.pre('save', async function (next) {
       next(err);
     }
   }
+  // check that tickets count is valid
+  const ticketsCount = Object.values(this.tickets).reduce((accumulator, current) => accumulator + current, 0)
+  if (ticketsCount !== this.seats.length) {
+    next(new Error('Wrong amount of tickets'))
+  }
+
   // the schema emits an event that we listen for in the socket.io controller
   bookingSchema.emit('newBooking', this);
   next();

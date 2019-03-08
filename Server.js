@@ -71,7 +71,7 @@ module.exports = class Server {
         date: req.params.date
       })
       // incase there are two shows at the same time, we get only the one at our specified auditorium
-      const show = shows.filter(show => show.auditorium.name.toLowerCase().replace(/ /, '-') === req.params.auditorium)
+      const show = shows.filter(show => show.auditorium.name.toLowerCase().replace(/ /g, '-') === req.params.auditorium)
       res.json(show)
     })
 

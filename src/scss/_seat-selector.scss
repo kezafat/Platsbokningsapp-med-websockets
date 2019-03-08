@@ -60,7 +60,7 @@
         
         &.invalid-selection {
           @media screen and (max-width: 1024px) {
-            animation: invalid-selection-animation 2.5s;          
+            animation: invalid-selection-animation 1.5s;          
           }
           @media screen and (min-width: 1024px) {
             background-color: red;

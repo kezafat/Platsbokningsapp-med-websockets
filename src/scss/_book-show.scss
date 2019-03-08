@@ -39,6 +39,11 @@ div.book-show {
           &:hover {
             background-color: #218838;
           }
+
+          &.disabled {
+            background-color: #0e5a1e;
+            cursor: default;
+          }
         }
       }
     }
@@ -48,7 +53,7 @@ div.book-show {
     display: flex;
     justify-content: center;
 
-    button.disabled:hover {
+    button.disabled:hover, button[disabled] {
       color: rgb(153, 3, 3)
     }
   }

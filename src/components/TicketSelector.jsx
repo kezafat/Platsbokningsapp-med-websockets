@@ -12,7 +12,10 @@ class TicketSelector extends Component {
     { DOMtext: 'Barn (65 kr/st)', class: 'kids'}
   ]
 
+
   render() {
+    const ticketsCount = Object.values(this.props.tickets).reduce((accumulator, current) => accumulator + current, 0)
+
     return (
       <Row className="ticket-selector">
         <Col md="" />
@@ -21,9 +24,9 @@ class TicketSelector extends Component {
               <Col xs="12" sm="auto" key={ticket.class}>
                 <h6>{ticket.DOMtext}</h6>
                 <div className={`ticket-incrementor ${ticket.class}`}>
-                  <span className="minus" onClick={this.props.subtractTicket}>-</span>
+                  <span className={`minus${!this.props.tickets[ticket.class] ? ' disabled' : ''}`} onClick={this.props.subtractTicket}>-</span>
                   <span className="ticket-count">{this.props.tickets[ticket.class]}</span>
-                  <span className="plus" onClick={this.props.addTicket}>+</span>
+                  <span className={`plus${ticketsCount >= Math.min(8, this.props.freeSeatsCount) ? ' disabled' : ''}`} onClick={this.props.addTicket}>+</span>
                 </div>
               </Col>
             ))

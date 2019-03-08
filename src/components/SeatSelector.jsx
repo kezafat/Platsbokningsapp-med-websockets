@@ -74,11 +74,7 @@ class SeatSelector extends Component {
   }
 
   get ticketsCount() {
-    let count = 0;
-    for (let type in this.state.tickets) {
-      count += this.state.tickets[type]
-    }
-    return count
+    return Object.values(this.state.tickets).reduce((accumulator, current) => accumulator + current, 0)
   }
 
   componentDidMount() {
@@ -89,7 +85,8 @@ class SeatSelector extends Component {
     this.unListenToSocketIo()
   }
 
-  generateRows = () => {
+  generateRows() {
+    // this method is used in the constructor to create the seats state
     // we don't have access to state yet so get bookings from props
     const bookedSeats = this.props.show.bookings.map(booking => booking.seats).flat()
     let seatCounter = 0;
@@ -156,7 +153,7 @@ class SeatSelector extends Component {
     }
   }
 
-  adjustSelection = () => {
+  adjustSelection() {
     if (this.selectedSeats.length === 0) { return this.suggestBestSeats() }
     const surplus = this.selectedSeats.length - this.ticketsCount
     if (surplus > 0) {
@@ -170,7 +167,7 @@ class SeatSelector extends Component {
     }
   }
 
-  unselectedRecentSeats = async (numberOfSeats) => {
+  async unselectedRecentSeats(numberOfSeats) {
     const selection = this.selectedSeats.sort((a, b) => b.order - a.order).slice(0, numberOfSeats)
     await this.mutateSeats(selection, { selected: false })
     if (this.separateSeatsForced && this.selectedSeats.every(seat => seat.row === this.selectedSeats[0].row)) {
@@ -179,11 +176,13 @@ class SeatSelector extends Component {
     }
   }
 
-  addOneAdjacentSeatToSelection = async () => {
+  async addOneAdjacentSeatToSelection() {
     // first try to expand the selection to a higher or lower seat based on evaluation
     const row = this.selectedSeats[0].row
+    // if lowerSeat goes out of range(index 0), it will reach the kitten string and all is fine
     const lowerSeat = this.indexedSeats[this.selectedSeats[0].seatNumber - 1]
-    const higherSeat = this.indexedSeats[this.selectedSeats[this.selectedSeats.length - 1].seatNumber + 1]
+    // if higherseat goes out of range, we force it to become a dummy object with booked = true so the below logic still works fine
+    const higherSeat = this.indexedSeats[this.selectedSeats[this.selectedSeats.length - 1].seatNumber + 1] || { booked: true }
     if (!lowerSeat.booked && lowerSeat.row === row && (lowerSeat.evaluation >= higherSeat.evaluation || higherSeat.booked)) {
       await this.mutateSeats([lowerSeat], { selected: true })
     } else if (!higherSeat.booked && higherSeat.row === row) {
@@ -199,7 +198,7 @@ class SeatSelector extends Component {
     }
   }
 
-  addClosestSeatsToSelection = (numberOfSeats) => {
+  addClosestSeatsToSelection(numberOfSeats) {
     const row = this.selectedSeats.sort((a, b) => b.order - a.order)[0].row
     const selectedSeatsOnRow = this.selectedSeats.filter(seat => seat.row === row)
     // take the index from one of the middle seats
@@ -222,7 +221,7 @@ class SeatSelector extends Component {
     this.indicateSelection(seatNumber)    
   }
 
-  indicateSelection = (seatNumber) => {
+  indicateSelection(seatNumber) {
     const row = this.indexedSeats[seatNumber].row
     let lowSeatNumber = seatNumber, highSeatNumber = seatNumber
     const selection = []
@@ -235,6 +234,7 @@ class SeatSelector extends Component {
         selection.push(this.indexedSeats[++highSeatNumber])
       }
     } while (!this.state.separateSeats && selection.length < this.ticketsCount)
+    
     if (this.validateSelection(selection)) {
       this.mutateSeats(selection, { highlighted: true })
     } else if (this.state.separateSeats && this.selectedSeats.includes(selection[0])) {
@@ -247,7 +247,7 @@ class SeatSelector extends Component {
   //counter for selected seats
   selectedSeatsCounter = 0
 
-  mutateSeats = (selection, options) => {
+  mutateSeats(selection, options) {
     // this is how we mutate the rows array
     // i made it return a promise and put the promise resolver in the callback so we can await this
     // to make sure the new state has been applied before we move on
@@ -271,11 +271,11 @@ class SeatSelector extends Component {
     this.removeSeatHighlight()
   }
 
-  removeSeatHighlight = () => {
+  removeSeatHighlight() {
     this.mutateSeats(this.highlightedSeats, { highlighted: false, invalid: false, deselect: false })
   }
 
-  removeSeatSelection = () => {
+  removeSeatSelection() {
     this.mutateSeats(this.selectedSeats, { selected: false })
   }
 
@@ -287,7 +287,7 @@ class SeatSelector extends Component {
     } //otherwise do nothing
   }
 
-  addOrRemoveSeparateSeat = (event) => {
+  addOrRemoveSeparateSeat(event) {
     // this one is based on the click event rather than the highlighted seats so it can support repeated selection and deselection of the same seat
     const seatNumber = event.target.classList[2]
     const newSeat = this.indexedSeats[seatNumber]
@@ -317,13 +317,13 @@ class SeatSelector extends Component {
     return true
   }
 
-  suggestBestSeats = () => {
+  suggestBestSeats() {
     this.removeSeatSelection()
     const selection = this.findBestAdjacentSeats() || this.findBestOverallSeats()
     this.mutateSeats(selection, { selected: true })
   }
 
-  findBestAdjacentSeats = () => {
+  findBestAdjacentSeats() {
     // if we are in separate seats mode, return false and immediately jump to finding best overall seats
     if (this.state.separateSeats) { return false }
     let bestSelection = []
@@ -353,7 +353,7 @@ class SeatSelector extends Component {
       this.separateSeatsForced = true
     }
     // sort the seats by evaluation, the select as many as we want
-    const sortedSeats = this.allSeats.filter(seat => !seat.booked).sort((a, b) => b.evaluation - a.evaluation)
+    const sortedSeats = this.freeSeats.sort((a, b) => b.evaluation - a.evaluation)
     return sortedSeats.slice(0, this.ticketsCount)    
   }
 
@@ -419,7 +419,7 @@ class SeatSelector extends Component {
     this.suggestBestSeats()
   }
 
-  limitTicketsCount = () => {
+  limitTicketsCount() {
     const surplus = this.ticketsCount - this.freeSeats.length
     const tickets = {...this.state.tickets}
     let removed = 0
@@ -446,7 +446,7 @@ class SeatSelector extends Component {
     return (
       <Card className="my-3">
         <CardBody>
-          <TicketSelector addTicket={this.addTicket} subtractTicket={this.subtractTicket} tickets={this.state.tickets} />
+          <TicketSelector addTicket={this.addTicket} subtractTicket={this.subtractTicket} tickets={this.state.tickets} freeSeatsCount={this.freeSeats.length} />
           <section className="seat-selector">
             <Row>
               <Col xs="12" className="d-flex justify-content-center">
@@ -481,7 +481,7 @@ class SeatSelector extends Component {
             {
               (this.freeSeats.length > 0)
               ?
-              <button className="btn btn-outline-danger" onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
+              <button className="btn btn-outline-danger" disabled={this.selectedSeats.length !== this.ticketsCount} onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
               :
               <button className="btn btn-outline-danger disabled">Denna visning är fullbokad</button>
             }

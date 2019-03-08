@@ -17,7 +17,7 @@ class MoviePage extends Component {
     this.movies = []
   }
 
-  async fetchShows() {
+  async fetchMovies() {
     const result = await fetch('http://localhost:3000/json/movies/')
     this.movies = await result.json()
     for (let movie of this.movies) {
@@ -42,7 +42,7 @@ class MoviePage extends Component {
   }
 
   async componentDidMount() {
-    await this.fetchShows()
+    await this.fetchMovies()
   }
 
   /**

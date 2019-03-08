@@ -11,16 +11,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class MoviePage extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = { fetched: false }
-    this.movies= []
+    this.movies = []
   }
 
   async fetchShows() {
     const result = await fetch('http://localhost:3000/json/movies/')
     this.movies = await result.json()
-    for(let movie of this.movies){
+    for (let movie of this.movies) {
       movie.nextShow = this.getNextShow(movie.shows)
     }
     this.state = { fetched: true }
@@ -28,19 +28,19 @@ class MoviePage extends Component {
     this.setStars()
   }
 
-  getNextShow(shows){
-    shows.sort(function(a,b) {
+  getNextShow(shows) {
+    shows.sort(function (a, b) {
       return new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time);
     });
-    for(let show of shows){
-      let date =  new Date(show.date + ' ' + show.time)
-      if(date >= new Date()){
+    for (let show of shows) {
+      let date = new Date(show.date + ' ' + show.time)
+      if (date >= new Date()) {
         return show
       }
     }
     return {}
   }
-  
+
   async componentDidMount() {
     await this.fetchShows()
   }
@@ -50,11 +50,13 @@ class MoviePage extends Component {
    * 
    */
   setStars() {
-    for(let i = 0; i < this.movies.length; i++ ){
+    for (let i = 0; i < this.movies.length; i++) {
       let starsCount = this.movies[i].reviews[0].stars;
       let htmlStars = document.getElementsByClassName("fa-star");
-      for (let j = 5 * i; j < starsCount + 5* i; j++) {
-        (htmlStars[j]).classList.add('checked');
+      for (let j = 5 * i; j < starsCount + 5 * i; j++) {
+        if (htmlStars[j]) {
+          (htmlStars[j]).classList.add('checked');
+        }
       }
     }
   }
@@ -87,17 +89,24 @@ class MoviePage extends Component {
                           <FontAwesomeIcon icon="star"></FontAwesomeIcon>
                         </CardBody>
                         <div className="pl-5 pb-1 padding-fix">
-                            {/* added ternery so application dosen't crash if we dont have any shows*/}
+                          {/* added ternery so application dosen't crash if we dont have any shows*/}
                           <Link to={!movie.nextShow._id ? "/visningar/" : "/visningar/" +
-                          movie.nextShow.auditorium.name.replace(" ", "-").toLowerCase() +
-                          "/" +
-                          movie.nextShow.date +
-                          "/" +
-                          movie.nextShow.time +
-                          "/"
-                        } 
-                          className="btn btn-outline-danger">Boka</Link>
-                          <Link to={"/"+ movie.title.replace(" ", "-").toLowerCase() +"/"} className="btn btn-outline-danger">Mera</Link>
+                            movie.nextShow.auditorium.name
+                              .replace(" ", "-")
+                              .toLowerCase() +
+                            "/" +
+                            movie.nextShow.date +
+                            "/" +
+                            movie.nextShow.time +
+                            "/"
+                          }
+                            className="btn btn-outline-danger">Boka</Link>
+                          <Link to={"/filmer/" +
+                            movie.title
+                              .replace(/ /g, "-")
+                              .replace(/:/g, "")
+                              .toLowerCase()}
+                            className="btn btn-outline-danger">Mera</Link>
                         </div>
                       </Col>
                     </Row>

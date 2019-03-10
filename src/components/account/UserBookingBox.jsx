@@ -15,7 +15,7 @@ class UserBookingBox extends Component {
     const ticketDetails = () => (
       <Col md="6">
         <ListGroup className="text-dark">
-          <ListGroupItem className="justify-content-between">Tid & plats <span className="float-right font-weight-bold">{b.show.date} kl {b.show.time}</span></ListGroupItem>
+          <ListGroupItem className="justify-content-between">Datum & Tid <span className="float-right font-weight-bold">{b.show.date} kl {b.show.time}</span></ListGroupItem>
           <ListGroupItem className="justify-content-between">Alkohol tillåtet <span className="float-right font-weight-bold">{b.show.auditorium.alcohol}</span></ListGroupItem>
           <ListGroupItem className="justify-content-between">Barn {ticketBadge(b.tickets.kids)}</ListGroupItem>
           <ListGroupItem className="justify-content-between">Vuxna {ticketBadge(b.tickets.adult)}</ListGroupItem>

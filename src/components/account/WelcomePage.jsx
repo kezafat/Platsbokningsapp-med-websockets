@@ -16,7 +16,7 @@ const WelcomePage = () => {
             <Card>
               <CardBody>
                 <CardTitle>Vill du ha ett eget konto?</CardTitle>
-                <CardText>Det är helt gratis! Skapa ditt konto här och börja boka filmer som en äkta die-hard fan!</CardText>
+                <CardText>Det är helt gratis! Skapa ditt konto här och börja boka filmer som ett äkta die-hard fan!</CardText>
                 <Link to='/registrera-konto' className="btn btn-success btn-block">Skapa konto</Link>
               </CardBody>
             </Card>

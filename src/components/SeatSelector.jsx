@@ -73,6 +73,16 @@ class SeatSelector extends Component {
     return maxCount
   }
 
+  get selectionIsAdjacent() {
+    // getter to check if selected seats are on the same row and next to each other
+    // I opted to make both statements using the .every method for brevity
+    // the !index check in the 2nd one makes sure that the first element always passes
+    const isSameRow = this.selectedSeats.every(seat => seat.row === this.selectedSeats[0].row)
+    const isAdjacentSeats = this.selectedSeats.every((seat, index) => 
+      !index || seat.seatNumber === this.selectedSeats[index - 1].seatNumber + 1)
+    return isSameRow && isAdjacentSeats
+  }
+
   get ticketsCount() {
     return Object.values(this.state.tickets).reduce((accumulator, current) => accumulator + current, 0)
   }
@@ -157,7 +167,7 @@ class SeatSelector extends Component {
     if (this.selectedSeats.length === 0) { return this.suggestBestSeats() }
     const surplus = this.selectedSeats.length - this.ticketsCount
     if (surplus > 0) {
-      this.unselectedRecentSeats(surplus)
+      this.deselectRecentSeats(surplus)
     } else if (surplus === -1 && !this.state.separateSeats) {
       this.addOneAdjacentSeatToSelection()
     } else if (surplus < 0 && this.state.separateSeats) {
@@ -167,14 +177,16 @@ class SeatSelector extends Component {
     }
   }
 
-  async unselectedRecentSeats(numberOfSeats) {
+  async deselectRecentSeats(numberOfSeats) {
     const selection = this.selectedSeats.sort((a, b) => b.order - a.order).slice(0, numberOfSeats)
     await this.mutateSeats(selection, { selected: false })
-    if (this.separateSeatsForced && this.selectedSeats.every(seat => seat.row === this.selectedSeats[0].row)) {
+    if (this.separateSeatsForced && this.selectionIsAdjacent) {
       this.setState({ separateSeats: false })
       this.separateSeatsForced = false
     }
   }
+
+
 
   async addOneAdjacentSeatToSelection() {
     // first try to expand the selection to a higher or lower seat based on evaluation
@@ -297,7 +309,7 @@ class SeatSelector extends Component {
       if (this.selectedSeats.length < this.ticketsCount) {
         this.mutateSeats([newSeat], { highlighted: false, selected: true })
       } else {
-        this.unselectedRecentSeats(1)
+        this.deselectRecentSeats(1)
         this.mutateSeats([newSeat], { highlighted: false, selected: true })
       }
     } else if (this.selectedSeats.some(seat => seat.seatNumber === newSeat.seatNumber)){

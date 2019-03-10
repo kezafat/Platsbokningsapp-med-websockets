@@ -19,40 +19,37 @@ module.exports = class LoginHandler {
 
       if (user) {
         // Already in DB, redirect user to login screen
-        res.json({ 'msg': 'login' });
+        res.json({ 'msg': 'login', 'res': "Detta konto finns redan!" });
         return;
       }
 
       if (!data.password) {
-        res.json({ 'msg': 'error, no password' });
+        res.json({ 'msg': 'error', 'res': 'Ett lösenord måste anges!' });
+        return;
+      }
+      if (!data.name) {
+        res.json({ 'msg': 'error', 'res': 'Du måste ange ett namn!' });
         return;
       }
 
-      // Add the account (I choose to handle all cases myself and respond with pure string responses that frontend can use to handle actions)
-      // We've been told that it is not good to expose that mongodb is being used, so this is my workaround.
       let encryptedPwd = await bcrypt.hash(data.password + passwordSalt, 10);
       data.password = encryptedPwd;
       let newUser = new this.User(data);
       let result = await newUser.save().catch(error => err = error);
-      // Actually not doing anything with err at all, if things do NOT go as planned, then they are errored and no need to tell frontend that
-      // Keeping err around for backend torubleshooting
 
-      // We check for clues in the result String as to how everything went
-      let resString = result + "";
-      resString = resString.toLowerCase();
-
-      if (resString.search('error') !== -1) {
-        res.json({ 'msg': "error" });
-      } else {
-        // Since all went well, also store some data in users session.
-        req.session.user = data.email;
-        req.session.name = data.name;
-        req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
-        req.session.auth = true;
-        req.session._id = newUser._id;
-        await req.session.save();
-        res.json({ "msg": "ok", 'user': req.session.user, 'name': req.session.name, '_id': newUser._id });
+      if (err) {
+        res.json({ 'db': err, 'msg': 'error', 'res': "Något gick fel med databasen :(" });
+        return;
       }
+
+      req.session.user = data.email;
+      req.session.name = data.name;
+      req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
+      req.session.auth = true;
+      req.session._id = newUser._id;
+      await req.session.save();
+      res.json({ "msg": "ok", 'user': req.session.user, 'name': req.session.name, '_id': newUser._id });
+
     })
   }
 
@@ -64,13 +61,18 @@ module.exports = class LoginHandler {
       // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
       if (req.session.auth === true) {
         let user = await this.User.findOne({ email: req.session.user }).catch(error => err = error);
+        if (err) {
+          res.json({ err });
+          return;
+        }
         res.json({ 'msg': 'ok', 'user': req.session.user, 'xtrazz': 'Hot damn! User was already logged in :D', 'name': req.session.name, '_id': user._id });
         return;
       }
 
       let data = req.body;
+      // Leaving this here because peepz could use postman even if clientside validation does not allow posts with uncomplete forms
       if (!data.password || !data.email) {
-        res.json({ 'msg': 'error', 'xtras' : 'missing email or pwd' });
+        res.json({ 'msg': 'error', 'xtras': 'missing email or pwd' });
         return;
       }
 

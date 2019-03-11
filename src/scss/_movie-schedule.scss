@@ -1,7 +1,17 @@
 .movies-schedule-page {
+  .btn {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+  h5 {
+    font-size: 1.35rem;
+  }
+  p {
+    font-size: 1.15rem;
+  }
 
   img{
-    width: 70%;
+    width: 92%;
     margin-left: 5%;
   }
   @media only screen and(max-width: 375px){
@@ -9,17 +19,52 @@
       display: none;
     }
   }
-  @media only screen and(max-width: 668px){
+  @media only screen and(max-width: 568px){
     img {
       width: 50%;
     }
+  }
+  @media only screen and(max-width: 768px){
+    img {
+      width: 90%;
+    }
+    
     h5 {
-      font-size: 70%;
+      font-size: 19px;
     }
     p {
-      font-size: 70%;
+      font-size: 15px;
     }
   }
+  @media only screen and(min-width: 768px){
+      .btn{
+        padding: 3px;
+        padding-left: 9%;
+        padding-right: 9%;
+      }
+    }
+    @media only screen and(min-width: 993px){
+      img {
+        width: 90%;
+      }
+      h5 {
+        font-size: 2.05rem;
+      }
+      p {
+        font-size: 2.05rem;
+      }
+    }
+    @media only screen and(min-width: 1003px){
+      img {
+        width: 90%;
+      }
+      h5 {
+        font-size: 2.15rem;
+      }
+      p {
+        font-size: 2rem;
+      }
+    }
   .red{
     background-color:#dc3545;
     font-size: 18px;
@@ -33,7 +78,9 @@
       padding: 10px;
     }
     .btn{
-      padding: 1px;
+      padding: 3px;
+      padding-left: 13%;
+      padding-right: 13%;
     }
   }
   @include media-breakpoint-only(sm) {

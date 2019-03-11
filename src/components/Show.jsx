@@ -26,21 +26,19 @@ class Show extends Component {
               <Col sm="auto" md="4" className="d-flex flex-column pl-3">
                 <CardBody className="pl-0">
                   <h5 className="m-0 mt-4">{this.props.show.movie.title}</h5>
-                  <p>{this.props.show.auditorium.name}</p>
+                  <p className="mt-2">{this.props.show.auditorium.name}</p>
                 </CardBody>
                 <Row className="buttons pl-3 mr-4">
                   <Link
                     to={
-                      "/bokning/" +
+                      "/visningar/" +
                       this.props.show.auditorium.name
                         .replace(" ", "-")
                         .toLowerCase() +
                       "/" +
                       this.props.show.date +
                       "/" +
-                      this.props.show.time +
-                      "/" +
-                      this.props.show.movie.title
+                      this.props.show.time
                     }
                     className="btn btn-outline-danger mt-auto mb-3"
                   >

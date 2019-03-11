@@ -31,7 +31,7 @@ class App extends Component {
           <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
           <Route exact path="/filmer" component={MoviePage} />
           <Route path="/filmer/:title" component={MovieDetail} />
-          <Route path="/visningar/" component={Shows} />
+          <Route exact path="/visningar/" component={Shows} />
           <Route path="/bokningsbekräftelse/" component={BookingConfirmationContainer} />
           <Route exact path="/biografer" component={Auditoria} />
           <Route path="/biografer/:name" component={Auditorium} />

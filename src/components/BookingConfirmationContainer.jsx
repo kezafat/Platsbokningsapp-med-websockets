@@ -1,22 +1,26 @@
 import React, { Component } from "react";
+import BookingConfirmation from "./BookingConfirmation";
 
 class BookingConfirmationContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.fetchedBooking = false;
-    state = {};
   }
 
   async getSelectedBooking() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let id = urlParams.get("id");
-    if (id === null) {
-      return;
-    }
+    console.log('ko');
+    // let urlParams = new URLSearchParams(window.location.search);
+    // let id = urlParams.get("id");
+    // if (id === null) {
+    //   return
+    // };
+    
     let booking = await fetch("http://localhost:3000/json/shows/");
     this.bookingConfirmation = new BookingConfirmation(booking);
     this.setState(state => this);
     console.log(booking);
+    console.log('hi');
+
   }
   componentDidMount() {
     this.getSelectedBooking();

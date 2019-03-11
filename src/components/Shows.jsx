@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Spinner } from "reactstrap";
 import Day from "./Day";
 
 class Shows extends Component {
   constructor(props) {
     super(props);
-
     this.days = [];
     this.allShows = [];
     this.fetchShows();
+    this.state = {
+      loaded: false,
+    }
   }
 
   async fetchShows() {
@@ -20,6 +22,7 @@ class Shows extends Component {
       .join(":");
     this.allShows = await fetch("http://localhost:3000/json/shows/");
     this.allShows = await this.allShows.json();
+
     this.allShows = this.allShows.filter(show => {
       if (show.date > currentDate) {
         return true;
@@ -53,6 +56,7 @@ class Shows extends Component {
     // create a day with the same date as the first show
     this.days = [{ date: firstDate, shows: [] }];
     for (let show of this.allShows) {
+      if (!show) { continue }
       let currentDay = this.days[this.days.length - 1];
       // if the date of the show isn't the current day
       // create a new day
@@ -65,11 +69,11 @@ class Shows extends Component {
     }
 
     // render
-    this.setState(state => this);
+    this.setState({ loaded: true })
   }
 
   render() {
-    return (
+    const melsMarkup = () => (
       <section className="movies-schedule-page">
         <Row>
           <Col>
@@ -82,7 +86,10 @@ class Shows extends Component {
           ))}
         </div>
       </section>
-    );
+    )
+    return (
+      this.state.loaded ? melsMarkup() : <Spinner />
+    )
   }
 }
 

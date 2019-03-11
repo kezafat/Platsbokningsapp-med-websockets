@@ -63,6 +63,12 @@ module.exports = class Server {
 
     global.models = models;
 
+    app.get('/json/movies/:title', async (req, res) => {
+      const movies = await models.movies.find({
+      })
+      const movie = movies.filter(movie => movie.title.toLowerCase().replace(/ /g, '-').replace().replace(/:/, '') === req.params.title)
+      res.json(movie)
+    })
     // create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../avoidFOUC';
 import NavBar from './NavBar'
 import Footer from './Footer'
-import MoviesContainer from './MoviesContainer'
+import MoviePage from './MoviePage'
+import MovieDetail from './MovieDetail'
 import ShowContainer from './ShowContainer'
 import StartPage from './StartPage'
 import Auditoria from './Auditoria'
@@ -14,6 +15,12 @@ import UserPage from './account/UserPage'
 import { Route, } from 'react-router-dom'
 import { Spinner, } from 'reactstrap'
 import BookShow from './BookShow'
+import { Route } from 'react-router-dom'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+library.add(faStar);
+
+
 
 class App extends Component {
   constructor(props) {
@@ -53,6 +60,8 @@ class App extends Component {
           <Route exact path="/mitt-konto" render={() => <div><UserPage state={this.state} /></div>} />
         </main>
         <Footer />
+        <Route path="/filmer/:title" component={MovieDetail} />
+        <Route exact path="/filmer" component={MoviePage} />
       </div>
     );
   }

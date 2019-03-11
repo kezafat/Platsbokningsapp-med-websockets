@@ -1,7 +1,7 @@
 .movies-schedule-page {
   .btn {
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 12%;
+    padding-right: 12%;
   }
   h5 {
     font-size: 1.35rem;
@@ -28,7 +28,6 @@
     img {
       width: 90%;
     }
-    
     h5 {
       font-size: 19px;
     }
@@ -36,13 +35,13 @@
       font-size: 15px;
     }
   }
-  @media only screen and(min-width: 768px){
-      .btn{
-        padding: 3px;
-        padding-left: 9%;
-        padding-right: 9%;
-      }
-    }
+  // @media only screen and(min-width: 768px){
+  //     .btn{
+  //       padding: 3px;
+  //       padding-left: 9%;
+  //       padding-right: 9%;
+  //     }
+  //   }
     @media only screen and(min-width: 993px){
       img {
         width: 90%;

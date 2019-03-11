@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Spinner,
   Container,
@@ -121,7 +121,7 @@ class Auditorium extends Component {
                           <Col xs="12" sm="auto">{show.date + ' ' + show.time}</Col>
                           <Col xs="12" sm="auto">{show.movie.title}</Col>
                           <Col xs="12" className="d-flex justify-content-end col-md">
-                            <Link to={'/visningar/' + show._id} className="btn btn-outline-danger btn-sm float-md-right">
+                            <Link to={`/visningar/${show.auditorium.name.replace(/\s/, '-').toLowerCase()}/${show.date}/${show.time}`} className="btn btn-outline-danger btn-sm float-md-right">
                               {freeSeats} kvar av {this.totalSeats} ->
                                 </Link>
                           </Col>

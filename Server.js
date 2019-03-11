@@ -9,6 +9,8 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const http = require('http');
 const SocketIoController = require('./SocketIoController');
+const cors = require('cors');
+
 
 
 module.exports = class Server {
@@ -39,6 +41,9 @@ module.exports = class Server {
 
     // Add body-parser to our requests
     app.use(bodyParser.json());
+    
+    // use cors (super safe)
+    app.use(cors())
 
 
     // Add session (and cookie) handling to Express
@@ -58,7 +63,6 @@ module.exports = class Server {
       auditoria: require('./schemas/Auditorium'),
       bookings: require('./schemas/Booking'),
       shows: require('./schemas/Show'),
-      users: require('./schemas/User')
     };
 
     global.models = models;
@@ -85,7 +89,7 @@ module.exports = class Server {
     new CreateRestRoutes(app, db, models);
 
     // create special extra routes for login
-    new LoginHandler(app, require('./schemas/User'));
+    new LoginHandler(app, db, require('./schemas/User'));
 
     // Start the web server
     const server = http.Server(app);

@@ -9,7 +9,7 @@ import {
 import TicketSelector from './TicketSelector'
 import SeatMap from './SeatMap'
 import Socket from './Socket'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 class SeatSelector extends Component {
   constructor(props) {
@@ -78,8 +78,8 @@ class SeatSelector extends Component {
     // I opted to make both statements using the .every method for brevity
     // the !index check in the 2nd one makes sure that the first element always passes
     const isSameRow = this.selectedSeats.every(seat => seat.row === this.selectedSeats[0].row)
-    const isAdjacentSeats = this.selectedSeats.every((seat, index) => 
-      !index || seat.seatNumber === this.selectedSeats[index - 1].seatNumber + 1)
+    const isAdjacentSeats = this.selectedSeats.every((seat, index, seats) => 
+      !index || seat.seatNumber === seats[index - 1].seatNumber + 1)
     return isSameRow && isAdjacentSeats
   }
 
@@ -491,11 +491,18 @@ class SeatSelector extends Component {
             </Alert>
             <div className="button-wrap">
             {
-              (this.freeSeats.length > 0)
-              ?
-              <button className="btn btn-outline-danger" disabled={this.selectedSeats.length !== this.ticketsCount} onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
-              :
-              <button className="btn btn-outline-danger disabled">Denna visning är fullbokad</button>
+                (this.freeSeats.length > 0)
+                  ?
+                  (!global.auth)
+                    ?
+                    <Link to={{
+                      pathname: '/konto',
+                      state: { fromBooking: this.props.match.url }
+                    }} className="btn btn-outline-danger" >Logga in för att boka</Link>
+                    :
+                    <button className="btn btn-outline-danger" disabled={this.selectedSeats.length !== this.ticketsCount} onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
+                  :
+                  <button className="btn btn-outline-danger disabled">Denna visning är fullbokad</button>
             }
             </div>
           </section>

@@ -49,7 +49,6 @@ class App extends Component {
         </header>
         <main className="container">
           <Route exact path="/" component={StartPage} />
-          <Route exact path="/biografer" component={Auditoria} />
           <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
           <Route exact path="/filmer" component={MoviePage} />
           <Route path="/filmer/:title" component={MovieDetail} />

@@ -5,14 +5,12 @@ import {
 import CarouselStartPage from './CarouselStartPage';
 import CardStartPage from './CardStartPage';
 import Shows from './Shows';
-
-
 class StartPage extends Component {
   constructor(props) {
     super(props);
     this.movies = require('../json/movies.json');
-    this.shows = this.props.show;
-    this.auditorium = this.props.auditorium;
+    //this.shows = [];
+
   }
   render() {
     return (<Container fluid>
@@ -26,11 +24,7 @@ class StartPage extends Component {
         })}
         <Col xs="12" md="4" className="aside d-flex">
           <Shows />
-          <div className="schedule"><p>{this.props.show}
-            kl. {this.props.show}</p> <br />
-          </div>
-        </Col>)
-          })}
+        </Col>
       </Row>
     </Container>
     )

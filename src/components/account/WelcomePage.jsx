@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Card, CardBody, CardText, CardTitle, CardGroup } from 'reactstrap';
 
-const WelcomePage = () => {
+const WelcomePage = (props) => {
+  // this is the 'route state'
+  const { state } = props.location
   return (
     <div>
       <Row>
@@ -17,7 +19,12 @@ const WelcomePage = () => {
               <CardBody>
                 <CardTitle>Vill du ha ett eget konto?</CardTitle>
                 <CardText>Det är helt gratis! Skapa ditt konto här och börja boka filmer som ett äkta die-hard fan!</CardText>
-                <Link to='/registrera-konto' className="btn btn-success btn-block">Skapa konto</Link>
+                <Link to={{
+                  pathname: '/registrera-konto',
+                  state: {
+                    fromBooking: state ? state.fromBooking : undefined
+                  }
+                }} className="btn btn-success btn-block">Skapa konto</Link>
               </CardBody>
             </Card>
 
@@ -25,7 +32,12 @@ const WelcomePage = () => {
               <CardBody>
                 <CardTitle>Har du redan ett konto?</CardTitle>
                 <CardText>Vad sägs om att du tar och loggar in på det då. Gör du inte det förblir du utloggad :(</CardText>
-                <Link to='/logga-in' className="btn btn-danger btn-block">Logga in</Link>
+                <Link to={{
+                  pathname: '/logga-in',
+                  state: {
+                    fromBooking: state ? state.fromBooking : undefined
+                  }
+                }} className="btn btn-danger btn-block">Logga in</Link>
               </CardBody>
             </Card>
           </CardGroup>

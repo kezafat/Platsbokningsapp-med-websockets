@@ -47,7 +47,7 @@ class App extends Component {
           <Route exact path="/biografer" component={Auditoria} />
           <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
           <Route path="/biografer/:name" component={Auditorium} />
-          <Route exact path="/konto" render={() => <div><AccountPage state={this.state} /></div>} />
+          <Route exact path="/konto" render={(props) => <div><AccountPage state={this.state} {...props} /></div>} />
           <Route exact path="/logga-in" render={() => <div><LoginPage state={this.state} /></div>} />
           <Route exact path="/registrera-konto" render={() => <div><RegisterPage state={this.state} /></div>} />
           <Route exact path="/mitt-konto" render={() => <div><UserPage state={this.state} /></div>} />

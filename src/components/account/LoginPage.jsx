@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect, withRouter, Link } from 'react-router-dom';
 import { Button, Input, Row, Col, Spinner } from 'reactstrap'
 import FR from '../../fetchRouter.js';
-import * as validator from "email-validator";
+import * as validator from 'email-validator';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -43,6 +43,9 @@ class LoginPage extends Component {
     const res = await FR(fetchData)
 
     if (res.msg === "ok") {
+      if (this.props.location.state) {
+        this.props.history.push(this.props.location.state.fromBooking)
+      }
       this.props.state.setAuth({ display: "mitt-konto", linkVal: res.name, authStatus: true }, res)
     }
 

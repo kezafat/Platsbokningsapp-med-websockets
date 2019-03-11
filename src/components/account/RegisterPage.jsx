@@ -56,6 +56,10 @@ class RegisterPage extends Component {
     }
 
     if (res.msg === "ok") {
+      const routerState = this.props.location.state
+      if (routerState) {
+        this.props.history.push(routerState.fromBooking)
+      }
       this.props.state.setAuth({ display: "mitt-konto", linkVal: res.name, authStatus: true }, res)
     }
   }

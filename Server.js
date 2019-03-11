@@ -52,8 +52,7 @@ module.exports = class Server {
       resave: false,
       saveUninitialized: true,
       store: new MongoStore({
-        mongooseConnection: db,
-        collection: "tmpsess"
+        mongooseConnection: db
       })
     }));
 

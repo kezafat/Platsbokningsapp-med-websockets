@@ -9,7 +9,7 @@ import {
 import TicketSelector from './TicketSelector'
 import SeatMap from './SeatMap'
 import Socket from './Socket'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 class SeatSelector extends Component {
   constructor(props) {
@@ -491,11 +491,18 @@ class SeatSelector extends Component {
             </Alert>
             <div className="button-wrap">
             {
-              (this.freeSeats.length > 0)
-              ?
-              <button className="btn btn-outline-danger" disabled={this.selectedSeats.length !== this.ticketsCount} onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
-              :
-              <button className="btn btn-outline-danger disabled">Denna visning är fullbokad</button>
+                (this.freeSeats.length > 0)
+                  ?
+                  (!global.auth)
+                    ?
+                    <Link to={{
+                      pathname: '/konto',
+                      state: { fromBooking: this.props.match.url }
+                    }} className="btn btn-outline-danger" >Logga in för att boka</Link>
+                    :
+                    <button className="btn btn-outline-danger" disabled={this.selectedSeats.length !== this.ticketsCount} onClick={this.sendBookingRequest}>BOOK THAT SHOWY-SHOW</button>
+                  :
+                  <button className="btn btn-outline-danger disabled">Denna visning är fullbokad</button>
             }
             </div>
           </section>

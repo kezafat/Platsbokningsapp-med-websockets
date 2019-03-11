@@ -9,7 +9,7 @@ class AccountPage extends Component {
     const display = this.props.state.display;
     return (
       <Jumbotron className="accountpage">
-        {display === "welcome" && <WelcomePage />}
+        {display === "welcome" && <WelcomePage location={this.props.location} />}
         {display === "registrera-konto" && global.auth !== true ? <Redirect to="/registrera-konto" /> : ''}
         {display === "mitt-konto" && global.auth === true ? <Redirect to="/mitt-konto" /> : ''}
       </Jumbotron>

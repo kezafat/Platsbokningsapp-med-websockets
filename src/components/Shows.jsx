@@ -64,8 +64,8 @@ class Shows extends Component {
       currentDay.shows.push(show);
     }
 
-    // render
-    this.setState(state => this);
+    // render method
+    this.setState({});
   }
 
   render() {

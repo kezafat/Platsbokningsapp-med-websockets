@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect, withRouter, Link } from 'react-router-dom';
 import { Button, Input, Row, Col, Spinner } from 'reactstrap'
 import FR from '../../fetchRouter.js';
-const validator = require("email-validator");
+import * as validator from "email-validator";
 
 class LoginPage extends Component {
   constructor(props) {

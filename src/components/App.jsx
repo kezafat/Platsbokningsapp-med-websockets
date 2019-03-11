@@ -5,11 +5,19 @@ import Footer from './Footer'
 //import MoviesContainer from './MoviesContainer'
 import Shows from './Shows'
 // import BookingConfirmationContainer from './BookingConfirmationContainer'
+import MoviePage from './MoviePage'
+import MovieDetail from './MovieDetail'
+import ShowContainer from './ShowContainer'
 import StartPage from './StartPage'
 import Auditoria from './Auditoria'
 import Auditorium from './Auditorium'
 import BookShow from './BookShow'
 import { Route } from 'react-router-dom'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+library.add(faStar);
+
+
 
 class App extends Component {
   render() {
@@ -20,9 +28,10 @@ class App extends Component {
       </header>
       <main className="main-content container mt-4 mb-3">
         <Route exact path="/" component={StartPage} />
-        <Route path="/filmer" component={MoviesContainer} />
         <Route exact path="/visningar" component={Shows} />
           <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
+        <Route exact path="/filmer" component={MoviePage} />
+        <Route path="/filmer/:title" component={MovieDetail} />
         <Route exact path="/biografer" component={Auditoria} /> 
         <Route path ="/biografer/:name" component={Auditorium} />
       </main>

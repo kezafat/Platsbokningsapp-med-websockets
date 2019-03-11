@@ -14,32 +14,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-<<<<<<< HEAD
       <header>
         <NavBar />
       </header>
-      <main className="container">
+      <main className="main-content container mt-4 mb-3">
         <Route exact path="/" component={StartPage} />
         <Route path="/filmer" component={MoviesContainer} />
-        <Route path="/visningar" component={Shows} />
+        <Route exact path="/visningar" component={Shows} />
+          <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
         <Route exact path="/biografer" component={Auditoria} /> 
         <Route path ="/biografer/:name" component={Auditorium} />
       </main>
       <Footer />
-=======
-        <header>
-          <NavBar />
-        </header>
-        <main className="main-content container mt-4 mb-3">
-          <Route exact path="/" component={StartPage} />
-          <Route path="/filmer" component={MoviesContainer} />
-          <Route exact path="/visningar" component={ShowContainer} />
-          <Route path="/visningar/:auditorium/:date/:time" component={BookShow} />
-          <Route exact path="/biografer" component={Auditoria} />
-          <Route path="/biografer/:name" component={Auditorium} />
-        </main>
-        <Footer />
->>>>>>> elias/booking-page-react
       </div>
     );
   }

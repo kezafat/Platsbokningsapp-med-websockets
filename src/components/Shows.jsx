@@ -70,10 +70,10 @@ class Shows extends Component {
 
   render() {
     return (
-      <section className="movie-schedule-page">
+      <section className="movies-schedule-page">
         <Row>
           <Col>
-            <h2 className="mb-3 ml-3">Filmvisningar</h2>
+            <h2 className="mb-3">Filmvisningar</h2>
           </Col>
         </Row>
         <div className="date">

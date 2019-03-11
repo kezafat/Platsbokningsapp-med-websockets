@@ -2,37 +2,41 @@
 
   img{
     width: 70%;
+    margin-left: 5%;
+  }
+  @media only screen and(max-width: 375px){
+    img {
+      display: none;
+    }
+  }
+  @media only screen and(max-width: 668px){
+    img {
+      width: 50%;
+    }
+    h5 {
+      font-size: 70%;
+    }
+    p {
+      font-size: 70%;
+    }
   }
   .red{
     background-color:#dc3545;
     font-size: 18px;
+    display: inline-block;
   }
   @include media-breakpoint-only(xs) {
-    p{
-      font-size: 60%;
-    }
     .red{
-      font-size: 45%;
       padding: 2px;
-    }
-    h5{
-      font-size: 60%;
     }
     .card-body{
       padding: 10px;
     }
     .btn{
-      font-size: 70%;
       padding: 1px;
     }
   }
   @include media-breakpoint-only(sm) {
-      h5{
-        font-size: 0.74rem;
-      }
-      p{
-        font-size: 0.70rem
-      }
       .card-body{
         padding: 10px;
       }

@@ -5,11 +5,12 @@ import {
 import CarouselStartPage from './CarouselStartPage';
 import CardStartPage from './CardStartPage';
 import Shows from './Shows';
+
 class StartPage extends Component {
   constructor(props) {
     super(props);
     this.movies = require('../json/movies.json');
-    //this.shows = [];
+    this.shows = [];
 
   }
   render() {
@@ -22,9 +23,12 @@ class StartPage extends Component {
               <CardStartPage movie={movie} />
             </Col>)
         })}
-        <Col xs="12" md="4" className="aside d-flex">
-          <Shows />
-        </Col>
+        {this.shows.map((show) => {
+          return (
+            <Col xs="12" md="4" className="aside d-flex">
+              <Shows show={show} />
+            </Col>)
+        })}
       </Row>
     </Container>
     )

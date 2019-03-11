@@ -1,9 +1,9 @@
 body > div  {
-  background-color: rgb(177, 173, 173);
+  //background-color: rgb(177, 173, 173);
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  //background-image: url("../images/wheat.png"); *This has got to go*
+  background-image: url("../images/wheat.png"); 
   font-family: 'Lato', sans-serif;
 }
 

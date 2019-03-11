@@ -78,8 +78,8 @@ class SeatSelector extends Component {
     // I opted to make both statements using the .every method for brevity
     // the !index check in the 2nd one makes sure that the first element always passes
     const isSameRow = this.selectedSeats.every(seat => seat.row === this.selectedSeats[0].row)
-    const isAdjacentSeats = this.selectedSeats.every((seat, index) => 
-      !index || seat.seatNumber === this.selectedSeats[index - 1].seatNumber + 1)
+    const isAdjacentSeats = this.selectedSeats.every((seat, index, seats) => 
+      !index || seat.seatNumber === seats[index - 1].seatNumber + 1)
     return isSameRow && isAdjacentSeats
   }
 

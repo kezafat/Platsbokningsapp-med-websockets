@@ -1,8 +1,9 @@
 .movies-schedule-page {
   .btn {
-    overflow: normal;
-    padding-left: 12%;
-    padding-right: 12%;
+  padding: 12px;
+  width: 43%;
+  // margin-right: 5px;
+  display: inline-block;
   }
   h5 {
     font-size: 1.35rem;
@@ -10,7 +11,6 @@
   p {
     font-size: 1.15rem;
   }
-
   img{
     width: 92%;
     margin-left: 5%;
@@ -20,11 +20,16 @@
       display: none;
     }
   }
-  @media only screen and(max-width: 568px){
+  @media only screen and(max-width: 575px){
     img {
       width: 50%;
     }
+   .btn {
+    padding: 3px;
+    padding-left: 11%;
+    padding-right: 11%;
   }
+}
   @media only screen and(max-width: 768px){
     img {
       width: 90%;
@@ -36,13 +41,6 @@
       font-size: 15px;
     }
   }
-  // @media only screen and(min-width: 768px){
-  //     .btn{
-  //       padding: 3px;
-  //       padding-left: 9%;
-  //       padding-right: 9%;
-  //     }
-  //   }
     @media only screen and(min-width: 993px){
       img {
         width: 90%;
@@ -79,8 +77,8 @@
     }
     .btn{
       padding: 3px;
-      padding-left: 13%;
-      padding-right: 13%;
+      padding-left: 12%;
+      padding-right: 12%;
     }
   }
   @include media-breakpoint-only(sm) {

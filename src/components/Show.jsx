@@ -31,14 +31,9 @@ class Show extends Component {
                 <Row className="buttons pl-3 mr-4">
                   <Link
                     to={
-                      "/visningar/" +
-                      this.props.show.auditorium.name
-                        .replace(" ", "-")
-                        .toLowerCase() +
-                      "/" +
-                      this.props.show.date +
-                      "/" +
-                      this.props.show.time
+                      "/filmer/" +
+                      this.props.show.movie.title
+                       
                     }
                     className="btn btn-outline-danger mt-auto mb-3"
                   >

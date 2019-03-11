@@ -57,6 +57,8 @@ class App extends Component {
           <Route exact path="/bokningsbekräftelse/" component={BookingConfirmationContainer} />
           <Route exact path="/biografer" component={Auditoria} />
           <Route path="/biografer/:name" component={Auditorium} />
+          <Route path="/filmer/:title" component={MovieDetail} />
+          <Route exact path="/filmer" component={MoviePage} />
           <Route exact path="/konto" render={(props) => <div><AccountPage state={this.state} {...props} /></div>} />
           <Route exact path="/logga-in" render={() => <div><LoginPage state={this.state} /></div>} />
           <Route exact path="/registrera-konto" render={() => <div><RegisterPage state={this.state} /></div>} />

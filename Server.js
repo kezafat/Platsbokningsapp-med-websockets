@@ -67,6 +67,12 @@ module.exports = class Server {
 
     global.models = models;
 
+    app.get('/json/movies/:title', async (req, res) => {
+      const movies = await models.movies.find({
+      })
+      const movie = movies.filter(movie => movie.title.toLowerCase().replace(/ /g, '-').replace().replace(/:/, '') === req.params.title)
+      res.json(movie)
+    })
     // Route for human friendly show urls
 
     app.get('/json/shows/:auditorium/:date/:time', async (req, res) => {

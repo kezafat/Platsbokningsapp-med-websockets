@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardImg,
-} from 'reactstrap'
+import { Row, Col, Card, CardBody, CardImg, Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -99,12 +93,8 @@ class MoviePage extends Component {
                             "/"
                           }
                             className="btn btn-outline-danger">Boka</Link>
-                          <Link to={"/filmer/" +
-                            movie.title
-                              .replace(/ /g, "-")
-                              .replace(/:/g, "")
-                              .toLowerCase()}
-                            className="btn btn-outline-danger">Mera</Link>
+                          {/* <Link to={"/filmer/" + movie.title.replace(/ /g, "-").replace(/:/g, "").toLowerCase()} className="btn btn-outline-danger">Mera</Link> */}
+                          <Button className="btn btn-danger">Mera</Button>
                         </div>
                       </Col>
                     </Row>

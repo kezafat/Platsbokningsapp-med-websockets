@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Row,
-} from 'reactstrap'
-import { Link } from 'react-router-dom'
+import { Row, } from 'reactstrap'
 
 class MovieDetail extends Component {
   constructor() {

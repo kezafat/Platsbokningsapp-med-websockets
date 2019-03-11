@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import '../avoidFOUC';
 import NavBar from './NavBar'
 import Footer from './Footer'
-import MoviesContainer from './MoviesContainer'
+//import MoviesContainer from './MoviesContainer'
 import Shows from './Shows'
+// import BookingConfirmationContainer from './BookingConfirmationContainer'
 import StartPage from './StartPage'
 import Auditoria from './Auditoria'
 import Auditorium from './Auditorium'

@@ -5,7 +5,7 @@ import Day from "./Day";
 class Shows extends Component {
   constructor(props) {
     super(props);
-
+    // this.state = { allShows: false, fetched: false };
     this.days = [];
     this.allShows = [];
     this.fetchShows();
@@ -50,9 +50,9 @@ class Shows extends Component {
     }
 
     let firstDate = this.allShows[0].date;
-    // create a day with the same date as the first show
     this.days = [{ date: firstDate, shows: [] }];
     for (let show of this.allShows) {
+      // create a day with the same date as the first show
       let currentDay = this.days[this.days.length - 1];
       // if the date of the show isn't the current day
       // create a new day
@@ -69,6 +69,14 @@ class Shows extends Component {
   }
 
   render() {
+    // if (!this.state.allShows) {
+    //   return (
+    //     <div className="d-flex justify-content-center">
+    //       <Spinner color="secondary" />
+    //     </div>
+    //   );
+    // }
+
     return (
       <section className="movies-schedule-page">
         <Row>

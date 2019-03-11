@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Spinner, Row, Col } from "reactstrap";
 import Day from "./Day";
 
 class Shows extends Component {
@@ -9,6 +9,9 @@ class Shows extends Component {
     this.days = [];
     this.allShows = [];
     this.fetchShows();
+    this.state = {
+      loaded: false,
+    }
   }
 
   async fetchShows() {
@@ -52,6 +55,7 @@ class Shows extends Component {
     let firstDate = this.allShows[0].date;
     this.days = [{ date: firstDate, shows: [] }];
     for (let show of this.allShows) {
+      if(!show) { continue }
       // create a day with the same date as the first show
       let currentDay = this.days[this.days.length - 1];
       // if the date of the show isn't the current day
@@ -65,32 +69,28 @@ class Shows extends Component {
     }
 
     // render method
-    this.setState({});
+    this.setState({ loaded:true });
   }
 
   render() {
-    // if (!this.state.allShows) {
-    //   return (
-    //     <div className="d-flex justify-content-center">
-    //       <Spinner color="secondary" />
-    //     </div>
-    //   );
-    // }
-
+   let markUp = () => (
+       <section className="movies-schedule-page">
+         <Row>
+           <Col>
+             <h2 className="mb-3">Filmvisningar</h2>
+           </Col>
+         </Row>
+         <div className="date">
+           {this.days.map((day, index) => (
+             <Day key={index} show={day} />
+           ))}
+         </div>
+       </section>
+     )
     return (
-      <section className="movies-schedule-page">
-        <Row>
-          <Col>
-            <h2 className="mb-3">Filmvisningar</h2>
-          </Col>
-        </Row>
-        <div className="date">
-          {this.days.map((day, index) => (
-            <Day key={index} show={day} />
-          ))}
-        </div>
-      </section>
-    );
+     this.state.loaded ? markUp() : <Spinner />
+   )
+
   }
 }
 

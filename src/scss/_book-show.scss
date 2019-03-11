@@ -8,9 +8,9 @@ div.book-show-container {
   }
 }
 
-section.book-show {
+div.book-show {
 
-  button {
+  button.btn {
     margin: 1rem 0;
   }
 
@@ -39,6 +39,11 @@ section.book-show {
           &:hover {
             background-color: #218838;
           }
+
+          &.disabled {
+            background-color: #0e5a1e;
+            cursor: default;
+          }
         }
       }
     }
@@ -47,12 +52,9 @@ section.book-show {
   div.button-wrap {
     display: flex;
     justify-content: center;
-  }
 
-  div.invalid-selection-alert, div.invalid-booking-alert, div.not-logged-in-alert, div.seats-stolen-alert {
-    display: none;
-    .close {
-      top: -15px;
+    button.disabled:hover, button[disabled] {
+      color: rgb(153, 3, 3)
     }
   }
 }

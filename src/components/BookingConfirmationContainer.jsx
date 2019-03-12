@@ -6,23 +6,22 @@ class BookingConfirmationContainer extends Component {
   constructor(props) {
     super(props);
     this.fetchedBooking = false;
+    this.selectedBooking = [];
+    console.log('he');
+
   }
 
   async getSelectedBooking() {
-    console.log('ko');
-    // let urlParams = new URLSearchParams(window.location.search);
-    // let id = urlParams.get("id");
-    // if (id === null) {
-    //   return
-    // };
-
-    let booking = await fetch("http://localhost:3000/json/shows/");
+    let { ticketID } = this.props.match.params;
+    let booking = await fetch(`http://localhost:3000/json/bookings/${ticketID}`);
     this.bookingConfirmation = new BookingConfirmation(booking);
+    this.fetchedBooking = true;
     this.setState(state => this);
-    console.log(booking);
+    console.log(booking, this);
     console.log('hi');
 
   }
+
   componentDidMount() {
     this.getSelectedBooking();
   }
@@ -32,8 +31,8 @@ class BookingConfirmationContainer extends Component {
 
   render() {
     return (
-      <div class="booking-confirmation-container">
-        {this.fetchedBooking ? this.bookingConfirmation : <Spinner />}
+      <div className="booking-confirmation-container">
+        {this.props.fetchedBooking ? this.props.bookingConfirmation : <Spinner />}
       </div>
     );
   }

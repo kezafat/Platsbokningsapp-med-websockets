@@ -31,17 +31,7 @@ class Show extends Component {
                 <Row className="buttons pl-3 mr-4">
                   <Link
                     to={
-                      "/filmer/" +
-                      this.props.show.movie.title
-                       
-                    }
-                    className="btn btn-outline-danger mt-auto mb-3"
-                  >
-                    Boka
-                  </Link>
-                  <Link
-                    to={
-                      "/filmer/" +
+                      "/visningar/" +
                       this.props.show.auditorium.name
                         .replace(" ", "-")
                         .toLowerCase() +
@@ -49,6 +39,21 @@ class Show extends Component {
                       this.props.show.date +
                       "/" +
                       this.props.show.time
+                    }
+                    className="btn btn-outline-danger mt-auto mb-3"
+                  >
+                    Boka
+                  </Link>
+                  <Link
+                    to={
+                      "/filmer" 
+                      // this.props.show.auditorium.name
+                      //   .replace(" ", "-")
+                      //   .toLowerCase() +
+                      // "/" +
+                      // this.props.show.date +
+                      // "/" +
+                      // this.props.show.time
                     }
                     className="btn btn-outline-danger mt-auto mb-3 ml-4"
                   >

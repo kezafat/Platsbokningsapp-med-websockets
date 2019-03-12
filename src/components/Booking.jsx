@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 class Booking extends Component {
 constructor(props){
   super(props);
-  this.auditorium = this.props.auditorium;
+  this.booking = this.props.booking;
+  console.log('ho');
+
 }
   render() { 
     
     return ( 
-      <div>{this.props.show}</div>
+      <div>{this.booking}</div>
      );
   }
 }

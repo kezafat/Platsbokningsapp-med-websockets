@@ -1,0 +1,45 @@
+@media (min-width: 992px) {
+  .smallNavLink{
+    display:none;
+  }
+}
+
+.accountpage{
+  button{
+    margin:5px;
+  }
+
+  .welcome{
+    .card{
+      background:#3f51b5;
+      margin: 10px;
+      color:#fff5cf;
+    }
+    .card-title{
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+}
+
+.registerpage{
+  button{
+    margin:5px;
+  }
+}
+.loginpage{
+  button{
+    margin:5px;
+  }
+}
+
+.usercontent{
+  .userBookingHistoryHeading{
+    font-weight: bold;
+  }
+  .bookingGroup{
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    margin-bottom: 5px;
+  }
+}

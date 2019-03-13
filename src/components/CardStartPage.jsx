@@ -5,24 +5,21 @@ import {
 import { Link } from 'react-router-dom';
 
 class CardStartPage extends Component {
-
     render() {
-        let { title, images, productionCountries, productionYear, genre, director, description } = this.props.movie;
+        let { id, title, images, productionCountries, productionYear, genre, director, description } = this.props.movie;
         return (
-            <div>
-                <CardGroup className="mt-2 mb-2">
-                    <Card>
-                        <CardBody>
-                            <CardTitle><h5>{title}</h5></CardTitle>
-                            <CardImg top width="100%" src={require('../images/' + images)} alt="Posters" />
-                            <CardSubtitle className="my-2"><p>[{productionCountries}] {director}<br />
-                                {genre} {productionYear}</p></CardSubtitle>
-                            <CardText><p>{description.substr(0, 200) + ' ... '} </p></CardText>
-                            <Link to={'/visningar/'} className="btn btn-outline-danger">Visningar</Link>
-                        </CardBody>
-                    </Card>
-                </CardGroup>
-            </div>
+            <CardGroup className="mt-2 mb-2" key={id}>
+                <Card>
+                    <CardBody>
+                        <CardTitle><h5 className="text-light">{title}</h5></CardTitle>
+                        <CardImg top width="100%" src={require('../images/' + images)} alt="Posters" />
+                        <CardSubtitle className="text-light my-2"> [{productionCountries}] {director}<br />
+                            {genre} {productionYear}</CardSubtitle>
+                        <CardText>{description.substr(0, 200)} <CardText onPress={'...'}> <a href={`/filmer/${this.props.movie.title.replace(/ /g, "-").replace(/:/g, "").toLowerCase()}`} className="films-link">läs vidare ...</a></CardText></CardText>
+                        <Link to={'/visningar/'} className="btn btn-outline-danger">Visningar</Link>
+                    </CardBody>
+                </Card>
+            </CardGroup>
         )
     }
 }

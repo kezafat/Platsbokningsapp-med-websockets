@@ -1,51 +1,34 @@
-.StartPage, .CardStartPage, .CarouselStartPage{
-html{
-  max-width: 960px;
-}
-body{
+.startpage, .cardstartpage, .calendar, .carouselstarpage{
+body >.startpage{
   width: 100%;
   height: auto;
   font-weight: 200;
-  //background-color: azure;
-  //background-image: url('../images/diehard-artposter.jpg'); 
 }
-
-/* Movies card row/column starts */
-.card{
-  //background-color:black;
-  position: relative;
-  flex: 1;
-  min-width: 280px;
-  .card-text{
-          font-size: 16px;
-     }
-  .CardTitle{
-          word-wrap: inherit;
-          font-size: 15px;
-      }
- }
-
-.img-thumbnail{
-  padding: 0;
-  border: 1px solid black;
-  background-color: transparent;
+.startpage-cards{
+  background-image: url('../images/diehard-artposter.jpg');
+  background-size: cover; 
 
 }
+}
+.films-link, a:hover{
+  color: white;
+  text-decoration-line: none;
+}
 
-//card buttons that links to visningar
-a.btn{
- font-size: 15px;
- display: block;
-  &:hover{
-   transition: all 0.2s ease 0s;
-}
-}
-//col-4 --> aside
-.aside{
-  border: 1px solid #dee2e6;
+.shows-calendar{
+  margin-bottom: 8px;
+  background-color: rgb(150, 114, 114);
+  opacity: 0.8;
   padding-left: 0;
   padding-right: 0;
-  background-color: black;
-}
+ 
 }
 
+.carouselstarpage.carousel{
+   width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,rgba(15,15,15,0) 50%,#000);
+    position: absolute;
+    top: 0;
+    left: 0;
+}

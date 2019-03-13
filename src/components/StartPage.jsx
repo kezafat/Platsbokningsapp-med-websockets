@@ -4,34 +4,33 @@ import {
 } from 'reactstrap';
 import CarouselStartPage from './CarouselStartPage';
 import CardStartPage from './CardStartPage';
-import Shows from './Shows';
+import Calendar from './Calendar';
+
+
 
 class StartPage extends Component {
   constructor(props) {
     super(props);
     this.movies = require('../json/movies.json');
-    this.shows = [];
-
   }
+
+
   render() {
     return (<Container fluid>
+      <CarouselStartPage />
       <Row noGutters>
-        <CarouselStartPage />
-        {this.movies.map((movie) => {
+        {this.movies.map((movie, i) => {
           return (
-            <Col xs="12" md="4" className="d-flex">
+            <Col xs="12" sm="6" md="4" className="d-flex" key={i}>
               <CardStartPage movie={movie} />
             </Col>)
         })}
-        {this.shows.map((show) => {
-          return (
-            <Col xs="12" md="4" className="aside d-flex">
-              <Shows show={show} />
-            </Col>)
-        })}
+        <Col xs="12" sm="6" md="4" className="d-flex">
+          <Calendar />
+        </Col>
       </Row>
-    </Container>
-    )
+    </Container >)
   }
 }
+
 export default StartPage

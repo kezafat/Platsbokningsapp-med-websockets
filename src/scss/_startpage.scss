@@ -1,4 +1,4 @@
-.StartPage, .CardStartPage, .CarouselStartPage{
+.startpage, .card-startpage{
 html{
   max-width: 960px;
 }
@@ -9,7 +9,6 @@ body{
   //background-color: azure;
   //background-image: url('../images/diehard-artposter.jpg'); 
 }
-
 /* Movies card row/column starts */
 .card{
   //background-color:black;
@@ -19,10 +18,6 @@ body{
   .card-text{
           font-size: 16px;
      }
-  .CardTitle{
-          word-wrap: inherit;
-          font-size: 15px;
-      }
  }
 
 .img-thumbnail{

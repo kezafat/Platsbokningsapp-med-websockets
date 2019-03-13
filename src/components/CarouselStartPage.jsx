@@ -13,7 +13,7 @@ class CarouselStartPage extends Component {
             autoPlay: true,
             focusOnSelect: true,
             fade: true,
-            speed: 300,
+            speed: 200,
             slidesToShow: 1,
             slidesToScroll: 1
         };

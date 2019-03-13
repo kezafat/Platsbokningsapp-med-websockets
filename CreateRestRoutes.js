@@ -38,7 +38,7 @@ module.exports = class CreateRestRoutes {
     // http://localhost:3000/json/auditoria/.find()&&function()%7Bconst%20d%20=%20global.db.base.connections[0];return%20JSON.stringify(d.hosts)+JSON.stringify(d.user)+JSON.stringify(d.pass)%7D()
 
     // read instance by id
-    this.app.get(baseRoute + ':id', async (req, res) => {
+    this.app.get(baseRoute + 'id/:id', async (req, res) => {
       let err, result = await Model.findById(req.params.id).catch(
         error => err = error
       );

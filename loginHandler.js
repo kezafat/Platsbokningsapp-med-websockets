@@ -45,10 +45,17 @@ module.exports = class LoginHandler {
       req.session.user = data.email;
       req.session.name = data.name;
       req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
-      req.session.auth = true;
+      let resMsg;
+      if (req.session.user === "admin@fox.com") {
+        req.session.auth = "admin";
+        resMsg = "admin";
+      } else {
+        req.session.auth = true;
+        resMsg = "ok";
+      }
       req.session._id = newUser._id;
       await req.session.save();
-      res.json({ "msg": "ok", 'user': req.session.user, 'name': req.session.name, '_id': newUser._id });
+      res.json({ "msg": resMsg, 'user': req.session.user, 'name': req.session.name, '_id': newUser._id });
 
     })
   }
@@ -58,6 +65,19 @@ module.exports = class LoginHandler {
       let err;
       req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
       req.session.save();
+
+
+      // Check for admin auth, if set just redirect to admin page on clientside
+      if (req.session.auth === "admin") {
+        let user = await this.User.findOne({ email: req.session.user }).catch(error => err = error);
+        if (err) {
+          res.json({ err });
+          return;
+        }
+        res.json({ 'msg': 'admin', 'user': req.session.user, 'xtrazz': 'Hot damn! This is the daddy of them all!', 'name': req.session.name, '_id': user._id });
+        return;
+      }
+
       // before ANYTHING else, let's see if this person is already logged in, in that case all is well already
       if (req.session.auth === true) {
         let user = await this.User.findOne({ email: req.session.user }).catch(error => err = error);
@@ -87,13 +107,20 @@ module.exports = class LoginHandler {
 
       let match = await bcrypt.compare(data.password + passwordSalt, user.password);
       if (match) {
-        req.session.auth = true;
+        let resMsg;
         req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
         req.session.user = data.email;
         req.session.name = user.name;
         req.session._id = user._id;
+        if (req.session.user === "admin@fox.com") {
+          req.session.auth = "admin";
+          resMsg = "admin";
+        } else {
+          req.session.auth = true;
+          resMsg = "ok";
+        }
         await req.session.save();
-        res.json({ 'msg': 'ok', 'user': req.session.user, 'name': req.session.name, '_id': user._id });
+        res.json({ 'msg': resMsg, 'user': req.session.user, 'name': req.session.name, '_id': user._id });
       } else {
         res.json({ 'msg': 'badpass' });
       }

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../avoidFOUC';
 import NavBar from './NavBar'
 import Footer from './Footer'
-import Shows from './Shows'
-import BookingConfirmationContainer from './BookingConfirmationContainer'
+import Shows from './Shows';
+import BookingConfirmation from './BookingConfirmation';
 import MoviePage from './MoviePage'
 import MovieDetail from './MovieDetail'
 import StartPage from './StartPage'
@@ -53,7 +53,7 @@ class App extends Component {
           <Route exact path="/filmer" component={MoviePage} />
           <Route path="/filmer/:title" component={MovieDetail} />
           <Route exact path="/visningar/" component={Shows} />
-          <Route exact path="/bokningsbekräftelse/:ticketID" component={BookingConfirmationContainer} />
+          <Route exact path="/bokningsbekräftelse/:ticketID/" component={BookingConfirmation} />
           <Route exact path="/biografer" component={Auditoria} />
           <Route path="/biografer/:name" component={Auditorium} />
           <Route path="/filmer/:title" component={MovieDetail} />

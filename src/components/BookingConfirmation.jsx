@@ -43,8 +43,6 @@ class BookingConfirmation extends Component {
 
   render() {
     let booking = this.fetchedBooking;
-
-
     if (!this.fetchedBooking) {
       return <div className="d-flex justify-content-center">
         <Spinner color="secondary" />

@@ -89,7 +89,7 @@ module.exports = class Server {
     new CreateRestRoutes(app, db, models);
 
     // create special extra routes for login
-    new LoginHandler(app, db, require('./schemas/User'));
+    new LoginHandler(app, db, require('./schemas/User'), require('./schemas/Show'));
 
     // Start the web server
     const server = http.Server(app);

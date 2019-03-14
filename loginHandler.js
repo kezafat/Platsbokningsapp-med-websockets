@@ -9,7 +9,24 @@ module.exports = class LoginHandler {
     this.createLoginRoute();
     this.createLogoutRoute();
     this.createRegisterRoute();
+    this.createAdminEditRoute();
   }
+
+
+  async createAdminEditRoute() {
+    this.app.post('/admin/edit/:id', async (req, res) => {
+      let err;
+      // Check for admin auth, if set just redirect to admin page on clientside
+      if (req.session.auth === "admin") {
+        res.json({ "data": req.body, "params": req.params.id })
+        return;
+      } else {
+        res.json({ "Go": "Away :P" })
+        return;
+      }
+    });
+  }
+
 
   //MANUALLY add these routes (do not allow hackable queries)
   async createRegisterRoute() {

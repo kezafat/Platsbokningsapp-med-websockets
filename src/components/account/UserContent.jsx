@@ -21,6 +21,7 @@ class UserContent extends Component {
       endpoint: "/json/bookings/"
     }
     const res = await FR(fetchData, "GET");
+    // console.log(res)
     const userDbBookings = res.filter((entry) => {
       return entry.user === global.user._id;
     })
@@ -33,8 +34,11 @@ class UserContent extends Component {
 
     for (let booking of userDbBookings) {
       let todaysDate = new Date().toISOString().split('T')[0];
+      if (!booking.show) {
+        continue;
+      }
       let bookingDate = booking.show.date;
-    
+
       if (bookingDate === todaysDate) {
         // TODAYS BOOKINGS
         tmpUserObj.currentBookings.push(booking);

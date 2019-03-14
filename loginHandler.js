@@ -2,10 +2,11 @@ const bcrypt = require('bcryptjs');
 
 module.exports = class LoginHandler {
 
-  constructor(app, db, User) {
+  constructor(app, db, User, Show) {
     this.app = app;
     this.db = db;
     this.User = User;
+    this.Show = Show;
     this.createLoginRoute();
     this.createLogoutRoute();
     this.createRegisterRoute();
@@ -14,11 +15,20 @@ module.exports = class LoginHandler {
 
 
   async createAdminEditRoute() {
-    this.app.post('/admin/edit/:id', async (req, res) => {
-      let err;
-      // Check for admin auth, if set just redirect to admin page on clientside
+    this.app.post('/admin/editshow/:id', async (req, res) => {
       if (req.session.auth === "admin") {
-        res.json({ "data": req.body, "params": req.params.id })
+        let err;
+        let show = new this.Show({
+          "auditorium": "dadas",
+          "movie": "dasdas",
+          "date": "2019-03-15",
+          "time": "16:30"
+        })
+        let result = await show.save().catch(
+          error => err = error
+        )
+
+        res.json({ err: err, res: result })
         return;
       } else {
         res.json({ "Go": "Away :P" })

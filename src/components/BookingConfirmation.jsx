@@ -53,21 +53,21 @@ class BookingConfirmation extends Component {
         <Row>
           <Col>
             <Row className="my-3">
-              <Col className="xl-7 lg-7 mx-auto background p-5">
+              <Col xl="7" lg="7" className="mx-auto p-5 backgroundscheiße">
                 <h2>Samanställning</h2>
                 <h4 className="pb-3">Bokningsnummer: {booking.ticketID} </h4>
                 <Card>
                   <CardBody className="rounded-lg">
                     <Row>
-                      <Col className="auto">
+                      <Col xs="auto">
                         <CardImg src={require("../images/" + booking.show.movie.images[0])} />
-                        <Col className="auto">
+                        </Col>
+                        <Col xs="auto">
                           <h5 className="card-title-text-center-md">{booking.show.movie.title}</h5>
                           <h6 className="card-subtitle mb-1 mt-1 text-center-md">{booking.show.auditorium.name}</h6>
                           <p className="card-text text-center-md">{booking.show.time} - {booking.show.date}</p>
                           <p className="card-text text-center-md">Platser: {booking.seats.join(', ')}</p>
                         </Col>
-                      </Col>
                     </Row>
                   </CardBody>
                 </Card>

@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class MoviesContainer extends Component {
+  constructor() {
+    super();
+  }
   render() {
-    return (
-      <div>Movies</div>
-    )
+    return <div>hi</div>;
   }
 }
 
-export default MoviesContainer
+export default MoviesContainer;

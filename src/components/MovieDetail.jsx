@@ -8,6 +8,7 @@ import {
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
+
 class MovieDetail extends Component {
   constructor() {
     super()

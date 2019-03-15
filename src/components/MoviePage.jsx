@@ -89,8 +89,7 @@ class MoviePage extends Component {
                             "/" +
                             movie.nextShow.date +
                             "/" +
-                            movie.nextShow.time +
-                            "/"
+                            movie.nextShow.time 
                           }
                             className="btn btn-outline-danger">Boka</Link>
                           <Link to={"/filmer/" + movie.title.replace(/ /g, "-").replace(/:/g, "").toLowerCase()} className="btn btn-outline-danger">Mera</Link>

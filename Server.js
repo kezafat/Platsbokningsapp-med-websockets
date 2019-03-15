@@ -41,7 +41,7 @@ module.exports = class Server {
 
     // Add body-parser to our requests
     app.use(bodyParser.json());
-    
+
     // use cors (super safe)
     app.use(cors())
 
@@ -66,6 +66,11 @@ module.exports = class Server {
     };
 
     global.models = models;
+
+    app.get('/json/bookings/:ticketID', async (req, res) => {
+      const booking = await models.bookings.findOne({ ticketID: req.params.ticketID });
+      res.json(booking);
+    })
 
     app.get('/json/movies/:title', async (req, res) => {
       const movies = await models.movies.find({

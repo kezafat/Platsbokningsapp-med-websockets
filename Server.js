@@ -78,11 +78,6 @@ module.exports = class Server {
       const movie = movies.filter(movie => movie.title.toLowerCase().replace(/ /g, '-').replace().replace(/:/, '') === req.params.title)
       res.json(movie)
     })
-    app.get('/json/bookings/:ticketID', async (req, res) => {
-      const bookings = await models.bookings.findOne({
-      })
-      res.json(bookings)
-    })
     // Route for human friendly show urls
 
     app.get('/json/shows/:auditorium/:date/:time', async (req, res) => {

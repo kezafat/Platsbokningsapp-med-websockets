@@ -53,7 +53,7 @@ class MovieDetail extends Component {
     let movie = this.movie
     if (!this.movie) {
       return <div className="d-flex justify-content-center">
-        <Spinner color="danger" />
+        <Spinner color="danger"/>
       </div>
     }
     return (

@@ -4,7 +4,7 @@ body >.startpage{
   height: auto;
   font-weight: 200;
 }
-.startpage-cards{
+.startpage.startpage-cards{
   background-image: url('../images/diehard-artposter.jpg');
   background-size: cover; 
 
@@ -13,15 +13,17 @@ body >.startpage{
 .films-link, a:hover{
   color: white;
   text-decoration-line: none;
+  font-size: 18px;
 }
 
 .shows-calendar{
   margin-bottom: 8px;
-  background-color: rgb(150, 114, 114);
-  opacity: 0.8;
+  background: linear-gradient(rgb(240, 176, 58) 40%,rgb(228, 125, 125));
   padding-left: 0;
   padding-right: 0;
- 
+  font-size: 18px;
+  //.time-table{    
+  //}
 }
 
 .carouselstarpage.carousel{

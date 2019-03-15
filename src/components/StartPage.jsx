@@ -25,7 +25,7 @@ class StartPage extends Component {
               <CardStartPage movie={movie} />
             </Col>)
         })}
-        <Col xs="12" sm="6" md="4" className="d-flex">
+        <Col xs="12" sm="6" md="4" className="time-table d-flex">
           <Calendar />
         </Col>
       </Row>

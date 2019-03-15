@@ -17,7 +17,7 @@ class Calendar extends Component {
     return (
       <Row className="shows-calendar mx-2 rounded">
         <div>
-          <h3 className="text-center my-2 ml-3">Fuckin' Kalendarium</h3>
+          <h3 className="text-center my-2 ml-4">Kalendarium</h3>
         </div>
         <div className="text-center ml-2">
           {this.state.data.slice(0, 12).sort().map((show, _id) => (

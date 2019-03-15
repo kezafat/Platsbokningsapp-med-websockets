@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, CardBody, CardImg } from 'reactstrap'
+import { Row, Col, Card, CardBody, CardImg, } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -23,7 +23,7 @@ class MoviePage extends Component {
   }
 
   getNextShow(shows) {
-    //Getting the next coming show 
+    /*Getting the next coming show */
     shows.sort(function (a, b) {
       return new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time);
     });
@@ -41,7 +41,7 @@ class MoviePage extends Component {
   }
 
   setStars() {
-    //  Method for adding the star 
+    /* Method for adding the star */
     for (let i = 0; i < this.movies.length; i++) {
       let starsCount = this.movies[i].reviews[0].stars;
       let htmlStars = document.getElementsByClassName("fa-star");

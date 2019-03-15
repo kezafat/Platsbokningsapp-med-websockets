@@ -1,9 +1,10 @@
 .movie-detail {
-
   .movie-title {
     color: aliceblue;
   }
-
+  .line-break {
+    white-space: pre-line;
+  }
   .img {
     width: 100%;
     margin-top: 9%;
@@ -13,6 +14,10 @@
     color: white;
     margin-bottom: 5%;
     line-height: 2.3;
+  }
+  ul{
+    list-style: none;
+    padding: 0;
   }
 
   .card {

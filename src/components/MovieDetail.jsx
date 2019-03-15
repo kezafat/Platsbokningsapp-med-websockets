@@ -113,7 +113,7 @@ class MovieDetail extends Component {
               </Card>
             </Col>
           </Row>
-          <Row className="mt-3 justify-content-between">
+          <Row className="my-3 justify-content-between">
             <Col md="3">
               <Card className="mb-0 py-3">
                 <CardBody>

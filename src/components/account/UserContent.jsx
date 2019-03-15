@@ -76,7 +76,9 @@ class UserContent extends Component {
     )
 
     return (
-      this.state.loaded ? userBookingData() : <Spinner />
+      this.state.loaded ? userBookingData() :<div className="d-flex justify-content-center">
+      <Spinner color="secondary" />
+    </div>
     );
   }
   componentDidMount() {

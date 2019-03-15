@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, } from 'reactstrap'
 
+
 class MovieDetail extends Component {
   constructor() {
     super()

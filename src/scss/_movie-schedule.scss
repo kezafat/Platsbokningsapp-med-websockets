@@ -3,28 +3,22 @@
   img{
     width: 70%;
   }
+  @media only screen and(max-width: 375px){
+    img {
+      display: none;
+    }
+    p {
+      font-size: 80%;
+    }
+    h5 {
+      font-size: 70%;
+    }
+  }
   .red{
     background-color:#dc3545;
     font-size: 18px;
-  }
-  @include media-breakpoint-only(xs) {
-    p{
-      font-size: 60%;
-    }
-    .red{
-      font-size: 45%;
-      padding: 2px;
-    }
-    h5{
-      font-size: 60%;
-    }
-    .card-body{
-      padding: 10px;
-    }
-    .btn{
-      font-size: 70%;
-      padding: 1px;
-    }
+    display: inline-block;
+    padding: 1%;
   }
   @include media-breakpoint-only(sm) {
       h5{
@@ -37,6 +31,4 @@
         padding: 10px;
       }
   }
-}
-
-  
+}  

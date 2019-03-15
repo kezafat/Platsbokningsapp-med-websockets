@@ -9,6 +9,8 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const http = require('http');
 const SocketIoController = require('./SocketIoController');
+const cors = require('cors');
+
 
 
 module.exports = class Server {
@@ -39,6 +41,9 @@ module.exports = class Server {
 
     // Add body-parser to our requests
     app.use(bodyParser.json());
+    
+    // use cors (super safe)
+    app.use(cors())
 
 
     // Add session (and cookie) handling to Express
@@ -58,7 +63,6 @@ module.exports = class Server {
       auditoria: require('./schemas/Auditorium'),
       bookings: require('./schemas/Booking'),
       shows: require('./schemas/Show'),
-      users: require('./schemas/User')
     };
 
     global.models = models;
@@ -74,11 +78,23 @@ module.exports = class Server {
       })
       res.json(bookings)
     })
+    // Route for human friendly show urls
+
+    app.get('/json/shows/:auditorium/:date/:time', async (req, res) => {
+      const shows = await models.shows.find({
+        time: req.params.time,
+        date: req.params.date
+      })
+      // incase there are two shows at the same time, we get only the one at our specified auditorium
+      const show = shows.filter(show => show.auditorium.name.toLowerCase().replace(/ /g, '-') === req.params.auditorium)
+      res.json(show)
+    })
+
     // create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
 
     // create special extra routes for login
-    new LoginHandler(app, require('./schemas/User'));
+    new LoginHandler(app, db, require('./schemas/User'));
 
     // Start the web server
     const server = http.Server(app);

@@ -3,17 +3,12 @@ import { Jumbotron, Spinner, Card, CardImg, CardDeck } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import FR from '../../fetchRouter.js';
 
-class AdminContent extends Component {
+class AdminMovies extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
       movies: [],
-      bookings: {
-        currentBookings: [],
-        previousBookings: [],
-        futureBookings: [],
-      }
     }
   }
 
@@ -52,4 +47,4 @@ class AdminContent extends Component {
   }
 }
 
-export default AdminContent;
+export default AdminMovies;

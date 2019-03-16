@@ -10,31 +10,6 @@ module.exports = class LoginHandler {
     this.createLoginRoute();
     this.createLogoutRoute();
     this.createRegisterRoute();
-    this.createAdminEditRoute();
-  }
-
-
-  async createAdminEditRoute() {
-    this.app.post('/admin/editshow/:id', async (req, res) => {
-      if (req.session.auth === "admin") {
-        let err;
-        let show = new this.Show({
-          "auditorium": "dadas",
-          "movie": "dasdas",
-          "date": "2019-03-15",
-          "time": "16:30"
-        })
-        let result = await show.save().catch(
-          error => err = error
-        )
-
-        res.json({ err: err, res: result })
-        return;
-      } else {
-        res.json({ "Go": "Away :P" })
-        return;
-      }
-    });
   }
 
 

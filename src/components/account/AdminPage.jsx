@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import AdminContent from './AdminContent'
+import AdminMovies from './AdminMovies'
 import FR from '../../fetchRouter.js';
 import { Button, Spinner, Jumbotron } from 'reactstrap';
 
@@ -34,7 +34,7 @@ class AdminPage extends Component {
             {this.state.loading === true ? <Spinner /> : 'Logga ut'}
           </Button>
         </Jumbotron>
-        {global.auth === "admin" ? <AdminContent state={this.props.state} /> : <Redirect to="/konto" />}
+        {global.auth === "admin" ? <AdminMovies state={this.props.state} /> : <Redirect to="/konto" />}
       </div>
     );
   }

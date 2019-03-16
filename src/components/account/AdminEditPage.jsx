@@ -126,7 +126,7 @@ class AdminEditPage extends Component {
   render() {
     const showTables = () => (
       <React.Fragment>
-        <Button className="btn btn-danger mb-2" onClick={this.newShow.bind(this)}>{this.state.actionLoading ? <Spinner size="sm" /> : '+ Ny visning'}</Button>
+        <Button className="mb-2 float-right" color="primary" onClick={this.newShow.bind(this)}>{this.state.actionLoading ? <Spinner size="sm" /> : '+ Ny visning'}</Button>
         <Table striped hover responsive size="sm">
           <thead>
             <tr>
@@ -147,7 +147,7 @@ class AdminEditPage extends Component {
                   <Button className="btn btn-danger" size="sm" onClick={this.deleteShow.bind(this)} id={show._id}>{this.state.actionLoading ? <Spinner size="sm" /> : 'X'}</Button>
                 </td>
                 <td>
-                  <Button className="btn btn-warning" size="sm" onClick={this.editShow.bind(this)} id={show._id}>{this.state.actionLoading ? <Spinner size="sm" /> : "?"}</Button>
+                  <Button className="btn btn-warning" size="sm" onClick={this.editShow.bind(this)} id={show._id}>{this.state.actionLoading ? <Spinner size="sm" /> : "Ä"}</Button>
                 </td>
               </tr>
             ))}
@@ -166,14 +166,16 @@ class AdminEditPage extends Component {
                 return (<option value={audio._id} key={id}>{audio.name}</option>)
               })}
             </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="dateField">Datum</Label>
-            <Input type="date" name="showDate" id="dateField" value={this.state.showCfg.showDate} onChange={this.readForms.bind(this)} required />
-          </FormGroup>
-          <FormGroup>
-            <Label for="timeField">Tid</Label>
-            <Input type="time" name="showTime" id="timeField" value={this.state.showCfg.showTime} onChange={this.readForms.bind(this)} required />
+            <Row>
+              <Col>
+                <Label for="dateField">Datum</Label>
+                <Input type="date" name="showDate" id="dateField" value={this.state.showCfg.showDate} onChange={this.readForms.bind(this)} required />
+              </Col>
+              <Col>
+                <Label for="timeField">Tid</Label>
+                <Input type="time" name="showTime" id="timeField" value={this.state.showCfg.showTime} onChange={this.readForms.bind(this)} required />
+              </Col>
+            </Row>
           </FormGroup>
           <Row>
             <Col>
@@ -206,6 +208,7 @@ class AdminEditPage extends Component {
 
   componentDidMount() {
     global.auth === "admin" ? this.fetchDbMovie() : this.props.history.push("/konto");
+    document.title = "Redigera | " + this.props.match.params.id;
   }
 }
 

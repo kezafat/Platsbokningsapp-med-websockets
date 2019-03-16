@@ -59,7 +59,7 @@ class App extends Component {
           <Route exact path="/registrera-konto" render={() => <div><RegisterPage state={this.state} /></div>} />
           <Route exact path="/mitt-konto" render={() => <div><UserPage state={this.state} /></div>} />
           <Route exact path="/admin" render={() => <div><AdminPage state={this.state} /></div>} />
-          <Route path="/admin/redigera/:id" render={() => <div><AdminEditPage state={this.state} /></div>} />
+          <Route path="/admin/redigera/:id" component={AdminEditPage} />
         </main>
         <Footer />
       </div>

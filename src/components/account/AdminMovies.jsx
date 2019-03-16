@@ -29,6 +29,7 @@ class AdminMovies extends Component {
             <Card key={index}>
               <Link to={"/admin/redigera/" + movie._id}>
                 <CardImg top width="100%" src={require('../../images/' + movie.images[0])} />
+                <p className="text-center mt-2">{movie.shows.length} visningar</p>
               </Link>
             </Card>
           ))}

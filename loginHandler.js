@@ -2,11 +2,10 @@ const bcrypt = require('bcryptjs');
 
 module.exports = class LoginHandler {
 
-  constructor(app, db, User, Show) {
+  constructor(app, db, User) {
     this.app = app;
     this.db = db;
     this.User = User;
-    this.Show = Show;
     this.createLoginRoute();
     this.createLogoutRoute();
     this.createRegisterRoute();

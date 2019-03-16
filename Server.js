@@ -41,7 +41,7 @@ module.exports = class Server {
 
     // Add body-parser to our requests
     app.use(bodyParser.json());
-    
+
     // use cors (super safe)
     app.use(cors())
 
@@ -89,7 +89,7 @@ module.exports = class Server {
     new CreateRestRoutes(app, db, models);
 
     // create special extra routes for login
-    new LoginHandler(app, db, require('./schemas/User'), require('./schemas/Show'));
+    new LoginHandler(app, db, require('./schemas/User'));
 
     // Start the web server
     const server = http.Server(app);

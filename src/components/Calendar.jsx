@@ -15,15 +15,17 @@ class Calendar extends Component {
   }
   render() {
     return (
-      <Row className="shows-calendar mx-2 rounded">
-        <div>
-          <h3 className="text-center my-2 ml-4">Kalendarium</h3>
-        </div>
-        <div className="text-center ml-2">
-          {this.state.data.slice(0, 12).sort().map((show, _id) => (
-            <p key={_id}>{show.date} {'   '}<strong>kl.</strong> {'   '} {show.time}<br />
-              {show.movie.title}</p>
-          ))}
+      <Row className="shows-calendar mx-2 ounded">
+        <div className="calender-wrapper">
+          <div>
+            <h2 className="text-center">Kalendarium</h2>
+          </div>
+          <div className="text-center ml-2 mb-2">
+            {this.state.data.slice(1, 12).sort().map((show, _id) => (
+              <p key={_id}>{show.date} &nbsp; <strong>kl.</strong> &nbsp;{show.time}<br />
+                {show.movie.title}</p>
+            ))}
+          </div>
         </div>
       </Row>
     )

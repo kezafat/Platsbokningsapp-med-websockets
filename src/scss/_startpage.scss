@@ -1,36 +1,35 @@
 .startpage, .cardstartpage, .calendar, .carouselstarpage{
-body >.startpage{
+.startpage{
   width: 100%;
   height: auto;
   font-weight: 200;
-}
-.startpage.startpage-cards{
-  background-image: url('../images/diehard-artposter.jpg');
-  background-size: cover; 
+  h1{
+    color: white;
+    text-decoration: underline;
+    font-size: 40px; 
+  
+  }
 
 }
 }
-.films-link, a:hover{
+
+.films-link{
   color: white;
   text-decoration-line: none;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .shows-calendar{
-  margin-bottom: 8px;
-  background: linear-gradient(rgb(240, 176, 58) 40%,rgb(228, 125, 125));
-  padding-left: 0;
-  padding-right: 0;
-  font-size: 18px;
-  //.time-table{    
-  //}
+  background-image: url("../images/startlinglights.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover; ;
+  font-weight: 200;
+  padding: 20px;
+  h2{
+font-family: 'Lato', sans-serif;
+font-size: 30px;
+text-decoration-style: solid;
+}
 }
 
-.carouselstarpage.carousel{
-   width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg,rgba(15,15,15,0) 50%,#000);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
+

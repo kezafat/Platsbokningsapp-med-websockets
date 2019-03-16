@@ -21,7 +21,6 @@ class UserContent extends Component {
       endpoint: "/json/bookings/"
     }
     const res = await FR(fetchData, "GET");
-    // console.log(res)
     const userDbBookings = res.filter((entry) => {
       return entry.user === global.user._id;
     })

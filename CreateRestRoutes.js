@@ -16,6 +16,10 @@ module.exports = class CreateRestRoutes {
 
     // create a new instance
     this.app.post(baseRoute, async (req, res) => {
+      if (req.session.auth !== "admin") {
+        res.json({ get: "the fuck out :D" });
+        return;
+      }
       let err, instance = new Model(req.body);
       // naughty little if statement to add the users id if creating a booking
       if (Model.modelName === 'Booking') {
@@ -47,6 +51,10 @@ module.exports = class CreateRestRoutes {
 
     // update/change instance by id
     this.app.put(baseRoute + ':id', async (req, res) => {
+      if (req.session.auth !== "admin") {
+        res.json({ get: "the fuck out :D" });
+        return;
+      }
       let result;
       try {
         let instance = await Model.findById(req.params.id);
@@ -61,6 +69,10 @@ module.exports = class CreateRestRoutes {
 
     // delete instance by id
     this.app.delete(baseRoute + ':id', async (req, res) => {
+      if (req.session.auth !== "admin") {
+        res.json({ get: "the fuck out :D" });
+        return;
+      }
       let err, result = await Model.findByIdAndRemove(req.params.id).catch(
         error => err = error
       );

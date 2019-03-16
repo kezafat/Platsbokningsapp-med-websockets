@@ -22,11 +22,11 @@ class StartPage extends Component {
         </Col>
         {this.movies.map((movie, i) => {
           return (
-            <Col xs="12" sm="6" md="3" lg="4" className="startpage-cards d-flex justify-content-center" key={i}>
-              <CardStartPage movie={movie} />
+            <Col xs="12" sm="6" md="4" className=" startpage-cards d-flex justify-content-center" key={i}>
+              < CardStartPage movie={movie} />
             </Col>)
         })}
-        <Col xs="12" sm="6" md="3" lg="4" className="d-flex mb-2">
+        <Col xs="12" sm="6" md="4" className="d-flex mb-2">
           <Calendar />
         </Col>
       </Row>

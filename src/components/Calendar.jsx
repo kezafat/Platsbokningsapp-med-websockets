@@ -15,7 +15,7 @@ class Calendar extends Component {
   }
   render() {
     return (
-      <Row className="shows-calendar mx-2 ounded">
+      <Row className="shows-calendar mx-2 rounded">
         <div className="calender-wrapper">
           <div>
             <h2 className="text-center">Kalendarium</h2>

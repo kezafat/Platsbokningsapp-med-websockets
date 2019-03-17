@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card, CardBody, CardText, CardTitle, CardGroup } from 'reactstrap';
 
 const WelcomePage = (props) => {
-  // this is the 'route state'
   const { state } = props.location
   return (
     <div>

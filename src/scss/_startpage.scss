@@ -1,35 +1,47 @@
 .startpage, .cardstartpage, .calendar, .carouselstarpage{
 .startpage{
+
+  .startpage-cards{
   width: 100%;
   height: auto;
   font-weight: 200;
-  h1{
-    color: white;
-    text-decoration: underline;
-    font-size: 40px; 
-  
-  }
-
 }
+  h1{
+    font-size: 50px;   
+    font-weight: 200;
+  }
+  }
 }
 
 .films-link{
   color: white;
-  text-decoration-line: none;
+  outline-color: red;
   font-size: 20px;
+  .films-link:hover{
+      color: rgb(229, 238, 229);
+
+  }
 }
 
 .shows-calendar{
   background-image: url("../images/startlinglights.jpeg");
   background-repeat: no-repeat;
-  background-size: cover; ;
+  background-size: cover; 
   font-weight: 200;
   padding: 20px;
+  font-size: 18px;
   h2{
 font-family: 'Lato', sans-serif;
-font-size: 30px;
-text-decoration-style: solid;
+font-size: 40px;
+margin: auto;
 }
 }
 
 
+    @include media-breakpoint-down(md) {
+.shows-calendar{
+  padding: 10px;
+      }
+    }
+
+  

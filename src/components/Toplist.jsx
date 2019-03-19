@@ -1,26 +1,62 @@
 import React, { Component } from 'react';
+import { Row, Col, Card, CardBody, } from 'reactstrap';
 
 class Toplist extends Component {
-  constructor(){
-    super()
-    this.state = { fetched: false }
-    this.fetchBookings();
+  constructor(props) {
+    super(props)
+    this.moviesTopList = [];
+    //this.ticketsCount();
   }
+  async componentDidMount() {
+    await this.fetchBookings()
+  }
+
   async fetchBookings() {
-    const response = await fetch(`http://localhost:3000/json/bookings/`)
-    this.bookings = await response.json()
-    this.state = { fetched: true }
-    this.setState(state => this) 
+    let allBookings = await fetch(`http://localhost:3000/json/bookings/`)
+    allBookings = await allBookings.json();
+
+    let ticketCount = {};
+
+    for (let booking of allBookings) {
+      if (!booking.show) { continue; }
+
+      let title = booking.show.movie.title;
+      if (!ticketCount[title]) {
+        ticketCount[title] = { count: 0, movie: title, key: booking.show.movie.id };
+      }
+      ticketCount[title].count = ticketCount[title].count + booking.seats.length;
+    }
+    for (let title in ticketCount) {
+      this.moviesTopList.push(ticketCount[title])
+    }
+
+    this.moviesTopList.sort((a, b) => {
+      return b.count - a.count
+    });
+    this.setState(state => this);
   }
 
   render() {
-    if(!this.bookings){
-    return <div>loading...</div>
-  }
-    return ( 
-      <div>Helloooo</div>
-    )
+    return <div>
+      <Row>
+        <Col>
+          <Card>
+            <CardBody>
+              {this.moviesTopList.map((movie, index) => {
+
+                return <Row>
+                  <Col key={index}>{index + 1}</Col>
+                  <Col>{movie.movie}</Col>
+                  <Col>{movie.count}</Col>
+                </Row>
+
+              })}
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+    </div>
   }
 }
- 
-export default Toplist;
+
+export default Toplist; 

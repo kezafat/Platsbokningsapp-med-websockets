@@ -16,7 +16,7 @@ class AdminEditPage extends Component {
         showID: "",
         movieID: "",
         showDate: "",
-        showTime: ""
+        showTime: "19:00"
       }
     }
   }
@@ -116,10 +116,9 @@ class AdminEditPage extends Component {
   }
 
   readForms(event) {
-    this.setState({
-      showCfg: {
-        [event.target.name]: event.target.value
-      }
+    const { name, value } = event.target
+    this.setState(prevState => {
+      return { showCfg: {...prevState.showCfg, [name]: value } }
     })
   }
 
@@ -179,10 +178,10 @@ class AdminEditPage extends Component {
           </FormGroup>
           <Row>
             <Col>
-              <Button color="success" className="btn-block" onClick={this.backToListView.bind(this)}>{this.state.actionLoading ? <Spinner size="sm" /> : 'Avbryt'}</Button>
+              <Button color="danger" className="btn-block" onClick={this.backToListView.bind(this)}>{this.state.actionLoading ? <Spinner size="sm" /> : 'Avbryt'}</Button>
             </Col>
             <Col>
-              <Button color="danger" className="btn-block" type="submit">{this.state.actionLoading ? <Spinner size="sm" /> : 'Spara'}</Button>
+              <Button color="success" className="btn-block" type="submit">{this.state.actionLoading ? <Spinner size="sm" /> : 'Spara'}</Button>
             </Col>
           </Row>
         </Form>

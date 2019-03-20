@@ -16,7 +16,7 @@ module.exports = class CreateRestRoutes {
 
     // create a new instance
     this.app.post(baseRoute, async (req, res) => {
-      if (req.session.auth !== "admin") {
+      if (req.session.auth !== "admin" && Model.modelName !== 'Booking') {
         res.json({ get: "the fuck out :D" });
         return;
       }

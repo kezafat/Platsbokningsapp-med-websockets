@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, CardBody, } from 'reactstrap';
+import { Link } from "react-router-dom";
 
 class Toplist extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Toplist extends Component {
   }
 
   render() {
-    return <div>
+    return <div className="top-list">
       <Row>
         <Col>
           <Card>
@@ -46,7 +47,7 @@ class Toplist extends Component {
 
                 return <Row>
                   <Col key={index}>{index + 1}</Col>
-                  <Col>{movie.movie}</Col>
+                  <Col><Link to="/visningar">{movie.movie}</Link></Col>
                   <Col>{movie.count}</Col>
                 </Row>
 

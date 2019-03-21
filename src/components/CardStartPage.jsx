@@ -8,20 +8,24 @@ class CardStartPage extends Component {
     render() {
         let { id, title, images, productionCountries, productionYear, genre, director, description } = this.props.movie;
         return (
-            <CardGroup className="d-flex mt-2 mb-2" key={id}>
-                <Card className="flex-column">
-                    <CardBody className="mt-auto">
+            <CardGroup className="mt-2 mb-2" key={id} >
+                <Card className="d-flex flex-column">
+                    <CardBody>
                         <CardTitle><h5 className="text-light mt-auto">{title}</h5></CardTitle>
-                        <CardImg top width="100%" src={require('../images/' + images)} className="img-thumbnail img-fluid" alt="Posters" />
+                        <CardImg top width="100%" src={require('../images/' + images)} className="img-fluid img-thumbnail" alt="Movie-Posters" />
                         <CardSubtitle className="text-light my-2"> [{productionCountries}] {director}<br />
                             {genre} {productionYear}</CardSubtitle>
-                        <CardText>{description.substr(0, 150) + (' ... ')}<a href={`/filmer/${this.props.movie.title.replace(/ /g, "-").replace(/:/g, " ").toLowerCase()}`} className="films-link text-light"> &nbsp;läs vidare </a></CardText>
-                        <Link to={'/filmer/'} className="btn btn-outline-danger text-light d-block">BILJETTER</Link>
+                        <CardText className="mt-auto">{description.substr(0, 150) + (' ... ')}<a href={`/filmer/${this.props.movie.title.replace(/ /g, "-").replace(/:/g, "").toLowerCase()}`} className="films-link text-light">läs vidare </a></CardText>
+                        <Link to='/visningar/' className="btn btn-outline-danger text-light d-block">BILJETTER</Link>
 
                     </CardBody>
                 </Card>
             </CardGroup>
         )
     }
+
 }
+
 export default CardStartPage
+
+

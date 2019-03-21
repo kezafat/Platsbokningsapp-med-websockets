@@ -12,12 +12,9 @@
 
 
 .films-link{
-  color: white;
-  //outline-color: red;
   font-size: 20px;
   .films-link:hover{
       color: rgb(229, 238, 229);
-
   }
 }
 
@@ -35,15 +32,12 @@ margin: auto;
 }
 }
 
-    @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(md) {
 .shows-calendar{
   padding: 10px;
       }
     }
 
 
-    div.startpage-cards{
-      color: red;
-    }
 
   

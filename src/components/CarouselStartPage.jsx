@@ -22,8 +22,8 @@ class CarouselStartPage extends Component {
             <Row className="carousel my-4">
                 <Col>
                     <Slider {...settings}>
+                        <img src={require('../images/diehard-wallpaper3.jpg')} alt="film-poster-slide" />
                         <img src={require('../images/diehard-wallpaper4.jpg')} alt="film-poster-slide" />
-                        <img src={require('../images/diehard-wallpaper6.jpg')} alt="film-poster-slide" />
                         <img src={require('../images/diehard-wallpaper5.jpg')} alt="film-poster-slide" />
                     </Slider>
                 </Col>

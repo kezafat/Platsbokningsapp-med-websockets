@@ -13,11 +13,11 @@ class Calendar extends Component {
   }
 
   render() {
-    const now = new Date().toISOString().split('T');
+    const now = new Date().toISOString().split('T')
     const currentDate = now[0];
     const currentTime = now[1];
-    return (<Row className="shows-calendar mx-2 mt-2 rounded">
-      <div className="text-center ml-2 mb-2">
+    return (<Row className="shows-calendar mx-2 mt-2 rounded" >
+      <div className="text-center mb-2">
         <h2>Kalendarium</h2>
       </div>
       <div>
@@ -40,7 +40,9 @@ class Calendar extends Component {
                 return 0;
               }
             })).slice(0, 10).map((show) => (
-              <p key={show._id}>{show.date} &nbsp; <strong>kl.</strong> &nbsp;{show.time}<br />
+              <p key={show._id}>
+                {new Date(show.date).toLocaleDateString('sv-SE', { month: 'numeric', day: 'numeric', weekday: 'short' })}
+                &nbsp; <strong>kl.</strong> &nbsp;{show.time}<br />
                 {show.movie.title}</p>
             ))}
         </div>

@@ -45,20 +45,7 @@ class Show extends Component {
                     Boka
                   </Link>
                   <Link
-                    to={
-                      "/filmer/" +
-                      this.props.show.auditorium.name
-                        .replace(" ", "-")
-                        .toLowerCase() +
-                      "/" +
-                      this.props.show.date +
-                      "/" +
-                      this.props.show.time
-                    }
-                    className="btn btn-outline-danger mt-auto mb-3 ml-4"
-                  >
-                    INFO
-                  </Link>
+                    to="/filmer" className="btn btn-outline-danger mt-auto mb-3 ml-3"> INFO </Link>
                 </Row>
               </Col>
             </Row>

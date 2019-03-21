@@ -55,7 +55,7 @@ class Shows extends Component {
     let firstDate = this.allShows[0].date;
     this.days = [{ date: firstDate, shows: [] }];
     for (let show of this.allShows) {
-      if(!show) { continue }
+      if (!show) { continue }
       // create a day with the same date as the first show
       let currentDay = this.days[this.days.length - 1];
       // if the date of the show isn't the current day
@@ -69,27 +69,29 @@ class Shows extends Component {
     }
 
     // render method
-    this.setState({ loaded:true });
+    this.setState({ loaded: true });
   }
 
   render() {
-   let markUp = () => (
-       <section className="movies-schedule-page">
-         <Row>
-           <Col>
-             <h2 className="mb-3">Filmvisningar</h2>
-           </Col>
-         </Row>
-         <div className="date">
-           {this.days.map((day, index) => (
-             <Day key={index} show={day} />
-           ))}
-         </div>
-       </section>
-     )
+    let markUp = () => (
+      <section className="movies-schedule-page">
+        <Row>
+          <Col>
+            <h2 className="mb-3">Filmvisningar</h2>
+          </Col>
+        </Row>
+        <div className="date">
+          {this.days.map((day, index) => (
+            <Day key={index} show={day} />
+          ))}
+        </div>
+      </section>
+    )
     return (
-     this.state.loaded ? markUp() : <Spinner />
-   )
+      this.state.loaded ? markUp() : <div className="d-flex justify-content-center">
+        <Spinner color="secondary" />
+      </div>
+    )
 
   }
 }

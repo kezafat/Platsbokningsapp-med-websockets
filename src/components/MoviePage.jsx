@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, CardBody, CardImg, } from 'reactstrap'
+import { Row, Col, Card, CardBody, CardImg, Spinner } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -17,8 +17,8 @@ class MoviePage extends Component {
     for (let movie of this.movies) {
       movie.nextShow = this.getNextShow(movie.shows)
     }
-    this.state = { fetched: true }
-    this.setState(state => this)
+    this.setState(state => this);
+    this.setState({ fetched: true })
     this.setStars()
   }
 
@@ -36,9 +36,9 @@ class MoviePage extends Component {
     return {}
   }
 
-  async componentDidMount() {
-    document.title ="Filmer"
-    await this.fetchMovies()
+  componentDidMount() {
+    document.title = "Filmer"
+    this.fetchMovies()
   }
 
   setStars() {
@@ -55,6 +55,9 @@ class MoviePage extends Component {
   }
 
   render() {
+    if (!this.state.fetched) {
+      return (<Spinner />)
+    }
     return (
       <section className="movie-page">
         <Row>
@@ -90,7 +93,7 @@ class MoviePage extends Component {
                             "/" +
                             movie.nextShow.date +
                             "/" +
-                            movie.nextShow.time 
+                            movie.nextShow.time
                           }
                             className="btn btn-outline-danger">Boka</Link>
                           <Link to={"/filmer/" + movie.title.replace(/ /g, "-").replace(/:/g, "").toLowerCase()} className="btn btn-outline-danger">Mera</Link>

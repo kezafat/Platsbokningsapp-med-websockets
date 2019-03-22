@@ -1,13 +1,11 @@
-body > div  {
+body>div>div {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   background-image: url("../images/wheat.png");
-  //background: #8b0000;
   font-family: 'Lato', sans-serif;
 }
 
-main{
+main {
   flex: 1;
 }
-

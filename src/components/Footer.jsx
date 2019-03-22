@@ -4,7 +4,7 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer>
+      <footer className="mt-4">
         <section>
           <div className="footer-text">
             <h3>Adress</h3>

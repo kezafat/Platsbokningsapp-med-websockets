@@ -56,7 +56,11 @@ class MoviePage extends Component {
 
   render() {
     if (!this.state.fetched) {
-      return (<Spinner />)
+      return (
+        <div className="d-flex justify-content-center">
+          <Spinner />
+        </div>
+      )
     }
     return (
       <section className="movie-page">

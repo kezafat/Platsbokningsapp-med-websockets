@@ -6,11 +6,6 @@ const WelcomePage = (props) => {
   const { state } = props.location
   return (
     <div>
-      <Row>
-        <Col>
-          <p className="text-center text-dark">&#9732; This right here is called aesthetic excellence*! (*&#9760;)</p>
-        </Col>
-      </Row>
       <Row className="welcome">
         <Col>
           <CardGroup>

@@ -1,0 +1,36 @@
+.btn{
+  text-transform: uppercase;
+  font-weight: bold;
+}
+p{
+  color: #ffffff;
+}
+
+.card{
+  background-color: black;
+}
+
+h1,h2,h3,h4,h5,h6{
+  color: #ffffff ;
+}
+
+.navbar-brand{
+  @include media-breakpoint-down(md) {
+    font-size: 80%;
+  }
+}
+.navbar{
+  @include media-breakpoint-down(md) {
+    padding: .5rem 0.50rem;
+  }
+}
+.btn-outline-danger{
+  &:hover{
+    color:black;
+  }
+}
+
+// Utility class for flex-grow
+.flex-grow-1 {
+  flex-grow: 1;
+}

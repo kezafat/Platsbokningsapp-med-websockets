@@ -1,1 +1,0 @@
-class Footer extends Component {}

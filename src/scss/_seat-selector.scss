@@ -1,0 +1,79 @@
+@keyframes invalid-selection-animation {
+  0% {background-color: default;}
+  20% {background-color: red}
+  60% {background-color: red}
+  100% {background-color: default;}
+}
+
+.seat-selector {
+
+  .screen-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .screen {
+    background-color: rgb(136, 16, 40);
+    color: white;
+    width: 200px;
+    max-width: 40vw;
+    margin-bottom: 3rem;
+    border-radius: 0.5rem;
+    padding: 0 0.3rem;
+    text-align: center;
+    box-shadow: 1px 1px 3px black;
+  }
+
+  .seat-map {
+    margin-bottom: 2rem;
+
+    div {
+      margin: 0.4rem -1.25rem;
+      display: flex;
+      justify-content: center;
+
+      span {
+        display: inline-block;
+        background-color: lightgrey;
+        border-radius: 0.3rem;
+        margin: 0 0.15rem;
+        height: 1.5rem;
+        width: 6vw;
+        max-width: 1.5rem;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 1px 1px 3px #bbb;
+        transition: background-color 0.25s ease;
+  
+        &.booked {
+          background-color: lightcoral;
+        }
+        
+        &.selected-seat {
+          background-color: #218838;
+        }
+  
+        &.highlighted-seat {
+          background-color: #44d463;
+        }
+  
+        
+        &.invalid-selection {
+          @media screen and (max-width: 1024px) {
+            animation: invalid-selection-animation 1.5s;          
+          }
+          @media screen and (min-width: 1024px) {
+            background-color: red;
+          }
+
+        }
+        
+        &.deselect-seat {
+          background-color: red;
+        }
+      }
+
+    }
+  
+  }
+}

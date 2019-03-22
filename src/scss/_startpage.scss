@@ -1,0 +1,43 @@
+.startpage{
+  .startpage-cards{
+  width: 100%;
+  height: auto;
+  font-weight: 200;
+}
+  h1{
+    font-size: 50px;   
+    font-weight: 200;
+  }
+  }
+
+
+.films-link{
+  font-size: 20px;
+  .films-link:hover{
+      color: rgb(229, 238, 229);
+  }
+}
+
+.shows-calendar{
+  background-image: url("../images/startlinglights.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover; 
+  font-weight: 200;
+  padding: 20px;
+  font-size: 18px;
+  h2{
+font-family: 'Lato', sans-serif;
+font-size: 40px;
+margin: auto;
+}
+}
+
+  @include media-breakpoint-down(md) {
+.shows-calendar{
+  padding: 10px;
+      }
+    }
+
+
+
+  

@@ -10,6 +10,8 @@ import StartPage from './StartPage'
 import Auditoria from './Auditoria'
 import Auditorium from './Auditorium'
 import AccountPage from './account/AccountPage'
+import AdminPage from './account/AdminPage'
+import AdminEditPage from './account/AdminEditPage'
 import LoginPage from './account/LoginPage'
 import RegisterPage from './account/RegisterPage'
 import UserPage from './account/UserPage'
@@ -62,6 +64,8 @@ class App extends Component {
           <Route exact path="/logga-in" render={() => <div><LoginPage state={this.state} /></div>} />
           <Route exact path="/registrera-konto" render={() => <div><RegisterPage state={this.state} /></div>} />
           <Route exact path="/mitt-konto" render={() => <div><UserPage state={this.state} /></div>} />
+          <Route exact path="/admin" render={() => <div><AdminPage state={this.state} /></div>} />
+          <Route path="/admin/redigera/:id" component={AdminEditPage} />
         </main>
         <Footer />
       </div>

@@ -3,15 +3,9 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card, CardBody, CardText, CardTitle, CardGroup } from 'reactstrap';
 
 const WelcomePage = (props) => {
-  // this is the 'route state'
   const { state } = props.location
   return (
     <div>
-      <Row>
-        <Col>
-          <p className="text-center text-dark">&#9732; This right here is called aesthetic excellence*! (*&#9760;)</p>
-        </Col>
-      </Row>
       <Row className="welcome">
         <Col>
           <CardGroup>

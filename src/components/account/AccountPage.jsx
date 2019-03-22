@@ -12,6 +12,7 @@ class AccountPage extends Component {
         {display === "welcome" && <WelcomePage location={this.props.location} />}
         {display === "registrera-konto" && global.auth !== true ? <Redirect to="/registrera-konto" /> : ''}
         {display === "mitt-konto" && global.auth === true ? <Redirect to="/mitt-konto" /> : ''}
+        {display === "admin" && global.auth === "admin" ? <Redirect to="/admin" /> : ''}
       </Jumbotron>
     )
   }

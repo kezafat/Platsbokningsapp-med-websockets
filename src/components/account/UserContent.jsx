@@ -33,8 +33,11 @@ class UserContent extends Component {
 
     for (let booking of userDbBookings) {
       let todaysDate = new Date().toISOString().split('T')[0];
+      if (!booking.show) {
+        continue;
+      }
       let bookingDate = booking.show.date;
-    
+
       if (bookingDate === todaysDate) {
         // TODAYS BOOKINGS
         tmpUserObj.currentBookings.push(booking);

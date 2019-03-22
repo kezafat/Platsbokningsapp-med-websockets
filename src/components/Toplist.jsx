@@ -38,7 +38,7 @@ class Toplist extends Component {
 
   render() {
     return <div className="top-list">
-      <h3 className="text-center pt-3">Topplisa</h3>
+      <h3 className="text-center pt-3">Topplista</h3>
       <Row>
         <Col className="my-3">
           <Card>

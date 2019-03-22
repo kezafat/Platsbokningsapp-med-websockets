@@ -8,7 +8,7 @@ class TicketSelector extends Component {
 
   ticketTypes = [
     { DOMtext: 'Ordinarie (85 kr/st)', class: 'adult'},
-    { DOMtext: 'Pensinär (75 kr/st)', class: 'senior'},
+    { DOMtext: 'Pensionär (75 kr/st)', class: 'senior'},
     { DOMtext: 'Barn (65 kr/st)', class: 'kids'}
   ]
 

@@ -43,10 +43,21 @@ class Toplist extends Component {
         <Col className="my-3">
           <Card>
             <CardBody>
+              <Row>
+                <Col md="2" xs="auto" className="text-md-center">
+                  #
+                </Col>
+                <Col className="text-md-center">
+                  Titel
+                </Col>
+                <Col md="2" className="d-none d-md-block text-md-center">
+                  Sålda biljetter
+                </Col>
+              </Row>
               {this.moviesTopList.map((movie, index) => {
                 return <Row key={index}>
-                  <Col md="2" className="d-none d-md-block text-md-center">{index + 1}</Col>
-                  <Col className="text-center"><Link to="/visningar">{movie.movie}</Link></Col>
+                  <Col md="2" xs="auto" className="text-md-center">{index + 1}</Col>
+                  <Col className="text-md-center"><Link to="/visningar">{movie.movie}</Link></Col>
                   <Col md="2" className="d-none d-md-block text-md-center">{movie.count}</Col>
                 </Row>
               })}

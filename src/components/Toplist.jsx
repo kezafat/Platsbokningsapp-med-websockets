@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, CardBody, } from 'reactstrap';
+import { Row, Col, Card, CardBody } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 class Toplist extends Component {
   constructor(props) {
     super(props)
     this.moviesTopList = [];
-    //this.ticketsCount();
   }
   async componentDidMount() {
     await this.fetchBookings()
@@ -39,18 +38,17 @@ class Toplist extends Component {
 
   render() {
     return <div className="top-list">
+      <h3 className="text-center pt-3">Topplisa</h3>
       <Row>
-        <Col>
+        <Col className="my-3">
           <Card>
             <CardBody>
               {this.moviesTopList.map((movie, index) => {
-
-                return <Row>
-                  <Col key={index}>{index + 1}</Col>
+                return <Row key={index}>
+                  <Col md="2" className="d-none d-md-block text-md-center">{index + 1}</Col>
                   <Col><Link to="/visningar">{movie.movie}</Link></Col>
-                  <Col>{movie.count}</Col>
+                  <Col md="2" className="d-none d-md-block text-md-center">{movie.count}</Col>
                 </Row>
-
               })}
             </CardBody>
           </Card>

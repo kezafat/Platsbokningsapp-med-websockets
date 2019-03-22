@@ -5,7 +5,7 @@ import {
 import CarouselStartPage from './CarouselStartPage';
 import CardStartPage from './CardStartPage';
 import Calendar from './Calendar';
-//import Toplist from './Toplist'
+import Toplist from './Toplist'
 
 
 class StartPage extends Component {
@@ -17,10 +17,10 @@ class StartPage extends Component {
   render() {
     return (<section className="startpage">
       <CarouselStartPage />
+      <Toplist />
       <Row noGutters>
-        {/* <Toplist / > */}
         <Col xs="12" sm="12" md="12">
-          <h1 className="text-light font-weight-light"> På bio just nu</h1>
+          <h3 className="text-light font-weight-light text-center"> På bio just nu</h3>
         </Col>
         {this.movies.map((movie, i) => {
           return (

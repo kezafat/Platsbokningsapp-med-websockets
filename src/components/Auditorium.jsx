@@ -77,7 +77,7 @@ class Auditorium extends Component {
           </Row>
         </Container>
       )
-    } 
+    }
     return (
       <Container>
         <img src={require('../images/' + this.auditorium.imageBig)} alt="Auditorium" className="img-fluid" />

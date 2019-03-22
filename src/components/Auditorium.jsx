@@ -20,7 +20,6 @@ class Auditorium extends Component {
       this.fetchShows()
     }
   }
-
   get totalSeats() {
     return this.auditorium.seats.reduce((acc, cur) => acc + cur, 0)
   }

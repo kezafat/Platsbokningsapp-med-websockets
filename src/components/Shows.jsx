@@ -13,6 +13,7 @@ class Shows extends Component {
       loaded: false,
     }
   }
+  
 
   async fetchShows() {
     let now = new Date().toISOString().split("T");
@@ -32,6 +33,7 @@ class Shows extends Component {
         return false;
       }
     });
+
 
     this.allShows.sort((a, b) => {
       if (a.date < b.date) {
@@ -70,6 +72,10 @@ class Shows extends Component {
 
     // render method
     this.setState({ loaded: true });
+  }
+  
+  componentDidMount(){
+    document.title="Visningar"
   }
 
   render() {

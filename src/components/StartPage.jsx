@@ -13,6 +13,9 @@ class StartPage extends Component {
     super(props);
     this.movies = require('../json/movies.json');
   }
+  componentDidMount(){
+    document.title  = "Startsida"
+  }
 
   render() {
     return (<section className="startpage">

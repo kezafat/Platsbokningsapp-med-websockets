@@ -46,7 +46,7 @@ class Toplist extends Component {
               {this.moviesTopList.map((movie, index) => {
                 return <Row key={index}>
                   <Col md="2" className="d-none d-md-block text-md-center">{index + 1}</Col>
-                  <Col><Link to="/visningar">{movie.movie}</Link></Col>
+                  <Col className="text-center"><Link to="/visningar">{movie.movie}</Link></Col>
                   <Col md="2" className="d-none d-md-block text-md-center">{movie.count}</Col>
                 </Row>
               })}

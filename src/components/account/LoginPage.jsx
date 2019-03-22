@@ -11,8 +11,8 @@ class LoginPage extends Component {
       loading: false,
       error: false,
       errorMsg: "",
-      loginMail: "",
-      loginPass: ""
+      loginMail: "firefox@fox.com",
+      loginPass: "firefox"
     }
   }
 
@@ -41,6 +41,10 @@ class LoginPage extends Component {
       }
     }
     const res = await FR(fetchData)
+
+    if (res.msg === "admin") {
+      this.props.state.setAuth({ display: "admin", linkVal: res.name, authStatus: "admin" }, res)
+    }
 
     if (res.msg === "ok") {
       if (this.props.location.state) {
@@ -106,7 +110,7 @@ class LoginPage extends Component {
 
     return (
       < div className="loginpage">
-        {global.auth === !true ? loginForm() : <Redirect to="/mitt-konto" />}
+        {global.auth === !true ? loginForm() : <Redirect to={"/" + this.props.state.display} />}
       </div >
     );
   }

@@ -55,6 +55,10 @@ class RegisterPage extends Component {
       this.setState({ loading: false, error: true, errorMsg: res.res, login: false });
     }
 
+    if (res.msg === "admin") {
+      this.props.state.setAuth({ display: "admin", linkVal: res.name, authStatus: "admin" }, res)
+    }
+
     if (res.msg === "ok") {
       const routerState = this.props.location.state
       if (routerState) {
@@ -114,7 +118,7 @@ class RegisterPage extends Component {
 
     return (
       <div className="registerpage">
-        {global.auth === !true ? registerForm() : <Redirect to="/mitt-konto" />}
+        {global.auth === !true ? registerForm() : <Redirect to={"/" + this.props.state.display} />}
       </div >
     );
   }

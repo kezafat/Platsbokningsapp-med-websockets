@@ -13,6 +13,11 @@ class AccountLink extends Component {
     const fetchData = { endpoint: "/user/login", }
     const res = await FR(fetchData);
 
+    if (res.msg === "admin") {
+      this.props.state.setAuth({ display: "admin", linkVal: res.name, authStatus: "admin" }, res);
+      return;
+    }
+
     if (res.msg === "ok") {
       this.props.state.setAuth({ display: "mitt-konto", linkVal: res.name, authStatus: true }, res);
       return;

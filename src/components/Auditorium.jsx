@@ -27,7 +27,7 @@ class Auditorium extends Component {
 
   fetchShows = async () => {
     // get the shows (i get the whole auditorium because its the most convenient way, and the extra data downloaded is minimal) and save them in this.shows
-    const result = await fetch('http://localhost:3000/json/auditoria/' + this.auditorium._id)
+    const result = await fetch('http://localhost:3000/json/auditoria/id/' + this.auditorium._id)
     const auditorium = await result.json()
     this.shows = auditorium.shows
     if (this.shows) {

@@ -15,7 +15,6 @@ import AdminEditPage from './account/AdminEditPage'
 import LoginPage from './account/LoginPage'
 import RegisterPage from './account/RegisterPage'
 import UserPage from './account/UserPage'
-import Toplist from './Toplist'
 import { Route } from 'react-router-dom'
 import { Spinner } from 'reactstrap'
 import BookShow from './BookShow'
@@ -56,7 +55,6 @@ class App extends Component {
           <Route exact path="/filmer" component={MoviePage} />
           <Route path="/filmer/:title" component={MovieDetail} />
           <Route exact path="/visningar/" component={Shows} />
-          <Route path="/topplista" component={Toplist} />
           <Route exact path="/bokningsbekräftelse/:ticketID/" component={BookingConfirmation} />
           <Route exact path="/biografer" component={Auditoria} />
           <Route path="/biografer/:name" component={Auditorium} />

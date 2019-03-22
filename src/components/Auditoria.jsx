@@ -15,6 +15,10 @@ class Auditoria extends Component {
     super(props)
     this.auditoria = require('../json/auditoria.json')
   }
+  
+  componentDidMount(){
+    document.title="Biografer"
+  }
 
   render() {
     return (

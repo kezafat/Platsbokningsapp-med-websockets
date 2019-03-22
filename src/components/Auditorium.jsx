@@ -20,7 +20,6 @@ class Auditorium extends Component {
       this.fetchShows()
     }
   }
-
   get totalSeats() {
     return this.auditorium.seats.reduce((acc, cur) => acc + cur, 0)
   }
@@ -77,7 +76,7 @@ class Auditorium extends Component {
           </Row>
         </Container>
       )
-    } 
+    }
     return (
       <Container>
         <img src={require('../images/' + this.auditorium.imageBig)} alt="Auditorium" className="img-fluid" />

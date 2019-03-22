@@ -8,6 +8,7 @@ class Show extends Component {
     this.movie = this.props.movie;
     this.auditorium = this.props.auditorium;
   }
+  
 
   render() {
     return (

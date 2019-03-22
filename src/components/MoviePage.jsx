@@ -37,6 +37,7 @@ class MoviePage extends Component {
   }
 
   async componentDidMount() {
+    document.title ="Filmer"
     await this.fetchMovies()
   }
 

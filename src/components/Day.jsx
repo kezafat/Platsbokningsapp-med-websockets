@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Show from "./Show";
-//import { Row } from "reactstrap";
 
 class Day extends Component {
   render() {

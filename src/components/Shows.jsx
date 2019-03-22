@@ -5,7 +5,6 @@ import Day from "./Day";
 class Shows extends Component {
   constructor(props) {
     super(props);
-    // this.state = { allShows: false, fetched: false };
     this.days = [];
     this.allShows = [];
     this.fetchShows();
